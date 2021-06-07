@@ -1,0 +1,17 @@
+# .ls-lint.yml
+
+ls:
+  src:
+    .js: PascalCase
+    .ts: PascalCase
+    .d.ts: PascalCase
+
+  scripts:
+    .js: PascalCase
+
+ignore:
+  - node_modules
+  - .git
+  - .circleci
+  - .github
+  - .vscode
