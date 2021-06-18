@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Home.module.less';
+import styles from './layout.module.less';
 import { Route, Switch, Link } from 'react-router-dom';
 
 export default function Layout({ routes }: { routes: any }) {

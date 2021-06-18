@@ -1,7 +1,7 @@
-import Login from '@/views/Login';
-import Layout from '@/layout1';
-import PageA from '@/views/PageA';
-import PageB from '@/views/PageB';
+import Login from '@/views/login1';
+import Layout from '@/layout';
+import PageA from '@/views/page-a';
+import PageB from '@/views/page-b';
 
 const routes = [
   {
