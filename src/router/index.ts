@@ -1,4 +1,4 @@
-import Login from '@/views/login1';
+import Login from '@/views/login';
 import Layout from '@/layout';
 import PageA from '@/views/page-a';
 import PageB from '@/views/page-b';
