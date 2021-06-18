@@ -3,6 +3,13 @@ import Layout from '@/layout';
 import PageA from '@/views/page-a';
 import PageB from '@/views/page-b';
 
+export type RouteConfig = {
+  path: string;
+  component: () => JSX.Element;
+  exact?: boolean;
+  routes?: Array<RouteConfig>;
+};
+
 const routes = [
   {
     path: '/login',
