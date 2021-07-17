@@ -5,13 +5,15 @@ const { join } = require('path');
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 680,
   });
 
   isDev
     ? mainWindow.loadURL('http://localhost:3000')
     : mainWindow.loadFile(join(__dirname, 'dist/index.html'));
+
+  mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {

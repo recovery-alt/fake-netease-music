@@ -1,9 +1,8 @@
 {
   "name": "react-electron",
   "version": "1.0.0",
-  "main": "main.js",
   "scripts": {
-    "dev:electron": "concurrently \"npm run dev\" \"wait-on tcp:3000 -l && electron .\"",
+    "dev:electron": "concurrently \"npm run dev\" \"wait-on tcp:3000 -l && electron main.js\"",
     "build:electron": "npm run build && electron-builder",
     "dev": "vite --host",
     "build": "tsc && vite build",
@@ -13,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "antd": "^4.16.7",
+    "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0"
