@@ -1,0 +1,57 @@
+.banner {
+  position: relative;
+  height: 220px;
+
+  &__item {
+    position: absolute;
+    width: 540px;
+    height: 200px;
+    background-color: aqua;
+    border-radius: 8px;
+    left: 50%;
+    margin-left: -270px;
+  }
+
+  &__dot {
+    background-color: #e5e5e5;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-left: 10px;
+    cursor: pointer;
+
+    &.--actived {
+      background-color: #d33b31;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 15px;
+      display: flex;
+    }
+  }
+
+  &__array {
+    position: absolute;
+    top: calc(50% - 10px);
+    transform: translateY(-50%);
+    font-size: 20px;
+    cursor: pointer;
+    color: #a7b0b3;
+
+    &.--left {
+      left: 5px;
+    }
+
+    &.--right {
+      right: 5px;
+    }
+  }
+}

@@ -1,0 +1,125 @@
+.find-music {
+  padding-left: 30px;
+  padding-top: 20px;
+  padding-right: 30px;
+  box-sizing: border-box;
+  overflow: auto;
+
+  &__title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  &__card {
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    &-item {
+      width: 135px;
+      height: 175px;
+      flex-shrink: 0;
+      margin-bottom: 40px;
+
+      span {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        line-height: 18px;
+        margin-top: 4px;
+      }
+
+      &.--rect {
+        width: 170px;
+      }
+    }
+
+    &-box {
+      width: 100%;
+      height: 135px;
+      background-color: aqua;
+      border-radius: 8px;
+
+      &.--rect {
+        height: 100px;
+      }
+    }
+  }
+
+  &__newest {
+    &-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &-item {
+      width: 360px;
+      height: 80px;
+      margin-left: 20px;
+      flex-shrink: 0;
+      border-bottom: 1px solid #f3f3f2;
+      box-sizing: border-box;
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+
+      &:first-child,
+      &:nth-child(2) {
+        border-top: 1px solid #f3f3f2;
+      }
+
+      &:nth-child(2n + 1) {
+        margin-left: 0;
+      }
+
+      &.--actived,
+      &:hover {
+        background-color: #f5f5f6;
+      }
+
+      strong {
+        margin: 0 10px;
+        color: #bfbebf;
+        font-weight: normal;
+      }
+    }
+
+    &-img {
+      position: relative;
+      width: 60px;
+      height: 60px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        background-color: aqua;
+      }
+
+      span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        color: #d33b31;
+      }
+    }
+
+    &-name {
+      height: 40px;
+
+      div {
+        height: 20px;
+        line-height: 20px;
+      }
+    }
+  }
+}

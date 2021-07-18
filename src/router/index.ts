@@ -1,7 +1,7 @@
 import Login from '@/views/login';
 import Layout from '@/layout';
-import PageA from '@/views/page-a';
-import PageB from '@/views/page-b';
+import FindMusic from '@/views/find-music';
+import FM from '@/views/fm';
 
 export type RouteConfig = {
   path: string;
@@ -21,12 +21,12 @@ const routes = [
     component: Layout,
     routes: [
       {
-        path: '/page-a',
-        component: PageA,
+        path: '/find-music',
+        component: FindMusic,
       },
       {
-        path: '/page-b',
-        component: PageB,
+        path: '/fm',
+        component: FM,
       },
     ],
   },

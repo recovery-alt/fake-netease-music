@@ -1,6 +1,5 @@
 .header {
   height: 50px;
-  flex-shrink: 0;
   display: flex;
 
   &__left {
@@ -37,7 +36,13 @@
       color: #777;
 
       li {
+        cursor: pointer;
         margin-left: 20px;
+
+        &.--actived {
+          color: #000;
+          font-weight: bold;
+        }
       }
     }
 
@@ -87,7 +92,7 @@
 }
 
 .container {
-  flex: 1;
+  height: calc(100% - 110px);
   display: flex;
 }
 
@@ -131,6 +136,8 @@
 
     a {
       margin-left: 8px;
+      cursor: pointer;
+      pointer-events: none;
     }
   }
 
@@ -158,6 +165,7 @@
 
 .main {
   flex: 1;
+  overflow: auto;
 }
 
 .footer {

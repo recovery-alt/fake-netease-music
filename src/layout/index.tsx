@@ -1,5 +1,6 @@
 import React from 'react';
 import type { RouteConfig } from '@/router';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import './layout.less';
 import {
   LeftOutlined,
@@ -24,10 +25,12 @@ import {
   DeleteOutlined,
   SoundOutlined,
   ControlOutlined,
+  UnorderedListOutlined,
+  RetweetOutlined,
 } from '@ant-design/icons';
-import ProgressBar from '@/components/common/progress-bar';
+import ProgressBar from '@/components/progress-bar';
 
-export default function Home({ routes }: { routes?: Array<RouteConfig> }) {
+export default function Layout({ routes }: { routes?: Array<RouteConfig> }) {
   return (
     <>
       <header className="header">
@@ -37,8 +40,10 @@ export default function Home({ routes }: { routes?: Array<RouteConfig> }) {
         </div>
         <div className="header__right">
           <ul className="header__right-menu">
-            {['个性推荐', '歌单', '主播电台', '排行榜', '歌手', '最新音乐'].map(item => (
-              <li key={item}>{item}</li>
+            {['个性推荐', '歌单', '主播电台', '排行榜', '歌手', '最新音乐'].map((item, i) => (
+              <li className={i === 0 ? '--actived' : ''} key={item}>
+                {item}
+              </li>
             ))}
           </ul>
           <div className="header__right-search">
@@ -64,7 +69,7 @@ export default function Home({ routes }: { routes?: Array<RouteConfig> }) {
             { name: '视频', icon: PlaySquareOutlined },
             { name: '朋友', icon: TeamOutlined },
           ].map((item, i) => (
-            <div key={i} className={`aside__item${i === 1 ? ' --actived' : ''}`}>
+            <div key={i} className={`aside__item${i === 0 ? ' --actived' : ''}`}>
               <item.icon />
               <a>{item.name}</a>
             </div>
@@ -75,7 +80,7 @@ export default function Home({ routes }: { routes?: Array<RouteConfig> }) {
             { name: '下载管理', icon: DownloadOutlined },
             { name: '最近播放', icon: FieldTimeOutlined },
           ].map((item, i) => (
-            <div key={i} className={`aside__item${i === 1 ? ' --actived' : ''}`}>
+            <div key={i} className={`aside__item${i === 0 ? ' --actived' : ''}`}>
               <item.icon />
               <a>{item.name}</a>
             </div>
@@ -94,7 +99,17 @@ export default function Home({ routes }: { routes?: Array<RouteConfig> }) {
             </div>
           ))}
         </aside>
-        <main className="main"></main>
+        <main className="main">
+          <Switch>
+            {routes &&
+              routes.map(route => (
+                <Route path={route.path} key={route.path}>
+                  <route.component />
+                </Route>
+              ))}
+            <Redirect to={routes![0].path} />
+          </Switch>
+        </main>
       </section>
       <footer className="footer">
         <ProgressBar />
@@ -114,6 +129,8 @@ export default function Home({ routes }: { routes?: Array<RouteConfig> }) {
         </div>
         <div className="footer__right">
           <ControlOutlined />
+          <RetweetOutlined />
+          <UnorderedListOutlined />
           <span>词</span>
           <SoundOutlined />
         </div>
