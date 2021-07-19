@@ -28,7 +28,8 @@ import {
   UnorderedListOutlined,
   RetweetOutlined,
 } from '@ant-design/icons';
-import ProgressBar from '@/components/progress-bar';
+import ProgressBar from './progress-bar';
+import avatar from '@/assets/img/avatar.svg';
 
 export default function Layout({ routes }: { routes?: Array<RouteConfig> }) {
   return (
@@ -60,7 +61,7 @@ export default function Layout({ routes }: { routes?: Array<RouteConfig> }) {
       <section className="container">
         <aside className="aside">
           <header className="aside__header">
-            <img src="/src/assets/img/avatar.svg" alt="icon" />
+            <img src={avatar} alt="icon" />
             <span>未登录</span>
           </header>
           {[
@@ -114,7 +115,7 @@ export default function Layout({ routes }: { routes?: Array<RouteConfig> }) {
       <footer className="footer">
         <ProgressBar />
         <div className="footer__left">
-          <img src="/src/assets/img/avatar.svg" alt="music" />
+          <img src={avatar} alt="music" />
           <div className="footer__left-name">
             <div>老街 - 李荣浩</div>
             <div>01:30 / 04:50</div>

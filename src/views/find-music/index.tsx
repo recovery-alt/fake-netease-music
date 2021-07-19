@@ -1,55 +1,44 @@
 import React from 'react';
-import Banner from '@/components/banner';
+import Banner from './banner';
 import './find-music.less';
-import { RightOutlined, PlayCircleFilled } from '@ant-design/icons';
+import { PlayCircleFilled } from '@ant-design/icons';
+import Title from './title';
+import avatar from '@/assets/img/avatar.svg';
 
 export default function FindMusic() {
   return (
     <div className="find-music">
       <Banner />
-      <header className="find-music__title">
-        推荐歌单
-        <RightOutlined />
-      </header>
+      <Title name="推荐歌单" />
       <div className="find-music__card-wrapper">
         {Array(10)
           .fill(0)
           .map((item, i) => (
             <div key={i} className="find-music__card-item">
               <div className="find-music__card-box"></div>
-              <span>
-                推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单
-              </span>
+              <span>一段描述信息</span>
             </div>
           ))}
       </div>
-      <header className="find-music__title" style={{ marginTop: 0 }}>
-        独家放送
-        <RightOutlined />
-      </header>
+      <Title name="独家放送" />
       <div className="find-music__card-wrapper">
         {Array(4)
           .fill(0)
           .map((item, i) => (
             <div key={i} className="find-music__card-item --rect">
               <div className="find-music__card-box --rect"></div>
-              <span>
-                推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单
-              </span>
+              <span>一段描述信息</span>
             </div>
           ))}
       </div>
-      <header className="find-music__title" style={{ marginTop: 0 }}>
-        最新音乐
-        <RightOutlined />
-      </header>
+      <Title name="最新音乐" />
       <div className="find-music__newest-wrapper">
         {Array(10)
           .fill(0)
           .map((item, i) => (
             <div key={i} className={`find-music__newest-item ${i === 2 ? '--actived' : ''}`}>
               <div className="find-music__newest-img">
-                <img src="/src/assets/img/avatar.svg" alt="music" />
+                <img src={avatar} alt="music" />
                 <PlayCircleFilled />
               </div>
               <strong>{i + 1}</strong>
@@ -60,33 +49,25 @@ export default function FindMusic() {
             </div>
           ))}
       </div>
-      <header className="find-music__title">
-        推荐MV
-        <RightOutlined />
-      </header>
+      <Title name="推荐MV" />
       <div className="find-music__card-wrapper">
         {Array(4)
           .fill(0)
           .map((item, i) => (
             <div key={i} className="find-music__card-item --rect">
               <div className="find-music__card-box --rect"></div>
-              <span>
-                推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单推荐歌单
-              </span>
+              <span>一段描述信息</span>
             </div>
           ))}
       </div>
-      <header className="find-music__title" style={{ marginTop: 0 }}>
-        主播电台
-        <RightOutlined />
-      </header>
+      <Title name="主播电台" />
       <div className="find-music__newest-wrapper">
         {Array(10)
           .fill(0)
           .map((item, i) => (
             <div key={i} className={`find-music__newest-item ${i === 2 ? '--actived' : ''}`}>
               <div className="find-music__newest-img">
-                <img src="/src/assets/img/avatar.svg" alt="music" />
+                <img src={avatar} alt="music" />
                 <PlayCircleFilled />
               </div>
               <strong>{i + 1}</strong>
