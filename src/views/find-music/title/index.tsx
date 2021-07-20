@@ -4,13 +4,14 @@ import styles from './title.module.less';
 
 type Props = {
   name: string;
+  welt?: boolean;
 };
 
-export default function Title(props: Props) {
-  return (
-    <header className={styles.title}>
-      {props.name}
-      <RightOutlined />
-    </header>
-  );
-}
+const Title: React.FC<Props> = ({ name, welt = false }: Props) => (
+  <header className={`${styles.title} ${welt ? styles.welt : ''}`}>
+    {name}
+    <RightOutlined />
+  </header>
+);
+
+export default Title;
