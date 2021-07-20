@@ -6,10 +6,26 @@
     position: absolute;
     width: 540px;
     height: 200px;
-    background-color: aqua;
     border-radius: 8px;
     left: 50%;
     margin-left: -270px;
+    transition: transform ease-in-out 0.3s;
+    cursor: pointer;
+    z-index: 2;
+
+    &.--left {
+      z-index: 1;
+      transform: translateX(-150px) scale(0.8);
+    }
+
+    &.--right {
+      z-index: 1;
+      transform: translateX(150px) scale(0.8);
+    }
+
+    &.--hidden {
+      display: none;
+    }
   }
 
   &__dot {

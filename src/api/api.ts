@@ -12,7 +12,7 @@ const apiErrorHandler = (message?: unknown) => {
   return Promise.resolve({ code: -10000, msg });
 };
 
-const baseURL = import.meta.env.PROD ? '/api/v1/' : 'http://localhost:3000/api/v1/';
+const baseURL = import.meta.env.PROD ? '/' : 'http://localhost:4000/';
 
 // 策略模式生产状态码
 const statusStrategy = (status: number) => {
@@ -67,19 +67,19 @@ service.interceptors.response.use(async (response: AxiosResponse) => {
 }, apiErrorHandler);
 
 // get请求
-const get = <T>(url: string, params?: Data, config?: Data) =>
+const get = <T extends Data>(url: string, params?: Data, config?: Data) =>
   service.get<T, ResponseData<T>>(url, { ...config, params });
 
 // post请求
-const post = <T>(url: string, params?: Data | string[], config?: Data) =>
+const post = <T extends Data>(url: string, params?: Data | string[], config?: Data) =>
   service.post<T, ResponseData<T>>(url, params, config);
 
 // put请求
-const put = <T>(url: string, params?: Data, config?: Data) =>
+const put = <T extends Data>(url: string, params?: Data, config?: Data) =>
   service.put<T, ResponseData<T>>(url, params, config);
 
 // delete请求
-const del = <T>(url: string, params?: Data, config?: Data) =>
+const del = <T extends Data>(url: string, params?: Data, config?: Data) =>
   service.delete<T, ResponseData<T>>(url, { ...config, params });
 
 export { get, post, put, del };
