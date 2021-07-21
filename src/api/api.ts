@@ -12,7 +12,7 @@ const apiErrorHandler = (message?: unknown) => {
   return Promise.resolve({ code: -10000, msg });
 };
 
-const baseURL = import.meta.env.PROD ? '/' : 'http://localhost:4000/';
+const baseURL = 'http://47.100.62.108:4000/';
 
 // 策略模式生产状态码
 const statusStrategy = (status: number) => {
