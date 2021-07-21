@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './card.module.less';
-import type { PersonalizedType } from '@/api';
+import type { PersonalizedList } from '@/api';
 
 type Props = {
-  data: PersonalizedType['result'];
+  data: PersonalizedList;
   rect?: boolean;
 };
 

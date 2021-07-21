@@ -1,8 +1,10 @@
 export type Data<T = unknown> = Record<string, T>;
 
-export type ResponseData<T extends Data> = T & {
-  code: number;
-};
+export type ResponseData<T> = T extends Data
+  ? T & {
+      code: number;
+    }
+  : { code: number; result: T };
 
 export interface AppProps {
   children?: React.ReactNode;
@@ -10,9 +12,3 @@ export interface AppProps {
   style?: React.CSSProperties;
   onChange?: React.FormEventHandler<HTMLInputElement>;
 }
-
-interface b {
-  a: string;
-}
-
-type a<T> = b;

@@ -67,19 +67,19 @@ service.interceptors.response.use(async (response: AxiosResponse) => {
 }, apiErrorHandler);
 
 // get请求
-const get = <T extends Data>(url: string, params?: Data, config?: Data) =>
+const get = <T>(url: string, params?: Data, config?: Data) =>
   service.get<T, ResponseData<T>>(url, { ...config, params });
 
 // post请求
-const post = <T extends Data>(url: string, params?: Data | string[], config?: Data) =>
+const post = <T>(url: string, params?: Data | string[], config?: Data) =>
   service.post<T, ResponseData<T>>(url, params, config);
 
 // put请求
-const put = <T extends Data>(url: string, params?: Data, config?: Data) =>
+const put = <T>(url: string, params?: Data, config?: Data) =>
   service.put<T, ResponseData<T>>(url, params, config);
 
 // delete请求
-const del = <T extends Data>(url: string, params?: Data, config?: Data) =>
+const del = <T>(url: string, params?: Data, config?: Data) =>
   service.delete<T, ResponseData<T>>(url, { ...config, params });
 
 export { get, post, put, del };

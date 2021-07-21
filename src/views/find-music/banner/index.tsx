@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styles from './banner.module.less';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import type { BannerType } from '@/api';
+import type { Banners } from '@/api';
 
 type Props = {
-  data: BannerType['banners'];
+  data: Banners['banners'];
 };
 
 const Banner: React.FC<Props> = ({ data }) => {
