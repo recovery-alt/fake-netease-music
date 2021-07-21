@@ -6,11 +6,12 @@ import './find-music.less';
 import {
   getAlbumNewest,
   getBanner,
+  getDJToplist,
   getPersonalized,
   getPersonalizedMV,
   getPersonalizedPrivatecontent,
 } from '@/api';
-import type { Banners, PersonalizedList, AlbumNewest } from '@/api';
+import type { Banners, PersonalizedList, AlbumNewest, DJToplist } from '@/api';
 import Banner from './banner';
 
 const FindMusic = () => {
@@ -19,6 +20,7 @@ const FindMusic = () => {
   const [privateList, setPrivateList] = useState<PersonalizedList>([]);
   const [personalizedMV, setPersonalizedMV] = useState<PersonalizedList>([]);
   const [albumNewest, setAlbumNewest] = useState<AlbumNewest['albums']>([]);
+  const [djToplist, setDJToplist] = useState<DJToplist['toplist']>([]);
 
   useEffect(() => {
     getBanner().then(res => {
@@ -27,7 +29,7 @@ const FindMusic = () => {
     getPersonalized({ limit: 10 }).then(res => {
       setPersonalized(res.result);
     });
-    getPersonalizedPrivatecontent().then(res => {
+    getPersonalizedPrivatecontent({ limit: 4 }).then(res => {
       setPrivateList(res.result);
     });
     getPersonalizedMV().then(res => {
@@ -35,6 +37,9 @@ const FindMusic = () => {
     });
     getAlbumNewest().then(res => {
       setAlbumNewest(res.albums);
+    });
+    getDJToplist({ limit: 6 }).then(res => {
+      setDJToplist(res.toplist);
     });
   }, []);
 
@@ -50,7 +55,7 @@ const FindMusic = () => {
       <Title name="推荐MV" />
       <Card data={personalizedMV} rect />
       <Title name="主播电台" welt />
-      <List data={albumNewest} />
+      <List size="large" data={djToplist} />
     </div>
   );
 };

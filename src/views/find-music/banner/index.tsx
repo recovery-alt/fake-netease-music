@@ -9,11 +9,17 @@ type Props = {
 
 const Banner: React.FC<Props> = ({ data }) => {
   const [current, setCurrent] = useState<number>(0);
+  const len = data.length;
 
-  const getPosition = (index: number) => {
-    return index === current - 1
+  const handleArrayClick = (plus = false) => {
+    const cur = plus ? current + 1 : current - 1;
+    setCurrent(cur < 0 ? cur + len : cur % len);
+  };
+
+  const getState = (index: number) => {
+    return index === current - 1 || (current === 0 && index === len - 1)
       ? styles['--left']
-      : index === (current + 1) % data.length
+      : index === (current + 1) % len
       ? styles['--right']
       : index === current
       ? ''
@@ -27,20 +33,26 @@ const Banner: React.FC<Props> = ({ data }) => {
           src={item.imageUrl}
           key={item.imageUrl}
           alt="banner"
-          className={`${styles.banner__item} ${getPosition(i)}`}
+          className={`${styles.banner__item} ${getState(i)}`}
         />
       ))}
       <div className={styles['banner__dot-wrapper']}>
         {data.map((item, i) => (
           <div
             key={item.imageUrl}
-            onClick={() => setCurrent(i)}
+            onMouseMove={() => setCurrent(i)}
             className={`${styles['banner__dot']} ${i === current ? styles['--actived'] : ''}`}
           ></div>
         ))}
       </div>
-      <LeftOutlined className={`${styles['banner__array']} ${styles['--left']}`} />
-      <RightOutlined className={`${styles['banner__array']} ${styles['--right']}`} />
+      <LeftOutlined
+        className={`${styles['banner__array']} ${styles['--left']}`}
+        onClick={() => handleArrayClick()}
+      />
+      <RightOutlined
+        className={`${styles['banner__array']} ${styles['--right']}`}
+        onClick={() => handleArrayClick(true)}
+      />
     </div>
   );
 };

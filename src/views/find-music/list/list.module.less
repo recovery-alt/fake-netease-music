@@ -12,17 +12,14 @@
   }
 
   &__item {
-    width: 360px;
-    height: 80px;
+    padding: 10px;
     flex-shrink: 0;
     border-bottom: 1px solid #f3f3f2;
     box-sizing: border-box;
-    padding-left: 10px;
     display: flex;
     align-items: center;
     border-radius: 4px;
 
-    &.--actived,
     &:hover {
       background-color: #f5f5f6;
     }
@@ -52,6 +49,15 @@
       transform: translate(-50%, -50%);
       font-size: 20px;
       color: #d33b31;
+    }
+
+    &.--large {
+      width: 90px;
+      height: 90px;
+
+      & + .list__name {
+        margin-left: 20px;
+      }
     }
   }
 
