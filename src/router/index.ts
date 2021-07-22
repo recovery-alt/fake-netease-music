@@ -1,3 +1,4 @@
+import Layout from '@/layout';
 import FindMusic from '@/views/find-music';
 import FM from '@/views/fm';
 
@@ -11,12 +12,17 @@ export type RouteConfig = {
 const routes = [
   {
     path: '/',
-    exact: true,
-    component: FindMusic,
-  },
-  {
-    path: '/fm',
-    component: FM,
+    component: Layout,
+    routes: [
+      {
+        path: '/find-music',
+        component: FindMusic,
+      },
+      {
+        path: '/fm',
+        component: FM,
+      },
+    ],
   },
 ];
 

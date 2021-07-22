@@ -1,17 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import routes from '@/router';
 
 const App: React.FC = () => (
-  <Router>
+  <BrowserRouter>
     <Switch>
       {routes.map((route, i) => (
         <Route key={i} path={route.path}>
-          {/* <route.component {...route} /> */}
+          <route.component {...route} />
         </Route>
       ))}
     </Switch>
-  </Router>
+  </BrowserRouter>
 );
 
 export default App;

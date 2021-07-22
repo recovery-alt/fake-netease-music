@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './sidebar.module.less';
 import avatar from '@/assets/img/avatar.svg';
 import {
@@ -18,7 +18,7 @@ const List: React.FC = () => {
   type ItemProps = { menu: Menu; i: number; plus?: number };
 
   const menuList: Array<Menu> = [
-    { name: '发现音乐', icon: CustomerServiceOutlined, path: '/' },
+    { name: '发现音乐', icon: CustomerServiceOutlined, path: '/find-music' },
     { name: '私人FM', icon: TeamOutlined, path: '/fm' },
     { name: '视频', icon: PlaySquareOutlined, path: '' },
     { name: '朋友', icon: TeamOutlined, path: '' },
@@ -46,6 +46,10 @@ const List: React.FC = () => {
       <a>{menu.name}</a>
     </div>
   );
+
+  useEffect(() => {
+    history.push('/find-music');
+  }, []);
 
   return (
     <aside className={styles.sidebar}>
