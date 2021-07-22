@@ -5,6 +5,7 @@ import './layout.less';
 import Sidebar from './sidebar';
 import Header from './header';
 import Footer from './footer';
+import NotFound from './not-found';
 
 type Props = { routes?: Array<RouteConfig> };
 
@@ -21,7 +22,9 @@ const Layout: React.FC<Props> = ({ routes }) => (
                 <route.component />
               </Route>
             ))}
-          <Redirect to={routes![0].path} />
+          <Route>
+            <NotFound />
+          </Route>
         </Switch>
       </main>
     </section>

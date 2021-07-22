@@ -21,7 +21,7 @@ const routes = [
     component: Layout,
     routes: [
       {
-        path: '/find-music',
+        path: '',
         component: FindMusic,
       },
       {
