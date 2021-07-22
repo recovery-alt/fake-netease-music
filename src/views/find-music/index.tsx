@@ -14,7 +14,7 @@ import {
 import type { Banners, PersonalizedList, AlbumNewest, DJToplist } from '@/api';
 import Banner from './banner';
 
-const FindMusic = () => {
+const FindMusic: React.FC = () => {
   const [banner, setBanner] = useState<Banners['banners']>([]);
   const [personalized, setPersonalized] = useState<PersonalizedList>([]);
   const [privateList, setPrivateList] = useState<PersonalizedList>([]);

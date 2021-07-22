@@ -15,11 +15,11 @@ import { useHistory } from 'react-router-dom';
 
 const List: React.FC = () => {
   type Menu = { name: string; icon: React.FC; path: string };
-  const history = useHistory();
+  type ItemProps = { menu: Menu; i: number; plus?: number };
 
   const menuList: Array<Menu> = [
-    { name: '发现音乐', icon: CustomerServiceOutlined, path: '' },
-    { name: '私人FM', icon: TeamOutlined, path: '' },
+    { name: '发现音乐', icon: CustomerServiceOutlined, path: '/' },
+    { name: '私人FM', icon: TeamOutlined, path: '/fm' },
     { name: '视频', icon: PlaySquareOutlined, path: '' },
     { name: '朋友', icon: TeamOutlined, path: '' },
     { name: 'iTunes音乐', icon: CustomerServiceOutlined, path: '' },
@@ -29,24 +29,23 @@ const List: React.FC = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const history = useHistory();
 
-  function handleMenuClick(menu: Menu, i: number, plus = 0) {
+  const handleMenuClick = ({ menu, i, plus = 0 }: ItemProps) => {
     setSelected(i + plus);
     history.push(menu.path);
-  }
+  };
 
-  function getItem(menu: Menu, i: number, plus = 0) {
-    return (
-      <div
-        key={i}
-        className={`${styles.sidebar__item} ${i + plus === selected ? styles['--actived'] : ''}`}
-        onClick={() => handleMenuClick(menu, i, plus)}
-      >
-        <menu.icon />
-        <a>{menu.name}</a>
-      </div>
-    );
-  }
+  const Item: React.FC<ItemProps> = ({ menu, i, plus = 0 }) => (
+    <div
+      key={i}
+      className={`${styles.sidebar__item} ${i + plus === selected ? styles['--actived'] : ''}`}
+      onClick={() => handleMenuClick({ menu, i, plus })}
+    >
+      <menu.icon />
+      <a>{menu.name}</a>
+    </div>
+  );
 
   return (
     <aside className={styles.sidebar}>
@@ -54,9 +53,13 @@ const List: React.FC = () => {
         <img src={avatar} alt="icon" />
         <span>未登录</span>
       </header>
-      {menuList.slice(0, 4).map((item, i) => getItem(item, i))}
+      {menuList.slice(0, 4).map((item, i) => (
+        <Item key={i} menu={item} i={i} />
+      ))}
       <div className={styles.sidebar__title}>我的音乐</div>
-      {menuList.slice(4, 7).map((item, i) => getItem(item, i, 4))}
+      {menuList.slice(4, 7).map((item, i) => (
+        <Item key={i} menu={item} i={i} plus={4} />
+      ))}
       <div className={styles.sidebar__title}>
         <div className={styles['sidebar__title-left']}>
           <CaretDownOutlined />
@@ -64,7 +67,9 @@ const List: React.FC = () => {
         </div>
         <PlusOutlined className={styles['sidebar__title-right']} />
       </div>
-      {menuList.slice(7).map((item, i) => getItem(item, i, 7))}
+      {menuList.slice(7).map((item, i) => (
+        <Item key={i} menu={item} i={i} plus={7} />
+      ))}
     </aside>
   );
 };

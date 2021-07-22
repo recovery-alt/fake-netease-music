@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function FM() {
-  return <div>FM</div>;
-}
+const FM: React.FC = () => <div>FM</div>;
+
+export default FM;

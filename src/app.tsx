@@ -7,7 +7,7 @@ const App: React.FC = () => (
     <Switch>
       {routes.map((route, i) => (
         <Route key={i} path={route.path}>
-          <route.component {...route} />
+          {/* <route.component {...route} /> */}
         </Route>
       ))}
     </Switch>

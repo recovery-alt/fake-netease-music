@@ -22,6 +22,7 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
+    "@ehutch79/vite-eslint": "^0.0.1",
     "@ls-lint/ls-lint": "^1.9.2",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
@@ -42,7 +43,7 @@
     "husky": "^7.0.1",
     "less": "^4.1.1",
     "lint-staged": "^11.0.1",
-    "postcss": "^8.3.5",
+    "postcss": "^8.3.6",
     "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^2.3.2",
     "typescript": "^4.3.5",

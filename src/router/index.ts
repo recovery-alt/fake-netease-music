@@ -1,34 +1,22 @@
-import Login from '@/views/login';
-import Layout from '@/layout';
 import FindMusic from '@/views/find-music';
 import FM from '@/views/fm';
 
 export type RouteConfig = {
   path: string;
-  component: () => JSX.Element;
+  component: React.FC;
   exact?: boolean;
   routes?: Array<RouteConfig>;
 };
 
 const routes = [
   {
-    path: '/login',
-    component: Login,
+    path: '/',
     exact: true,
+    component: FindMusic,
   },
   {
-    path: '/',
-    component: Layout,
-    routes: [
-      {
-        path: '',
-        component: FindMusic,
-      },
-      {
-        path: '/fm',
-        component: FM,
-      },
-    ],
+    path: '/fm',
+    component: FM,
   },
 ];
 
