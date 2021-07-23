@@ -7,6 +7,7 @@ export type ResponseData<T> = T extends Data
   : { code: number; result: T };
 
 export interface AppProps {
+  className?: string;
   children?: React.ReactNode;
   functionChildren?: (name: string) => React.ReactNode;
   style?: React.CSSProperties;
