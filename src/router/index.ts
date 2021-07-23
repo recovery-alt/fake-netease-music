@@ -9,13 +9,15 @@ export type RouteConfig = {
   routes?: Array<RouteConfig>;
 };
 
-const routes = [
+const routes: Array<RouteConfig> = [
   {
     path: '/',
+    exact: true,
     component: Layout,
     routes: [
       {
-        path: '/find-music',
+        path: '/',
+        exact: true,
         component: FindMusic,
       },
       {

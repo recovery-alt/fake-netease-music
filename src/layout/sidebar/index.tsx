@@ -18,9 +18,9 @@ const List: React.FC = () => {
   type ItemProps = { menu: Menu; i: number; plus?: number };
 
   const menuList: Array<Menu> = [
-    { name: '发现音乐', icon: CustomerServiceOutlined, path: '/find-music' },
+    { name: '发现音乐', icon: CustomerServiceOutlined, path: '/' },
     { name: '私人FM', icon: TeamOutlined, path: '/fm' },
-    { name: '视频', icon: PlaySquareOutlined, path: '' },
+    { name: '视频', icon: PlaySquareOutlined, path: '/dasdsa' },
     { name: '朋友', icon: TeamOutlined, path: '' },
     { name: 'iTunes音乐', icon: CustomerServiceOutlined, path: '' },
     { name: '下载管理', icon: DownloadOutlined, path: '' },
@@ -46,10 +46,6 @@ const List: React.FC = () => {
       <a>{menu.name}</a>
     </div>
   );
-
-  useEffect(() => {
-    history.push('/find-music');
-  }, []);
 
   return (
     <aside className={styles.sidebar}>

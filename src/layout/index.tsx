@@ -1,6 +1,6 @@
 import React from 'react';
 import type { RouteConfig } from '@/router';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import './layout.less';
 import Sidebar from './sidebar';
 import Header from './header';
@@ -16,12 +16,10 @@ const Layout: React.FC<Props> = ({ routes }) => {
       <section className="container">
         <Sidebar />
         <main className="main">
-          <BrowserRouter>
-            <Switch>
-              {routes && routes.map(route => <Route key={route.path} {...route} />)}
-              <Route component={NotFound} />
-            </Switch>
-          </BrowserRouter>
+          <Switch>
+            {routes && routes.map(route => <Route key={route.path} {...route} />)}
+            <NotFound />
+          </Switch>
         </main>
       </section>
       <Footer />
