@@ -1,0 +1,23 @@
+.pagination {
+  display: flex;
+
+  &__item {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    margin-left: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    &.--actived {
+      background-color: #d33a31;
+      color: #fff;
+    }
+  }
+}

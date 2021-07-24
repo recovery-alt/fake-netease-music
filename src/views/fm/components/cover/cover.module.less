@@ -1,0 +1,37 @@
+.cover {
+  position: relative;
+  width: 310px;
+  height: 270px;
+  flex-shrink: 0;
+  margin-top: 50px;
+
+  img {
+    width: 270px;
+    height: 270px;
+    background-color: aqua;
+    border-radius: 8px;
+  }
+
+  &__pre-img {
+    position: absolute;
+    transform: translateY(-50%) scale(0.85);
+    top: 50%;
+    left: -20px;
+  }
+
+  &__img {
+    position: absolute;
+    width: 270px;
+    left: 40px;
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 50px;
+      color: #d33a31;
+      cursor: pointer;
+    }
+  }
+}

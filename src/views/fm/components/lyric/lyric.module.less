@@ -1,0 +1,61 @@
+.lyric {
+  position: relative;
+  width: 320px;
+  margin-left: 50px;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+  }
+
+  &__quality {
+    font-weight: normal;
+    font-size: 14px;
+    color: #d33a31;
+    margin-left: 20px;
+    border: 1px solid #d33a31;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+
+    p {
+      flex: 1;
+    }
+
+    a {
+      color: #4f7eaf;
+      cursor: pointer;
+    }
+  }
+
+  &__wrapper {
+    width: 320px;
+    height: 370px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    p {
+      margin-top: 20px;
+    }
+  }
+
+  &__question {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    right: -30px;
+    bottom: 0;
+    background-color: #e5e5e5;
+    border-radius: 50%;
+    color: #fff;
+  }
+}
