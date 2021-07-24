@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './sidebar.module.less';
 import avatar from '@/assets/img/avatar.svg';
 import {
@@ -11,7 +11,7 @@ import {
   PlusOutlined,
   HeartOutlined,
 } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import Scrollbar from '@/components/scrollbar';
 
 const List: React.FC = () => {
@@ -31,6 +31,17 @@ const List: React.FC = () => {
 
   const [selected, setSelected] = useState(0);
   const history = useHistory();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const index = menuList.findIndex(menu => pathname.includes(menu.path));
+    if (index > -1) {
+      setSelected(index);
+    } else {
+      setSelected(0);
+      history.push('/find-music');
+    }
+  }, [pathname]);
 
   const handleMenuClick = ({ menu, i, plus = 0 }: ItemProps) => {
     setSelected(i + plus);
