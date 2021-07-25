@@ -1,5 +1,5 @@
 import { Data } from '@/types';
-import { get } from './api';
+import { get, post } from './api';
 
 export type Banners = { banners: Array<{ imageUrl: string }> };
 export const getBanner = () => get<Banners>('/banner');
@@ -19,3 +19,6 @@ export const getAlbumNewest = () => get<AlbumNewest>('/album/newest');
 
 export type DJToplist = { toplist: Array<{ name: string; picUrl: string; rcmdtext: string }> };
 export const getDJToplist = (params: Data) => get<DJToplist>('/dj/toplist', params);
+
+export type UserInfo = { cookie: string; profile: { nickname: string; avatarUrl: string } };
+export const postLogin = (params: Data) => post<UserInfo>('/login/cellphone', params);

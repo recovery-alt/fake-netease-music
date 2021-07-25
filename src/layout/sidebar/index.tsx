@@ -10,9 +10,11 @@ import {
   CaretDownOutlined,
   PlusOutlined,
   HeartOutlined,
+  CaretRightOutlined,
 } from '@ant-design/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import Scrollbar from '@/components/scrollbar';
+import Login from '@/components/login';
 
 const List: React.FC = () => {
   type Menu = { name: string; icon: React.FC; path: string };
@@ -32,6 +34,7 @@ const List: React.FC = () => {
   const [selected, setSelected] = useState(0);
   const history = useHistory();
   const { pathname } = useLocation();
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     const index = menuList.findIndex(menu => pathname.includes(menu.path));
@@ -59,11 +62,16 @@ const List: React.FC = () => {
     </div>
   );
 
+  const login = () => {
+    setShowLogin(true);
+  };
+
   return (
     <aside className={styles.sidebar}>
       <header className={styles.sidebar__header}>
         <img src={avatar} alt="icon" />
-        <span>未登录</span>
+        <strong onClick={login}>未登录</strong>
+        <CaretRightOutlined onClick={login} />
       </header>
       <Scrollbar className={styles.sidebar__main}>
         {menuList.slice(0, 4).map((item, i) => (
@@ -84,9 +92,7 @@ const List: React.FC = () => {
           <Item key={i} menu={item} i={i} plus={7} />
         ))}
       </Scrollbar>
-      {/* <section className={styles.sidebar__main}>
-        <div className={styles['sidebar__main-content']}></div>
-      </section> */}
+      {showLogin && <Login setShowLogin={setShowLogin} />}
     </aside>
   );
 };

@@ -1,15 +1,14 @@
 import type { ResponseData, Data } from '@/types';
 import axios, { AxiosResponse } from 'axios';
 import json from 'json5';
-
-// 默认提示
-const TIP = '连接出错了~';
+import { message } from 'antd';
+import { local } from '@/utils';
 
 // 接口请求报错的时候，伪装成正常错误，由业务代码处理
-const apiErrorHandler = (message?: unknown) => {
-  const msg = typeof message === 'string' ? message : TIP;
+const apiErrorHandler = (msg?: string) => {
+  message.error(msg);
   // 错误抛到业务代码
-  return Promise.resolve({ code: -10000, msg });
+  return Promise.reject();
 };
 
 const baseURL = 'http://47.100.62.108:4000/';
@@ -53,6 +52,8 @@ const service = axios.create({
 
 // 请求拦截器
 service.interceptors.request.use(config => {
+  const cookie = local.get('cookie');
+  if (cookie) config.url = config.url + '?cookie=' + cookie;
   return config;
 }, apiErrorHandler);
 
