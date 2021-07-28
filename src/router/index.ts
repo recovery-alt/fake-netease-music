@@ -5,7 +5,7 @@ import { topMenuMap } from '@/config';
 
 export type RouteConfig = {
   path: string;
-  component: React.FC;
+  component: React.FC<RouteConfig>;
   exact?: boolean;
   routes?: Array<RouteConfig>;
 };

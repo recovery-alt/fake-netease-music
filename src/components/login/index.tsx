@@ -26,6 +26,7 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
     if (res.code === 200) {
       local.set('cookie', res.cookie);
       message.success('登录成功~');
+      setShowLogin(false);
     } else {
       message.error('未登录');
     }
