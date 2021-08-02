@@ -6,13 +6,16 @@ import login from '@/assets/img/login.svg';
 import { postLogin } from '@/api';
 import { message } from 'antd';
 import { local } from '@/utils';
+import { useStore } from 'react-redux';
+import { setUserInfo } from '@/reducer';
 
 type Props = { setShowLogin: (show: boolean) => void };
 
 const Login: React.FC<Props> = ({ setShowLogin }) => {
   const dom = document.getElementById('portal')!;
+  const store = useStore();
 
-  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const hideLogin: MouseEventHandler<HTMLDivElement> = e => {
@@ -21,10 +24,11 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
   };
 
   const submitLogin = async () => {
-    if (!phone || !password) return;
-    const res = await postLogin({ phone, password });
+    if (!email || !password) return;
+    const res = await postLogin({ email, password });
     if (res.code === 200) {
       local.set('cookie', res.cookie);
+      store.dispatch(setUserInfo(res));
       message.success('登录成功~');
       setShowLogin(false);
     } else {
@@ -41,9 +45,9 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
           <div className={styles['login__form-item']}>
             <input
               type="text"
-              placeholder="请输入手机号"
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
+              placeholder="请输入邮箱"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
             />
           </div>
           <div className={styles['login__form-item']}>

@@ -15,6 +15,8 @@ import {
 import { useHistory, useLocation } from 'react-router-dom';
 import Scrollbar from '@/components/scrollbar';
 import Login from '@/components/login';
+import { useStore } from 'react-redux';
+import { RootState } from '@/store';
 
 const List: React.FC = () => {
   type Menu = { name: string; icon: React.FC; path: string };
@@ -35,6 +37,7 @@ const List: React.FC = () => {
   const history = useHistory();
   const { pathname } = useLocation();
   const [showLogin, setShowLogin] = useState(false);
+  const store = useStore<RootState>().getState();
 
   useEffect(() => {
     const index = menuList.findIndex(menu => pathname.includes(menu.path));
@@ -69,8 +72,8 @@ const List: React.FC = () => {
   return (
     <aside className={styles.sidebar}>
       <header className={styles.sidebar__header}>
-        <img src={avatar} alt="icon" />
-        <strong onClick={login}>未登录</strong>
+        <img src={store.user.profile.avatarUrl || avatar} alt="icon" />
+        <strong onClick={login}>{store.user.profile.nickname || '未登录'}</strong>
         <CaretRightOutlined onClick={login} />
       </header>
       <Scrollbar className={styles.sidebar__main}>

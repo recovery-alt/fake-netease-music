@@ -21,4 +21,6 @@ export type DJToplist = { toplist: Array<{ name: string; picUrl: string; rcmdtex
 export const getDJToplist = (params: Data) => get<DJToplist>('/dj/toplist', params);
 
 export type UserInfo = { cookie: string; profile: { nickname: string; avatarUrl: string } };
-export const postLogin = (params: Data) => post<UserInfo>('/login/cellphone', params);
+export const postLogin = (params: Data) => post<UserInfo>('/login', params);
+
+export const song = (id: string) => get<any>('/song/url', { id });
