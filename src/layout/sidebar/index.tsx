@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './sidebar.module.less';
-import avatar from '@/assets/img/avatar.svg';
 import {
   CustomerServiceOutlined,
   TeamOutlined,
@@ -15,7 +14,7 @@ import {
 import { useHistory, useLocation } from 'react-router-dom';
 import Scrollbar from '@/components/scrollbar';
 import Login from '@/components/login';
-import { useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 
 const List: React.FC = () => {
@@ -37,7 +36,7 @@ const List: React.FC = () => {
   const history = useHistory();
   const { pathname } = useLocation();
   const [showLogin, setShowLogin] = useState(false);
-  const store = useStore<RootState>().getState();
+  const { avatarUrl, nickname } = useSelector((state: RootState) => state.user.profile);
 
   useEffect(() => {
     const index = menuList.findIndex(menu => pathname.includes(menu.path));
@@ -72,8 +71,8 @@ const List: React.FC = () => {
   return (
     <aside className={styles.sidebar}>
       <header className={styles.sidebar__header}>
-        <img src={store.user.profile.avatarUrl || avatar} alt="icon" />
-        <strong onClick={login}>{store.user.profile.nickname || '未登录'}</strong>
+        <img src={avatarUrl} alt="icon" />
+        <strong onClick={login}>{nickname}</strong>
         <CaretRightOutlined onClick={login} />
       </header>
       <Scrollbar className={styles.sidebar__main}>

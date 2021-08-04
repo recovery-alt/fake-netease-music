@@ -1,4 +1,5 @@
-import { Data } from '@/types';
+import type { Data } from '@/types';
+
 import FindMusic from '@/views/find-music';
 import FindMusicList from '@/views/find-music/views/list';
 import FindMusicNewest from '@/views/find-music/views/newest';
@@ -26,6 +27,7 @@ import Recent from '@/views/recent';
 import Collection from '@/views/collection';
 import CollectionSinger from '@/views/collection/views/singer';
 import CollectionVideo from '@/views/collection/views/video';
+
 import Column from '@/views/collection/views/column';
 
 export type MenuConfig = { label: string; component: React.FC; path: string; exact?: boolean };

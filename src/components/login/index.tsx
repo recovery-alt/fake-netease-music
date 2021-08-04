@@ -3,20 +3,20 @@ import styles from './login.module.less';
 import ReactDOM from 'react-dom';
 import { CloseOutlined } from '@ant-design/icons';
 import login from '@/assets/img/login.svg';
-import { postLogin } from '@/api';
 import { message } from 'antd';
 import { local } from '@/utils';
-import { useStore } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUserInfo } from '@/reducer';
+import { AppDispatch } from '@/store';
 
 type Props = { setShowLogin: (show: boolean) => void };
 
 const Login: React.FC<Props> = ({ setShowLogin }) => {
   const dom = document.getElementById('portal')!;
-  const store = useStore();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch<AppDispatch>();
 
   const hideLogin: MouseEventHandler<HTMLDivElement> = e => {
     e.stopPropagation();
@@ -25,15 +25,17 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
 
   const submitLogin = async () => {
     if (!email || !password) return;
-    const res = await postLogin({ email, password });
-    if (res.code === 200) {
-      local.set('cookie', res.cookie);
-      store.dispatch(setUserInfo(res));
-      message.success('登录成功~');
-      setShowLogin(false);
-    } else {
-      message.error('未登录');
-    }
+    const promise = dispatch(setUserInfo({ email, password }));
+    promise
+      .unwrap()
+      .then(res => {
+        local.set('cookie', res.cookie);
+        setShowLogin(false);
+        message.success('登录成功～');
+      })
+      .catch(() => {
+        message.error('未登录');
+      });
   };
 
   return ReactDOM.createPortal(

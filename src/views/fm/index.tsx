@@ -6,11 +6,8 @@ import ButtonGroup from './components/button-group';
 import WriteComment from './components/write-comment';
 import Comments from './components/comments';
 import Pagination from './components/pagination';
-import { useDispatch } from 'react-redux';
-import { setUserInfo } from '@/store/reducer/user';
 
 const FM: React.FC = () => {
-  const dispatch = useDispatch();
   return (
     <div className="fm">
       <section className="fm__player">
