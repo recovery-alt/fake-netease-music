@@ -14,7 +14,7 @@ type Props = { setShowLogin: (show: boolean) => void };
 const Login: React.FC<Props> = ({ setShowLogin }) => {
   const dom = document.getElementById('portal')!;
 
-  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch<AppDispatch>();
 
@@ -24,18 +24,15 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
   };
 
   const submitLogin = async () => {
-    if (!email || !password) return;
-    const promise = dispatch(setUserInfo({ email, password }));
-    promise
-      .unwrap()
-      .then(res => {
-        local.set('cookie', res.cookie);
-        setShowLogin(false);
-        message.success('登录成功～');
-      })
-      .catch(() => {
-        message.error('未登录');
-      });
+    if (!phone || !password) return;
+    const res = await dispatch(setUserInfo({ phone, password }));
+    if (setUserInfo.fulfilled.match(res)) {
+      local.set('cookie', res.payload.cookie);
+      setShowLogin(false);
+      message.success('登录成功～');
+    } else {
+      message.error('未登录～');
+    }
   };
 
   return ReactDOM.createPortal(
@@ -47,9 +44,9 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
           <div className={styles['login__form-item']}>
             <input
               type="text"
-              placeholder="请输入邮箱"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              placeholder="请输入手机号"
+              value={phone}
+              onChange={e => setPhone(e.target.value)}
             />
           </div>
           <div className={styles['login__form-item']}>

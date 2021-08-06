@@ -36,7 +36,7 @@ const List: React.FC = () => {
   const history = useHistory();
   const { pathname } = useLocation();
   const [showLogin, setShowLogin] = useState(false);
-  const { avatarUrl, nickname } = useSelector((state: RootState) => state.user.profile);
+  const { profile } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     const index = menuList.findIndex(menu => pathname.includes(menu.path));
@@ -71,8 +71,8 @@ const List: React.FC = () => {
   return (
     <aside className={styles.sidebar}>
       <header className={styles.sidebar__header}>
-        <img src={avatarUrl} alt="icon" />
-        <strong onClick={login}>{nickname}</strong>
+        <img src={profile.avatarUrl} alt="icon" />
+        <strong onClick={login}>{profile.nickname}</strong>
         <CaretRightOutlined onClick={login} />
       </header>
       <Scrollbar className={styles.sidebar__main}>

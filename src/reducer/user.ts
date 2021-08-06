@@ -4,12 +4,19 @@ import avatarUrl from '@/assets/img/avatar.svg';
 import { postLogin } from '@/api';
 import { to } from '@/utils';
 
-export const setUserInfo = createAsyncThunk<UserInfo, { email: string; password: string }>(
+export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password: string }>(
   'userInfo/set',
-  async ({ email, password }, { rejectWithValue }) => {
-    const [err, res] = await to(postLogin({ email, password }));
+  async ({ phone, password }, { rejectWithValue }) => {
+    const [err, res] = await to(postLogin({ phone, password }));
+    if (err || !res) return rejectWithValue(null);
     const { code, ...rest } = res;
-    return !err && code === 200 ? rest : rejectWithValue(null);
+
+    if (code === 200) {
+      debugger;
+      return rest;
+    } else {
+      return rejectWithValue(null);
+    }
   }
 );
 
