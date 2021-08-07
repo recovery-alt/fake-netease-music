@@ -1,13 +1,13 @@
 import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { UserInfo } from '@/api';
 import avatarUrl from '@/assets/img/avatar.svg';
-import { postLogin } from '@/api';
+import { loginCellphone } from '@/api';
 import { to } from '@/utils';
 
 export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password: string }>(
   'userInfo/set',
   async ({ phone, password }, { rejectWithValue }) => {
-    const [err, res] = await to(postLogin({ phone, password }));
+    const [err, res] = await to(loginCellphone({ phone, password }));
     if (err || !res) return rejectWithValue(null);
     const { code, ...rest } = res;
 

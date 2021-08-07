@@ -3,7 +3,7 @@ import styles from './lyric.module.less';
 import Scrollbar from '@/components/scrollbar';
 import { QuestionOutlined } from '@ant-design/icons';
 import { Music } from '@/api';
-import { getLyricById } from '@/api';
+import { getLyric } from '@/api';
 
 type Props = { music: Music };
 
@@ -22,7 +22,7 @@ const Lyric: React.FC<Props> = ({ music }) => {
 
   useEffect(() => {
     if (!music?.id) return;
-    getLyricById(music.id).then(res => {
+    getLyric(music.id).then(res => {
       const { lrc } = res;
       setLyrics(transLyric2Arr(lrc.lyric));
     });
@@ -41,7 +41,9 @@ const Lyric: React.FC<Props> = ({ music }) => {
         <p>
           <span>歌手：</span>
           {music?.artists.map(artist => (
-            <a key={artist.name}>{artist.name}</a>
+            <a className={styles.lyric__anchor} key={artist.name}>
+              {artist.name}
+            </a>
           ))}
         </p>
       </div>

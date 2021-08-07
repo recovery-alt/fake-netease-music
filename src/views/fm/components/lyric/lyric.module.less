@@ -26,12 +26,17 @@
     box-sizing: border-box;
 
     p {
-      flex: 1;
+      width: 50%;
+      display: flex;
     }
 
     a {
       color: #4f7eaf;
       cursor: pointer;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      flex: 1;
     }
   }
 
@@ -58,5 +63,9 @@
     background-color: #e5e5e5;
     border-radius: 50%;
     color: #fff;
+  }
+
+  &__anchor:not(:last-child)::after {
+    content: '/';
   }
 }

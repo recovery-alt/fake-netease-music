@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getCommentMusicById, Music } from '@/api';
+import { getCommentMusic, Music } from '@/api';
 import { Comment } from '@/api';
 
 export const useMusicComment = (current: Music) => {
@@ -7,9 +7,9 @@ export const useMusicComment = (current: Music) => {
   const [hotComments, setHotComments] = useState<Comment[]>([]);
   const [total, setTotal] = useState(0);
 
-  function getMusicComment(id: string | number, current = 1, pageSize = 20) {
+  function loadCommentMusic(id: string | number, current = 1, pageSize = 20) {
     const offset = (current - 1) * pageSize;
-    getCommentMusicById(id, offset).then(res => {
+    getCommentMusic(id, offset).then(res => {
       setComments(res.comments);
       res.hotComments && setHotComments(res.hotComments);
       setTotal(res.total);
@@ -17,8 +17,8 @@ export const useMusicComment = (current: Music) => {
   }
 
   useEffect(() => {
-    current?.id && getMusicComment(current.id);
+    current?.id && loadCommentMusic(current.id);
   }, [current]);
 
-  return { comments, hotComments, total, getMusicComment };
+  return { comments, hotComments, total, loadCommentMusic };
 };

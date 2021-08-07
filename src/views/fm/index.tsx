@@ -12,7 +12,7 @@ import { Pagination } from 'antd';
 const FM: React.FC = () => {
   const [musicList, setMusicList] = useState<Music[]>([]);
   const [current, setCurrent] = useState(0);
-  const { comments, hotComments, total, getMusicComment } = useMusicComment(musicList[current]);
+  const { comments, hotComments, total, loadCommentMusic } = useMusicComment(musicList[current]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -45,9 +45,9 @@ const FM: React.FC = () => {
           total={total}
           showSizeChanger={false}
           current={currentPage}
-          onChange={page => {
+          onChange={(page, pageSize) => {
             setCurrentPage(page);
-            getMusicComment(musicList[current].id, page);
+            loadCommentMusic(musicList[current].id, page, pageSize);
           }}
         />
       </footer>
