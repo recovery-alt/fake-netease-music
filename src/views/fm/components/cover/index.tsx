@@ -1,18 +1,27 @@
 import React from 'react';
 import styles from './cover.module.less';
-import img from '@/assets/img/avatar.svg';
 import { PlayCircleFilled } from '@ant-design/icons';
+import { Music } from '@/api';
+import music from '@/assets/img/music.svg';
 
-const Cover: React.FC = () => (
-  <>
-    <div className={styles.cover}>
-      <img className={styles['cover__pre-img']} src={img} alt="pre-cover" />
-      <div className={styles['cover__img']}>
-        <img src={img} alt="cover" />
-        <PlayCircleFilled />
+type Props = { musicList: Array<Music> };
+
+const Cover: React.FC<Props> = ({ musicList }) => {
+  return (
+    <>
+      <div className={styles.cover}>
+        <img
+          className={styles['cover__pre-img']}
+          src={musicList[1]?.album?.picUrl || music}
+          alt="pre-cover"
+        />
+        <div className={styles['cover__img']}>
+          <img src={musicList[0]?.album?.picUrl || music} alt="cover" />
+          <PlayCircleFilled />
+        </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
+};
 
 export default Cover;

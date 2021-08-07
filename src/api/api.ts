@@ -64,7 +64,9 @@ service.interceptors.response.use(async (response: AxiosResponse) => {
     // 处理http错误
     return apiErrorHandler(statusStrategy(status));
   }
-  return response.data;
+
+  if (response.data.code === 200) return response.data;
+  return apiErrorHandler(response.data.message);
 }, apiErrorHandler);
 
 // get请求

@@ -27,6 +27,7 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
     if (!phone || !password) return;
     const res = await dispatch(setUserInfo({ phone, password }));
     if (setUserInfo.fulfilled.match(res)) {
+      local.set('userInfo', res.payload);
       local.set('cookie', res.payload.cookie);
       setShowLogin(false);
       message.success('登录成功～');

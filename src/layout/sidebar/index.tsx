@@ -14,8 +14,12 @@ import {
 import { useHistory, useLocation } from 'react-router-dom';
 import Scrollbar from '@/components/scrollbar';
 import Login from '@/components/login';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '@/store';
+import { local } from '@/utils';
+import { UserInfo } from '@/api';
+import { setUserInfoFromCache } from '@/reducer';
+import json from 'json5';
 
 const List: React.FC = () => {
   type Menu = { name: string; icon: React.FC; path: string };
@@ -37,6 +41,7 @@ const List: React.FC = () => {
   const { pathname } = useLocation();
   const [showLogin, setShowLogin] = useState(false);
   const { profile } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const index = menuList.findIndex(menu => pathname.includes(menu.path));
@@ -46,6 +51,10 @@ const List: React.FC = () => {
       setSelected(0);
       history.push('/find-music');
     }
+
+    const userInfo = local.get('userInfo');
+    if (!userInfo) return;
+    dispatch(setUserInfoFromCache(json.parse<UserInfo>(userInfo)));
   }, [pathname]);
 
   const handleMenuClick = ({ menu, i, plus = 0 }: ItemProps) => {

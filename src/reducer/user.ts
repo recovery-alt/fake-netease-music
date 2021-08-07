@@ -12,7 +12,6 @@ export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password:
     const { code, ...rest } = res;
 
     if (code === 200) {
-      debugger;
       return rest;
     } else {
       return rejectWithValue(null);
@@ -20,10 +19,15 @@ export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password:
   }
 );
 
+export const setUserInfoFromCache = createAction<UserInfo>('userInfo/setCache');
+
 export const userReducer = createReducer<UserInfo>(
   { cookie: '', profile: { avatarUrl, nickname: '未登录' } },
   builder => {
     builder.addCase(setUserInfo.fulfilled, (state, action) => {
+      return { ...state, ...action.payload };
+    });
+    builder.addCase(setUserInfoFromCache, (state, action) => {
       return { ...state, ...action.payload };
     });
   }
