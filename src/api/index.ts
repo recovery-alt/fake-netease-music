@@ -5,7 +5,7 @@ export type User = { nickname: string; avatarUrl: string };
 
 export type BannerType = { imageUrl: string };
 export const getBanner = () => get<{ banners: BannerType[] }>('/banner');
-export const getDJBanner = () => get<{ data: BannerType[] }>('/dj/banner');
+export const getDJBanner = () => get<{ data: { pic: string; url: string }[] }>('/dj/banner');
 
 export type PersonalizedList = Array<{ name: string; picUrl: string }>;
 export const getPersonalized = (params: Data) => get<PersonalizedList>('/personalized', params);
@@ -15,13 +15,11 @@ export const getPPList = (params: Data) =>
 
 export const getPersonalizedMV = () => get<PersonalizedList>('/personalized/mv');
 
-export type AlbumNewest = {
-  albums: Array<{ picUrl: string; name: string; artist: { name: string } }>;
-};
-export const getAlbumNewest = () => get<AlbumNewest>('/album/newest');
+export type AlbumNewest = { picUrl: string; name: string; artist: { name: string } };
+export const getAlbumNewest = () => get<{ albums: AlbumNewest[] }>('/album/newest');
 
-export type DJToplist = { toplist: Array<{ name: string; picUrl: string; rcmdtext: string }> };
-export const getDJToplist = (params: Data) => get<DJToplist>('/dj/toplist', params);
+export type DJToplist = { name: string; picUrl: string; rcmdtext: string };
+export const getDJToplist = (limit = 6) => get<{ toplist: DJToplist[] }>('/dj/toplist', { limit });
 
 export type UserInfo = { cookie: string; profile: User };
 export const loginCellphone = (params: Data) => post<UserInfo>('/login/cellphone', params);
@@ -70,3 +68,21 @@ export const getAllMusicCategory = () => get<PlaylistCatlist>('/playlist/catlist
 export type TopPlaylist = { coverImgUrl: string; id: number; name: string };
 export const getTopPlaylist = (params: { offset?: number; limit?: number }) =>
   get<{ total: number; playlists: TopPlaylist[] }>('/top/playlist', params);
+
+export type DJCatelist = { id: number; name: string; pic56x56Url: string };
+export const getDJCatelist = () => get<{ categories: DJCatelist[] }>('/dj/catelist');
+
+export type DJPersonalizeRecommend = { rcmdText: string; name: string; picUrl: string };
+export const getDJPersonalizeRecommend = (limit = 5) =>
+  get<{ data: DJPersonalizeRecommend[] }>('/dj/personalize/recommend', { limit });
+
+export type DJRadio = { name: string; picUrl: string; rcmdText: string; lastProgramName: string };
+export const getDJPaygift = (limit = 4) =>
+  get<{ data: { list: DJRadio[] } }>('/dj/paygift', { limit });
+
+export type DJToplistPay = { name: string; creatorName: string; picUrl: string };
+export const getDJToplistPay = (limit = 5) =>
+  get<{ data: { list: DJToplistPay[] } }>('/dj/toplist/pay', { limit });
+
+export const getDJRecommendType = (type: number) =>
+  get<{ djRadios: DJRadio[] }>('/dj/recommend/type', { type });

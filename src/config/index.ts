@@ -3,7 +3,7 @@ import type { Data } from '@/types';
 import FindMusic from '@/views/find-music';
 import FindMusicList from '@/views/find-music/views/list';
 import FindMusicNewest from '@/views/find-music/views/newest';
-import FindMusicRadio from '@/views/find-music/views/radio';
+import FindMusicRadioHost from '@/views/find-music/views/radio-host';
 import FindMusicRank from '@/views/find-music/views/rank';
 import FindMusicSinger from '@/views/find-music/views/singer';
 
@@ -36,7 +36,7 @@ export const topMenuMap: Data<Array<MenuConfig>> = {
   'find-music': [
     { label: '个性推荐', component: FindMusic, path: '/find-music', exact: true },
     { label: '歌单', component: FindMusicList, path: '/find-music/list' },
-    { label: '主播电台', component: FindMusicRadio, path: '/find-music/radio' },
+    { label: '主播电台', component: FindMusicRadioHost, path: '/find-music/radio-host' },
     { label: '排行榜', component: FindMusicRank, path: '/find-music/rank' },
     { label: '歌手', component: FindMusicSinger, path: '/find-music/singer' },
     { label: '最新音乐', component: FindMusicNewest, path: '/find-music/newest' },

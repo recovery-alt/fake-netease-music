@@ -13,9 +13,7 @@
 
   &__item {
     padding: 10px;
-    flex-shrink: 0;
     border-bottom: 1px solid #f3f3f2;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     border-radius: 4px;
@@ -23,18 +21,10 @@
     &:hover {
       background-color: #f5f5f6;
     }
-
-    strong {
-      margin: 0 10px;
-      color: #bfbebf;
-      font-weight: normal;
-    }
   }
 
   &__img {
     position: relative;
-    width: 60px;
-    height: 60px;
 
     img {
       width: 100%;
@@ -49,24 +39,6 @@
       transform: translate(-50%, -50%);
       font-size: 20px;
       color: #d33b31;
-    }
-
-    &.--large {
-      width: 90px;
-      height: 90px;
-
-      & + .list__name {
-        margin-left: 20px;
-      }
-    }
-  }
-
-  &__name {
-    height: 40px;
-
-    div {
-      height: 20px;
-      line-height: 20px;
     }
   }
 }
