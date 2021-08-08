@@ -1,7 +1,8 @@
 import { Data } from '@/types';
-import { get, post } from './api';
+import { get } from './api';
+import { User } from './login';
 
-export type User = { nickname: string; avatarUrl: string };
+export * from './login';
 
 export type BannerType = { imageUrl: string };
 export const getBanner = () => get<{ banners: BannerType[] }>('/banner');
@@ -20,9 +21,6 @@ export const getAlbumNewest = () => get<{ albums: AlbumNewest[] }>('/album/newes
 
 export type DJToplist = { name: string; picUrl: string; rcmdtext: string };
 export const getDJToplist = (limit = 6) => get<{ toplist: DJToplist[] }>('/dj/toplist', { limit });
-
-export type UserInfo = { cookie: string; profile: User };
-export const loginCellphone = (params: Data) => post<UserInfo>('/login/cellphone', params);
 
 export type Song = any;
 export const getSongUrl = (id: number | string) => get<Song>('/song/url', { id });

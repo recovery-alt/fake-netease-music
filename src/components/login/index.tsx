@@ -6,7 +6,7 @@ import login from '@/assets/img/login.svg';
 import { message } from 'antd';
 import { local } from '@/utils';
 import { useDispatch } from 'react-redux';
-import { setUserInfo } from '@/reducer';
+import { setUserInfo, setUserSubcount } from '@/reducer';
 import { AppDispatch } from '@/store';
 
 type Props = { setShowLogin: (show: boolean) => void };
@@ -28,11 +28,14 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
     const res = await dispatch(setUserInfo({ phone, password }));
     if (setUserInfo.fulfilled.match(res)) {
       local.set('userInfo', res.payload);
-      local.set('cookie', res.payload.cookie);
+      // const result = await dispatch(setUserSubcount());
+      // if (setUserInfo.fulfilled.match(res)) {
+      //   local.set('userSubcount', result.payload);
+      // }
       setShowLogin(false);
       message.success('登录成功～');
     } else {
-      message.error('未登录～');
+      message.error('登录失败～');
     }
   };
 

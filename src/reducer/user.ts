@@ -1,7 +1,6 @@
 import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { UserInfo } from '@/api';
+import { loginCellphone, UserInfo } from '@/api';
 import avatarUrl from '@/assets/img/avatar.svg';
-import { loginCellphone } from '@/api';
 import { to } from '@/utils';
 
 export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password: string }>(
