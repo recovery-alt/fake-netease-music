@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './pagination.module.less';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import classNames from 'classnames';
 
 type Props = { total: number; current: number; pageSize?: number };
 
@@ -21,7 +22,7 @@ const Pagination: React.FC<Props> = ({ total, current, pageSize = 20 }) => {
         .map((item, i) => (
           <div
             key={i}
-            className={`${styles.pagination__item} ${i === 1 ? styles['--actived'] : ''}`}
+            className={classNames(styles.pagination__item, { [styles['--actived']]: i === 1 })}
           >
             {i + 1}
           </div>

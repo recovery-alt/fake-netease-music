@@ -20,6 +20,7 @@ import { local } from '@/utils';
 import { UserInfo } from '@/api';
 import { setUserInfoFromCache } from '@/reducer';
 import json from 'json5';
+import classNames from 'classnames';
 
 const List: React.FC = () => {
   type Menu = { name: string; icon: React.FC; path: string };
@@ -65,7 +66,7 @@ const List: React.FC = () => {
   const Item: React.FC<ItemProps> = ({ menu, i, plus = 0 }) => (
     <div
       key={i}
-      className={`${styles.sidebar__item} ${i + plus === selected ? styles['--actived'] : ''}`}
+      className={classNames(styles.sidebar__item, { [styles['--actived']]: i + plus === selected })}
       onClick={() => handleMenuClick({ menu, i, plus })}
     >
       <menu.icon />

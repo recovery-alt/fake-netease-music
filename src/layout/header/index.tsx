@@ -11,6 +11,7 @@ import {
 } from '@ant-design/icons';
 import { topMenuMap, MenuConfig } from '@/config';
 import { Link, useLocation } from 'react-router-dom';
+import classNames from 'classnames';
 
 const List: React.FC = () => {
   const [actived, setActvied] = useState('');
@@ -33,7 +34,7 @@ const List: React.FC = () => {
       <div className={styles.header__right}>
         <ul className={styles['header__right-menu']}>
           {topMenu.map((item, i) => (
-            <li className={item.path === actived ? styles['--actived'] : ''} key={i}>
+            <li className={classNames({ [styles['--actived']]: item.path === actived })} key={i}>
               <Link to={item.path} onClick={() => setActvied(item.path)}>
                 {item.label}
               </Link>

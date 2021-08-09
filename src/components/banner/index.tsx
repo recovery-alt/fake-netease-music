@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './banner.module.less';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import type { BannerType } from '@/api';
+import classNames from 'classnames';
 
 type Props = {
   data: BannerType[];
@@ -33,7 +34,7 @@ const Banner: React.FC<Props> = ({ data }) => {
           src={item.imageUrl}
           key={item.imageUrl}
           alt="banner"
-          className={`${styles.banner__item} ${getState(i)}`}
+          className={classNames(styles.banner__item, getState(i))}
         />
       ))}
       <div className={styles['banner__dot-wrapper']}>
@@ -41,16 +42,16 @@ const Banner: React.FC<Props> = ({ data }) => {
           <div
             key={item.imageUrl}
             onMouseMove={() => setCurrent(i)}
-            className={`${styles['banner__dot']} ${i === current ? styles['--actived'] : ''}`}
+            className={classNames(styles.banner__dot, { [styles['--actived']]: i === current })}
           ></div>
         ))}
       </div>
       <LeftOutlined
-        className={`${styles['banner__array']} ${styles['--left']}`}
+        className={classNames(styles.banner__array, styles['--left'])}
         onClick={() => handleArrayClick()}
       />
       <RightOutlined
-        className={`${styles['banner__array']} ${styles['--right']}`}
+        className={classNames(styles.banner__array, styles['--right'])}
         onClick={() => handleArrayClick(true)}
       />
     </div>

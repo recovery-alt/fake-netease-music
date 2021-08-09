@@ -13,6 +13,7 @@ import {
   SoundOutlined,
 } from '@ant-design/icons';
 import avatar from '@/assets/img/avatar.svg';
+import classNames from 'classnames';
 
 const List: React.FC = () => {
   return (
@@ -28,7 +29,7 @@ const List: React.FC = () => {
       <div className={styles.footer__mid}>
         <HeartOutlined />
         <VerticalRightOutlined className={styles['--red']} />
-        <PlayCircleFilled className={`${styles['--big']} ${styles['--red']}`} />
+        <PlayCircleFilled className={classNames(styles['--big'], styles['--red'])} />
         <VerticalLeftOutlined className={styles['--red']} />
         <DeleteOutlined />
       </div>
