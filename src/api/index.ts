@@ -84,3 +84,13 @@ export const getDJToplistPay = (limit = 5) =>
 
 export const getDJRecommendType = (type: number) =>
   get<{ djRadios: DJRadio[] }>('/dj/recommend/type', { type });
+
+export type Toplist = { name: string; coverImgUrl: string; id: number };
+export const getToplist = () => get<{ list: Toplist[] }>('/toplist');
+
+export const getToplistDetail = () => get('/toplist/detail');
+
+export type Track = { name: string; id: number; ar: { name: string }[] };
+export type PlaylistDetail = { name: string; coverImgUrl: string; tracks: Track[] };
+export const getPlaylistDetail = (id: number) =>
+  get<{ playlist: PlaylistDetail }>('/playlist/detail', { id });
