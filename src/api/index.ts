@@ -22,7 +22,12 @@ export const getAlbumNewest = () => get<{ albums: AlbumNewest[] }>('/album/newes
 export type DJToplist = { name: string; picUrl: string; rcmdtext: string };
 export const getDJToplist = (limit = 6) => get<{ toplist: DJToplist[] }>('/dj/toplist', { limit });
 
-export type Song = any;
+export type Song = {
+  id: number;
+  name: string;
+  duration: number;
+  album: { name: string; picUrl: string; artists: ArtistList[] };
+};
 export const getSongUrl = (id: number | string) => get<Song>('/song/url', { id });
 
 export type Lyric = { lrc: { lyric: string } };
@@ -103,3 +108,5 @@ export const getArtistList = (params?: {
   limit?: number;
   offset?: number;
 }) => get<{ artists: ArtistList[] }>('/artist/list', params);
+
+export const getTopSong = (type: number) => get<{ data: Song[] }>('/top/song', { type });

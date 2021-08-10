@@ -1,37 +1,36 @@
 .music-list {
-  padding: 20px 30px 0 30px;
+  padding: 20px 30px 0;
 
   &__banner {
-    border-radius: 8px;
     background-image: linear-gradient(#847d6b, #557584, #847d6b);
-    padding: 15px;
+    border-radius: 8px;
     display: flex;
+    padding: 15px;
 
     img {
-      width: 140px;
-      height: 140px;
       border-radius: 8px;
-      background-color: aqua;
+      height: 140px;
+      width: 140px;
     }
 
     &-right {
       margin-left: 10px;
 
       button {
-        width: 100px;
-        height: 30px;
-        font-size: 14px;
-        border-radius: 15px;
-        border: 1px solid #e8a95a;
-        color: #e8a95a;
         background-color: transparent;
+        border: 1px solid #e8a95a;
+        border-radius: 15px;
+        color: #e8a95a;
+        font-size: 14px;
+        height: 30px;
         margin-top: 20px;
+        width: 100px;
       }
 
       h2 {
-        margin-top: 16px;
-        font-size: 20px;
         color: #fff;
+        font-size: 20px;
+        margin-top: 16px;
       }
 
       h3 {
@@ -43,18 +42,18 @@
   }
 
   &__guide {
-    margin: 15px 0;
+    align-items: center;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    margin: 15px 0;
     position: relative;
 
     button {
-      height: 30px;
+      background-color: transparent;
       border: 1px solid #d9d9d9;
       border-radius: 15px;
-      background-color: transparent;
       cursor: pointer;
+      height: 30px;
 
       &:hover {
         background-color: #f2f2f2;
@@ -62,18 +61,18 @@
     }
 
     ul {
-      display: flex;
       align-items: center;
+      display: flex;
     }
 
     li {
+      border-left: 1px solid #f2f2f3;
+      color: #666;
+      cursor: pointer;
+      font-size: 12px;
       padding: 0 10px;
       text-align: center;
       white-space: nowrap;
-      border-left: 1px solid #f2f2f3;
-      font-size: 12px;
-      cursor: pointer;
-      color: #666;
 
       &:hover {
         color: #3a3939;
@@ -87,38 +86,38 @@
 
   .popover {
     &__wrapper {
-      position: absolute;
-      width: 100%;
-      box-shadow: var(--shadow);
-      top: 40px;
-      left: 0;
       background-color: #fff;
+      box-shadow: var(--shadow);
+      left: 0;
       padding-bottom: 100px;
+      position: absolute;
+      top: 40px;
+      width: 100%;
 
       &::before {
-        content: '';
-        position: absolute;
-        border-width: 5px;
         border-color: transparent transparent #fff #fff;
         border-style: solid;
-        top: -3px;
-        left: 30px;
-        display: block;
+        border-width: 5px;
         box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.15);
+        content: '';
+        display: block;
+        left: 30px;
+        position: absolute;
+        top: -3px;
         transform: rotate(-45deg);
       }
     }
 
     &__header {
-      padding: 12px 20px;
       border-bottom: 1px solid #e5e5e5;
+      padding: 12px 20px;
 
       button {
-        width: 80px;
-        height: 30px;
         background-color: #fdf6f5;
-        color: var(--primary-color);
         border: 0;
+        color: var(--primary-color);
+        height: 30px;
+        width: 80px;
       }
     }
 
@@ -133,9 +132,9 @@
     }
 
     &__left {
-      margin-left: 9px;
       color: #999;
       flex-shrink: 0;
+      margin-left: 9px;
 
       span {
         margin-left: 6px;
@@ -143,20 +142,20 @@
     }
 
     &__right {
-      margin-left: 60px;
       display: flex;
       flex-wrap: wrap;
+      margin-left: 60px;
     }
 
     &__label {
-      width: 100px;
-      margin-bottom: 24px;
       cursor: pointer;
+      margin-bottom: 24px;
+      width: 100px;
 
       strong {
+        color: var(--primary-color);
         display: inline-block;
         font-size: 12px;
-        color: var(--primary-color);
         transform: translate(-5px, -3px) scale(0.5);
       }
 
@@ -167,9 +166,9 @@
   }
 
   &__footer {
-    margin-top: 10px;
-    margin-bottom: 100px;
     display: flex;
     justify-content: center;
+    margin-bottom: 100px;
+    margin-top: 10px;
   }
 }

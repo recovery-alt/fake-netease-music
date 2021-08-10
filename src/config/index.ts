@@ -62,3 +62,12 @@ export const topMenuMap: Data<Array<MenuConfig>> = {
     { label: '专栏', component: Column, path: '/collection/column' },
   ],
 };
+
+export const categoryList = [
+  { name: '全部', area: -1, type: 0 },
+  { name: '华语', area: 7, type: 7 },
+  { name: '欧美', area: 96, type: 96 },
+  { name: '日本', area: 8, type: 8 },
+  { name: '韩国', area: 16, type: 16 },
+  { name: '其他', area: 0, type: -1 },
+];

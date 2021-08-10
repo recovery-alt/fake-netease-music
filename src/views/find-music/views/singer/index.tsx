@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './singer.less';
 import classNames from 'classnames';
 import { getArtistList, ArtistList } from '@/api';
+import { categoryList } from '@/config';
 
 const Singer: React.FC = () => {
   const [data, setData] = useState<ArtistList[]>([]);
@@ -9,14 +10,7 @@ const Singer: React.FC = () => {
   const searchData = [
     {
       label: '语种',
-      list: [
-        { name: '全部', area: -1 },
-        { name: '华语', area: 7 },
-        { name: '欧美', area: 96 },
-        { name: '日本', area: 8 },
-        { name: '韩国', area: 16 },
-        { name: '其他', area: 0 },
-      ],
+      list: categoryList,
     },
     {
       label: '分类',

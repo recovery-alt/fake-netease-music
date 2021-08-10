@@ -1,26 +1,26 @@
 .banner {
-  position: relative;
   height: 220px;
+  position: relative;
 
   &__item {
-    position: absolute;
-    width: 540px;
-    height: 200px;
     border-radius: 8px;
+    cursor: pointer;
+    height: 200px;
     left: 50%;
     margin-left: -270px;
+    position: absolute;
     transition: transform ease-in-out 0.3s;
-    cursor: pointer;
+    width: 540px;
     z-index: 2;
 
     &.--left {
-      z-index: 1;
       transform: translateX(-150px) scale(0.8);
+      z-index: 1;
     }
 
     &.--right {
-      z-index: 1;
       transform: translateX(150px) scale(0.8);
+      z-index: 1;
     }
 
     &.--hidden {
@@ -30,11 +30,11 @@
 
   &__dot {
     background-color: #e5e5e5;
-    width: 5px;
-    height: 5px;
     border-radius: 50%;
-    margin-left: 10px;
     cursor: pointer;
+    height: 5px;
+    margin-left: 10px;
+    width: 5px;
 
     &.--actived {
       background-color: #d33b31;
@@ -45,22 +45,22 @@
     }
 
     &-wrapper {
-      position: absolute;
       bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      margin-top: 15px;
       display: flex;
+      left: 50%;
+      margin-top: 15px;
+      position: absolute;
+      transform: translateX(-50%);
     }
   }
 
   &__array {
+    color: #a7b0b3;
+    cursor: pointer;
+    font-size: 20px;
     position: absolute;
     top: calc(50% - 10px);
     transform: translateY(-50%);
-    font-size: 20px;
-    cursor: pointer;
-    color: #a7b0b3;
     z-index: 3;
 
     &.--left {

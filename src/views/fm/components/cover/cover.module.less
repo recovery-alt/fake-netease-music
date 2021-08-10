@@ -1,36 +1,36 @@
 .cover {
+  flex-shrink: 0;
+  height: 270px;
+  margin-top: 50px;
   position: relative;
   width: 310px;
-  height: 270px;
-  flex-shrink: 0;
-  margin-top: 50px;
 
   img {
-    width: 270px;
-    height: 270px;
     border-radius: 8px;
+    height: 270px;
+    width: 270px;
   }
 
   &__pre-img {
-    position: absolute;
-    transform: translateY(-50%) scale(0.85);
-    top: 50%;
     left: -20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) scale(0.85);
   }
 
   &__img {
+    left: 40px;
     position: absolute;
     width: 270px;
-    left: 40px;
 
     span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 50px;
       color: var(--primary-color);
       cursor: pointer;
+      font-size: 50px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }

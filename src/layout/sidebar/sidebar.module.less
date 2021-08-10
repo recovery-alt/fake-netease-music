@@ -1,31 +1,31 @@
 .sidebar {
-  width: 200px;
-  flex-shrink: 0;
   background-color: #ededee;
+  flex-shrink: 0;
+  width: 200px;
 
   &__header {
+    align-items: center;
+    display: flex;
     height: 60px;
     padding-left: 10px;
-    display: flex;
-    align-items: center;
 
     img {
-      width: 40px;
-      height: 40px;
       border-radius: 50%;
+      height: 40px;
+      width: 40px;
     }
 
     strong {
-      margin-left: 8px;
-      font-weight: normal;
       cursor: pointer;
+      font-weight: normal;
+      margin-left: 8px;
     }
   }
 
   &__main {
     height: calc(100% - 60px);
-    overflow-y: auto;
     overflow-x: hidden;
+    overflow-y: auto;
     visibility: hidden;
 
     &:hover,
@@ -36,9 +36,9 @@
   }
 
   &__item {
-    height: 35px;
-    display: flex;
     align-items: center;
+    display: flex;
+    height: 35px;
     padding-left: 20px;
 
     &:hover {
@@ -52,20 +52,20 @@
 
     a {
       color: inherit;
-      margin-left: 8px;
       cursor: pointer;
+      margin-left: 8px;
       pointer-events: none;
     }
   }
 
   &__title {
-    padding: 0 15px;
-    padding-top: 10px;
-    height: 35px;
+    align-items: center;
     color: #9e9e9f;
     display: flex;
-    align-items: center;
+    height: 35px;
     justify-content: space-between;
+    padding: 0 15px;
+    padding-top: 10px;
 
     &-left {
       a {

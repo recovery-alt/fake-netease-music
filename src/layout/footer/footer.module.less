@@ -1,27 +1,27 @@
 .footer {
-  height: 60px;
+  align-items: center;
+  display: flex;
   flex-shrink: 0;
+  height: 60px;
+  justify-content: space-between;
   padding-left: 10px;
   padding-right: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   position: relative;
 
   &__left {
-    height: 40px;
-    display: flex;
     align-items: center;
+    display: flex;
+    height: 40px;
 
     img {
-      width: 40px;
-      height: 40px;
       border-radius: 4px;
+      height: 40px;
+      width: 40px;
     }
 
     &-name {
-      margin-left: 10px;
       height: 100%;
+      margin-left: 10px;
 
       div {
         height: 20px;
@@ -30,31 +30,30 @@
     }
   }
 
+  &__right span {
+    font-size: 16px;
+    margin-left: 20px;
+  }
+
   &__mid {
-    display: flex;
     align-items: center;
+    display: flex;
+
     span {
-      margin-left: 35px;
       font-size: 18px;
+      margin-left: 35px;
 
       &:first-child {
         margin-left: 0;
       }
-
-      &.--big {
-        font-size: 40px;
-      }
-
-      &.--red {
-        color: var(--primary-color);
-      }
     }
-  }
 
-  &__right {
-    span {
-      margin-left: 20px;
-      font-size: 16px;
+    .--big {
+      font-size: 40px;
+    }
+
+    .--red {
+      color: var(--primary-color);
     }
   }
 }

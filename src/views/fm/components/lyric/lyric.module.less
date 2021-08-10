@@ -1,23 +1,23 @@
 .lyric {
+  margin-left: 50px;
   position: relative;
   width: 320px;
-  margin-left: 50px;
 
   h2 {
-    display: flex;
     align-items: center;
+    display: flex;
     font-size: 20px;
   }
 
   &__quality {
-    font-weight: normal;
-    font-size: 14px;
-    color: var(--primary-color);
-    margin-left: 20px;
     border: 1px solid var(--primary-color);
-    padding: 4px;
     border-radius: 4px;
+    color: var(--primary-color);
     cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    margin-left: 20px;
+    padding: 4px;
   }
 
   &__info {
@@ -25,43 +25,43 @@
     justify-content: space-between;
 
     p {
-      width: 50%;
       display: flex;
+      width: 50%;
     }
 
     a {
       color: #4f7eaf;
       cursor: pointer;
+      flex: 1;
+      overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      overflow: hidden;
-      flex: 1;
     }
   }
 
   &__wrapper {
-    width: 320px;
     height: 370px;
-    overflow-y: auto;
     overflow-x: hidden;
+    overflow-y: auto;
+    width: 320px;
 
     p {
-      margin-top: 20px;
       line-height: 24px;
+      margin-top: 20px;
     }
   }
 
   &__question {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    right: -30px;
-    bottom: 0;
     background-color: #e5e5e5;
     border-radius: 50%;
+    bottom: 0;
     color: #fff;
+    height: 20px;
+    line-height: 20px;
+    position: absolute;
+    right: -30px;
+    text-align: center;
+    width: 20px;
   }
 
   &__anchor:not(:last-child)::after {

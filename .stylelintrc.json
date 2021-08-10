@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-prettier/recommended",
+    "stylelint-config-sass-guidelines"
+  ],
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "selector-max-id": null,
+    "max-nesting-depth": null
+  }
+}
