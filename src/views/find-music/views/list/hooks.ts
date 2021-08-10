@@ -14,12 +14,11 @@ export const useTopPlaylist = () => {
     });
   }
 
-  function loadTopPlaylist(current = 1, limit = 100) {
+  async function loadTopPlaylist(current = 1, limit = 100) {
     const offset = (current - 1) * limit;
-    getTopPlaylist({ offset, limit }).then(res => {
-      setTopPlaylist(CardDataAdapter(res.playlists));
-      setTotal(res.total);
-    });
+    const res = await getTopPlaylist({ offset, limit });
+    setTopPlaylist(CardDataAdapter(res.playlists));
+    setTotal(res.total);
   }
 
   useEffect(() => {

@@ -29,7 +29,8 @@ const List: React.FC = () => {
     });
 
     useEffect(() => {
-      getAllMusicCategory().then(res => {
+      (async () => {
+        const res = await getAllMusicCategory();
         const allMusicCategory = Object.keys(res.categories).map(key => {
           const item = res.categories[key];
           const data: Subcategory[] = [];
@@ -43,7 +44,7 @@ const List: React.FC = () => {
         });
 
         setAllMusicCategory(allMusicCategory);
-      });
+      })();
     }, []);
 
     return (

@@ -94,3 +94,12 @@ export type Track = { name: string; id: number; ar: { name: string }[] };
 export type PlaylistDetail = { name: string; coverImgUrl: string; tracks: Track[] };
 export const getPlaylistDetail = (id: number) =>
   get<{ playlist: PlaylistDetail }>('/playlist/detail', { id });
+
+export type ArtistList = { picUrl: string; name: string; id: number };
+export const getArtistList = (params?: {
+  type?: number;
+  area?: number;
+  initial?: string;
+  limit?: number;
+  offset?: number;
+}) => get<{ artists: ArtistList[] }>('/artist/list', params);
