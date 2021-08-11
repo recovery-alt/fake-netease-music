@@ -3,24 +3,57 @@ import './newest.less';
 import classNames from 'classnames';
 import { categoryList } from '@/config';
 import { PlayCircleOutlined, FileAddOutlined } from '@ant-design/icons';
-import List from './components/list';
+import SongList from './components/song-list';
+import AlbumList from './components/album-list';
 import { getTopSong, Song } from '@/api';
+import { AlbumType } from '@/types';
 
 const Newest: React.FC = () => {
   const [isAlbum, setIsAlbum] = useState(0);
-  const [type, setType] = useState(0);
+  const [areaIndex, setAreaIndex] = useState(0);
   const [songs, setSongs] = useState<Song[]>([]);
-  const playList = [
+  const [albumType, setAlbumType] = useState<AlbumType>('hot');
+  const songList = [
     { name: '播放全部', icon: PlayCircleOutlined },
     { name: '收藏全部', icon: FileAddOutlined },
+  ];
+  const albumOptions: { text: string; type: AlbumType }[] = [
+    { text: '推荐', type: 'hot' },
+    { text: '全部', type: 'new' },
   ];
 
   useEffect(() => {
     (async () => {
-      const res = await getTopSong(type);
+      const res = await getTopSong(categoryList[areaIndex].type);
       setSongs(res.data);
     })();
-  }, [type]);
+  }, [areaIndex]);
+
+  const SongControl = (
+    <div className="newest__song-wrapper">
+      {songList.map(item => (
+        <div key={item.name} className="newest__song">
+          <item.icon />
+          {item.name}
+        </div>
+      ))}
+    </div>
+  );
+
+  const AlbumControl = (
+    <div className="newest__album-wrapper">
+      {albumOptions.map(item => (
+        <div key={item.type} className="newest__album">
+          <span
+            className={classNames({ ['--active']: albumType === item.type })}
+            onClick={() => setAlbumType(item.type)}
+          >
+            {item}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <div className="newest">
@@ -37,25 +70,23 @@ const Newest: React.FC = () => {
       </header>
       <div className="newest__control">
         <div>
-          {categoryList.slice(0, -1).map(item => (
+          {categoryList.slice(0, -1).map((item, i) => (
             <span
               key={item.area}
-              className={classNames('newest__category', { ['--active']: type === item.type })}
+              className={classNames('newest__category', { ['--active']: areaIndex === i })}
+              onClick={() => setAreaIndex(i)}
             >
               {item.name}
             </span>
           ))}
         </div>
-        <div className="newest__play-wrapper">
-          {playList.map(item => (
-            <div key={item.name} className="newest__play">
-              <item.icon />
-              {item.name}
-            </div>
-          ))}
-        </div>
+        {isAlbum ? AlbumControl : SongControl}
       </div>
-      <List data={songs} />
+      {isAlbum ? (
+        <AlbumList type={albumType} area={categoryList[areaIndex].albumArea} />
+      ) : (
+        <SongList data={songs} />
+      )}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import type { Data } from '@/types';
+import { AlbumArea } from '@/types';
 
 import FindMusic from '@/views/find-music';
 import FindMusicList from '@/views/find-music/views/list';
@@ -63,11 +64,11 @@ export const topMenuMap: Data<Array<MenuConfig>> = {
   ],
 };
 
-export const categoryList = [
-  { name: '全部', area: -1, type: 0 },
-  { name: '华语', area: 7, type: 7 },
-  { name: '欧美', area: 96, type: 96 },
-  { name: '日本', area: 8, type: 8 },
-  { name: '韩国', area: 16, type: 16 },
+export const categoryList: { name: string; area: number; type: number; albumArea?: AlbumArea }[] = [
+  { name: '全部', area: -1, type: 0, albumArea: 'ALL' },
+  { name: '华语', area: 7, type: 7, albumArea: 'ZH' },
+  { name: '欧美', area: 96, type: 96, albumArea: 'EA' },
+  { name: '日本', area: 8, type: 8, albumArea: 'JP' },
+  { name: '韩国', area: 16, type: 16, albumArea: 'KR' },
   { name: '其他', area: 0, type: -1 },
 ];

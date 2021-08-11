@@ -1,6 +1,7 @@
 import { Data } from '@/types';
 import { get } from './api';
 import { User } from './login';
+import { AlbumType, AlbumArea } from '@/types';
 
 export * from './login';
 
@@ -16,8 +17,7 @@ export const getPPList = (params: Data) =>
 
 export const getPersonalizedMV = () => get<PersonalizedList>('/personalized/mv');
 
-export type AlbumNewest = { picUrl: string; name: string; artist: { name: string } };
-export const getAlbumNewest = () => get<{ albums: AlbumNewest[] }>('/album/newest');
+export const getAlbumNewest = () => get<{ albums: Album[] }>('/album/newest');
 
 export type DJToplist = { name: string; picUrl: string; rcmdtext: string };
 export const getDJToplist = (limit = 6) => get<{ toplist: DJToplist[] }>('/dj/toplist', { limit });
@@ -26,7 +26,7 @@ export type Song = {
   id: number;
   name: string;
   duration: number;
-  album: { name: string; picUrl: string; artists: ArtistList[] };
+  album: Album;
 };
 export const getSongUrl = (id: number | string) => get<Song>('/song/url', { id });
 
@@ -36,7 +36,7 @@ export const getLyric = (id: number | string) => get<Lyric>('/lyric', { id });
 export type Music = {
   id: string;
   name: string;
-  album: { id: number; name: string; picUrl: string };
+  album: Album;
   artists: Array<{ name: string }>;
 };
 export const getPersonalFM = () => get<{ data: Array<Music> }>('/personal_fm');
@@ -110,3 +110,13 @@ export const getArtistList = (params?: {
 }) => get<{ artists: ArtistList[] }>('/artist/list', params);
 
 export const getTopSong = (type: number) => get<{ data: Song[] }>('/top/song', { type });
+
+export type Album = {
+  picUrl: string;
+  name: string;
+  artist: { name: string };
+  artists: ArtistList[];
+};
+export type TopAlbumParams = { area?: AlbumArea; limit?: number; type?: AlbumType };
+export const getTopAlbum = (params: TopAlbumParams) =>
+  get<{ monthData: Album[] }>('/top/album', params);

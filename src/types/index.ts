@@ -13,3 +13,7 @@ export interface AppProps {
   style?: React.CSSProperties;
   onChange?: React.FormEventHandler<HTMLInputElement>;
 }
+
+export type AlbumType = 'hot' | 'new';
+
+export type AlbumArea = 'ALL' | 'ZH' | 'EA' | 'KR' | 'JP';

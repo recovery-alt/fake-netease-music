@@ -42,7 +42,7 @@
     }
   }
 
-  &__play {
+  &__song {
     align-items: center;
     border-radius: 12px;
     cursor: pointer;
@@ -71,6 +71,50 @@
 
     span {
       margin-right: 3px;
+    }
+  }
+
+  &__album {
+    position: relative;
+    text-align: center;
+    width: 75px;
+
+    span {
+      border-radius: 22px;
+      cursor: pointer;
+      display: inline-block;
+      height: 20px;
+      width: 44px;
+
+      &:hover {
+        color: #000;
+      }
+    }
+
+    .--active {
+      background-color: #fdf5f5;
+      color: var(--primary-color);
+
+      &:hover {
+        background-color: #fdeeed;
+        color: var(--primary-color);
+      }
+    }
+
+    &:first-child::after {
+      background-color: #f1f2f3;
+      content: '';
+      display: inline-block;
+      height: 10px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+    }
+
+    &-wrapper {
+      display: flex;
     }
   }
 }
