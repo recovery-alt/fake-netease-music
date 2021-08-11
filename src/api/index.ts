@@ -120,3 +120,5 @@ export type Album = {
 export type TopAlbumParams = { area?: AlbumArea; limit?: number; type?: AlbumType };
 export const getTopAlbum = (params: TopAlbumParams) =>
   get<{ monthData: Album[] }>('/top/album', params);
+
+export const getVideoCategoryList = () => get('/video/category/list');

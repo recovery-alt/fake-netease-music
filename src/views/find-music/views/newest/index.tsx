@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './newest.less';
 import classNames from 'classnames';
 import { categoryList } from '@/config';
@@ -22,9 +22,11 @@ const Newest: React.FC = () => {
     { text: '全部', type: 'new' },
   ];
 
+  const currentArea = useMemo(() => categoryList[areaIndex], [areaIndex]);
+
   useEffect(() => {
     (async () => {
-      const res = await getTopSong(categoryList[areaIndex].type);
+      const res = await getTopSong(currentArea.type);
       setSongs(res.data);
     })();
   }, [areaIndex]);
@@ -43,12 +45,12 @@ const Newest: React.FC = () => {
   const AlbumControl = (
     <div className="newest__album-wrapper">
       {albumOptions.map(item => (
-        <div key={item.type} className="newest__album">
+        <div key={item.text} className="newest__album">
           <span
             className={classNames({ ['--active']: albumType === item.type })}
             onClick={() => setAlbumType(item.type)}
           >
-            {item}
+            {item.text}
           </span>
         </div>
       ))}
@@ -82,11 +84,7 @@ const Newest: React.FC = () => {
         </div>
         {isAlbum ? AlbumControl : SongControl}
       </div>
-      {isAlbum ? (
-        <AlbumList type={albumType} area={categoryList[areaIndex].albumArea} />
-      ) : (
-        <SongList data={songs} />
-      )}
+      {isAlbum ? <AlbumList /> : <SongList data={songs} />}
     </div>
   );
 };

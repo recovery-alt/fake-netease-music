@@ -26,10 +26,10 @@ const Comments: React.FC<Props> = ({ comment }) => {
         {comment.beReplied?.length > 0 && (
           <p className={styles['--mentioned']}>
             {comment.beReplied.map(replied => (
-              <>
-                <a key={replied.beRepliedCommentId}>@{replied.user.nickname}：</a>
+              <span key={replied.beRepliedCommentId}>
+                <a>@{replied.user.nickname}：</a>
                 {replied.content}
-              </>
+              </span>
             ))}
           </p>
         )}

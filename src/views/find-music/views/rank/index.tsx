@@ -32,8 +32,8 @@ const Rank: React.FC = () => {
     <div className="rank">
       <header className="rank__header">官方榜</header>
       <div className="rank__official">
-        {playlistDetail.map(item => (
-          <Official key={item.name} data={item} />
+        {playlistDetail.map((item, i) => (
+          <Official key={i} data={item} />
         ))}
       </div>
       <header className="rank__header">全球榜</header>

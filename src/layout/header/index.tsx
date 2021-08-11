@@ -34,7 +34,7 @@ const List: React.FC = () => {
       <div className={styles.header__right}>
         <ul className={styles['header__right-menu']}>
           {topMenu.map((item, i) => (
-            <li className={classNames({ [styles['--actived']]: item.path === actived })} key={i}>
+            <li key={i} className={classNames({ [styles['--actived']]: item.path === actived })}>
               <Link to={item.path} onClick={() => setActvied(item.path)}>
                 {item.label}
               </Link>

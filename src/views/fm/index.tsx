@@ -33,12 +33,12 @@ const FM: React.FC = () => {
       </section>
       <WriteComment />
       <h2 className="fm__title">精彩评论</h2>
-      {hotComments.map(comment => (
-        <Comments key={comment.commentId} comment={comment} />
+      {hotComments.map((comment, i) => (
+        <Comments key={i} comment={comment} />
       ))}
       <h2 className="fm__title">最新评论（{total}）</h2>
-      {comments.map(comment => (
-        <Comments key={comment.commentId} comment={comment} />
+      {comments.map((comment, i) => (
+        <Comments key={i} comment={comment} />
       ))}
       <footer className="fm__footer">
         <Pagination
