@@ -1,0 +1,29 @@
+.table {
+  width: 100%;
+
+  th,
+  td {
+    height: 35px;
+    padding: 0 5px;
+    text-align: left;
+  }
+
+  thead th {
+    color: #888;
+    font-weight: normal;
+  }
+
+  tbody tr {
+    &:nth-child(2n + 1) {
+      background-color: #fafafb;
+    }
+
+    &:hover {
+      background-color: #f2f2f3;
+    }
+  }
+
+  th:hover {
+    background-color: #f2f2f3;
+  }
+}
