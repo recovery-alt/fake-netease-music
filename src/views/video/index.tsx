@@ -1,48 +1,45 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import './video.less';
 import { RightOutlined } from '@ant-design/icons';
-import className from 'classnames';
-import { getVideoCategoryList } from '@/api';
+import { getVideoCategoryList, VideoCategogy, getVideoGroup, VideoType } from '@/api';
+import Nav, { NavItem } from '@/components/nav';
+import List, { ListItem } from './components/list';
 
 const Video: React.FC = () => {
+  const [videoCategory, setVideoCategory] = useState<NavItem[]>([]);
+  const [selected, SetSelected] = useState<number>(0);
+  const [videoList, setVideoList] = useState<ListItem[]>([]);
+  const current = useMemo(() => videoCategory[selected] || null, [selected, videoCategory]);
+
   useEffect(() => {
     (async () => {
       const res = await getVideoCategoryList();
-      console.log(res);
+      setVideoCategory(res.data.map(item => ({ name: item.name, id: item.id })));
     })();
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      if (!current) return;
+      const res = await getVideoGroup(current.id as number);
+      const result = res.datas.map(item => {
+        const { coverUrl: imgUrl, title: description, creator } = item.data;
+        const { nickname: author } = creator;
+        return { imgUrl, description, author };
+      });
+      setVideoList(result);
+    })();
+  }, [current]);
 
   return (
     <div className="video">
       <header className="video__header">
         <button className="video__button">
-          全部视频 <RightOutlined />
+          {current?.name} <RightOutlined />
         </button>
-        <div className="video__type">
-          {Array(9)
-            .fill(0)
-            .map((item, i) => (
-              <div key={i} className="video__type-item">
-                <span className={className({ ['--active']: i === 0 })}>现场</span>
-              </div>
-            ))}
-        </div>
+        <Nav data={videoCategory} />
       </header>
-      <section className="video__list">
-        {Array(18)
-          .fill(0)
-          .map((item, i) => (
-            <div key={i} className="video__item">
-              <div className="video__img">
-                <img src="" alt="" />
-              </div>
-              <div className="video__description">
-                <h3>大师大大大大大说</h3>
-                <h4>basadddadadadadas</h4>
-              </div>
-            </div>
-          ))}
-      </section>
+      <List data={videoList} />
     </div>
   );
 };

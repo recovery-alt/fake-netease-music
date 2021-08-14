@@ -43,13 +43,13 @@ export const topMenuMap: Data<Array<MenuConfig>> = {
     { label: '最新音乐', component: FindMusicNewest, path: '/find-music/newest' },
   ],
   video: [
-    { label: '视频', component: Video, path: '/video' },
+    { label: '视频', component: Video, path: '/video', exact: true },
     { label: 'MV', component: VideoMV, path: '/video/mv' },
   ],
   friend: [{ label: '动态', component: Friend, path: '/friend' }],
   'i-tunes': [{ label: 'iTunes音乐', component: ITunes, path: '/i-tunes' }],
   download: [
-    { label: '已下载单曲', component: Download, path: '/download' },
+    { label: '已下载单曲', component: Download, path: '/download', exact: true },
     { label: '已下载节目', component: DownloadProgram, path: '/download/program' },
     { label: '正在下载', component: DownloadPedding, path: '/download/pendding' },
   ],
@@ -57,7 +57,7 @@ export const topMenuMap: Data<Array<MenuConfig>> = {
   radio: [{ label: '我的电台', component: Radio, path: '/radio' }],
   recent: [{ label: '最近播放', component: Recent, path: '/recent' }],
   collection: [
-    { label: '专辑', component: Collection, path: '/collection' },
+    { label: '专辑', component: Collection, path: '/collection', exact: true },
     { label: '歌手', component: CollectionSinger, path: '/collection/singer' },
     { label: '视频', component: CollectionVideo, path: '/collection/video' },
     { label: '专栏', component: Column, path: '/collection/column' },
@@ -72,3 +72,5 @@ export const categoryList: { name: string; area: number; type: number; albumArea
   { name: '韩国', area: 16, type: 16, albumArea: 'KR' },
   { name: '其他', area: 0, type: -1 },
 ];
+
+export const areaCategory = ['内地', '港台', '欧美', '日本', '韩国'];

@@ -121,4 +121,31 @@ export type TopAlbumParams = { area?: AlbumArea; limit?: number; type?: AlbumTyp
 export const getTopAlbum = (params: TopAlbumParams) =>
   get<{ monthData: Album[] }>('/top/album', params);
 
-export const getVideoCategoryList = () => get('/video/category/list');
+export type VideoCategogy = { id: number; name: string };
+export const getVideoCategoryList = () => get<{ data: VideoCategogy[] }>('/video/category/list');
+
+export type VideoType = {
+  data: {
+    coverUrl: string;
+    durationms: number;
+    playTime: number;
+    previewUrl: string;
+    title: string;
+    vid: number;
+    creator: {
+      nickname: string;
+    };
+  };
+};
+export const getVideoGroup = (id: number, offset = 0) =>
+  get<{ datas: VideoType[] }>('/video/group', { id, offset });
+
+export type MVType = { artistName: string; cover: string; name: string; playCount: number };
+export const getMVFirst = (area: string, limit = 6) =>
+  get<{ data: MVType[] }>('/mv/first', { area, limit });
+
+export const getMVAll = (limit = 6) => get<{ data: MVType[] }>('/mv/all', { limit });
+export const getMVExclusiveRcmd = (limit = 6) =>
+  get<{ data: MVType[] }>('/mv/exclusive/rcmd', { limit });
+
+export const getTopMV = (limit = 10) => get<{ data: MVType[] }>('/top/mv', { limit });
