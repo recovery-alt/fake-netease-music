@@ -1,0 +1,46 @@
+.cloud-music {
+  &__header {
+    border-bottom: 1px solid #f2f2f3;
+    padding: 20px 30px;
+  }
+
+  &__capacity {
+    align-items: center;
+    color: #666;
+    display: flex;
+
+    &-title {
+      margin-right: 5px;
+    }
+
+    &-ratio {
+      margin-left: 5px;
+    }
+
+    &-description {
+      margin-left: 24px;
+    }
+  }
+
+  &__ruler {
+    background-color: #e9e9eb;
+    border-radius: 3px;
+    height: 6px;
+    width: 110px;
+
+    div {
+      background-color: #517daf;
+      border-radius: 3px;
+      height: 100%;
+      transition: width ease-in-out 0.3s;
+      width: 10px;
+    }
+  }
+
+  &__control {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+}

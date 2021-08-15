@@ -53,9 +53,9 @@ export const topMenuMap: Data<Array<MenuConfig>> = {
     { label: '已下载节目', component: DownloadProgram, path: '/download/program' },
     { label: '正在下载', component: DownloadPedding, path: '/download/pendding' },
   ],
+  recent: [{ label: '最近播放', component: Recent, path: '/recent' }],
   'cloud-music': [{ label: '我的音乐云盘', component: CloudMusic, path: '/cloud-music' }],
   radio: [{ label: '我的电台', component: Radio, path: '/radio' }],
-  recent: [{ label: '最近播放', component: Recent, path: '/recent' }],
   collection: [
     { label: '专辑', component: Collection, path: '/collection', exact: true },
     { label: '歌手', component: CollectionSinger, path: '/collection/singer' },

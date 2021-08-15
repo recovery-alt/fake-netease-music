@@ -10,6 +10,9 @@ import {
   PlusOutlined,
   HeartOutlined,
   CaretRightOutlined,
+  CloudOutlined,
+  NotificationOutlined,
+  StarOutlined,
 } from '@ant-design/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import Scrollbar from '@/components/scrollbar';
@@ -34,6 +37,9 @@ const List: React.FC = () => {
     { name: 'iTunes音乐', icon: CustomerServiceOutlined, path: '/i-tunes' },
     { name: '下载管理', icon: DownloadOutlined, path: '/download' },
     { name: '最近播放', icon: FieldTimeOutlined, path: '/recent' },
+    { name: '我的音乐云盘', icon: CloudOutlined, path: '/cloud-music' },
+    { name: '我的电台', icon: NotificationOutlined, path: '/radio' },
+    { name: '我的收藏', icon: StarOutlined, path: '/collection' },
     { name: '我喜欢的音乐', icon: HeartOutlined, path: '/list' },
   ];
 
@@ -90,7 +96,7 @@ const List: React.FC = () => {
           <Item key={i} menu={item} i={i} />
         ))}
         <div className={styles.sidebar__title}>我的音乐</div>
-        {menuList.slice(4, 7).map((item, i) => (
+        {menuList.slice(4, 10).map((item, i) => (
           <Item key={i} menu={item} i={i} plus={4} />
         ))}
         <div className={styles.sidebar__title}>
@@ -100,8 +106,8 @@ const List: React.FC = () => {
           </div>
           <PlusOutlined className={styles['sidebar__title-right']} />
         </div>
-        {menuList.slice(7).map((item, i) => (
-          <Item key={i} menu={item} i={i} plus={7} />
+        {menuList.slice(10).map((item, i) => (
+          <Item key={i} menu={item} i={i} plus={10} />
         ))}
       </Scrollbar>
       {showLogin && <Login setShowLogin={setShowLogin} />}
