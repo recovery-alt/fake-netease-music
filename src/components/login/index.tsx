@@ -6,7 +6,7 @@ import login from '@/assets/img/login.svg';
 import { message } from 'antd';
 import { local } from '@/utils';
 import { useDispatch } from 'react-redux';
-import { setUserInfo, setUserSubcount } from '@/reducer';
+import { setUserInfo, setUserPlaylist } from '@/reducer';
 import { AppDispatch } from '@/store';
 
 type Props = { setShowLogin: (show: boolean) => void };
@@ -28,10 +28,11 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
     const res = await dispatch(setUserInfo({ phone, password }));
     if (setUserInfo.fulfilled.match(res)) {
       local.set('userInfo', res.payload);
-      // const result = await dispatch(setUserSubcount());
-      // if (setUserInfo.fulfilled.match(res)) {
-      //   local.set('userSubcount', result.payload);
-      // }
+      const { userId } = res.payload.profile;
+      const result = await dispatch(setUserPlaylist(userId));
+      if (setUserPlaylist.fulfilled.match(result)) {
+        local.set('userPlaylist', result.payload);
+      }
       setShowLogin(false);
       message.success('登录成功～');
     } else {

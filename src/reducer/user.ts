@@ -21,7 +21,7 @@ export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password:
 export const setUserInfoFromCache = createAction<UserInfo>('userInfo/setCache');
 
 export const userReducer = createReducer<UserInfo>(
-  { cookie: '', profile: { avatarUrl, nickname: '未登录' } },
+  { cookie: '', profile: { avatarUrl, nickname: '未登录', userId: 0 } },
   builder => {
     builder.addCase(setUserInfo.fulfilled, (state, action) => {
       return { ...state, ...action.payload };

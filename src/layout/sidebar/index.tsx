@@ -109,6 +109,13 @@ const List: React.FC = () => {
         {menuList.slice(10).map((item, i) => (
           <Item key={i} menu={item} i={i} plus={10} />
         ))}
+        <div className={styles.sidebar__title}>
+          <div className={styles['sidebar__title-left']}>
+            <CaretDownOutlined />
+            <a>收藏的歌单</a>
+          </div>
+          <PlusOutlined className={styles['sidebar__title-right']} />
+        </div>
       </Scrollbar>
       {showLogin && <Login setShowLogin={setShowLogin} />}
     </aside>
