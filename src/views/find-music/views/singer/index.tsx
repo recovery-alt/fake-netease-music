@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './singer.less';
 import classNames from 'classnames';
-import { getArtistList, ArtistList } from '@/api';
+import { getArtistList, Artist } from '@/api';
 import { categoryList } from '@/config';
 
 const Singer: React.FC = () => {
-  const [data, setData] = useState<ArtistList[]>([]);
+  const [data, setData] = useState<Artist[]>([]);
 
   const searchData = [
     {

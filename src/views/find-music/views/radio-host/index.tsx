@@ -13,7 +13,7 @@ import './radio-host.less';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Title from '@/components/title';
 import Card, { CardData } from '@/components/card';
-import List, { ListParams } from '@/components/list';
+import List, { ListParams } from '../../components/list';
 
 const RadioHost: React.FC = () => {
   const [banner, setBanner] = useState<BannerType[]>([]);

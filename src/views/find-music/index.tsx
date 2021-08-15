@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Title from '@/components/title';
 import Card, { CardData } from '@/components/card';
-import List, { ListData, ListParams } from '@/components/list';
+import List, { ListData, ListParams } from './components/list';
 import Banner from '@/components/banner';
 import './find-music.less';
 import {

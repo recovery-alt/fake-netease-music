@@ -2156,7 +2156,7 @@ packages:
     engines: {node: '>=4'}
     dependencies:
       find-up: 2.1.0
-      read-pkg: 3.0.0
+      read-pkg: registry.nlark.com/read-pkg/3.0.0
     dev: true
 
   /read-pkg-up/7.0.1:
@@ -2164,27 +2164,8 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
-      read-pkg: 5.2.0
+      read-pkg: registry.nlark.com/read-pkg/5.2.0
       type-fest: registry.nlark.com/type-fest/0.8.1
-    dev: true
-
-  /read-pkg/3.0.0:
-    resolution: {integrity: sha1-nLxoaXj+5l0WwA4rGcI3/Pbjg4k=, tarball: read-pkg/download/read-pkg-3.0.0.tgz}
-    engines: {node: '>=4'}
-    dependencies:
-      load-json-file: 4.0.0
-      normalize-package-data: 2.5.0
-      path-type: 3.0.0
-    dev: true
-
-  /read-pkg/5.2.0:
-    resolution: {integrity: sha1-e/KVQ4yloz5WzTDgU7NO5yUMk8w=, tarball: read-pkg/download/read-pkg-5.2.0.tgz}
-    engines: {node: '>=8'}
-    dependencies:
-      '@types/normalize-package-data': registry.nlark.com/@types/normalize-package-data/2.4.1
-      normalize-package-data: 2.5.0
-      parse-json: 5.2.0
-      type-fest: registry.nlark.com/type-fest/0.6.0
     dev: true
 
   /readable-stream/2.3.7:
@@ -4378,7 +4359,7 @@ packages:
       chalk: registry.nlark.com/chalk/4.1.2
       date-fns: registry.nlark.com/date-fns/2.23.0
       lodash: 4.17.21
-      read-pkg: 5.2.0
+      read-pkg: registry.nlark.com/read-pkg/5.2.0
       rxjs: registry.nlark.com/rxjs/6.6.7
       spawn-command: registry.nlark.com/spawn-command/0.0.2-1
       supports-color: registry.nlark.com/supports-color/8.1.1
@@ -4442,7 +4423,7 @@ packages:
       lodash: 4.17.21
       normalize-package-data: 3.0.2
       q: 1.5.1
-      read-pkg: 3.0.0
+      read-pkg: registry.nlark.com/read-pkg/3.0.0
       read-pkg-up: 3.0.0
       through2: 4.0.2
     dev: true
@@ -5327,7 +5308,7 @@ packages:
     dev: false
 
   registry.nlark.com/inline-style-prefixer/6.0.0:
-    resolution: {integrity: sha1-9z1dvyhVcz1rFTpNJLe0enPpdws=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/inline-style-prefixer/download/inline-style-prefixer-6.0.0.tgz}
+    resolution: {integrity: sha1-9z1dvyhVcz1rFTpNJLe0enPpdws=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/inline-style-prefixer/download/inline-style-prefixer-6.0.0.tgz?cache=0&sync_timestamp=1626836996979&other_urls=https%3A%2F%2Fregistry.nlark.com%2Finline-style-prefixer%2Fdownload%2Finline-style-prefixer-6.0.0.tgz}
     name: inline-style-prefixer
     version: 6.0.0
     dependencies:
@@ -6694,6 +6675,29 @@ packages:
       lazy-val: registry.nlark.com/lazy-val/1.0.5
     dev: true
 
+  registry.nlark.com/read-pkg/3.0.0:
+    resolution: {integrity: sha1-nLxoaXj+5l0WwA4rGcI3/Pbjg4k=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/read-pkg/download/read-pkg-3.0.0.tgz?cache=0&sync_timestamp=1628985520600&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fread-pkg%2Fdownload%2Fread-pkg-3.0.0.tgz}
+    name: read-pkg
+    version: 3.0.0
+    engines: {node: '>=4'}
+    dependencies:
+      load-json-file: 4.0.0
+      normalize-package-data: 2.5.0
+      path-type: 3.0.0
+    dev: true
+
+  registry.nlark.com/read-pkg/5.2.0:
+    resolution: {integrity: sha1-e/KVQ4yloz5WzTDgU7NO5yUMk8w=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/read-pkg/download/read-pkg-5.2.0.tgz?cache=0&sync_timestamp=1628985520600&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fread-pkg%2Fdownload%2Fread-pkg-5.2.0.tgz}
+    name: read-pkg
+    version: 5.2.0
+    engines: {node: '>=8'}
+    dependencies:
+      '@types/normalize-package-data': registry.nlark.com/@types/normalize-package-data/2.4.1
+      normalize-package-data: 2.5.0
+      parse-json: 5.2.0
+      type-fest: registry.nlark.com/type-fest/0.6.0
+    dev: true
+
   registry.nlark.com/redent/3.0.0:
     resolution: {integrity: sha1-5Ve3mYMWu1PJ8fVvpiY1LGljBZ8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/redent/download/redent-3.0.0.tgz}
     name: redent
@@ -7327,7 +7331,7 @@ packages:
     dev: true
 
   registry.nlark.com/typescript/4.3.5:
-    resolution: {integrity: sha1-TRw3zBbok5c8RaBohrcRMjTxGfQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/typescript/download/typescript-4.3.5.tgz?cache=0&sync_timestamp=1628929238486&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftypescript%2Fdownload%2Ftypescript-4.3.5.tgz}
+    resolution: {integrity: sha1-TRw3zBbok5c8RaBohrcRMjTxGfQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/typescript/download/typescript-4.3.5.tgz?cache=0&sync_timestamp=1629012418077&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftypescript%2Fdownload%2Ftypescript-4.3.5.tgz}
     name: typescript
     version: 4.3.5
     engines: {node: '>=4.2.0'}

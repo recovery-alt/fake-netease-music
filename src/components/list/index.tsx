@@ -1,40 +1,26 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import styles from './list.module.less';
-import { PlayCircleFilled } from '@ant-design/icons';
-import { Data } from '@/types';
 
-export type ListData = { name: string; imgUrl: string; extra?: Data<string> };
-export type ListParams = { item: ListData; i: number; j: number; len: number };
+export type ListData = { imgUrl: string; col2: string; col3?: string; col4?: string };
 
-type Props = {
-  data: ListData[];
-  size?: number;
-  functionChildren?: (params: ListParams) => ReactNode;
-};
+type Props = { data: ListData[] };
 
-const List: React.FC<Props> = ({ data, functionChildren, size = 60 }) => {
-  const len = data.length;
-  const newData = [data.slice(0, len / 2), data.slice(len / 2, len)];
-
+const List: React.FC<Props> = ({ data }) => {
   return (
-    <div className={styles.list}>
-      {newData.map((val, i) => (
-        <div key={i} className={styles.list__col}>
-          {val.map((item, j) => (
-            <div key={j} className={styles.list__item}>
-              <div
-                className={styles.list__img}
-                style={{ width: `${size / 10}vw`, height: `${size / 10}vw` }}
-              >
-                <img src={item.imgUrl} alt="music" />
-                <PlayCircleFilled />
-              </div>
-              {functionChildren?.({ item, i, j, len })}
-            </div>
-          ))}
+    <section className={styles.list}>
+      {data.map((item, i) => (
+        <div key={i} className={styles.list__item}>
+          <div className={styles.list__left}>
+            <img src={item.imgUrl} alt="cover" />
+            <span>{item.col2}</span>
+          </div>
+          <div className={styles.list__right}>
+            {item.col3 && <div className={styles.list__author}>{item.col3}</div>}
+            {item.col4 && <div className={styles.list__section}>{item.col4}</div>}
+          </div>
         </div>
       ))}
-    </div>
+    </section>
   );
 };
 

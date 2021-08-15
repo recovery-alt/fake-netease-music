@@ -1,0 +1,44 @@
+.list {
+  display: flex;
+  width: 100%;
+
+  &__col {
+    border-top: 1px solid #f3f3f2;
+    flex: 1;
+
+    &:last-child {
+      margin-left: 20px;
+    }
+  }
+
+  &__item {
+    align-items: center;
+    border-bottom: 1px solid #f3f3f2;
+    border-radius: 4px;
+    display: flex;
+    padding: 10px;
+
+    &:hover {
+      background-color: #f5f5f6;
+    }
+  }
+
+  &__img {
+    position: relative;
+
+    img {
+      border-radius: 8px;
+      height: 100%;
+      width: 100%;
+    }
+
+    span {
+      color: #d33b31;
+      font-size: 20px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

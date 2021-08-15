@@ -79,7 +79,14 @@ export type DJPersonalizeRecommend = { rcmdText: string; name: string; picUrl: s
 export const getDJPersonalizeRecommend = (limit = 5) =>
   get<{ data: DJPersonalizeRecommend[] }>('/dj/personalize/recommend', { limit });
 
-export type DJRadio = { name: string; picUrl: string; rcmdText: string; lastProgramName: string };
+export type DJRadio = {
+  name: string;
+  picUrl: string;
+  rcmdText: string;
+  lastProgramName: string;
+  programCount: number;
+  dj: { nickname: string };
+};
 export const getDJPaygift = (limit = 4) =>
   get<{ data: { list: DJRadio[] } }>('/dj/paygift', { limit });
 
@@ -100,14 +107,20 @@ export type PlaylistDetail = { name: string; coverImgUrl: string; tracks: Track[
 export const getPlaylistDetail = (id: number) =>
   get<{ playlist: PlaylistDetail }>('/playlist/detail', { id });
 
-export type ArtistList = { picUrl: string; name: string; id: number };
+export type Artist = {
+  picUrl: string;
+  name: string;
+  id: number;
+  albumSize: number;
+  mvSize: number;
+};
 export const getArtistList = (params?: {
   type?: number;
   area?: number;
   initial?: string;
   limit?: number;
   offset?: number;
-}) => get<{ artists: ArtistList[] }>('/artist/list', params);
+}) => get<{ artists: Artist[] }>('/artist/list', params);
 
 export const getTopSong = (type: number) => get<{ data: Song[] }>('/top/song', { type });
 
@@ -115,7 +128,8 @@ export type Album = {
   picUrl: string;
   name: string;
   artist: { name: string };
-  artists: ArtistList[];
+  size: number;
+  artists: Artist[];
 };
 export type TopAlbumParams = { area?: AlbumArea; limit?: number; type?: AlbumType };
 export const getTopAlbum = (params: TopAlbumParams) =>
@@ -149,3 +163,17 @@ export const getMVExclusiveRcmd = (limit = 6) =>
   get<{ data: MVType[] }>('/mv/exclusive/rcmd', { limit });
 
 export const getTopMV = (limit = 10) => get<{ data: MVType[] }>('/top/mv', { limit });
+
+export const getDJSublist = () => get<{ count: number; djRadios: DJRadio[] }>('/dj/sublist');
+
+export const getAlbumSublist = () => get<{ data: Album[] }>('/album/sublist');
+
+export const getArtistSublist = () => get<{ data: Artist[] }>('/artist/sublist');
+
+export type MVSublist = {
+  creator: { userId: number; useName: string }[];
+  coverUrl: string;
+  title: string;
+  playTime: number;
+};
+export const getMVSublist = () => get<{ data: MVSublist[] }>('/mv/sublist');
