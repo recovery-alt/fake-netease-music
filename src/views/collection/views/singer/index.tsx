@@ -23,7 +23,7 @@ const Singer: React.FC = () => {
   }, []);
 
   return (
-    <div className="singer">
+    <div className="collection-singer">
       <Header title="收藏的歌手" count={26} />
       <List data={data} />
     </div>

@@ -19,13 +19,10 @@ export const setUserPlaylist = createAsyncThunk<{ playlist: UserPlaylist[] }, nu
 
 export const setUserPlaylistFromCache = createAction<UserPlaylist>('userPlaylist/setCache');
 
-export const userSubcountReducer = createReducer<{ playlist: UserPlaylist[] }>(
+export const userPlaylistReducer = createReducer<{ playlist: UserPlaylist[] }>(
   { playlist: [] },
   builder => {
     builder.addCase(setUserPlaylist.fulfilled, (state, action) => {
-      return { ...state, ...action.payload };
-    });
-    builder.addCase(setUserPlaylistFromCache, (state, action) => {
       return { ...state, ...action.payload };
     });
   }

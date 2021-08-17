@@ -21,7 +21,7 @@ const routes: Array<RouteConfig> = [
         component: FM,
       },
       {
-        path: '/list',
+        path: '/list/:id?',
         component: List,
       },
       ...Object.values(topMenuMap).flat(),

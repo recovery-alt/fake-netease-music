@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './list.less';
 import Button from '@/components/button';
 import { FolderAddOutlined, ShareAltOutlined, DownloadOutlined } from '@ant-design/icons';
 import Tab from './components/tab';
 import Table, { Column } from '@/components/table';
 import { Data } from '@/types';
+import { useParams } from 'react-router-dom';
 
 const List: React.FC = () => {
+  const params = useParams<{ id: string }>();
+
+  useEffect(() => {
+    const id = Number(params.id);
+    if (Number.isNaN(id)) return;
+  }, [params]);
+
   const columns: Column[] = [
     { title: '', key: 'ordinal' },
     { title: '', key: 'action' },

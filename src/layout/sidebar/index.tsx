@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import styles from './sidebar.module.less';
 import {
   CustomerServiceOutlined,
@@ -21,68 +21,159 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '@/store';
 import { local } from '@/utils';
 import { UserInfo } from '@/api';
-import { setUserInfoFromCache } from '@/reducer';
+import { setUserInfoFromCache, setUserPlaylist } from '@/reducer';
 import json from 'json5';
 import classNames from 'classnames';
 
 const List: React.FC = () => {
   type Menu = { name: string; icon: React.FC; path: string };
-  type ItemProps = { menu: Menu; i: number; plus?: number };
+  type MenuItem = { title?: string; menus: Menu[] };
+  type ItemProps = { menu: Menu; index: [number, number]; plus?: number };
+  type MenuListAction = { type: number; payload: MenuItem[] };
 
-  const menuList: Array<Menu> = [
-    { name: '发现音乐', icon: CustomerServiceOutlined, path: '/find-music' },
-    { name: '私人FM', icon: TeamOutlined, path: '/fm' },
-    { name: '视频', icon: PlaySquareOutlined, path: '/video' },
-    { name: '朋友', icon: TeamOutlined, path: '/friend' },
-    { name: 'iTunes音乐', icon: CustomerServiceOutlined, path: '/i-tunes' },
-    { name: '下载管理', icon: DownloadOutlined, path: '/download' },
-    { name: '最近播放', icon: FieldTimeOutlined, path: '/recent' },
-    { name: '我的音乐云盘', icon: CloudOutlined, path: '/cloud-music' },
-    { name: '我的电台', icon: NotificationOutlined, path: '/radio' },
-    { name: '我的收藏', icon: StarOutlined, path: '/collection' },
-    { name: '我喜欢的音乐', icon: HeartOutlined, path: '/list' },
-  ];
-
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState([0, 0]);
   const history = useHistory();
   const { pathname } = useLocation();
   const [showLogin, setShowLogin] = useState(false);
   const { profile } = useSelector((state: RootState) => state.user);
+  const playlist = useSelector((state: RootState) => state.userPlaylist.playlist);
   const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    const index = menuList.findIndex(menu => pathname.includes(menu.path));
-    if (index > -1) {
-      setSelected(index);
-    } else {
-      setSelected(0);
-      history.push('/find-music');
-    }
+  const [menuList, menuListDispatch] = useReducer<React.Reducer<MenuItem[], MenuListAction>>(
+    (state, action) => {
+      const newState = state.slice(0, 2);
+      return [...newState, ...action.payload];
+    },
+    [
+      {
+        menus: [
+          { name: '发现音乐', icon: CustomerServiceOutlined, path: '/find-music' },
+          { name: '私人FM', icon: TeamOutlined, path: '/fm' },
+          { name: '视频', icon: PlaySquareOutlined, path: '/video' },
+          { name: '朋友', icon: TeamOutlined, path: '/friend' },
+        ],
+      },
+      {
+        title: '我的音乐',
+        menus: [
+          { name: 'iTunes音乐', icon: CustomerServiceOutlined, path: '/i-tunes' },
+          { name: '下载管理', icon: DownloadOutlined, path: '/download' },
+          { name: '最近播放', icon: FieldTimeOutlined, path: '/recent' },
+          { name: '我的音乐云盘', icon: CloudOutlined, path: '/cloud-music' },
+          { name: '我的电台', icon: NotificationOutlined, path: '/radio' },
+          { name: '我的收藏', icon: StarOutlined, path: '/collection' },
+        ],
+      },
+      {
+        title: '创建的歌单',
+        menus: [{ name: '我喜欢的音乐', icon: HeartOutlined, path: '/list' }],
+      },
+    ]
+  );
 
-    const userInfo = local.get('userInfo');
-    if (!userInfo) return;
-    dispatch(setUserInfoFromCache(json.parse<UserInfo>(userInfo)));
+  useEffect(() => {
+    (async () => {
+      const index = findIndex();
+      if (index) {
+        setSelected(index);
+      } else {
+        setSelected([0, 0]);
+        history.push('/find-music');
+      }
+      recoverLoginFromCache();
+    })();
   }, [pathname]);
 
-  const handleMenuClick = ({ menu, i, plus = 0 }: ItemProps) => {
-    setSelected(i + plus);
+  useEffect(() => {
+    const payload: MenuItem[] = [
+      { title: '创建的歌单', menus: [] },
+      { title: '收藏的歌单', menus: [] },
+    ];
+    if (!playlist || playlist.length === 0) return;
+    playlist.forEach(item => {
+      const { name, id, userId } = item;
+      const path = `/list/${id}`;
+      const menu = { name, path, icon: CustomerServiceOutlined };
+      const index = userId === profile.userId ? 0 : 1;
+      payload[index].menus.push(menu);
+    });
+    menuListDispatch({ type: 0, payload });
+  }, [playlist]);
+
+  const handleMenuClick = ({ menu, index }: ItemProps) => {
+    setSelected(index);
     history.push(menu.path);
   };
 
-  const Item: React.FC<ItemProps> = ({ menu, i, plus = 0 }) => (
-    <div
-      key={i}
-      className={classNames(styles.sidebar__item, { [styles['--actived']]: i + plus === selected })}
-      onClick={() => handleMenuClick({ menu, i, plus })}
-    >
-      <menu.icon />
-      <a>{menu.name}</a>
-    </div>
-  );
-
-  const login = () => {
-    setShowLogin(true);
+  const Item: React.FC<ItemProps> = ({ menu, index }) => {
+    const actived = judgeSelected(selected, index);
+    return (
+      <div
+        key={menu.path}
+        className={classNames(styles.sidebar__item, {
+          [styles['--actived']]: actived,
+        })}
+        onClick={() => handleMenuClick({ menu, index })}
+      >
+        <menu.icon />
+        <a>{menu.name}</a>
+      </div>
+    );
   };
+
+  function login() {
+    setShowLogin(true);
+  }
+
+  function recoverLoginFromCache() {
+    const userInfoStr = local.get('userInfo');
+    if (!userInfoStr) return;
+    const userInfo = json.parse<UserInfo>(userInfoStr);
+    dispatch(setUserInfoFromCache(userInfo));
+    const { userId } = userInfo.profile;
+    dispatch(setUserPlaylist(userId));
+  }
+
+  function findIndex() {
+    for (let i = 0, len = menuList.length; i < len; i++) {
+      const { menus } = menuList[i];
+      for (let j = 0, len = menus.length; j < len; j++) {
+        const menu = menus[j];
+        if (pathname.includes(menu.path)) return [i, j];
+      }
+    }
+  }
+
+  function judgeSelected(a: number[], b: number[]) {
+    if (a.length !== a.length) return false;
+
+    for (let i = 0, len = a.length; i < len; i++) {
+      if (a[i] !== b[i]) return false;
+    }
+
+    return true;
+  }
+
+  function renderTitle(item: MenuItem, i: number) {
+    if (!item.title) return;
+    return (
+      <div className={styles.sidebar__title}>
+        {i < 2 ? (
+          item.title
+        ) : (
+          <>
+            <div className={styles['sidebar__title-left']}>
+              <CaretDownOutlined />
+              <a>{item.title}</a>
+            </div>
+            {item.title === '创建的歌单' && (
+              <PlusOutlined className={styles['sidebar__title-right']} />
+            )}
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
     <aside className={styles.sidebar}>
@@ -92,30 +183,16 @@ const List: React.FC = () => {
         <CaretRightOutlined onClick={login} />
       </header>
       <Scrollbar className={styles.sidebar__main}>
-        {menuList.slice(0, 4).map((item, i) => (
-          <Item key={i} menu={item} i={i} />
-        ))}
-        <div className={styles.sidebar__title}>我的音乐</div>
-        {menuList.slice(4, 10).map((item, i) => (
-          <Item key={i} menu={item} i={i} plus={4} />
-        ))}
-        <div className={styles.sidebar__title}>
-          <div className={styles['sidebar__title-left']}>
-            <CaretDownOutlined />
-            <a>创建的歌单</a>
-          </div>
-          <PlusOutlined className={styles['sidebar__title-right']} />
-        </div>
-        {menuList.slice(10).map((item, i) => (
-          <Item key={i} menu={item} i={i} plus={10} />
-        ))}
-        <div className={styles.sidebar__title}>
-          <div className={styles['sidebar__title-left']}>
-            <CaretDownOutlined />
-            <a>收藏的歌单</a>
-          </div>
-          <PlusOutlined className={styles['sidebar__title-right']} />
-        </div>
+        {menuList.map((item, i) => {
+          return (
+            <div key={i}>
+              {renderTitle(item, i)}
+              {item.menus.map((menu, j) => (
+                <Item key={j} menu={menu} index={[i, j]} />
+              ))}
+            </div>
+          );
+        })}
       </Scrollbar>
       {showLogin && <Login setShowLogin={setShowLogin} />}
     </aside>

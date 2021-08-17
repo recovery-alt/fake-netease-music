@@ -29,10 +29,7 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
     if (setUserInfo.fulfilled.match(res)) {
       local.set('userInfo', res.payload);
       const { userId } = res.payload.profile;
-      const result = await dispatch(setUserPlaylist(userId));
-      if (setUserPlaylist.fulfilled.match(result)) {
-        local.set('userPlaylist', result.payload);
-      }
+      dispatch(setUserPlaylist(userId));
       setShowLogin(false);
       message.success('登录成功～');
     } else {
