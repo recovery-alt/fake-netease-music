@@ -6,6 +6,7 @@
   }
 
   &__img {
+    background-color: #a5a5a5;
     border-radius: 4px;
     height: 200px;
     width: 200px;
@@ -33,7 +34,7 @@
     }
   }
 
-  &__description {
+  &__user-info {
     align-items: center;
     display: flex;
     margin-top: 18px;
@@ -54,11 +55,33 @@
     }
   }
 
-  &__count {
-    margin-top: 20px;
+  &__description {
+    font-size: 12px;
+    line-height: 1;
+    margin-top: 22px;
 
-    span {
-      margin-right: 12px;
+    .--title {
+      color: #333;
+    }
+
+    .--left {
+      margin-left: 12px;
+    }
+  }
+
+  &__count {
+    margin-top: 10px;
+  }
+
+  &__introduction {
+    display: flex;
+    margin-top: 10px;
+
+    div {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 300px;
     }
   }
 

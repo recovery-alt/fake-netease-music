@@ -39,3 +39,8 @@ export function to<T, U = Error>(
       return [err, undefined];
     });
 }
+
+export const wrapNumber = (num?: number) => {
+  if (!num) return 0;
+  return num < 10000 ? '' + num : Math.floor(num / 10000) + '万';
+};

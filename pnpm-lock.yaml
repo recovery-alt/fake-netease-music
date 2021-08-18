@@ -7,6 +7,7 @@ specifiers:
   '@ehutch79/vite-eslint': ^0.0.1
   '@ls-lint/ls-lint': ^1.10.0
   '@reduxjs/toolkit': ^1.6.1
+  '@types/lodash': ^4.14.172
   '@types/react': ^17.0.18
   '@types/react-dom': ^17.0.9
   '@types/react-lazyload': ^3.1.1
@@ -33,6 +34,7 @@ specifiers:
   json5: ^2.2.0
   less: ^4.1.1
   lint-staged: ^11.1.2
+  lodash: ^4.17.21
   normalize.css: ^8.0.1
   postcss: ^8.3.6
   postcss-px-to-viewport: ^1.1.1
@@ -62,11 +64,12 @@ dependencies:
   classnames: 2.3.1
   dayjs: registry.nlark.com/dayjs/1.10.6
   json5: 2.2.0
+  lodash: 4.17.21
   normalize.css: 8.0.1
   react: registry.nlark.com/react/17.0.2
   react-dom: registry.nlark.com/react-dom/17.0.2_react@17.0.2
   react-lazyload: registry.nlark.com/react-lazyload/3.2.0_react-dom@17.0.2+react@17.0.2
-  react-redux: registry.nlark.com/react-redux/7.2.4_react@17.0.2
+  react-redux: registry.nlark.com/react-redux/7.2.4_react-dom@17.0.2+react@17.0.2
   react-router-dom: registry.nlark.com/react-router-dom/5.2.0_react@17.0.2
   react-use: registry.nlark.com/react-use/17.2.4_react-dom@17.0.2+react@17.0.2
 
@@ -75,6 +78,7 @@ devDependencies:
   '@commitlint/config-conventional': registry.nlark.com/@commitlint/config-conventional/12.1.4
   '@ehutch79/vite-eslint': registry.nlark.com/@ehutch79/vite-eslint/0.0.1
   '@ls-lint/ls-lint': registry.nlark.com/@ls-lint/ls-lint/1.10.0
+  '@types/lodash': registry.nlark.com/@types/lodash/4.14.172
   '@types/react': registry.nlark.com/@types/react/17.0.18
   '@types/react-dom': registry.nlark.com/@types/react-dom/17.0.9
   '@types/react-lazyload': registry.nlark.com/@types/react-lazyload/3.1.1
@@ -91,7 +95,7 @@ devDependencies:
   electron-is-dev: registry.nlark.com/electron-is-dev/2.0.0
   eslint: registry.nlark.com/eslint/7.32.0
   eslint-config-prettier: registry.nlark.com/eslint-config-prettier/8.3.0_eslint@7.32.0
-  eslint-plugin-prettier: 3.4.0_eslint@7.32.0+prettier@2.3.2
+  eslint-plugin-prettier: 3.4.0_5a48a349ffec60f5257b5f148f5199c3
   eslint-plugin-react: registry.nlark.com/eslint-plugin-react/7.24.0_eslint@7.32.0
   husky: registry.nlark.com/husky/7.0.1
   less: 4.1.1
@@ -149,6 +153,8 @@ packages:
     optionalDependencies:
       global-agent: registry.nlark.com/global-agent/2.2.0
       global-tunnel-ng: 2.7.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@hapi/hoek/9.2.0:
@@ -177,6 +183,8 @@ packages:
       '@babel/core': registry.nlark.com/@babel/core/7.15.0
       postcss: registry.nlark.com/postcss/7.0.36
       postcss-syntax: 0.36.2_postcss@7.0.36
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@stylelint/postcss-markdown/0.36.2_2b33a41d320e3e2012e5b3b0fadc703b:
@@ -189,6 +197,8 @@ packages:
       postcss-syntax: 0.36.2_postcss@7.0.36
       remark: registry.nlark.com/remark/13.0.0
       unist-util-find-all-after: registry.nlark.com/unist-util-find-all-after/3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /JSONStream/1.3.5:
@@ -324,6 +334,8 @@ packages:
     resolution: {integrity: sha1-IlY0gZYvTWvemnbVFu8OXTwJsrg=, tarball: axios/download/axios-0.21.1.tgz?cache=0&sync_timestamp=1608623177223&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Faxios%2Fdownload%2Faxios-0.21.1.tgz}
     dependencies:
       follow-redirects: registry.nlark.com/follow-redirects/1.14.1
+    transitivePeerDependencies:
+      - debug
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha1-6D46fj8wCzTLnYf2FfoMvzV2kO4=, tarball: balanced-match/download/balanced-match-1.0.2.tgz}
@@ -941,14 +953,19 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-plugin-prettier/3.4.0_eslint@7.32.0+prettier@2.3.2:
+  /eslint-plugin-prettier/3.4.0_5a48a349ffec60f5257b5f148f5199c3:
     resolution: {integrity: sha1-zbrTvx29Kxd+mCVzf+Y7R2oI8Mc=, tarball: eslint-plugin-prettier/download/eslint-plugin-prettier-3.4.0.tgz}
     engines: {node: '>=6.0.0'}
     peerDependencies:
       eslint: '>=5.0.0'
+      eslint-config-prettier: '*'
       prettier: '>=1.13.0'
+    peerDependenciesMeta:
+      eslint-config-prettier:
+        optional: true
     dependencies:
       eslint: registry.nlark.com/eslint/7.32.0
+      eslint-config-prettier: registry.nlark.com/eslint-config-prettier/8.3.0_eslint@7.32.0
       prettier: registry.nlark.com/prettier/2.3.2
       prettier-linter-helpers: 1.0.0
     dev: true
@@ -1106,6 +1123,7 @@ packages:
   /fsevents/2.3.2:
     resolution: {integrity: sha1-ilJveLj99GI7cJ4Ll1xSwkwC/Ro=, tarball: fsevents/download/fsevents-2.3.2.tgz?cache=0&sync_timestamp=1612537044236&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffsevents%2Fdownload%2Ffsevents-2.3.2.tgz}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
     dev: true
     optional: true
 
@@ -1746,7 +1764,7 @@ packages:
     dev: true
 
   /lodash/4.17.21:
-    resolution: {integrity: sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=, tarball: lodash/download/lodash-4.17.21.tgz}
+    resolution: {integrity: sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=, tarball: lodash/download/lodash-4.17.21.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash%2Fdownload%2Flodash-4.17.21.tgz}
 
   /log-symbols/4.1.0:
     resolution: {integrity: sha1-P727lbRoOsn8eFER55LlWNSr1QM=, tarball: log-symbols/download/log-symbols-4.1.0.tgz?cache=0&sync_timestamp=1618723242212&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flog-symbols%2Fdownload%2Flog-symbols-4.1.0.tgz}
@@ -2943,6 +2961,8 @@ packages:
     engines: {node: '>= 8.0'}
     dependencies:
       debug: registry.nlark.com/debug/4.3.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /svg-tags/1.0.0:
@@ -3359,6 +3379,8 @@ packages:
       json5: 2.2.0
       semver: 6.3.0
       source-map: 0.5.7
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/generator/7.15.0:
@@ -3449,6 +3471,8 @@ packages:
       '@babel/template': registry.nlark.com/@babel/template/7.14.5
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.15.0
       '@babel/types': registry.nlark.com/@babel/types/7.15.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/helper-optimise-call-expression/7.14.5:
@@ -3477,6 +3501,8 @@ packages:
       '@babel/helper-optimise-call-expression': registry.nlark.com/@babel/helper-optimise-call-expression/7.14.5
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.15.0
       '@babel/types': registry.nlark.com/@babel/types/7.15.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/helper-simple-access/7.14.8:
@@ -3520,6 +3546,8 @@ packages:
       '@babel/template': registry.nlark.com/@babel/template/7.14.5
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.15.0
       '@babel/types': registry.nlark.com/@babel/types/7.15.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/highlight/7.14.5:
@@ -3601,6 +3629,8 @@ packages:
       '@babel/types': registry.nlark.com/@babel/types/7.15.0
       debug: registry.nlark.com/debug/4.3.2
       globals: registry.nlark.com/globals/11.12.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/types/7.15.0:
@@ -3790,6 +3820,8 @@ packages:
     dependencies:
       '@rollup/pluginutils': registry.nlark.com/@rollup/pluginutils/4.1.1
       eslint: registry.nlark.com/eslint/7.32.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@electron/universal/1.0.5:
@@ -3803,6 +3835,8 @@ packages:
       debug: registry.nlark.com/debug/4.3.2
       dir-compare: registry.nlark.com/dir-compare/2.4.0
       fs-extra: registry.nlark.com/fs-extra/9.1.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@eslint/eslintrc/0.4.3:
@@ -3820,6 +3854,8 @@ packages:
       js-yaml: 3.14.1
       minimatch: 3.0.4
       strip-json-comments: 3.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@hapi/topo/5.1.0:
@@ -3839,6 +3875,8 @@ packages:
       '@humanwhocodes/object-schema': registry.nlark.com/@humanwhocodes/object-schema/1.2.0
       debug: registry.nlark.com/debug/4.3.2
       minimatch: 3.0.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@humanwhocodes/object-schema/1.2.0:
@@ -3851,6 +3889,7 @@ packages:
     resolution: {integrity: sha1-ytIAhe3AEKPpOKoBu2bQXl4Ss/M=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@ls-lint/ls-lint/download/@ls-lint/ls-lint-1.10.0.tgz}
     name: '@ls-lint/ls-lint'
     version: 1.10.0
+    os: [darwin, linux, win32]
     hasBin: true
     dev: true
 
@@ -3873,6 +3912,8 @@ packages:
       fs-extra: registry.nlark.com/fs-extra/9.1.0
       lodash: 4.17.21
       tmp-promise: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@nodelib/fs.scandir/2.1.5:
@@ -3910,10 +3951,15 @@ packages:
     peerDependencies:
       react: ^16.14.0 || ^17.0.0
       react-redux: ^7.2.1
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-redux:
+        optional: true
     dependencies:
       immer: registry.nlark.com/immer/9.0.5
       react: registry.nlark.com/react/17.0.2
-      react-redux: registry.nlark.com/react-redux/7.2.4_react@17.0.2
+      react-redux: registry.nlark.com/react-redux/7.2.4_react-dom@17.0.2+react@17.0.2
       redux: registry.nlark.com/redux/4.1.1
       redux-thunk: 2.3.0
       reselect: 4.0.0
@@ -4003,6 +4049,12 @@ packages:
     resolution: {integrity: sha1-l+3JA36gw4WFMgsolk3eOznkZg0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/json-schema/download/@types/json-schema-7.0.9.tgz}
     name: '@types/json-schema'
     version: 7.0.9
+    dev: true
+
+  registry.nlark.com/@types/lodash/4.14.172:
+    resolution: {integrity: sha1-qtd0wo57/Xpn3iVAjgPuWow9Aoo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/lodash/download/@types/lodash-4.14.172.tgz}
+    name: '@types/lodash'
+    version: 4.14.172
     dev: true
 
   registry.nlark.com/@types/mdast/3.0.7:
@@ -4166,6 +4218,10 @@ packages:
     peerDependencies:
       '@typescript-eslint/parser': ^4.0.0
       eslint: ^5.0.0 || ^6.0.0 || ^7.0.0
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
     dependencies:
       '@typescript-eslint/experimental-utils': registry.nlark.com/@typescript-eslint/experimental-utils/4.29.2_eslint@7.32.0+typescript@4.3.5
       '@typescript-eslint/parser': registry.nlark.com/@typescript-eslint/parser/4.29.2_eslint@7.32.0+typescript@4.3.5
@@ -4176,8 +4232,9 @@ packages:
       regexpp: registry.nlark.com/regexpp/3.2.0
       semver: 7.3.5
       tsutils: 3.21.0_typescript@4.3.5
+      typescript: registry.nlark.com/typescript/4.3.5
     transitivePeerDependencies:
-      - typescript
+      - supports-color
     dev: true
 
   registry.nlark.com/@typescript-eslint/experimental-utils/4.29.2_eslint@7.32.0+typescript@4.3.5:
@@ -4197,6 +4254,7 @@ packages:
       eslint-scope: registry.nlark.com/eslint-scope/5.1.1
       eslint-utils: registry.nlark.com/eslint-utils/3.0.0_eslint@7.32.0
     transitivePeerDependencies:
+      - supports-color
       - typescript
     dev: true
 
@@ -4208,14 +4266,19 @@ packages:
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
       eslint: ^5.0.0 || ^6.0.0 || ^7.0.0
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
     dependencies:
       '@typescript-eslint/scope-manager': registry.nlark.com/@typescript-eslint/scope-manager/4.29.2
       '@typescript-eslint/types': registry.nlark.com/@typescript-eslint/types/4.29.2
       '@typescript-eslint/typescript-estree': registry.nlark.com/@typescript-eslint/typescript-estree/4.29.2_typescript@4.3.5
       debug: registry.nlark.com/debug/4.3.2
       eslint: registry.nlark.com/eslint/7.32.0
+      typescript: registry.nlark.com/typescript/4.3.5
     transitivePeerDependencies:
-      - typescript
+      - supports-color
     dev: true
 
   registry.nlark.com/@typescript-eslint/scope-manager/4.29.2:
@@ -4241,6 +4304,11 @@ packages:
     name: '@typescript-eslint/typescript-estree'
     version: 4.29.2
     engines: {node: ^10.12.0 || >=12.0.0}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
     dependencies:
       '@typescript-eslint/types': registry.nlark.com/@typescript-eslint/types/4.29.2
       '@typescript-eslint/visitor-keys': registry.nlark.com/@typescript-eslint/visitor-keys/4.29.2
@@ -4249,8 +4317,9 @@ packages:
       is-glob: 4.0.1
       semver: 7.3.5
       tsutils: 3.21.0_typescript@4.3.5
+      typescript: registry.nlark.com/typescript/4.3.5
     transitivePeerDependencies:
-      - typescript
+      - supports-color
     dev: true
 
   registry.nlark.com/@typescript-eslint/visitor-keys/4.29.2:
@@ -4274,6 +4343,8 @@ packages:
       '@babel/plugin-transform-react-jsx-source': registry.nlark.com/@babel/plugin-transform-react-jsx-source/7.14.5_@babel+core@7.15.0
       '@rollup/pluginutils': registry.nlark.com/@rollup/pluginutils/4.1.1
       react-refresh: registry.nlark.com/react-refresh/0.10.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@xobotyi/scrollbar-width/1.9.5:
@@ -4430,6 +4501,8 @@ packages:
       sanitize-filename: 1.6.3
       semver: 7.3.5
       temp-file: registry.nlark.com/temp-file/3.4.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/array-includes/3.1.3:
@@ -4520,6 +4593,8 @@ packages:
     dependencies:
       debug: registry.nlark.com/debug/4.3.2
       sax: 1.2.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/builder-util-runtime/8.7.7:
@@ -4530,6 +4605,8 @@ packages:
     dependencies:
       debug: registry.nlark.com/debug/4.3.2
       sax: 1.2.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/builder-util/22.11.7:
@@ -4551,6 +4628,8 @@ packages:
       source-map-support: 0.5.19
       stat-mode: 1.0.0
       temp-file: registry.nlark.com/temp-file/3.4.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/cacheable-request/6.1.0:
@@ -4828,6 +4907,11 @@ packages:
     name: debug
     version: 4.3.2
     engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.1.2
     dev: true
@@ -4864,6 +4948,8 @@ packages:
       js-yaml: 4.1.0
     optionalDependencies:
       dmg-license: registry.nlark.com/dmg-license/1.0.9
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/dmg-license/1.0.9:
@@ -4871,6 +4957,7 @@ packages:
     name: dmg-license
     version: 1.0.9
     engines: {node: '>=8'}
+    os: [darwin]
     hasBin: true
     dependencies:
       '@types/plist': registry.nlark.com/@types/plist/3.0.2
@@ -4935,6 +5022,8 @@ packages:
       read-config-file: registry.nlark.com/read-config-file/6.2.0
       update-notifier: 5.1.0
       yargs: registry.nlark.com/yargs/17.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/electron-is-dev/2.0.0:
@@ -4955,6 +5044,8 @@ packages:
       fs-extra: registry.nlark.com/fs-extra/10.0.0
       lazy-val: registry.nlark.com/lazy-val/1.0.5
       mime: 2.5.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/electron-to-chromium/1.3.810:
@@ -4974,6 +5065,8 @@ packages:
       '@electron/get': 1.12.4
       '@types/node': registry.nlark.com/@types/node/14.17.9
       extract-zip: 1.7.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/entities/1.1.2:
@@ -5156,6 +5249,8 @@ packages:
       table: registry.nlark.com/table/6.7.1
       text-table: 0.2.0
       v8-compile-cache: 2.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/espree/7.3.1:
@@ -5224,6 +5319,11 @@ packages:
     name: follow-redirects
     version: 1.14.1
     engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
 
   registry.nlark.com/fs-extra/10.0.0:
     resolution: {integrity: sha1-n/YbZV3eU/s0qC34S7IUzoAuF8E=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/fs-extra/download/fs-extra-10.0.0.tgz}
@@ -5441,6 +5541,7 @@ packages:
     name: iconv-corefoundation
     version: 1.1.6
     engines: {node: ^8.11.2 || >=10}
+    os: [darwin]
     dependencies:
       cli-truncate: registry.nlark.com/cli-truncate/1.1.0
       node-addon-api: registry.nlark.com/node-addon-api/1.7.2
@@ -5663,6 +5764,8 @@ packages:
       please-upgrade-node: 3.2.0
       string-argv: 0.3.1
       stringify-object: 3.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/listr2/3.11.0_enquirer@2.3.6:
@@ -5694,6 +5797,8 @@ packages:
       micromark: registry.nlark.com/micromark/2.11.4
       parse-entities: 2.0.0
       unist-util-stringify-position: 2.0.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/mdast-util-to-markdown/0.6.5:
@@ -5786,6 +5891,8 @@ packages:
     dependencies:
       debug: registry.nlark.com/debug/4.3.2
       parse-entities: 2.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/mimic-response/1.0.1:
@@ -6586,13 +6693,20 @@ packages:
       react-dom: registry.nlark.com/react-dom/17.0.2_react@17.0.2
     dev: false
 
-  registry.nlark.com/react-redux/7.2.4_react@17.0.2:
+  registry.nlark.com/react-redux/7.2.4_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha1-HrtHQDK3LYBt4uBRnNB3YeIi4iU=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/react-redux/download/react-redux-7.2.4.tgz}
     id: registry.nlark.com/react-redux/7.2.4
     name: react-redux
     version: 7.2.4
     peerDependencies:
       react: ^16.8.3 || ^17
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
     dependencies:
       '@babel/runtime': registry.nlark.com/@babel/runtime/7.15.3
       '@types/react-redux': registry.nlark.com/@types/react-redux/7.1.18
@@ -6600,6 +6714,7 @@ packages:
       loose-envify: 1.4.0
       prop-types: 15.7.2
       react: registry.nlark.com/react/17.0.2
+      react-dom: registry.nlark.com/react-dom/17.0.2_react@17.0.2
       react-is: registry.nlark.com/react-is/16.13.1
     dev: false
 
@@ -6770,6 +6885,8 @@ packages:
     version: 9.0.0
     dependencies:
       mdast-util-from-markdown: registry.nlark.com/mdast-util-from-markdown/0.8.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/remark-stringify/9.0.1:
@@ -6788,6 +6905,8 @@ packages:
       remark-parse: registry.nlark.com/remark-parse/9.0.0
       remark-stringify: registry.nlark.com/remark-stringify/9.0.1
       unified: registry.nlark.com/unified/9.2.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/resolve-from/5.0.0:
@@ -7074,6 +7193,8 @@ packages:
       table: registry.nlark.com/table/6.7.1
       v8-compile-cache: 2.3.0
       write-file-atomic: 3.0.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/sugarss/2.0.0:
@@ -7339,6 +7460,8 @@ packages:
       es-module-lexer: registry.nlark.com/es-module-lexer/0.7.1
       magic-string: 0.25.7
       vite: registry.nlark.com/vite/2.5.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/vite/2.5.0:
@@ -7368,6 +7491,8 @@ packages:
       lodash: 4.17.21
       minimist: 1.2.5
       rxjs: registry.nlark.com/rxjs/7.3.0
+    transitivePeerDependencies:
+      - debug
     dev: true
 
   registry.nlark.com/widest-line/3.1.0:
