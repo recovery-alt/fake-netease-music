@@ -24,21 +24,36 @@
   }
 
   &__img {
-    position: relative;
+    border-radius: 8px;
+    height: 100%;
+    width: 100%;
 
-    img {
-      border-radius: 8px;
-      height: 100%;
-      width: 100%;
-    }
+    &-wrapper {
+      position: relative;
 
-    span {
-      color: #d33b31;
-      font-size: 20px;
-      left: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      &.--default {
+        height: 60px;
+        width: 60px;
+      }
+
+      &.--medium {
+        height: 90px;
+        width: 90px;
+      }
+
+      &.--large {
+        height: 135px;
+        width: 135px;
+      }
+
+      span {
+        color: #d33b31;
+        font-size: 20px;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 }

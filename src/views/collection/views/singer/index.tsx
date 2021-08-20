@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './singer.less';
-import Input from '@/components/input';
 import List, { ListData } from '@/components/list';
 import { getArtistSublist } from '@/api';
 import Header from '../../components/header';

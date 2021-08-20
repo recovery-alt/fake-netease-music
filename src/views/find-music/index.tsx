@@ -11,8 +11,9 @@ import {
   getPersonalized,
   getPersonalizedMV,
   getPPList,
+  BannerType,
+  PersonalizedList,
 } from '@/api';
-import type { BannerType, PersonalizedList } from '@/api';
 
 const FindMusic: React.FC = () => {
   const [banner, setBanner] = useState<BannerType[]>([]);
@@ -93,7 +94,7 @@ const FindMusic: React.FC = () => {
       <Title name="推荐MV" />
       <Card data={personalizedMV} width={170} height={100} style={{ marginBottom: 0 }} />
       <Title name="主播电台" welt />
-      <List size={90} data={djToplist} functionChildren={renderDJToplist}></List>
+      <List size="medium" data={djToplist} functionChildren={renderDJToplist}></List>
     </div>
   );
 };

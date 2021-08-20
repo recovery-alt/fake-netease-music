@@ -9,6 +9,7 @@ import {
   PlaylistDetail,
   Track,
 } from '@/api';
+import Img from '@/components/img';
 
 const Rank: React.FC = () => {
   const [toplist, setToplist] = useState<Toplist[]>([]);
@@ -40,8 +41,8 @@ const Rank: React.FC = () => {
       <div className="rank__global">
         {toplist.map(item => (
           <div key={item.id} className="rank__item">
-            <div className="rank__img">
-              <img src={item.coverImgUrl} alt="img" />
+            <div className="rank__img-wrapper">
+              <Img className="rank__img" src={item.coverImgUrl} />
             </div>
             <div className="rank__detail">{item.name}</div>
           </div>

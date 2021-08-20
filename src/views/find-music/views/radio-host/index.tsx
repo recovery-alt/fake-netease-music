@@ -14,6 +14,7 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Title from '@/components/title';
 import Card, { CardData } from '@/components/card';
 import List, { ListParams } from '../../components/list';
+import Img from '@/components/img';
 
 const RadioHost: React.FC = () => {
   const [banner, setBanner] = useState<BannerType[]>([]);
@@ -112,8 +113,8 @@ const RadioHost: React.FC = () => {
         >
           {djCatelist.map(item => (
             <div key={item.id} className="radio-host__category-item">
-              <div className="radio-host__category-img">
-                <img src={item.pic56x56Url} alt="icon" />
+              <div className="radio-host__category-img-wrapper">
+                <Img className="radio-host__category-img" src={item.pic56x56Url} />
               </div>
               <div className="radio-host__category-text">{item.name}</div>
             </div>
@@ -121,7 +122,7 @@ const RadioHost: React.FC = () => {
         </div>
       </div>
       <Title name="付费精品" />
-      <List size={135} data={djPaygift} functionChildren={renderDJPaygift} />
+      <List size="large" data={djPaygift} functionChildren={renderDJPaygift} />
       <Title name="电台个性推荐" />
       <Card data={djPersonalizeRecommend} />
       <Title name="有声书" />

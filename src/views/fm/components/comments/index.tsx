@@ -4,6 +4,7 @@ import avatar from '@/assets/img/avatar.svg';
 import { LikeOutlined, ExportOutlined, CommentOutlined } from '@ant-design/icons';
 import { Comment } from '@/api';
 import dayjs from 'dayjs';
+import Img from '@/components/img';
 
 type Props = { comment: Comment };
 
@@ -16,7 +17,7 @@ const Comments: React.FC<Props> = ({ comment }) => {
   return (
     <div className={styles.comments}>
       <div className={styles.comments__left}>
-        <img src={comment?.user.avatarUrl || avatar} alt="avatar" />
+        <Img className={styles.comments__img} src={comment?.user.avatarUrl || avatar} />
       </div>
       <div className={styles.comments__right}>
         <p>

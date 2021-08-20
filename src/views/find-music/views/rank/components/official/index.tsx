@@ -2,13 +2,14 @@ import React from 'react';
 import styles from './official.module.less';
 import { PlayCircleFilled, RightOutlined } from '@ant-design/icons';
 import { PlaylistDetail } from '@/api';
+import Img from '@/components/img';
 
 type Props = { data: PlaylistDetail };
 
 const Official: React.FC<Props> = ({ data }) => (
   <div className={styles.official}>
     <div className={styles.official__left}>
-      <img src={data.coverImgUrl} alt="official" />
+      <Img className={styles.official__img} src={data.coverImgUrl} />
       <PlayCircleFilled />
     </div>
     <div className={styles.official__right}>

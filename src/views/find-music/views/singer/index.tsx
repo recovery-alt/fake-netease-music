@@ -3,6 +3,7 @@ import './singer.less';
 import classNames from 'classnames';
 import { getArtistList, Artist } from '@/api';
 import { categoryList } from '@/config';
+import Img from '@/components/img';
 
 const Singer: React.FC = () => {
   const [data, setData] = useState<Artist[]>([]);
@@ -60,7 +61,7 @@ const Singer: React.FC = () => {
       <div className="singer__list">
         {data.map(item => (
           <div key={item.id} className="singer__item">
-            <img src={item.picUrl} alt="" />
+            <Img className="singer__img" src={item.picUrl} />
             <div className="singer__description">{item.name}</div>
           </div>
         ))}

@@ -3,6 +3,7 @@ import { PlayCircleFilled, PlaySquareOutlined } from '@ant-design/icons';
 import styles from './list.module.less';
 import { Song } from '@/api';
 import dayjs from 'dayjs';
+import Img from '@/components/img';
 
 type Props = { data: Song[] };
 
@@ -12,8 +13,8 @@ const SongList: React.FC<Props> = ({ data }) => (
       <div key={item.id} className={styles['song-list__item']}>
         <div className={styles['song-list__left']}>
           <div className={styles['song-list__ordinal']}>{i + 1}</div>
-          <div className={styles['song-list__img']}>
-            <img src={item.album.picUrl} alt="img" />
+          <div className={styles['song-list__img-wrapper']}>
+            <Img className={styles['song-list__img']} src={item.album.picUrl} />
             <PlayCircleFilled />
           </div>
           <div className={styles['song-list__song']}>

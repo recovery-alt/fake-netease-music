@@ -3,6 +3,7 @@ import styles from './banner.module.less';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import type { BannerType } from '@/api';
 import classNames from 'classnames';
+import Img from '@/components/img';
 
 type Props = {
   data: BannerType[];
@@ -30,10 +31,9 @@ const Banner: React.FC<Props> = ({ data }) => {
   return (
     <div className={styles.banner}>
       {data.map((item, i) => (
-        <img
+        <Img
           src={item.imageUrl}
           key={item.imageUrl}
-          alt="banner"
           className={classNames(styles.banner__item, getState(i))}
         />
       ))}

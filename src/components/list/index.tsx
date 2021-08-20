@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './list.module.less';
+import Img from '@/components/img';
 
 export type ListData = { imgUrl: string; col2: string; col3?: string; col4?: string };
 
@@ -11,7 +12,7 @@ const List: React.FC<Props> = ({ data }) => {
       {data.map((item, i) => (
         <div key={i} className={styles.list__item}>
           <div className={styles.list__left}>
-            <img src={item.imgUrl} alt="cover" />
+            <Img className={styles.list__img} src={item.imgUrl} />
             <span>{item.col2}</span>
           </div>
           <div className={styles.list__right}>

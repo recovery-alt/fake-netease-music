@@ -5,6 +5,7 @@ import Nav from '@/components/nav';
 import { areaCategory } from '@/config';
 import List, { ListItem } from '../../components/list';
 import { getMVFirst, getMVAll, MVType, getMVExclusiveRcmd, getTopMV } from '@/api';
+import Img from '@/components/img';
 
 const MV: React.FC = () => {
   const initAreaCategory = areaCategory.map(item => ({ name: item, id: item }));
@@ -84,8 +85,8 @@ const MV: React.FC = () => {
               <h3>{i + 1}</h3>
               <h4>-</h4>
             </div>
-            <div className="mv__rank-img">
-              <img src={item.cover} alt="cover" />
+            <div className="mv__rank-img-wrapper">
+              <Img className="mv__rank-img" src={item.cover} />
             </div>
             <div className="mv__rank-description">
               <h3>{item.name}</h3>

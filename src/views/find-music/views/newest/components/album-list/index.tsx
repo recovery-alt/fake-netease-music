@@ -2,6 +2,7 @@ import { getTopAlbum } from '@/api';
 import React, { useEffect, useState } from 'react';
 import styles from './album-list.module.less';
 import { TopAlbumParams, Album } from '@/api';
+import Img from '@/components/img';
 
 type Props = TopAlbumParams;
 
@@ -23,8 +24,8 @@ const AlbumList: React.FC<Props> = ({ type }) => {
       <div className={styles['album-list__right']}>
         {data.map((item, i) => (
           <div key={i} className={styles['album-list__item']}>
-            <div className={styles['album-list__img']}>
-              <img src={item.picUrl} alt="img" />
+            <div className={styles['album-list__img-wrapper']}>
+              <Img className={styles['album-list__img']} src={item.picUrl} />
             </div>
             <div className={styles['album-list__description']}>
               <div className={styles['album-list__name']}>{item.name}</div>

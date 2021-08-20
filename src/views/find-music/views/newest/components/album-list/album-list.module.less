@@ -23,25 +23,26 @@
   }
 
   &__img {
-    display: flex;
+    border-radius: 4px;
+    height: 130px;
+    width: 130px;
 
-    img {
-      border-radius: 4px;
-      height: 130px;
-      width: 130px;
-    }
+    &-wrapper {
+      display: flex;
 
-    &::after {
-      content: '';
-      display: block;
-      height: 130px;
-      width: 24px;
+      &::after {
+        content: '';
+        display: block;
+        height: 130px;
+        width: 24px;
+      }
     }
   }
 
   &__description {
     height: 90px;
     margin-top: 10px;
+    width: 130px;
   }
 
   &__name {

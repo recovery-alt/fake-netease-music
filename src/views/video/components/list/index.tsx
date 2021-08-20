@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './list.module.less';
+import Img from '@/components/img';
 
 export type ListItem = { imgUrl: string; description: string; author: string };
 
@@ -10,8 +11,8 @@ const List: React.FC<Props> = ({ data }) => {
     <section className={styles.list}>
       {data.map((item, i) => (
         <div key={i} className={styles.list__item}>
-          <div className={styles.list__img}>
-            <img src={item.imgUrl} alt="cover" />
+          <div className={styles['list__img-wrapper']}>
+            <Img className={styles.list__img} src={item.imgUrl} />
           </div>
           <div className={styles.list__description}>
             <h3>{item.description}</h3>

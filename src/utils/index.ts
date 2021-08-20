@@ -44,3 +44,6 @@ export const wrapNumber = (num?: number) => {
   if (!num) return 0;
   return num < 10000 ? '' + num : Math.floor(num / 10000) + '万';
 };
+
+// eslint-disable-next-line
+export const noop = () => {};
