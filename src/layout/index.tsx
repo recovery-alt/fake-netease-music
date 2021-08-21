@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import type { RouteConfig } from '@/router';
 import { Switch, Route } from 'react-router-dom';
 import './layout.less';
@@ -7,6 +7,7 @@ import Header from './header';
 import Footer from './footer';
 import NotFound from './not-found';
 import Scrollbar from '@/components/scrollbar';
+import { Spin } from 'antd';
 
 type Props = { routes?: Array<RouteConfig> };
 
@@ -17,10 +18,12 @@ const Layout: React.FC<Props> = ({ routes }) => {
       <section className="container">
         <Sidebar />
         <Scrollbar className="main">
-          <Switch>
-            {routes && routes.map(route => <Route key={route.path} {...route} />)}
-            <NotFound />
-          </Switch>
+          <Suspense fallback={<Spin className="main__loading" style={{ position: 'absolute' }} />}>
+            <Switch>
+              {routes && routes.map(route => <Route key={route.path} {...route} />)}
+              <NotFound />
+            </Switch>
+          </Suspense>
         </Scrollbar>
       </section>
       <Footer />

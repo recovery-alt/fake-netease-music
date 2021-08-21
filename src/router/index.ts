@@ -1,7 +1,6 @@
 import Layout from '@/layout';
-import FM from '@/views/fm';
-import List from '@/views/list';
 import { topMenuMap } from '@/config';
+import { lazy } from 'react';
 
 export type RouteConfig = {
   path: string;
@@ -18,11 +17,11 @@ const routes: Array<RouteConfig> = [
     routes: [
       {
         path: '/fm',
-        component: FM,
+        component: lazy(() => import('@/views/fm')),
       },
       {
         path: '/list/:id?',
-        component: List,
+        component: lazy(() => import('@/views/list')),
       },
       ...Object.values(topMenuMap).flat(),
     ],

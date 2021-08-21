@@ -25,7 +25,6 @@ const List: React.FC = () => {
       const playlistDetail = await getPlaylistDetail(id);
       setTracks(playlistDetail.playlist.tracks);
     })();
-    console.log(curPlaylist);
   }, [params]);
   const columns: Column<Track>[] = [
     { title: '', key: 'ordinal' },
