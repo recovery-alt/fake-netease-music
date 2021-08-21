@@ -10,19 +10,32 @@ import {
   CompressOutlined,
 } from '@ant-design/icons';
 import { topMenuMap, MenuConfig } from '@/config';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 
 const List: React.FC = () => {
-  const [actived, setActvied] = useState('');
+  const [actived, setActived] = useState('');
   const [topMenu, setTopMenu] = useState<Array<MenuConfig>>([]);
   const { pathname } = useLocation();
+  const { push } = useHistory();
+
+  const buttonList = [
+    {
+      icon: SettingOutlined,
+      event: () => {
+        push('/setting');
+      },
+    },
+    { icon: MailOutlined },
+    { icon: SkinOutlined },
+    { icon: CompressOutlined },
+  ];
 
   useEffect(() => {
     if (!pathname) return;
     const match = pathname.match(/(?<=\/)[\w-\d]+\b/);
     if (match?.[0]) setTopMenu(topMenuMap[match[0]] || []);
-    setActvied(pathname);
+    setActived(pathname);
   }, [pathname]);
 
   return (
@@ -35,7 +48,7 @@ const List: React.FC = () => {
         <ul className={styles['header__right-menu']}>
           {topMenu.map((item, i) => (
             <li key={i} className={classNames({ [styles['--actived']]: item.path === actived })}>
-              <Link to={item.path} onClick={() => setActvied(item.path)}>
+              <Link to={item.path} onClick={() => setActived(item.path)}>
                 {item.label}
               </Link>
             </li>
@@ -47,8 +60,8 @@ const List: React.FC = () => {
             <input type="text" placeholder="搜索" />
           </div>
           <div className={styles['header__right-icons']}>
-            {[SettingOutlined, MailOutlined, SkinOutlined, CompressOutlined].map((Icon, i) => (
-              <Icon key={i} />
+            {buttonList.map((item, i) => (
+              <item.icon key={i} onClick={item.event} />
             ))}
           </div>
         </div>

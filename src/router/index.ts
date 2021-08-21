@@ -6,6 +6,7 @@ export type RouteConfig = {
   path: string;
   component: React.FC<RouteConfig>;
   exact?: boolean;
+  redirect?: string;
   routes?: Array<RouteConfig>;
 };
 
@@ -14,6 +15,7 @@ const routes: Array<RouteConfig> = [
     path: '/',
     exact: true,
     component: Layout,
+    redirect: '/find-music',
     routes: [
       {
         path: '/fm',

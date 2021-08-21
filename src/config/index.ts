@@ -126,6 +126,13 @@ export const topMenuMap: Data<Array<MenuConfig>> = {
       path: '/collection/column',
     },
   ],
+  setting: [
+    {
+      label: '设置',
+      component: lazy(() => import('@/views/setting')),
+      path: '/setting',
+    },
+  ],
 };
 
 export const categoryList: { name: string; area: number; type: number; albumArea?: AlbumArea }[] = [

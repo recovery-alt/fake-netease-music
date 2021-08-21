@@ -1,0 +1,143 @@
+.button() {
+  background-color: #fff;
+  border: 1px solid #d9d9da;
+  border-radius: 12px;
+  cursor: pointer;
+  height: 24px;
+
+  &:hover {
+    background-color: #f1f2f2;
+  }
+}
+
+.setting {
+  padding: 20px 30px;
+
+  &__header {
+    display: flex;
+  }
+
+  &__icon {
+    display: flex;
+    margin-left: 15px;
+
+    span {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+  }
+
+  &__item {
+    border-bottom: 1px solid #f2f2f3;
+    padding: 30px 0;
+
+    &:first-child {
+      margin-top: -30px;
+    }
+  }
+
+  &__footer {
+    align-items: center;
+    display: flex;
+    margin-top: 20px;
+
+    button {
+      margin-left: 25px;
+      width: 90px;
+      .button();
+    }
+
+    a {
+      color: #606161;
+      margin-right: 15px;
+      text-decoration: underline;
+
+      &:hover {
+        color: #000;
+      }
+    }
+
+    .--red {
+      background-color: var(--primary-color);
+      border: 0;
+      color: #fff;
+      width: 105px;
+
+      &:hover {
+        background-color: var(--primary-color);
+      }
+    }
+  }
+
+  &__cache {
+    align-items: center;
+    display: flex;
+
+    > div {
+      margin: 0 12px;
+      width: 285px;
+    }
+
+    button {
+      margin-left: 26px;
+      width: 86px;
+      .button();
+    }
+  }
+
+  &__checkbox {
+    margin-top: 25px;
+
+    button {
+      margin-left: 20px;
+      margin-right: 10px;
+      .button();
+    }
+  }
+
+  &__account {
+    margin-top: 30px;
+
+    button {
+      margin-right: 10px;
+      width: 110px;
+      .button();
+
+      &:hover {
+        background-color: #f2f2f2;
+      }
+    }
+  }
+
+  &__sub {
+    color: #bfbfc0;
+  }
+
+  &__label {
+    margin-bottom: 8px;
+    margin-top: 25px;
+  }
+
+  &__shortcuts {
+    align-items: center;
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 15px;
+
+    > div {
+      flex: 0 0 205px;
+
+      &:first-child {
+        flex: 0 0 118px;
+      }
+    }
+
+    input {
+      border: 1px solid #e0e0e1;
+      border-radius: 4px;
+      height: 30px;
+      outline: none;
+    }
+  }
+}

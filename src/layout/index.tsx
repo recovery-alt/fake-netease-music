@@ -1,6 +1,6 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import type { RouteConfig } from '@/router';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import './layout.less';
 import Sidebar from './sidebar';
 import Header from './header';
@@ -12,6 +12,13 @@ import { Spin } from 'antd';
 type Props = { routes?: Array<RouteConfig> };
 
 const Layout: React.FC<Props> = ({ routes }) => {
+  const { push } = useHistory();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname === '/') push('/find-music');
+  }, []);
+
   return (
     <>
       <Header />

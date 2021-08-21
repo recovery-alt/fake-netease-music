@@ -74,12 +74,7 @@ const List: React.FC = () => {
   useEffect(() => {
     (async () => {
       const index = findIndex();
-      if (index) {
-        setSelected(index);
-      } else {
-        setSelected([0, 0]);
-        history.push('/find-music');
-      }
+      if (index) setSelected(index);
       recoverLoginFromCache();
     })();
   }, [pathname]);
