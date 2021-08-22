@@ -27,8 +27,9 @@ export type Song = {
   name: string;
   duration: number;
   album: Album;
+  url: string;
 };
-export const getSongUrl = (id: number | string) => get<Song>('/song/url', { id });
+export const getSongUrl = (id: number) => get<{ data: Song[] }>('/song/url', { id });
 
 export type Lyric = { lrc: { lyric: string } };
 export const getLyric = (id: number | string) => get<Lyric>('/lyric', { id });
@@ -106,7 +107,7 @@ export type Track = {
   name: string;
   id: number;
   dt: number;
-  al: { name: string };
+  al: { name: string; picUrl: string };
   ar: { name: string }[];
 };
 export type PlaylistDetail = { name: string; coverImgUrl: string; tracks: Track[] };

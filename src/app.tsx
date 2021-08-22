@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import routes from '@/router';
 import { Provider } from 'react-redux';
 import store from '@/store';
+import { IconConfigProvider } from '@ricons/utils';
 
 const App: React.FC = () => (
   <Provider store={store}>

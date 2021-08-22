@@ -8,6 +8,7 @@ module.exports = {
       selectorBlackList: [],
       minPixelValue: 1,
       mediaQuery: false,
+      exclude: /node_modules/,
     },
   },
 };

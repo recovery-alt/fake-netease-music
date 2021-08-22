@@ -75,9 +75,12 @@ const List: React.FC = () => {
     (async () => {
       const index = findIndex();
       if (index) setSelected(index);
-      recoverLoginFromCache();
     })();
   }, [pathname]);
+
+  useEffect(() => {
+    recoverLoginFromCache();
+  }, []);
 
   useEffect(() => {
     const payload: MenuItem[] = [
@@ -159,7 +162,7 @@ const List: React.FC = () => {
           <>
             <div className={styles['sidebar__title-left']}>
               <CaretDownOutlined />
-              <a>{item.title}</a>
+              <strong>{item.title}</strong>
             </div>
             {item.title === '创建的歌单' && (
               <PlusOutlined className={styles['sidebar__title-right']} />

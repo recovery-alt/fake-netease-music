@@ -10,12 +10,16 @@ import { LikeFilled } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import dayjs from 'dayjs';
-import { wrapNumber } from '@/utils';
+import { wrapNumber, formatMS } from '@/utils';
 import { getPlaylistDetail, Track } from '@/api';
+import { setCurrentTrack, setSong } from '@/reducer';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/store';
 
 const List: React.FC = () => {
   const params = useParams<{ id: string }>();
   const [tracks, setTracks] = useState<Track[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const id = Number(params.id);
@@ -40,9 +44,7 @@ const List: React.FC = () => {
     {
       title: '时长',
       key: 'dt',
-      format(val) {
-        return dayjs(val).format('mm:ss');
-      },
+      format: formatMS,
     },
   ];
   const profile = useSelector((state: RootState) => state.user.profile);
@@ -50,14 +52,18 @@ const List: React.FC = () => {
 
   const curPlaylist = useMemo(
     () => playList.find(item => item.id === Number(params.id)),
-    [playList]
+    [playList, params]
   );
+
+  const handleTableDoubleClick = (current: number) => {
+    dispatch(setCurrentTrack({ current, tracks }));
+  };
 
   return (
     <div className="list">
       <header className="list__header">
         {params.id ? (
-          <img className="list__img" src={profile.avatarUrl} alt="avatar" />
+          <img className="list__img" src={curPlaylist?.coverImgUrl} alt="avatar" />
         ) : (
           <LikeFilled className="list__img" />
         )}
@@ -110,7 +116,7 @@ const List: React.FC = () => {
         </div>
       </header>
       <Tab />
-      <Table columns={columns} data={tracks} />
+      <Table columns={columns} data={tracks} doubleClick={handleTableDoubleClick} />
     </div>
   );
 };

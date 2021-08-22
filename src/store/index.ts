@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer, userPlaylistReducer } from '@/reducer';
+import { userReducer, userPlaylistReducer, currentTrackReducer } from '@/reducer';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     userPlaylist: userPlaylistReducer,
+    currentTrack: currentTrackReducer,
   },
 });
 

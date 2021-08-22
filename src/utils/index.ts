@@ -1,5 +1,6 @@
 import json from 'json5';
 import { Data } from '@/types';
+import dayjs from 'dayjs';
 
 // 封装localStorage，可设置过期事件
 export const local = {
@@ -47,3 +48,5 @@ export const wrapNumber = (num?: number) => {
 
 // eslint-disable-next-line
 export const noop = () => {};
+
+export const formatMS = (timestamp: number | string) => dayjs(timestamp).format('mm:ss');

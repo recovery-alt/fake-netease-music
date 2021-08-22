@@ -15,9 +15,10 @@ export type Column<T = Data> = {
 type Props = {
   columns: Column<any>[];
   data: Data[];
+  doubleClick?: (index: number) => void;
 };
 
-const Table: React.FC<Props> = ({ columns, data }) => {
+const Table: React.FC<Props> = ({ columns, data, doubleClick }) => {
   return (
     <>
       <table className={styles.table}>
@@ -32,7 +33,7 @@ const Table: React.FC<Props> = ({ columns, data }) => {
         <tbody>
           {data.length > 0
             ? data.map((item, i) => (
-                <tr key={i}>
+                <tr key={i} onDoubleClick={() => doubleClick?.(i)}>
                   {columns.map((column, j) => {
                     let text;
                     if (column.render) {

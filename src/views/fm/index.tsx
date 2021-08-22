@@ -17,8 +17,7 @@ const FM: React.FC = () => {
 
   useEffect(() => {
     getPersonalFM().then(res => {
-      const { data } = res;
-      setMusicList(data);
+      setMusicList(res.data);
     });
   }, []);
 

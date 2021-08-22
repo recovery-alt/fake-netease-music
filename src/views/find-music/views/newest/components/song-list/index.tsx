@@ -2,7 +2,7 @@ import React from 'react';
 import { PlayCircleFilled, PlaySquareOutlined } from '@ant-design/icons';
 import styles from './list.module.less';
 import { Song } from '@/api';
-import dayjs from 'dayjs';
+import { formatMS } from '@/utils';
 import Img from '@/components/img';
 
 type Props = { data: Song[] };
@@ -28,9 +28,7 @@ const SongList: React.FC<Props> = ({ data }) => (
             {item.album.artists.reduce((acc, val) => `${acc}/${val.name}`, '').slice(1)}
           </div>
           <div className={styles['song-list__album']}>{item.album.name}</div>
-          <div className={styles['song-list__duration']}>
-            {dayjs(item.duration).format('mm:ss')}
-          </div>
+          <div className={styles['song-list__duration']}>{formatMS(item.duration)}</div>
         </div>
       </div>
     ))}
