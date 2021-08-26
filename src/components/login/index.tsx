@@ -32,8 +32,6 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
       dispatch(setUserPlaylist(userId));
       setShowLogin(false);
       message.success('登录成功～');
-    } else {
-      message.error('登录失败～');
     }
   };
 

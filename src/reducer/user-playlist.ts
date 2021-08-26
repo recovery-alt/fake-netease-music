@@ -1,6 +1,7 @@
 import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { getUserPlaylist, UserPlaylist } from '@/api';
 import { to } from '@/utils';
+import { message } from 'antd';
 
 export const setUserPlaylist = createAsyncThunk<{ playlist: UserPlaylist[] }, number>(
   'userPlaylist/set',
@@ -24,6 +25,11 @@ export const userPlaylistReducer = createReducer<{ playlist: UserPlaylist[] }>(
   builder => {
     builder.addCase(setUserPlaylist.fulfilled, (state, action) => {
       return { ...state, ...action.payload };
+    });
+
+    builder.addCase(setUserPlaylist.rejected, state => {
+      message.error('获取歌单列表失败，请稍后重试～');
+      return state;
     });
   }
 );

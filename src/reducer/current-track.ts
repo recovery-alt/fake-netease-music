@@ -2,6 +2,7 @@ import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { Track, Song, getSongUrl } from '@/api';
 import { to } from '@/utils';
 import { PlayMode } from '@/enum';
+import { message } from 'antd';
 
 type CurrentTrack = { current: number; tracks: Track[]; song?: Song };
 
@@ -14,6 +15,10 @@ export const setSong = createAsyncThunk<Song, number>(
     const { code, data } = res;
 
     if (code === 200) {
+      if (data.length === 0 || !data[0].url) {
+        message.error('应合作方要求，该资源暂时下架>_<');
+        return rejectWithValue(null);
+      }
       return data[0];
     } else {
       return rejectWithValue(null);
@@ -33,6 +38,10 @@ export const currentTrackReducer = createReducer<CurrentTrack>(
 
     builder.addCase(setSong.fulfilled, (state, action) => {
       return { ...state, song: action.payload };
+    });
+
+    builder.addCase(setSong.rejected, state => {
+      return state;
     });
 
     builder.addCase(changeSong, (state, action) => {

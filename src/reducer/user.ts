@@ -2,6 +2,7 @@ import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { loginCellphone, UserInfo } from '@/api';
 import avatarUrl from '@/assets/img/avatar.svg';
 import { to } from '@/utils';
+import { message } from 'antd';
 
 export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password: string }>(
   'userInfo/set',
@@ -25,6 +26,10 @@ export const userReducer = createReducer<UserInfo>(
   builder => {
     builder.addCase(setUserInfo.fulfilled, (state, action) => {
       return { ...state, ...action.payload };
+    });
+    builder.addCase(setUserInfo.rejected, state => {
+      message.error('登录失败，请稍后重试～');
+      return state;
     });
     builder.addCase(setUserInfoFromCache, (state, action) => {
       return { ...state, ...action.payload };
