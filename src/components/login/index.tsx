@@ -1,6 +1,6 @@
 import React, { useState, MouseEventHandler } from 'react';
 import styles from './login.module.less';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import { CloseOutlined } from '@ant-design/icons';
 import login from '@/assets/img/login.svg';
 import { message } from 'antd';
@@ -35,7 +35,7 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
     }
   };
 
-  return ReactDOM.createPortal(
+  return createPortal(
     <div className={styles.login__mask}>
       <div className={styles.login}>
         <CloseOutlined onClick={hideLogin} />

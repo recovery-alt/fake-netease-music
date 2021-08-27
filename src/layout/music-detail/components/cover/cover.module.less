@@ -1,0 +1,30 @@
+.cover {
+  align-items: center;
+  background-image: url('/src/assets/img/album.png');
+  background-size: cover;
+  border-radius: 50%;
+  display: flex;
+  height: 330px;
+  justify-content: center;
+  width: 330px;
+
+  &__inner {
+    border-radius: 50%;
+    height: 220px;
+    width: 220px;
+
+    &.--animate {
+      animation: rotate 50s infinite linear;
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

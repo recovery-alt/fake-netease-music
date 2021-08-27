@@ -13,10 +13,11 @@ import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@/store';
 import { formatMS } from '@/utils';
-import { useCurrentTime, usePause, usePlayMode } from './hooks';
+import { useCurrentTime, useMusicDetail, usePause, usePlayMode } from './hooks';
 import { changeSong, setSong } from '@/reducer';
 import { Tooltip } from 'antd';
 import { PlayMode } from '@/enum';
+import MusicDetail from '../music-detail';
 
 const List: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -43,6 +44,8 @@ const List: React.FC = () => {
   );
 
   const { playMode, handleIconClick, currentPlayMode } = usePlayMode();
+
+  const { showDetail, setShowDetail } = useMusicDetail();
 
   const handlePlayEnded = () => {
     if (playMode === PlayMode.SOLO) return;
@@ -83,7 +86,11 @@ const List: React.FC = () => {
               onPause={() => setPause(true)}
               onEnded={handlePlayEnded}
             />
-            <img src={currentTrack.al.picUrl} alt="music" />
+            <img
+              src={currentTrack.al.picUrl}
+              alt="music"
+              onClick={() => setShowDetail(!showDetail)}
+            />
             <div className={styles['footer__left-name']}>
               <div>
                 {currentTrack.name} -{' '}
@@ -121,6 +128,7 @@ const List: React.FC = () => {
         <span>词</span>
         <SoundOutlined />
       </div>
+      <MusicDetail visible={showDetail} />
     </footer>
   );
 };

@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import App from './app';
 import '@/assets/style/main.less';
 
-ReactDOM.render(
+render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,

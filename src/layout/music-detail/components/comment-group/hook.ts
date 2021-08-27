@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { getCommentMusic, Music } from '@/api';
 import { Comment } from '@/api';
 
-export const useMusicComment = (current: Music) => {
+export const useMusicComment = (current?: Music) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [hotComments, setHotComments] = useState<Comment[]>([]);
   const [total, setTotal] = useState(0);
 
-  function loadCommentMusic(id: string | number, current = 1, pageSize = 20) {
+  function loadCommentMusic(id?: number, current = 1, pageSize = 20) {
+    if (!id) return;
     const offset = (current - 1) * pageSize;
     getCommentMusic(id, offset).then(res => {
       setComments(res.comments);
@@ -18,7 +19,7 @@ export const useMusicComment = (current: Music) => {
 
   useEffect(() => {
     current?.id && loadCommentMusic(current.id);
-  }, [current]);
+  }, [current?.id]);
 
   return { comments, hotComments, total, loadCommentMusic };
 };

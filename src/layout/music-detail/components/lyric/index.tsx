@@ -26,7 +26,7 @@ const Lyric: React.FC<Props> = ({ music }) => {
       const { lrc } = res;
       setLyrics(transLyric2Arr(lrc.lyric));
     });
-  }, [music]);
+  }, [music?.id]);
   return (
     <div className={styles.lyric}>
       <h2>

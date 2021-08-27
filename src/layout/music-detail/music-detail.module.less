@@ -1,0 +1,75 @@
+.music-detail {
+  animation: fold 0.1s ease;
+  background-color: #f8f7f8;
+  bottom: 60px;
+  left: 0;
+  overflow: auto;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  transform: translateY(100%);
+  transition: transform 0.1s ease-in-out;
+  z-index: 3;
+
+  &__shim {
+    background-color: #f8f7f8;
+    content: '';
+    display: block;
+    height: 50px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 670px;
+    z-index: 1;
+  }
+
+  &.--show {
+    transform: translateY(0);
+  }
+
+  &__player {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-left: 110px;
+    padding-right: 130px;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    padding: 60px 55px;
+  }
+
+  &__comment {
+    width: 600px;
+  }
+
+  &__recommend {
+    margin-left: 40px;
+    width: 275px;
+  }
+
+  &__item {
+    display: flex;
+    padding: 5px;
+    width: 270px;
+
+    &-info {
+      margin-left: 10px;
+
+      div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &__img {
+    border-radius: 4px;
+    flex-shrink: 0;
+    height: 50px;
+    width: 50px;
+  }
+}

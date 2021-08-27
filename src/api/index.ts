@@ -35,8 +35,9 @@ export type Lyric = { lrc: { lyric: string } };
 export const getLyric = (id: number | string) => get<Lyric>('/lyric', { id });
 
 export type Music = {
-  id: string;
+  id: number;
   name: string;
+  duration: number;
   album: Album;
   artists: Array<{ name: string }>;
 };
@@ -107,7 +108,7 @@ export type Track = {
   name: string;
   id: number;
   dt: number;
-  al: { name: string; picUrl: string };
+  al: Album;
   ar: { name: string }[];
 };
 export type PlaylistDetail = { name: string; coverImgUrl: string; tracks: Track[] };

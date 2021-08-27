@@ -44,7 +44,7 @@ export const useCurrentTime = (
 
   const handleTimeUpdate = throttle(() => {
     getCurrentTime();
-  }, 1000);
+  }, 60);
 
   return { currentTime, setCurrentTime, handleTimeUpdate, handleProgressClick };
 };
@@ -54,7 +54,7 @@ export const usePlayMode = () => {
   const playModeList = [
     { key: 'inTurn', tip: '顺序播放', icon: DoubleRightOutlined },
     { key: 'loop', tip: '循环播放', icon: RetweetOutlined },
-    { key: 'solo', ip: '单曲循环', icon: RollbackOutlined },
+    { key: 'solo', tip: '单曲循环', icon: RollbackOutlined },
     { key: 'random', tip: '随机播放', icon: EnterOutlined },
   ];
 
@@ -66,4 +66,10 @@ export const usePlayMode = () => {
   };
 
   return { playMode, handleIconClick, currentPlayMode };
+};
+
+export const useMusicDetail = () => {
+  const [showDetail, setShowDetail] = useState(false);
+
+  return { showDetail, setShowDetail };
 };
