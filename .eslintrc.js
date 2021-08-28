@@ -4,7 +4,7 @@ module.exports = {
   parserOptions: { ecmaVersion: 2020, parser: '@typescript-eslint/parser' },
   extends: [
     'eslint:recommended',
-    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'plugin:prettier/recommended',

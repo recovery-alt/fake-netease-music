@@ -1,8 +1,9 @@
 .img {
-  align-items: center;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
+  position: relative;
+
+  img {
+    object-fit: cover;
+  }
 
   &__play {
     background-color: var(--primary-color);
@@ -10,5 +11,18 @@
     color: #fff;
     cursor: pointer;
     font-size: 16px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__loading {
+    font-size: 20px;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    position: absolute;
+    top: 50%;
   }
 }

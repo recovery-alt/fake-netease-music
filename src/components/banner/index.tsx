@@ -34,6 +34,7 @@ const Banner: React.FC<Props> = ({ data }) => {
         <Img
           src={item.imageUrl}
           key={item.imageUrl}
+          banLoading
           className={classNames(styles.banner__item, getState(i))}
         />
       ))}

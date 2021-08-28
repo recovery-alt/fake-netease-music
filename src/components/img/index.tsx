@@ -1,27 +1,37 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styles from './img.module.less';
 import classNames from 'classnames';
 import { AppProps } from '@/types';
-import { PlayCircleFilled } from '@ant-design/icons';
+import { PlayCircleFilled, LoadingOutlined } from '@ant-design/icons';
 
 interface Props extends AppProps {
   src: string;
   icon?: boolean;
+  alt?: string;
+  banLoading?: boolean;
 }
 
-const Img: React.FC<Props> = ({ style, className, src, icon = false }) => {
+const Img: React.FC<Props> = ({
+  alt = '',
+  banLoading = false,
+  style,
+  className,
+  src,
+  icon = false,
+}) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const target = entry.target as HTMLDataElement;
-        const img = target.dataset.img;
-        if (!img) return;
-        target.style.backgroundImage = img;
-      }
+      if (entry.isIntersecting && ref && ref.current?.style) setVisible(true);
     });
   });
+
+  function handleOnload() {
+    setLoading(false);
+  }
 
   useEffect(() => {
     if (!ref.current) return;
@@ -35,13 +45,10 @@ const Img: React.FC<Props> = ({ style, className, src, icon = false }) => {
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className={classNames(styles.img, className)}
-      style={style}
-      data-img={`url(${src})`}
-    >
-      {icon && <PlayCircleFilled className={styles.img__play} />}
+    <div ref={ref} className={classNames(styles.img)} style={style}>
+      {visible && <img className={className} src={src} alt={alt} onLoad={handleOnload} />}
+      {!banLoading && loading && <LoadingOutlined className={styles.img__loading} />}
+      {!loading && icon && <PlayCircleFilled className={styles.img__play} />}
     </div>
   );
 };
