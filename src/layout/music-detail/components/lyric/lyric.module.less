@@ -8,6 +8,14 @@
     font-size: 20px;
   }
 
+  &__music-name {
+    display: inline-block;
+    max-width: 330px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   &__quality {
     border: 1px solid var(--primary-color);
     border-radius: 4px;
@@ -15,6 +23,7 @@
     cursor: pointer;
     font-size: 14px;
     font-weight: normal;
+    line-height: 1;
     margin-left: 20px;
     padding: 4px;
   }

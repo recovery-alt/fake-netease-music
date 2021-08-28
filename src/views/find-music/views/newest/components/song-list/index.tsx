@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlayCircleFilled, PlaySquareOutlined } from '@ant-design/icons';
+import { PlaySquareOutlined } from '@ant-design/icons';
 import styles from './list.module.less';
 import { Song } from '@/api';
 import { formatMS } from '@/utils';
@@ -14,8 +14,7 @@ const SongList: React.FC<Props> = ({ data }) => (
         <div className={styles['song-list__left']}>
           <div className={styles['song-list__ordinal']}>{i + 1}</div>
           <div className={styles['song-list__img-wrapper']}>
-            <Img className={styles['song-list__img']} src={item.album.picUrl} />
-            <PlayCircleFilled />
+            <Img className={styles['song-list__img']} src={item.album.picUrl} icon />
           </div>
           <div className={styles['song-list__song']}>
             <p>{item.name}</p>

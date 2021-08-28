@@ -30,7 +30,7 @@ const Lyric: React.FC<Props> = ({ music }) => {
   return (
     <div className={styles.lyric}>
       <h2>
-        <span>{music?.name}</span>
+        <span className={styles['lyric__music-name']}>{music?.name}</span>
         <span className={styles.lyric__quality}>标准音质</span>
       </h2>
       <div className={styles.lyric__info}>

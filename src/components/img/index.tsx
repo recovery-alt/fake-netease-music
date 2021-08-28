@@ -2,12 +2,14 @@ import React, { useRef, useEffect } from 'react';
 import styles from './img.module.less';
 import classNames from 'classnames';
 import { AppProps } from '@/types';
+import { CaretRightFilled, PlayCircleFilled } from '@ant-design/icons';
 
 interface Props extends AppProps {
   src: string;
+  icon?: boolean;
 }
 
-const Img: React.FC<Props> = ({ style, className, src }) => {
+const Img: React.FC<Props> = ({ style, className, src, icon = false }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const io = new IntersectionObserver(entries => {
@@ -38,7 +40,9 @@ const Img: React.FC<Props> = ({ style, className, src }) => {
       className={classNames(styles.img, className)}
       style={style}
       data-img={`url(${src})`}
-    />
+    >
+      {icon && <PlayCircleFilled className={styles.img__play} />}
+    </div>
   );
 };
 

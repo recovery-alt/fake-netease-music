@@ -60,7 +60,7 @@ export const getCommentMusic = (id: number | string, offset = 0) =>
     offset,
   });
 
-export type Playlist = { name: string; id: number };
+export type Playlist = { name: string; id: number; playCount: number; coverImgUrl: string };
 export const getMusicCategory = () => get<{ tags: Playlist[] }>('/playlist/hot');
 
 export type Subcategory = { category: number; name: string; hot: boolean };
@@ -185,3 +185,8 @@ export type MVSublist = {
   playTime: number;
 };
 export const getMVSublist = () => get<{ data: MVSublist[] }>('/mv/sublist');
+
+export const getSimiPlaylist = (id: number) =>
+  get<{ playlists: Playlist[] }>('/simi/playlist', { id });
+
+export const getSimiSong = (id: number) => get<{ songs: Music[] }>('/simi/song', { id });

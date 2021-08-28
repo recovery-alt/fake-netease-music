@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './music-detail.module.less';
 import classNames from 'classnames';
@@ -7,14 +7,14 @@ import ButtonGroup from './components/button-group';
 import Lyric from './components/lyric';
 import CommentGroup from './components/comment-group';
 import { Music, Track } from '@/api';
-import Img from '@/components/img';
-import avatar from '@/assets/img/avatar.svg';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import { VerticalAlignMiddleOutlined } from '@ant-design/icons';
+import Recommend from './components/recommend';
 
-type Props = { visible: boolean };
+type Props = { visible: boolean; setVisible: (visible: boolean) => void };
 
-const MusicDetail: React.FC<Props> = ({ visible }) => {
+const MusicDetail: React.FC<Props> = ({ visible, setVisible }) => {
   const currentMusic = useSelector((state: RootState) => {
     const { current, tracks } = state.currentTrack;
     if (current < 0) return;
@@ -27,50 +27,30 @@ const MusicDetail: React.FC<Props> = ({ visible }) => {
     return { id, name, duration, album, artists };
   }
 
-  const dom = document.getElementById('popup')!;
   return createPortal(
     <>
-      {visible && <div className={styles['music-detail__shim']}></div>}
-      <div className={classNames(styles['music-detail'], { [styles['--show']]: visible })}>
-        <section className={styles['music-detail__player']}>
-          <div>
-            {currentMusic && <Cover img={currentMusic.album.picUrl} pause={false} />}
-            <ButtonGroup />
-          </div>
-          {currentMusic && <Lyric music={currentMusic} />}
-        </section>
-        <div className={styles['music-detail__info']}>
-          {currentMusic && <CommentGroup currentMusic={currentMusic} />}
-          <div className={styles['music-detail__recommend']}>
-            <h2 className="fm__title">包含这首歌的歌单</h2>
-            {Array(3)
-              .fill(0)
-              .map((item, i) => (
-                <div key={i} className={styles['music-detail__item']}>
-                  <Img className={styles['music-detail__img']} src={avatar} />
-                  <div className={styles['music-detail__item-info']}>
-                    <div>只要能遇到你，就不怕姗姗来迟</div>
-                    <div>李宗盛 林忆莲</div>
-                  </div>
-                </div>
-              ))}
-            <h2 className="fm__title">相似歌曲</h2>
-            {Array(5)
-              .fill(0)
-              .map((item, i) => (
-                <div key={i} className={styles['music-detail__item']}>
-                  <Img className={styles['music-detail__img']} src={avatar} />
-                  <div className={styles['music-detail__item-info']}>
-                    <div>只要能遇到你，就不怕姗姗来迟</div>
-                    <div>李宗盛 林忆莲</div>
-                  </div>
-                </div>
-              ))}
+      {visible && (
+        <div className={styles['music-detail__shim']}>
+          <VerticalAlignMiddleOutlined onClick={() => setVisible(false)} />
+        </div>
+      )}
+      {currentMusic && (
+        <div className={classNames(styles['music-detail'], { [styles['--show']]: visible })}>
+          <section className={styles['music-detail__player']}>
+            <div>
+              <Cover img={currentMusic.album.picUrl} pause={false} />
+              <ButtonGroup />
+            </div>
+            <Lyric music={currentMusic} />
+          </section>
+          <div className={styles['music-detail__info']}>
+            <CommentGroup currentMusic={currentMusic} />
+            <Recommend id={currentMusic.id} />
           </div>
         </div>
-      </div>
+      )}
     </>,
-    dom
+    document.getElementById('popup')!
   );
 };
 

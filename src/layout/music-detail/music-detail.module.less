@@ -17,10 +17,16 @@
     display: block;
     height: 50px;
     left: 0;
+    line-height: 50px;
     position: fixed;
     top: 0;
     width: 670px;
     z-index: 1;
+
+    span {
+      font-size: 18px;
+      margin-left: 20px;
+    }
   }
 
   &.--show {
@@ -43,33 +49,5 @@
 
   &__comment {
     width: 600px;
-  }
-
-  &__recommend {
-    margin-left: 40px;
-    width: 275px;
-  }
-
-  &__item {
-    display: flex;
-    padding: 5px;
-    width: 270px;
-
-    &-info {
-      margin-left: 10px;
-
-      div {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-    }
-  }
-
-  &__img {
-    border-radius: 4px;
-    flex-shrink: 0;
-    height: 50px;
-    width: 50px;
   }
 }

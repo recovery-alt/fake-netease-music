@@ -1,0 +1,40 @@
+.recommend {
+  margin-left: 40px;
+  width: 275px;
+
+  &__title {
+    font-size: 16px;
+    margin-top: 40px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__item {
+    display: flex;
+    padding: 5px;
+    width: 270px;
+
+    &:hover {
+      background-color: #edecee;
+    }
+
+    &-info {
+      margin-left: 10px;
+
+      div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &__img {
+    border-radius: 4px;
+    flex-shrink: 0;
+    height: 50px;
+    width: 50px;
+  }
+}

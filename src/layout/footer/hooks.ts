@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, RefObject, MouseEventHandler } from 'react';
-import { PlayCircleFilled, PauseOutlined } from '@ant-design/icons';
+import { PlayCircleFilled, PauseCircleFilled } from '@ant-design/icons';
 import { throttle } from 'lodash';
 import {
   RetweetOutlined,
@@ -11,7 +11,7 @@ import { PlayMode } from '@/enum';
 
 export const usePause = (audio?: RefObject<HTMLAudioElement>) => {
   const [pause, setPause] = useState(false);
-  const PlayIcon = useMemo(() => (pause ? PlayCircleFilled : PauseOutlined), [pause]);
+  const PlayIcon = useMemo(() => (pause ? PlayCircleFilled : PauseCircleFilled), [pause]);
 
   useEffect(() => {
     if (!audio?.current) return;

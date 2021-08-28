@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import styles from './footer.module.less';
 import {
   HeartOutlined,
-  VerticalRightOutlined,
-  VerticalLeftOutlined,
+  StepBackwardOutlined,
+  StepForwardOutlined,
   DeleteOutlined,
   ControlOutlined,
   UnorderedListOutlined,
@@ -105,16 +105,16 @@ const List: React.FC = () => {
       </div>
       <div className={styles.footer__mid}>
         <HeartOutlined />
-        <VerticalRightOutlined
-          className={styles['--red']}
+        <StepBackwardOutlined
+          className={classNames(styles['--medium'], styles['--red'])}
           onClick={() => dispatch(changeSong({ mode: playMode, next: false }))}
         />
         <PlayIcon
           className={classNames(styles['--big'], styles['--red'])}
           onClick={() => setPause(!pause)}
         />
-        <VerticalLeftOutlined
-          className={styles['--red']}
+        <StepForwardOutlined
+          className={classNames(styles['--medium'], styles['--red'])}
           onClick={() => dispatch(changeSong({ mode: playMode, next: true }))}
         />
         <DeleteOutlined />
@@ -128,7 +128,7 @@ const List: React.FC = () => {
         <span>词</span>
         <SoundOutlined />
       </div>
-      <MusicDetail visible={showDetail} />
+      <MusicDetail visible={showDetail} setVisible={setShowDetail} />
     </footer>
   );
 };
