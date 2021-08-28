@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect, RefObject, MouseEventHandler, useRef } from 'react';
 import { PlayCircleFilled, PauseCircleFilled } from '@ant-design/icons';
-import { throttle } from 'lodash';
 import {
   RetweetOutlined,
   DoubleRightOutlined,
@@ -27,7 +26,7 @@ export const useCurrentTime = (
   duration?: number
 ) => {
   const [currentTime, setCurrentTime] = useState(0);
-  const getCurrentTime = () => {
+  const handleTimeUpdate = () => {
     if (!audioRef?.current) return;
     setCurrentTime(audioRef.current.currentTime * 1000);
   };
@@ -41,10 +40,6 @@ export const useCurrentTime = (
     audioRef.current.currentTime = currentTime;
     setCurrentTime(currentTime);
   };
-
-  const handleTimeUpdate = throttle(() => {
-    getCurrentTime();
-  }, 60);
 
   return { currentTime, setCurrentTime, handleTimeUpdate, handleProgressClick };
 };

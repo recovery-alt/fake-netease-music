@@ -60,7 +60,14 @@ const MusicList: React.FC<Props> = ({ visible, setVisible, target }) => {
           </div>
         </div>
       </header>
-      <Table noHead data={currentTrack.tracks} columns={columns} doubleClick={handleDoubleClick} />
+      <section className={styles['music-list__subtitle-table']}>
+        <Table
+          noHead
+          data={currentTrack.tracks}
+          columns={columns}
+          doubleClick={handleDoubleClick}
+        />
+      </section>
     </div>,
     document.getElementById('music-list')!
   );

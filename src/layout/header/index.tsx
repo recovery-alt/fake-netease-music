@@ -17,7 +17,7 @@ const List: React.FC = () => {
   const [actived, setActived] = useState('');
   const [topMenu, setTopMenu] = useState<Array<MenuConfig>>([]);
   const { pathname } = useLocation();
-  const { push } = useHistory();
+  const { go, push } = useHistory();
 
   const buttonList = [
     {
@@ -38,11 +38,21 @@ const List: React.FC = () => {
     setActived(pathname);
   }, [pathname]);
 
+  function handleHistoryChange(next = false) {
+    go(next ? 1 : -1);
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.header__left}>
-        <LeftOutlined className={styles['header__left-icon']} />
-        <RightOutlined className={styles['header__left-icon']} />
+        <LeftOutlined
+          className={styles['header__left-icon']}
+          onClick={() => handleHistoryChange()}
+        />
+        <RightOutlined
+          className={styles['header__left-icon']}
+          onClick={() => handleHistoryChange(true)}
+        />
       </div>
       <div className={styles.header__right}>
         <ul className={styles['header__right-menu']}>
