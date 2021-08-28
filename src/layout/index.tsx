@@ -8,6 +8,7 @@ import Footer from './footer';
 import NotFound from './not-found';
 import Scrollbar from '@/components/scrollbar';
 import { Spin } from 'antd';
+import { clearRequests } from '@/api/api';
 
 type Props = { routes?: Array<RouteConfig> };
 
@@ -17,7 +18,8 @@ const Layout: React.FC<Props> = ({ routes }) => {
 
   useEffect(() => {
     if (pathname === '/') push('/find-music');
-  }, []);
+    clearRequests();
+  }, [pathname]);
 
   return (
     <>
