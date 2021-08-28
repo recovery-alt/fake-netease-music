@@ -13,17 +13,27 @@
     font-weight: normal;
   }
 
-  tbody tr {
-    &:nth-child(2n + 1) {
-      background-color: #fafafb;
+  tbody {
+    tr {
+      &:nth-child(2n + 1) {
+        background-color: #fafafb;
+      }
+
+      &:hover {
+        background-color: #f2f2f3;
+      }
     }
 
-    &:hover {
-      background-color: #f2f2f3;
+    .--active {
+      color: var(--primary-color);
     }
   }
 
   th:hover {
     background-color: #f2f2f3;
+  }
+
+  &__cell {
+    padding: 0 10px;
   }
 }

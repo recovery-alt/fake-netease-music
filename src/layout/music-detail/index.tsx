@@ -50,7 +50,7 @@ const MusicDetail: React.FC<Props> = ({ visible, setVisible }) => {
         </div>
       )}
     </>,
-    document.getElementById('popup')!
+    document.getElementById('music-detail')!
   );
 };
 

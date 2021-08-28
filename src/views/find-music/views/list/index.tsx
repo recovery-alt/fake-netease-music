@@ -12,6 +12,7 @@ const List: React.FC = () => {
   const [musicCategory, setMusicCategory] = useState<Playlist[]>([]);
   const { topPlaylist, total, current, setCurrent, loadTopPlaylist } = useTopPlaylist();
   const [showPopover, setShowPopover] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     getMusicCategory().then(res => {
@@ -19,13 +20,13 @@ const List: React.FC = () => {
     });
   }, []);
 
-  const Popover: React.FC = () => {
+  const Popover: React.FC<{ button: HTMLButtonElement | null }> = ({ button }) => {
     type MusicCategoryType = { name: string; data: Subcategory[] };
     const [allMusicCategory, setAllMusicCategory] = useState<MusicCategoryType[]>([]);
     const ref = useRef<HTMLDivElement>(null);
 
-    useClickAway(ref, () => {
-      setShowPopover(false);
+    useClickAway(ref, e => {
+      if (e.target !== button) setShowPopover(false);
     });
 
     useEffect(() => {
@@ -85,8 +86,8 @@ const List: React.FC = () => {
         </div>
       </header>
       <section className="music-list__guide">
-        {showPopover && <Popover />}
-        <button onClick={() => setShowPopover(true)}>
+        {showPopover && <Popover button={buttonRef.current} />}
+        <button ref={buttonRef} onClick={() => setShowPopover(!showPopover)}>
           全部歌单
           <RightOutlined />
         </button>

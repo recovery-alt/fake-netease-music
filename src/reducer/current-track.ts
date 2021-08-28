@@ -28,6 +28,8 @@ export const setSong = createAsyncThunk<Song, number>(
 export const changeSong =
   createAction<{ next: boolean; mode: PlayMode }>('currentTrack/changeSong');
 
+export const changeCurrent = createAction<number>('currentTrack/changeCurrent');
+
 export const currentTrackReducer = createReducer<CurrentTrack>(
   { current: -1, tracks: [] },
   builder => {
@@ -59,6 +61,12 @@ export const currentTrackReducer = createReducer<CurrentTrack>(
       }
       const newState = { ...state };
       newState.current = index;
+      return newState;
+    });
+
+    builder.addCase(changeCurrent, (state, action) => {
+      const newState = { ...state };
+      newState.current = action.payload;
       return newState;
     });
   }

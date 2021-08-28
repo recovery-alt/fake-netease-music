@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './table.module.less';
 import { Data } from '@/types';
 import NoData from '../no-data';
 import { get } from 'lodash';
+import classNames from 'classnames';
 
 export type Column<T = Data> = {
   width?: number;
@@ -15,25 +16,41 @@ export type Column<T = Data> = {
 type Props = {
   columns: Column<any>[];
   data: Data[];
+  noHead?: boolean;
   doubleClick?: (index: number) => void;
 };
 
-const Table: React.FC<Props> = ({ columns, data, doubleClick }) => {
+const Table: React.FC<Props> = ({ columns, data, noHead = false, doubleClick }) => {
+  const [selected, setSelected] = useState(-1);
+
+  const handleDoubleClick = (index: number) => {
+    setSelected(index);
+    doubleClick?.(index);
+  };
+
   return (
     <>
       <table className={styles.table}>
         <colgroup></colgroup>
-        <thead>
-          <tr>
-            {columns.map((item, i) => (
-              <th key={i}>{item.title}</th>
-            ))}
-          </tr>
-        </thead>
+        {!noHead && (
+          <thead>
+            <tr>
+              {columns.map((item, i) => (
+                <th key={i}>
+                  <div className={styles.table__cell}>{item.title}</div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+        )}
         <tbody>
           {data.length > 0
             ? data.map((item, i) => (
-                <tr key={i} onDoubleClick={() => doubleClick?.(i)}>
+                <tr
+                  key={i}
+                  className={classNames({ [styles['--active']]: selected === i })}
+                  onDoubleClick={() => handleDoubleClick(i)}
+                >
                   {columns.map((column, j) => {
                     let text;
                     if (column.render) {
@@ -43,7 +60,11 @@ const Table: React.FC<Props> = ({ columns, data, doubleClick }) => {
                       if (column.format) text = column.format(text);
                     }
 
-                    return <td key={j}>{text}</td>;
+                    return (
+                      <td key={j}>
+                        <div className={styles.table__cell}>{text}</div>
+                      </td>
+                    );
                   })}
                 </tr>
               ))

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, RefObject, MouseEventHandler } from 'react';
+import { useState, useMemo, useEffect, RefObject, MouseEventHandler, useRef } from 'react';
 import { PlayCircleFilled, PauseCircleFilled } from '@ant-design/icons';
 import { throttle } from 'lodash';
 import {
@@ -68,8 +68,9 @@ export const usePlayMode = () => {
   return { playMode, handleIconClick, currentPlayMode };
 };
 
-export const useMusicDetail = () => {
-  const [showDetail, setShowDetail] = useState(false);
+export const useMusicList = () => {
+  const listButtonRef = useRef<HTMLElement>(null);
+  const [showList, setShowList] = useState(false);
 
-  return { showDetail, setShowDetail };
+  return { listButtonRef, showList, setShowList };
 };

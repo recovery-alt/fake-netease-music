@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styles from './footer.module.less';
 import {
   HeartOutlined,
@@ -13,16 +13,19 @@ import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@/store';
 import { formatMS } from '@/utils';
-import { useCurrentTime, useMusicDetail, usePause, usePlayMode } from './hooks';
+import { useCurrentTime, useMusicList, usePause, usePlayMode } from './hooks';
 import { changeSong, setSong } from '@/reducer';
 import { Tooltip } from 'antd';
 import { PlayMode } from '@/enum';
 import MusicDetail from '../music-detail';
+import MusicList from '../music-list';
 
 const List: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLProgressElement>(null);
   const dispatch = useDispatch<AppDispatch>();
+  const [showDetail, setShowDetail] = useState(false);
+  const { listButtonRef, showList, setShowList } = useMusicList();
 
   const currentTrack = useSelector((state: RootState) => {
     const { current, tracks } = state.currentTrack;
@@ -44,8 +47,6 @@ const List: React.FC = () => {
   );
 
   const { playMode, handleIconClick, currentPlayMode } = usePlayMode();
-
-  const { showDetail, setShowDetail } = useMusicDetail();
 
   const handlePlayEnded = () => {
     if (playMode === PlayMode.SOLO) return;
@@ -124,11 +125,12 @@ const List: React.FC = () => {
         <Tooltip title={currentPlayMode.tip}>
           <currentPlayMode.icon onClick={handleIconClick} />
         </Tooltip>
-        <UnorderedListOutlined />
+        <UnorderedListOutlined ref={listButtonRef} onClick={() => setShowList(!showList)} />
         <span>词</span>
         <SoundOutlined />
       </div>
       <MusicDetail visible={showDetail} setVisible={setShowDetail} />
+      <MusicList visible={showList} setVisible={setShowList} target={listButtonRef.current} />
     </footer>
   );
 };
