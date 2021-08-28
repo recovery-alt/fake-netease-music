@@ -12,7 +12,7 @@ import { RootState } from '@/store';
 import dayjs from 'dayjs';
 import { wrapNumber, formatMS } from '@/utils';
 import { getPlaylistDetail, Track } from '@/api';
-import { setCurrentTrack, setSong } from '@/reducer';
+import { setCurrentTrack } from '@/reducer';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store';
 
@@ -37,7 +37,7 @@ const List: React.FC = () => {
     {
       title: '歌手',
       render(track) {
-        return track.ar.map((item, i) => <span key={i}>{item.name}</span>);
+        return track.ar.map(item => <span key={item.id}>{item.name}</span>);
       },
     },
     { title: '专辑', key: 'al.name' },

@@ -24,8 +24,8 @@ const Recommend: React.FC<Props> = ({ id }) => {
   return (
     <div className={styles.recommend}>
       <h2 className={styles.recommend__title}>包含这首歌的歌单</h2>
-      {simiPlaylist.map((item, i) => (
-        <div key={i} className={styles.recommend__item}>
+      {simiPlaylist.map(item => (
+        <div key={item.id} className={styles.recommend__item}>
           <Img className={styles.recommend__img} src={item.coverImgUrl} />
           <div className={styles['recommend__item-info']}>
             <div>{item.name}</div>
@@ -34,8 +34,8 @@ const Recommend: React.FC<Props> = ({ id }) => {
         </div>
       ))}
       <h2 className={styles.recommend__title}>相似歌曲</h2>
-      {simiSong.map((item, i) => (
-        <div key={i} className={styles['recommend__item']}>
+      {simiSong.map(item => (
+        <div key={item.id} className={styles['recommend__item']}>
           <Img className={styles['recommend__img']} src={item.album.picUrl} icon />
           <div className={styles['recommend__item-info']}>
             <div>{item.name}</div>

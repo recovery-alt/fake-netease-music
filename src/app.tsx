@@ -3,14 +3,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import routes from '@/router';
 import { Provider } from 'react-redux';
 import store from '@/store';
-import { IconConfigProvider } from '@ricons/utils';
 
 const App: React.FC = () => (
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
-        {routes.map((route, i) => (
-          <Route key={i} path={route.path}>
+        {routes.map(route => (
+          <Route key={route.path} path={route.path}>
             <route.component {...route} />
           </Route>
         ))}

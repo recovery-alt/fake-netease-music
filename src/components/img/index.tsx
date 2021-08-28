@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import styles from './img.module.less';
 import classNames from 'classnames';
 import { AppProps } from '@/types';
-import { CaretRightFilled, PlayCircleFilled } from '@ant-design/icons';
+import { PlayCircleFilled } from '@ant-design/icons';
 
 interface Props extends AppProps {
   src: string;

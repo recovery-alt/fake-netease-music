@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './rank.less';
 import Official from './components/official';
-import {
-  getToplist,
-  Toplist,
-  getToplistDetail,
-  getPlaylistDetail,
-  PlaylistDetail,
-  Track,
-} from '@/api';
+import { getToplist, Toplist, getPlaylistDetail, PlaylistDetail } from '@/api';
 import Img from '@/components/img';
 
 const Rank: React.FC = () => {
@@ -33,8 +26,8 @@ const Rank: React.FC = () => {
     <div className="rank">
       <header className="rank__header">官方榜</header>
       <div className="rank__official">
-        {playlistDetail.map((item, i) => (
-          <Official key={i} data={item} />
+        {playlistDetail.map(item => (
+          <Official key={item.id} data={item} />
         ))}
       </div>
       <header className="rank__header">全球榜</header>

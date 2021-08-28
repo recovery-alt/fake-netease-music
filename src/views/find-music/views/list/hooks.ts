@@ -9,8 +9,8 @@ export const useTopPlaylist = () => {
 
   function CardDataAdapter(topPlaylist: TopPlaylist[]) {
     return topPlaylist.map(item => {
-      const { name, coverImgUrl: imgUrl } = item;
-      return { name, imgUrl };
+      const { id, name, coverImgUrl: imgUrl } = item;
+      return { id, name, imgUrl };
     });
   }
 

@@ -2,15 +2,15 @@ import React from 'react';
 import styles from './list.module.less';
 import Img from '@/components/img';
 
-export type ListData = { imgUrl: string; col2: string; col3?: string; col4?: string };
+export type ListData = { id: number; imgUrl: string; col2: string; col3?: string; col4?: string };
 
 type Props = { data: ListData[] };
 
 const List: React.FC<Props> = ({ data }) => {
   return (
     <section className={styles.list}>
-      {data.map((item, i) => (
-        <div key={i} className={styles.list__item}>
+      {data.map(item => (
+        <div key={item.id} className={styles.list__item}>
           <div className={styles.list__left}>
             <Img className={styles.list__img} src={item.imgUrl} />
             <span>{item.col2}</span>

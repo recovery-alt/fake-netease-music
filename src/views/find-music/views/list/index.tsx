@@ -3,10 +3,10 @@ import './list.less';
 import img from '@/assets/img/avatar.svg';
 import { CrownOutlined, RightOutlined, GlobalOutlined } from '@ant-design/icons';
 import { getMusicCategory, Playlist, getAllMusicCategory, Subcategory } from '@/api';
-import Card from '@/components/card';
 import { useTopPlaylist } from './hooks';
 import { Pagination } from 'antd';
 import { useClickAway } from 'react-use';
+import Img from '@/components/img';
 
 const List: React.FC = () => {
   const [musicCategory, setMusicCategory] = useState<Playlist[]>([]);
@@ -43,7 +43,6 @@ const List: React.FC = () => {
 
           return category;
         });
-
         setAllMusicCategory(allMusicCategory);
       })();
     }, []);
@@ -53,15 +52,15 @@ const List: React.FC = () => {
         <header className="popover__header">
           <button>全部歌单</button>
         </header>
-        {allMusicCategory.map((item, i) => (
-          <section key={i} className="popover__item">
+        {allMusicCategory.map(item => (
+          <section key={item.name} className="popover__item">
             <div className="popover__left">
               <GlobalOutlined />
               <span>{item.name}</span>
             </div>
             <div className="popover__right">
-              {item.data.map((sub, i) => (
-                <div key={i} className="popover__label">
+              {item.data.map(sub => (
+                <div key={sub.name} className="popover__label">
                   <span>{sub.name}</span>
                   {sub.hot && <strong>HOT</strong>}
                 </div>
@@ -92,12 +91,19 @@ const List: React.FC = () => {
           <RightOutlined />
         </button>
         <ul>
-          {musicCategory.map((item, i) => (
-            <li key={i}>{item.name}</li>
+          {musicCategory.map(item => (
+            <li key={item.id}>{item.name}</li>
           ))}
         </ul>
       </section>
-      <Card data={topPlaylist} width={170} height={170} />
+      <section className="music-list__card">
+        {topPlaylist.map(item => (
+          <div key={item.id} className="music-list__item">
+            <Img className="music-list__img" src={item.imgUrl} />
+            <p>{item.name}</p>
+          </div>
+        ))}
+      </section>
       <footer className="music-list__footer">
         {total > 0 ? (
           <Pagination

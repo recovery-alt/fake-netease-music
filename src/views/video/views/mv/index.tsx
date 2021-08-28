@@ -10,7 +10,7 @@ import Img from '@/components/img';
 const MV: React.FC = () => {
   const initAreaCategory = areaCategory.map(item => ({ name: item, id: item }));
   const [mvFirst, setMVFirst] = useState<ListItem[]>([]);
-  const [selected, setSelected] = useState(0);
+  const [selected] = useState(0);
   const [mvHot, setMVHot] = useState<ListItem[]>([]);
   const [mvExclusiveRcmd, setMVExclusiveRcmd] = useState<ListItem[]>([]);
   const [topMV, setTopMV] = useState<MVType[]>([]);
@@ -18,8 +18,8 @@ const MV: React.FC = () => {
 
   function mv2ListAdapter(data: MVType[]) {
     return data.map(item => {
-      const { artistName: description, cover: imgUrl, name: author } = item;
-      return { description, imgUrl, author };
+      const { id, artistName: description, cover: imgUrl, name: author } = item;
+      return { id, description, imgUrl, author };
     });
   }
 
@@ -80,7 +80,7 @@ const MV: React.FC = () => {
       </header>
       <section className="mv__rank">
         {topMV.map((item, i) => (
-          <div key={i} className="mv__rank-item">
+          <div key={item.id} className="mv__rank-item">
             <div className="mv__rank-ordinal">
               <h3>{i + 1}</h3>
               <h4>-</h4>

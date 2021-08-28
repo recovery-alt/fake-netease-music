@@ -14,7 +14,7 @@ const Official: React.FC<Props> = ({ data }) => (
     <div className={styles.official__right}>
       <ul>
         {data.tracks.map((item, i) => (
-          <li key={i} className={styles.official__item}>
+          <li key={item.id} className={styles.official__item}>
             <div className={styles['official__item-left']}>
               <strong>{i + 1}</strong>
               <div>

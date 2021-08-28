@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import './video.less';
 import { RightOutlined } from '@ant-design/icons';
-import { getVideoCategoryList, VideoCategogy, getVideoGroup, VideoType } from '@/api';
+import { getVideoCategoryList, getVideoGroup } from '@/api';
 import Nav, { NavItem } from '@/components/nav';
 import List, { ListItem } from './components/list';
 
 const Video: React.FC = () => {
   const [videoCategory, setVideoCategory] = useState<NavItem[]>([]);
-  const [selected, SetSelected] = useState<number>(0);
+  const [selected] = useState<number>(0);
   const [videoList, setVideoList] = useState<ListItem[]>([]);
   const current = useMemo(() => videoCategory[selected] || null, [selected, videoCategory]);
 
@@ -23,9 +23,9 @@ const Video: React.FC = () => {
       if (!current) return;
       const res = await getVideoGroup(current.id as number);
       const result = res.datas.map(item => {
-        const { coverUrl: imgUrl, title: description, creator } = item.data;
+        const { vid, coverUrl: imgUrl, title: description, creator } = item.data;
         const { nickname: author } = creator;
-        return { imgUrl, description, author };
+        return { id: vid, imgUrl, description, author };
       });
       setVideoList(result);
     })();

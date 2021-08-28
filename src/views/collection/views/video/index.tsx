@@ -11,10 +11,10 @@ const Video: React.FC = () => {
     (async () => {
       const res = await getMVSublist();
       const result = res.data.map(item => {
-        const { coverUrl: imgUrl, title: description, creator } = item;
+        const { id, coverUrl: imgUrl, title: description, creator } = item;
         const author = creator.reduce((acc, val) => `${acc}/${val}`, '').slice(1);
 
-        return { imgUrl, description, author };
+        return { id, imgUrl, description, author };
       });
 
       setData(result);

@@ -12,7 +12,7 @@ import {
   getPersonalizedMV,
   getPPList,
   BannerType,
-  PersonalizedList,
+  Personalized,
 } from '@/api';
 
 const FindMusic: React.FC = () => {
@@ -23,10 +23,10 @@ const FindMusic: React.FC = () => {
   const [albumNewest, setAlbumNewest] = useState<ListData[]>([]);
   const [djToplist, setDJToplist] = useState<ListData[]>([]);
 
-  function CardDataAdapter(personalizedList: PersonalizedList) {
+  function CardDataAdapter(personalizedList: Personalized[]) {
     return personalizedList.map(item => {
-      const { name, picUrl: imgUrl } = item;
-      return { name, imgUrl };
+      const { id, name, picUrl: imgUrl } = item;
+      return { id, name, imgUrl };
     });
   }
 
@@ -45,6 +45,7 @@ const FindMusic: React.FC = () => {
     });
     getAlbumNewest().then(res => {
       const result = res.albums.map(item => ({
+        id: item.id,
         name: item.name,
         imgUrl: item.picUrl,
         extra: { artistName: item.artist.name },
@@ -53,6 +54,7 @@ const FindMusic: React.FC = () => {
     });
     getDJToplist().then(res => {
       const result = res.toplist.map(item => ({
+        id: item.id,
         name: item.name,
         imgUrl: item.picUrl,
         extra: { description: item.rcmdtext },
@@ -88,11 +90,11 @@ const FindMusic: React.FC = () => {
       <Title name="推荐歌单" />
       <Card data={personalized} />
       <Title name="独家放送" welt />
-      <Card data={privateList} width={170} height={100} style={{ marginBottom: 0 }} />
+      <Card type="rectangle" data={privateList} />
       <Title name="最新音乐" />
       <List data={albumNewest} functionChildren={renderAlbumNewest} />
       <Title name="推荐MV" />
-      <Card data={personalizedMV} width={170} height={100} style={{ marginBottom: 0 }} />
+      <Card type="rectangle" data={personalizedMV} />
       <Title name="主播电台" welt />
       <List size="medium" data={djToplist} functionChildren={renderDJToplist}></List>
     </div>

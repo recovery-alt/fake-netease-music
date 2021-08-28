@@ -10,7 +10,7 @@ const Nav: React.FC<Props> = ({ data }) => {
   return (
     <div className={styles.nav}>
       {data.map((item, i) => (
-        <div key={i} className={styles.nav__item}>
+        <div key={item.id} className={styles.nav__item}>
           <span className={classNames({ [styles['--active']]: i === 0 })}>{item.name}</span>
         </div>
       ))}

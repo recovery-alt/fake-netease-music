@@ -56,8 +56,11 @@ const List: React.FC = () => {
       </div>
       <div className={styles.header__right}>
         <ul className={styles['header__right-menu']}>
-          {topMenu.map((item, i) => (
-            <li key={i} className={classNames({ [styles['--actived']]: item.path === actived })}>
+          {topMenu.map(item => (
+            <li
+              key={item.path}
+              className={classNames({ [styles['--actived']]: item.path === actived })}
+            >
               <Link to={item.path} onClick={() => setActived(item.path)}>
                 {item.label}
               </Link>

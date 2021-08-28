@@ -84,6 +84,34 @@
     }
   }
 
+  &__card {
+    display: grid;
+    grid-column-gap: 18px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &__item {
+    height: 250px;
+
+    p {
+      margin-top: 4px;
+    }
+  }
+
+  &__img {
+    border: 1px solid #f2f2f1;
+    border-radius: 8px;
+    height: 170px;
+    width: 170px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+    margin-top: 10px;
+  }
+
   .popover {
     &__wrapper {
       background-color: #fff;
@@ -163,12 +191,5 @@
         color: var(--primary-color);
       }
     }
-  }
-
-  &__footer {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 100px;
-    margin-top: 10px;
   }
 }

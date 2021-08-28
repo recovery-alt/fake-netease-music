@@ -13,6 +13,6 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 1 : 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 1 : 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
-    'react/prop-types': 1,
+    'react/prop-types': 0,
   },
 };

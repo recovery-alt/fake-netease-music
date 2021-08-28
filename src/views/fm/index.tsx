@@ -8,7 +8,7 @@ import { getPersonalFM, Music } from '@/api';
 
 const FM: React.FC = () => {
   const [musicList, setMusicList] = useState<Music[]>([]);
-  const [current, setCurrent] = useState(0);
+  const [current] = useState(0);
 
   useEffect(() => {
     getPersonalFM().then(res => {

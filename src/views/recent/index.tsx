@@ -1,7 +1,6 @@
 import React from 'react';
 import './recent.less';
 import Button from '@/components/button';
-import Input from '@/components/input';
 import Table, { Column } from '@/components/table';
 import { Data } from '@/types';
 

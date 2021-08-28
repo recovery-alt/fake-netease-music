@@ -12,7 +12,7 @@ const Program: React.FC = () => {
     { key: 'size', title: '大小' },
     { key: 'time', title: '下载时间' },
   ];
-  const [data, setData] = useState<Data<string | number>[]>([]);
+  const [data] = useState<Data<string | number>[]>([]);
 
   return (
     <>

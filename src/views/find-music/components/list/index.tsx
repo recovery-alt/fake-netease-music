@@ -4,7 +4,7 @@ import { Data } from '@/types';
 import Img from '@/components/img';
 import classNames from 'classnames';
 
-export type ListData = { name: string; imgUrl: string; extra?: Data<string> };
+export type ListData = { id: number; name: string; imgUrl: string; extra?: Data<string> };
 export type ListParams = { item: ListData; i: number; j: number; len: number };
 
 type Props = {

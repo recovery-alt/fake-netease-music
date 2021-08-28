@@ -26,7 +26,7 @@ const MusicList: React.FC<Props> = ({ visible, setVisible, target }) => {
     {
       title: '歌手',
       render(track) {
-        return track.ar.map((item, i) => <span key={i}>{item.name}</span>);
+        return track.ar.map(item => <span key={item.id}>{item.name}</span>);
       },
     },
     { title: '链接到', key: '' },

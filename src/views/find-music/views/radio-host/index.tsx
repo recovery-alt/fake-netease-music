@@ -41,14 +41,18 @@ const RadioHost: React.FC = () => {
     });
 
     getDJPersonalizeRecommend().then(res => {
-      const result = res.data.map(item => ({ name: item.rcmdText, imgUrl: item.picUrl }));
+      const result = res.data.map(item => ({
+        id: item.id,
+        name: item.rcmdText,
+        imgUrl: item.picUrl,
+      }));
       setDJPersonalizeRecommend(result);
     });
 
     getDJPaygift().then(res => {
       const result = res.data.list.map(item => {
-        const { name, picUrl: imgUrl, ...rest } = item;
-        return { name, imgUrl, extra: rest };
+        const { id, name, picUrl: imgUrl, ...rest } = item;
+        return { id, name, imgUrl, extra: rest };
       });
 
       setDJPaygift(result);
@@ -68,8 +72,8 @@ const RadioHost: React.FC = () => {
   function loadDJRecommendType(type: number, cb: Callback) {
     getDJRecommendType(type).then(res => {
       const result = res.djRadios.map(item => {
-        const { name, picUrl: imgUrl } = item;
-        return { name, imgUrl };
+        const { id, name, picUrl: imgUrl } = item;
+        return { id, name, imgUrl };
       });
       cb(result.slice(0, 5));
     });

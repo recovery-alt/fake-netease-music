@@ -22,8 +22,8 @@ const AlbumList: React.FC<Props> = ({ type }) => {
         <h2>本周新碟</h2>
       </div>
       <div className={styles['album-list__right']}>
-        {data.map((item, i) => (
-          <div key={i} className={styles['album-list__item']}>
+        {data.map(item => (
+          <div key={item.id} className={styles['album-list__item']}>
             <div className={styles['album-list__img-wrapper']}>
               <Img className={styles['album-list__img']} src={item.picUrl} />
             </div>

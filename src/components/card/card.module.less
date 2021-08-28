@@ -3,6 +3,12 @@
   flex-wrap: wrap;
   justify-content: space-between;
 
+  &__img {
+    border: 1px solid #f2f2f1;
+    border-radius: 8px;
+    width: 100%;
+  }
+
   &__item {
     flex-shrink: 0;
     margin-bottom: 40px;
@@ -16,13 +22,21 @@
       overflow: hidden;
     }
 
-    img {
-      border: 1px solid #f2f2f1;
-      width: 100%;
-    }
-  }
+    &.--square {
+      width: 135px;
 
-  &__box {
-    border-radius: 8px;
+      .card__img {
+        height: 135px;
+      }
+    }
+
+    &.--rectangle {
+      margin-top: 0;
+      width: 170px;
+
+      .card__img {
+        height: 100px;
+      }
+    }
   }
 }

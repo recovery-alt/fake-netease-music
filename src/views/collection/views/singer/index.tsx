@@ -11,10 +11,10 @@ const Singer: React.FC = () => {
     (async () => {
       const res = await getArtistSublist();
       const result = res.data.map(item => {
-        const { picUrl: imgUrl, name: col2, mvSize, albumSize } = item;
+        const { id, picUrl: imgUrl, name: col2, mvSize, albumSize } = item;
         const col3 = `专辑：${albumSize}`;
         const col4 = `MV：${mvSize}`;
-        return { imgUrl, col2, col3, col4 };
+        return { id, imgUrl, col2, col3, col4 };
       });
 
       setData(result);

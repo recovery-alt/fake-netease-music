@@ -46,12 +46,12 @@ const Singer: React.FC = () => {
 
   return (
     <div className="singer">
-      {searchData.map((item, i) => (
-        <header key={i} className="singer__header">
+      {searchData.map(item => (
+        <header key={item.label} className="singer__header">
           <div className="singer__label">{item.label}：</div>
           <div className="singer__category">
             {item.list.map((val, i) => (
-              <div key={i} className="singer__category-item">
+              <div key={val.name} className="singer__category-item">
                 <span className={classNames({ ['--active']: i === 0 })}>{val.name}</span>
               </div>
             ))}

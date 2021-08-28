@@ -9,7 +9,7 @@ const Pedding: React.FC = () => {
     { key: 'title', title: '音乐标题' },
     { key: 'progress', title: '进度' },
   ];
-  const [data, setData] = useState<Data<number | string>[]>([]);
+  const [data] = useState<Data<number | string>[]>([]);
   return (
     <div>
       <header className="pedding__header">

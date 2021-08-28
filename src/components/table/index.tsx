@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './table.module.less';
 import { Data } from '@/types';
 import NoData from '../no-data';
