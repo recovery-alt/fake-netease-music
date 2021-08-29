@@ -6,8 +6,7 @@ import login from '@/assets/img/login.svg';
 import { message } from 'antd';
 import { local } from '@/utils';
 import { useDispatch } from 'react-redux';
-import { setUserInfo, setUserPlaylist } from '@/reducer';
-import { AppDispatch } from '@/store';
+import { setUserInfo, setUserPlaylist, AppDispatch } from '@/store';
 
 type Props = { setShowLogin: (show: boolean) => void };
 

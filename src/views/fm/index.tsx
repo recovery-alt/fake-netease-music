@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './fm.less';
-import Cover from './components/cover';
-import Lyric from '@/layout/music-detail/components/lyric';
-import ButtonGroup from '@/layout/music-detail/components/button-group';
-import CommentGroup from '@/layout/music-detail/components/comment-group';
-import { setFM } from '@/reducer';
+import Cover from './cover';
+import Lyric from '@/layout/music-detail/lyric';
+import ButtonGroup from '@/layout/music-detail/button-group';
+import CommentGroup from '@/layout/music-detail/comment-group';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@/store';
+import { AppDispatch, RootState, setFM } from '@/store';
 
 const FM: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

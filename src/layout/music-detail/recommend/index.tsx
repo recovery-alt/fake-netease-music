@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from './recommend.module.less';
 import Img from '@/components/img';
-import { getSimiPlaylist, getSimiSong, Music, Playlist } from '@/api';
+import { getSimiPlaylist, getSimiSong } from '@/api';
+import { Music, Playlist } from '@/types';
 import { wrapNumber } from '@/utils';
 
 type Props = { id: number };

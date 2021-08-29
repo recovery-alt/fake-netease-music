@@ -1,7 +1,7 @@
 import { getTopAlbum } from '@/api';
 import React, { useEffect, useState } from 'react';
 import styles from './album-list.module.less';
-import { TopAlbumParams, Album } from '@/api';
+import { TopAlbumParams, Album } from '@/types';
 import Img from '@/components/img';
 
 type Props = TopAlbumParams;

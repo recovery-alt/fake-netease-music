@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getTopPlaylist, TopPlaylist } from '@/api';
+import { getTopPlaylist } from '@/api';
+import { TopPlaylist } from '@/types';
 import { CardData } from '@/components/card';
 
 export const useTopPlaylist = () => {

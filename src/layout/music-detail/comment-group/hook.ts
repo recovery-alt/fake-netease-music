@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getCommentMusic, Music } from '@/api';
-import { Comment } from '@/api';
+import { getCommentMusic } from '@/api';
+import { Comment, Music } from '@/types';
 
 export const useMusicComment = (current?: Music) => {
   const [comments, setComments] = useState<Comment[]>([]);

@@ -3,10 +3,10 @@ import './newest.less';
 import classNames from 'classnames';
 import { categoryList } from '@/config';
 import { PlayCircleOutlined, FileAddOutlined } from '@ant-design/icons';
-import SongList from './components/song-list';
-import AlbumList from './components/album-list';
-import { getTopSong, Song } from '@/api';
-import { AlbumType } from '@/types';
+import SongList from './song-list';
+import AlbumList from './album-list';
+import { getTopSong } from '@/api';
+import { Song, AlbumType } from '@/types';
 
 const Newest: React.FC = () => {
   const [isAlbum, setIsAlbum] = useState(0);

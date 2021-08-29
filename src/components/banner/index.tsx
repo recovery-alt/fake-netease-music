@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './banner.module.less';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import type { BannerType } from '@/api';
+import type { BannerType } from '@/types';
 import classNames from 'classnames';
 import Img from '@/components/img';
 

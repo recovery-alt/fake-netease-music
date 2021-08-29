@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './singer.less';
 import List, { ListData } from '@/components/list';
 import { getArtistSublist } from '@/api';
-import Header from '../../components/header';
+import Header from '../../header';
 
 const Singer: React.FC = () => {
   const [data, setData] = useState<ListData[]>([]);

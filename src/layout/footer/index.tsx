@@ -11,15 +11,14 @@ import {
 } from '@ant-design/icons';
 import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '@/store';
+import { RootState, AppDispatch, changeSong, setSong, nextFM } from '@/store';
 import { formatMS } from '@/utils';
-import { useCurrentTime, useMusicList, usePause, usePlayMode } from './hooks';
-import { changeSong, setSong, nextFM } from '@/reducer';
+import { useCurrentTime, useMusicList, usePause, usePlayMode, useLyric } from './hooks';
 import { Tooltip } from 'antd';
 import { PlayMode } from '@/enum';
 import MusicDetail from '../music-detail';
 import MusicList from '../music-list';
-import { Music } from '@/api';
+import { Music } from '@/types';
 
 const List: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -28,12 +27,13 @@ const List: React.FC = () => {
   const [showDetail, setShowDetail] = useState(false);
   const { listButtonRef, showList, setShowList } = useMusicList();
   const isFMMode = useSelector((state: RootState) => state.currentTrack.fm.length);
+  const { lyricActived, setLyricActived } = useLyric();
 
   const currentTrack = useSelector((state: RootState) => {
     const { current, tracks, fm } = state.currentTrack;
     if (current < 0) return;
-
-    return isFMMode ? transformMusic2Track(fm[current]) : tracks[current];
+    if (!isFMMode) return tracks[current];
+    if (fm[current]) return transformMusic2Track(fm[current]);
   });
 
   const isLastSong = useSelector((state: RootState) => {
@@ -42,7 +42,7 @@ const List: React.FC = () => {
   });
 
   const song = useSelector((state: RootState) => state.currentTrack.song);
-  const { PlayIcon, pause, setPause } = usePause(audioRef);
+  const { PlayIcon, pause, handlePause } = usePause(audioRef, currentTrack);
   const { currentTime, setCurrentTime, handleTimeUpdate, handleProgressClick } = useCurrentTime(
     audioRef,
     progressRef,
@@ -61,6 +61,8 @@ const List: React.FC = () => {
       dispatch(nextFM());
       return;
     }
+
+    if (!currentTrack) return;
     if (playMode === PlayMode.SOLO) return;
     if (playMode === PlayMode.IN_TURN && isLastSong) {
       setCurrentTime(0);
@@ -70,7 +72,7 @@ const List: React.FC = () => {
   }
 
   function handleCurrentSongChange(next: boolean) {
-    if (!isFMMode) {
+    if (!isFMMode && currentTrack) {
       dispatch(changeSong({ mode: playMode, next }));
       return;
     }
@@ -104,8 +106,8 @@ const List: React.FC = () => {
               loop={playMode === PlayMode.SOLO}
               autoPlay
               onTimeUpdate={handleTimeUpdate}
-              onPlay={() => setPause(false)}
-              onPause={() => setPause(true)}
+              onPlay={() => handlePause(false)}
+              onPause={() => handlePause(true)}
               onEnded={handlePlayEnded}
             />
             <img
@@ -135,7 +137,7 @@ const List: React.FC = () => {
         />
         <PlayIcon
           className={classNames(styles['--big'], styles['--red'])}
-          onClick={() => setPause(!pause)}
+          onClick={() => handlePause(!pause)}
         />
         <StepForwardOutlined
           className={classNames(styles['--medium'], styles['--red'])}
@@ -151,7 +153,12 @@ const List: React.FC = () => {
         {!isFMMode && (
           <UnorderedListOutlined ref={listButtonRef} onClick={() => setShowList(!showList)} />
         )}
-        <span>词</span>
+        <span
+          className={classNames(styles['footer__lyric'], { [styles['--active']]: lyricActived })}
+          onClick={() => setLyricActived(!lyricActived)}
+        >
+          词
+        </span>
         <SoundOutlined />
       </div>
       <MusicDetail visible={showDetail} setVisible={setShowDetail} />

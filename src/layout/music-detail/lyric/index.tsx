@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './lyric.module.less';
 import Scrollbar from '@/components/scrollbar';
 import { QuestionOutlined } from '@ant-design/icons';
-import { Music } from '@/api';
+import { Music } from '@/types';
 import { getLyric } from '@/api';
 
 type Props = { music: Music };

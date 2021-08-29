@@ -1,6 +1,7 @@
 import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { loginCellphone, UserInfo } from '@/api';
-import avatarUrl from '@/assets/img/avatar.svg';
+import { loginCellphone } from '@/api';
+import { UserInfo } from '@/types';
+import avatar from '@/assets/img/avatar.svg';
 import { to } from '@/utils';
 import { message } from 'antd';
 
@@ -22,7 +23,7 @@ export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password:
 export const setUserInfoFromCache = createAction<UserInfo>('userInfo/setCache');
 
 export const userReducer = createReducer<UserInfo>(
-  { cookie: '', profile: { avatarUrl, nickname: '未登录', userId: 0 } },
+  { cookie: '', profile: { avatarUrl: avatar, nickname: '未登录', userId: 0 } },
   builder => {
     builder.addCase(setUserInfo.fulfilled, (state, action) => {
       return { ...state, ...action.payload };

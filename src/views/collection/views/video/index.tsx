@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../../components/header';
+import Header from '../../header';
 import './video.less';
-import List, { ListItem } from '@/views/video/components/list';
+import List, { ListItem } from '@/views/video/list';
 import { getMVSublist } from '@/api';
 
 const Video: React.FC = () => {

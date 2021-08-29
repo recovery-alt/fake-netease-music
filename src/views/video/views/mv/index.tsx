@@ -3,8 +3,9 @@ import './mv.less';
 import { RightOutlined } from '@ant-design/icons';
 import Nav from '@/components/nav';
 import { areaCategory } from '@/config';
-import List, { ListItem } from '../../components/list';
-import { getMVFirst, getMVAll, MVType, getMVExclusiveRcmd, getTopMV } from '@/api';
+import List, { ListItem } from '../../list';
+import { getMVFirst, getMVAll, getMVExclusiveRcmd, getTopMV } from '@/api';
+import { MVType } from '@/types';
 import Img from '@/components/img';
 
 const MV: React.FC = () => {

@@ -2,19 +2,19 @@ import React, { useState, useEffect, useMemo } from 'react';
 import './list.less';
 import Button from '@/components/button';
 import { FolderAddOutlined, ShareAltOutlined, DownloadOutlined } from '@ant-design/icons';
-import Tab from './components/tab';
+import Tab from './tab';
 import Table, { Column } from '@/components/table';
 import { useParams } from 'react-router-dom';
 import avatar from '@/assets/img/avatar.svg';
-import { LikeFilled } from '@ant-design/icons';
+import { HeartFilled } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import dayjs from 'dayjs';
 import { wrapNumber, formatMS } from '@/utils';
-import { getPlaylistDetail, Track } from '@/api';
-import { setCurrentTrack } from '@/reducer';
+import { getPlaylistDetail } from '@/api';
+import { Track } from '@/types';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/store';
+import { AppDispatch, setCurrentTrack } from '@/store';
 
 const List: React.FC = () => {
   const params = useParams<{ id: string }>();
@@ -56,7 +56,7 @@ const List: React.FC = () => {
   );
 
   const handleTableDoubleClick = (current: number) => {
-    dispatch(setCurrentTrack({ current, tracks }));
+    dispatch(setCurrentTrack({ current, tracks, fm: [] }));
   };
 
   return (
@@ -65,7 +65,9 @@ const List: React.FC = () => {
         {params.id ? (
           <img className="list__img" src={curPlaylist?.coverImgUrl} alt="avatar" />
         ) : (
-          <LikeFilled className="list__img" />
+          <div className="list__img-default">
+            <HeartFilled />
+          </div>
         )}
 
         <div className="list__right">

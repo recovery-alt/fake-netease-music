@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Title from '@/components/title';
 import Card, { CardData } from '@/components/card';
-import List, { ListData, ListParams } from './components/list';
+import List, { ListData, ListParams } from './list';
 import Banner from '@/components/banner';
 import './find-music.less';
 import {
@@ -11,9 +11,8 @@ import {
   getPersonalized,
   getPersonalizedMV,
   getPPList,
-  BannerType,
-  Personalized,
 } from '@/api';
+import { BannerType, Personalized } from '@/types';
 
 const FindMusic: React.FC = () => {
   const [banner, setBanner] = useState<BannerType[]>([]);

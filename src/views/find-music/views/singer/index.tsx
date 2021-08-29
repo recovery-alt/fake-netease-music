@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './singer.less';
 import classNames from 'classnames';
-import { getArtistList, Artist } from '@/api';
+import { getArtistList } from '@/api';
+import { Artist } from '@/types';
 import { categoryList } from '@/config';
 import Img from '@/components/img';
 

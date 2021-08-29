@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './rank.less';
-import Official from './components/official';
-import { getToplist, Toplist, getPlaylistDetail, PlaylistDetail } from '@/api';
+import Official from './official';
+import { getToplist, getPlaylistDetail } from '@/api';
+import { Toplist, PlaylistDetail } from '@/types';
 import Img from '@/components/img';
 
 const Rank: React.FC = () => {

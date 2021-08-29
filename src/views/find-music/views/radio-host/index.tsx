@@ -2,18 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Banner from '@/components/banner';
 import {
   getDJBanner,
-  BannerType,
   getDJCatelist,
-  DJCatelist,
   getDJPersonalizeRecommend,
   getDJPaygift,
   getDJRecommendType,
 } from '@/api';
+import { BannerType, DJCatelist } from '@/types';
 import './radio-host.less';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Title from '@/components/title';
 import Card, { CardData } from '@/components/card';
-import List, { ListParams } from '../../components/list';
+import List, { ListParams } from '../../list';
 import Img from '@/components/img';
 
 const RadioHost: React.FC = () => {

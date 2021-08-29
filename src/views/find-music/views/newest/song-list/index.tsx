@@ -1,7 +1,7 @@
 import React from 'react';
 import { PlaySquareOutlined } from '@ant-design/icons';
 import styles from './list.module.less';
-import { Song } from '@/api';
+import { Song } from '@/types';
 import { formatMS } from '@/utils';
 import Img from '@/components/img';
 

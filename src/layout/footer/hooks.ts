@@ -7,17 +7,26 @@ import {
   EnterOutlined,
 } from '@ant-design/icons';
 import { PlayMode } from '@/enum';
+import { Track } from '@/types';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, RootState, setPause } from '@/store';
 
-export const usePause = (audio?: RefObject<HTMLAudioElement>) => {
-  const [pause, setPause] = useState(false);
+export const usePause = (audio?: RefObject<HTMLAudioElement>, currentTrack?: Track) => {
+  const pause = useSelector((state: RootState) => state.controller.pause);
+  const dispatch = useDispatch<AppDispatch>();
   const PlayIcon = useMemo(() => (pause ? PlayCircleFilled : PauseCircleFilled), [pause]);
+
+  function handlePause(pause: boolean) {
+    if (!currentTrack) return;
+    dispatch(setPause(pause));
+  }
 
   useEffect(() => {
     if (!audio?.current) return;
     pause ? audio.current.pause() : audio.current.play();
   }, [pause]);
 
-  return { PlayIcon, pause, setPause };
+  return { PlayIcon, pause, handlePause };
 };
 
 export const useCurrentTime = (
@@ -68,4 +77,10 @@ export const useMusicList = () => {
   const [showList, setShowList] = useState(false);
 
   return { listButtonRef, showList, setShowList };
+};
+
+export const useLyric = () => {
+  const [lyricActived, setLyricActived] = useState(false);
+
+  return { lyricActived, setLyricActived };
 };

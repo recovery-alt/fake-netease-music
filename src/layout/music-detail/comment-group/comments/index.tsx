@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './comments.module.less';
 import avatar from '@/assets/img/avatar.svg';
 import { LikeOutlined, ExportOutlined, CommentOutlined } from '@ant-design/icons';
-import { Comment } from '@/api';
+import { Comment } from '@/types';
 import dayjs from 'dayjs';
 import Img from '@/components/img';
 

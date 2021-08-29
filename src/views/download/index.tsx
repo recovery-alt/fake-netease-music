@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from './components/header';
+import Header from './header';
 import Table, { Column } from '@/components/table';
 import { Data } from '@/types';
 

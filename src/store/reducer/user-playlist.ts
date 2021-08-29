@@ -1,5 +1,6 @@
 import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { getUserPlaylist, UserPlaylist } from '@/api';
+import { getUserPlaylist } from '@/api';
+import { UserPlaylist } from '@/types';
 import { to } from '@/utils';
 import { message } from 'antd';
 

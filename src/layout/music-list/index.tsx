@@ -5,10 +5,9 @@ import classNames from 'classnames';
 import { FolderAddOutlined } from '@ant-design/icons';
 import Table, { Column } from '@/components/table';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/store';
-import { Track } from '@/api';
+import { RootState, changeCurrent } from '@/store';
+import { Track } from '@/types';
 import { formatMS } from '@/utils';
-import { changeCurrent } from '@/reducer';
 import { useClickAway } from 'react-use';
 
 type Props = {

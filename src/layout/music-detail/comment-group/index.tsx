@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import WriteComment from './components/write-comment';
-import Comments from './components/comments';
+import WriteComment from './write-comment';
+import Comments from './comments';
 import { Pagination } from 'antd';
 import styles from './comment-group.module.less';
 import { useMusicComment } from './hook';
-import { Music } from '@/api';
+import { Music } from '@/types';
 
 type Props = { currentMusic: Music };
 

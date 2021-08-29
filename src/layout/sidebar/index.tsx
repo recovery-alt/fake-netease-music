@@ -18,15 +18,14 @@ import { useHistory, useLocation } from 'react-router-dom';
 import Scrollbar from '@/components/scrollbar';
 import Login from '@/components/login';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from '@/store';
+import { AppDispatch, RootState, setUserInfoFromCache, setUserPlaylist } from '@/store';
 import { local } from '@/utils';
-import { UserInfo } from '@/api';
-import { setUserInfoFromCache, setUserPlaylist } from '@/reducer';
+import { UserInfo } from '@/types';
 import json from 'json5';
 import classNames from 'classnames';
 
 const List: React.FC = () => {
-  type Menu = { name: string; icon: React.FC; path: string };
+  type Menu = { name: string; icon: React.FC; path: string; loginShow?: boolean };
   type MenuItem = { title?: string; menus: Menu[] };
   type ItemProps = { menu: Menu; index: [number, number]; plus?: number };
   type MenuListAction = { type: number; payload: MenuItem[] };
@@ -35,7 +34,7 @@ const List: React.FC = () => {
   const history = useHistory();
   const { pathname } = useLocation();
   const [showLogin, setShowLogin] = useState(false);
-  const { profile } = useSelector((state: RootState) => state.user);
+  const { profile, cookie } = useSelector((state: RootState) => state.user);
   const playlist = useSelector((state: RootState) => state.userPlaylist.playlist);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -49,7 +48,7 @@ const List: React.FC = () => {
         menus: [
           { name: '发现音乐', icon: CustomerServiceOutlined, path: '/find-music' },
           { name: '私人FM', icon: TeamOutlined, path: '/fm' },
-          { name: '视频', icon: PlaySquareOutlined, path: '/video' },
+          { name: '视频', icon: PlaySquareOutlined, path: '/video', loginShow: true },
           { name: '朋友', icon: TeamOutlined, path: '/friend' },
         ],
       },
@@ -59,9 +58,9 @@ const List: React.FC = () => {
           { name: 'iTunes音乐', icon: CustomerServiceOutlined, path: '/i-tunes' },
           { name: '下载管理', icon: DownloadOutlined, path: '/download' },
           { name: '最近播放', icon: FieldTimeOutlined, path: '/recent' },
-          { name: '我的音乐云盘', icon: CloudOutlined, path: '/cloud-music' },
-          { name: '我的电台', icon: NotificationOutlined, path: '/radio' },
-          { name: '我的收藏', icon: StarOutlined, path: '/collection' },
+          { name: '我的音乐云盘', icon: CloudOutlined, path: '/cloud-music', loginShow: true },
+          { name: '我的电台', icon: NotificationOutlined, path: '/radio', loginShow: true },
+          { name: '我的收藏', icon: StarOutlined, path: '/collection', loginShow: true },
         ],
       },
       {
@@ -185,9 +184,9 @@ const List: React.FC = () => {
           return (
             <div key={i}>
               {renderTitle(item, i)}
-              {item.menus.map((menu, j) => (
-                <Item key={j} menu={menu} index={[i, j]} />
-              ))}
+              {item.menus.map((menu, j) =>
+                cookie || !menu.loginShow ? <Item key={j} menu={menu} index={[i, j]} /> : null
+              )}
             </div>
           );
         })}

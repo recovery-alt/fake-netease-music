@@ -3,7 +3,7 @@ import './video.less';
 import { RightOutlined } from '@ant-design/icons';
 import { getVideoCategoryList, getVideoGroup } from '@/api';
 import Nav, { NavItem } from '@/components/nav';
-import List, { ListItem } from './components/list';
+import List, { ListItem } from './list';
 
 const Video: React.FC = () => {
   const [videoCategory, setVideoCategory] = useState<NavItem[]>([]);

@@ -17,3 +17,5 @@ export interface AppProps {
 export type AlbumType = 'hot' | 'new';
 
 export type AlbumArea = 'ALL' | 'ZH' | 'EA' | 'KR' | 'JP';
+
+export * from './interface';

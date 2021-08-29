@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './official.module.less';
 import { RightOutlined } from '@ant-design/icons';
-import { PlaylistDetail } from '@/api';
+import { PlaylistDetail } from '@/types';
 import Img from '@/components/img';
 
 type Props = { data: PlaylistDetail };

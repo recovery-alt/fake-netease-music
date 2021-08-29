@@ -1,9 +1,9 @@
 import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { Track, Song, getSongUrl } from '@/api';
+import { getSongUrl, getPersonalFM } from '@/api';
 import { to } from '@/utils';
 import { PlayMode } from '@/enum';
 import { message } from 'antd';
-import { Music, getPersonalFM } from '@/api';
+import { Music, Track, Song } from '@/types';
 
 type CurrentTrack = { current: number; tracks: Track[]; song?: Song; fm: Music[] };
 

@@ -1,13 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './list.less';
 import { CrownOutlined, RightOutlined, GlobalOutlined } from '@ant-design/icons';
-import {
-  getMusicCategory,
-  Playlist,
-  getAllMusicCategory,
-  Subcategory,
-  getTopPlaylistHighquality,
-} from '@/api';
+import { getMusicCategory, getAllMusicCategory, getTopPlaylistHighquality } from '@/api';
+import { Playlist, Subcategory } from '@/types';
 import { useTopPlaylist } from './hooks';
 import { Pagination } from 'antd';
 import { useClickAway } from 'react-use';

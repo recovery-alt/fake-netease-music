@@ -3,7 +3,7 @@ import './collection.less';
 import List, { ListData } from '@/components/list';
 import { getAlbumSublist } from '@/api';
 import disk from '@/assets/img/disk.svg';
-import Header from './components/header';
+import Header from './header';
 
 const Collection: React.FC = () => {
   const myAlbums: ListData[] = [{ id: 0, imgUrl: disk, col2: '我的数字专辑' }];

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './cover.module.less';
 import { PlayCircleFilled } from '@ant-design/icons';
-import { Music } from '@/api';
+import { Music } from '@/types';
 
 type Props = { current?: Music; next?: Music };
 
