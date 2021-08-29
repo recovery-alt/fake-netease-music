@@ -4,28 +4,32 @@ import Cover from './components/cover';
 import Lyric from '@/layout/music-detail/components/lyric';
 import ButtonGroup from '@/layout/music-detail/components/button-group';
 import CommentGroup from '@/layout/music-detail/components/comment-group';
-import { getPersonalFM, Music } from '@/api';
+import { setFM } from '@/reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/store';
 
 const FM: React.FC = () => {
-  const [musicList, setMusicList] = useState<Music[]>([]);
-  const [current] = useState(0);
+  const dispatch = useDispatch<AppDispatch>();
+  const [currentMusic, preMusic] = useSelector((state: RootState) => {
+    const { fm, current } = state.currentTrack;
+    if (!fm[current]) return [];
+    return [fm[current], fm[current + 1]];
+  });
 
   useEffect(() => {
-    getPersonalFM().then(res => {
-      setMusicList(res.data);
-    });
+    dispatch(setFM());
   }, []);
 
   return (
     <div className="fm">
       <section className="fm__player">
         <div className="fm__cover-wrapper">
-          <Cover musicList={musicList} />
+          <Cover current={currentMusic} next={preMusic} />
           <ButtonGroup />
         </div>
-        <Lyric music={musicList[current]} />
+        <Lyric music={currentMusic} />
       </section>
-      <CommentGroup currentMusic={musicList[current]} />
+      <CommentGroup currentMusic={currentMusic} />
     </div>
   );
 };

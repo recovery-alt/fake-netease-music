@@ -17,7 +17,7 @@ const Comments: React.FC<Props> = ({ comment }) => {
   return (
     <div className={styles.comments}>
       <div className={styles.comments__left}>
-        <Img className={styles.comments__img} src={comment?.user.avatarUrl || avatar} />
+        <Img className={styles.comments__img} src={comment?.user.avatarUrl || avatar} banLoading />
       </div>
       <div className={styles.comments__right}>
         <p>

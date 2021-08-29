@@ -31,7 +31,7 @@ export type Song = {
 };
 export const getSongUrl = (id: number) => get<{ data: Song[] }>('/song/url', { id });
 
-export type Lyric = { lrc: { lyric: string } };
+export type Lyric = { nolyric: boolean; lrc: { lyric: string } };
 export const getLyric = (id: number | string) => get<Lyric>('/lyric', { id });
 
 export type Music = {
@@ -60,7 +60,13 @@ export const getCommentMusic = (id: number | string, offset = 0) =>
     offset,
   });
 
-export type Playlist = { name: string; id: number; playCount: number; coverImgUrl: string };
+export type Playlist = {
+  name: string;
+  id: number;
+  playCount: number;
+  coverImgUrl: string;
+  copywriter: string;
+};
 export const getMusicCategory = () => get<{ tags: Playlist[] }>('/playlist/hot');
 
 export type Subcategory = { category: number; name: string; hot: boolean };
@@ -200,3 +206,6 @@ export const getSimiPlaylist = (id: number) =>
   get<{ playlists: Playlist[] }>('/simi/playlist', { id });
 
 export const getSimiSong = (id: number) => get<{ songs: Music[] }>('/simi/song', { id });
+
+export const getTopPlaylistHighquality = (cat = '全部', limit = 1) =>
+  get<{ playlists: Playlist[] }>('/top/playlist/highquality', { cat, limit });

@@ -1,4 +1,6 @@
 .lyric {
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 320px;
 
@@ -74,5 +76,13 @@
 
   &__anchor:not(:last-child)::after {
     content: '/';
+  }
+
+  &__container {
+    align-items: center;
+    border-right: 1px solid #f2f2f2;
+    display: flex;
+    flex: 1;
+    justify-content: center;
   }
 }

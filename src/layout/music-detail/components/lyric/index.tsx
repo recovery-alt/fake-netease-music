@@ -13,8 +13,9 @@ const Lyric: React.FC<Props> = ({ music }) => {
 
   function transLyric2Arr(lyric: string) {
     const result: Array<LyricItem> = [];
-    lyric.replace(/\[(.*?)\](?!\n)\s?(.+)\n/g, ($1, $2, $3) => {
-      result.push({ timestamp: $2, value: $3 });
+    lyric.replace(/((?:\[\d{2}:\d{2}\.\d{2}\])+)(.*)(?=\n)/g, ($1, $2, value) => {
+      const timestamp = $2.match(/(?<=\[)\d{2}:\d{2}\.\d{2}(?=\])/g);
+      result.push({ timestamp, value });
       return '';
     });
     return result;
@@ -23,8 +24,8 @@ const Lyric: React.FC<Props> = ({ music }) => {
   useEffect(() => {
     if (!music?.id) return;
     getLyric(music.id).then(res => {
-      const { lrc } = res;
-      setLyrics(transLyric2Arr(lrc.lyric));
+      const { lrc, nolyric } = res;
+      setLyrics(nolyric ? [] : transLyric2Arr(lrc.lyric));
     });
   }, [music?.id]);
   return (
@@ -47,12 +48,16 @@ const Lyric: React.FC<Props> = ({ music }) => {
           ))}
         </p>
       </div>
-      <div style={{ borderRight: '1px solid #f2f2f2' }}>
-        <Scrollbar className={styles.lyric__wrapper}>
-          {lyrics.map(lyric => (
-            <p key={lyric.timestamp}>{lyric.value}</p>
-          ))}
-        </Scrollbar>
+      <div className={styles.lyric__container}>
+        {lyrics.length > 0 ? (
+          <Scrollbar className={styles.lyric__wrapper}>
+            {lyrics.map(lyric => (
+              <p key={lyric.timestamp}>{lyric.value}</p>
+            ))}
+          </Scrollbar>
+        ) : (
+          <span>纯音乐，请您欣赏</span>
+        )}
       </div>
 
       <QuestionOutlined className={styles.lyric__question} />

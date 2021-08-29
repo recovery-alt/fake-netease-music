@@ -16,8 +16,8 @@ type Props = { visible: boolean; setVisible: (visible: boolean) => void };
 
 const MusicDetail: React.FC<Props> = ({ visible, setVisible }) => {
   const currentMusic = useSelector((state: RootState) => {
-    const { current, tracks } = state.currentTrack;
-    if (current < 0) return;
+    const { current, tracks, fm } = state.currentTrack;
+    if (current < 0 || fm.length > 0) return;
 
     return transformTrack2Music(tracks[current]);
   });
@@ -29,7 +29,7 @@ const MusicDetail: React.FC<Props> = ({ visible, setVisible }) => {
 
   return createPortal(
     <>
-      {visible && (
+      {visible && currentMusic && (
         <div className={styles['music-detail__shim']}>
           <VerticalAlignMiddleOutlined onClick={() => setVisible(false)} />
         </div>

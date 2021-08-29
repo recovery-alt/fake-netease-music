@@ -3,8 +3,9 @@ import { Track, Song, getSongUrl } from '@/api';
 import { to } from '@/utils';
 import { PlayMode } from '@/enum';
 import { message } from 'antd';
+import { Music, getPersonalFM } from '@/api';
 
-type CurrentTrack = { current: number; tracks: Track[]; song?: Song };
+type CurrentTrack = { current: number; tracks: Track[]; song?: Song; fm: Music[] };
 
 export const setCurrentTrack = createAction<CurrentTrack>('currentTrack/set');
 export const setSong = createAsyncThunk<Song, number>(
@@ -30,8 +31,22 @@ export const changeSong =
 
 export const changeCurrent = createAction<number>('currentTrack/changeCurrent');
 
+export const setFM = createAsyncThunk('currentTrack/setFM', async (id, { rejectWithValue }) => {
+  const [err, res] = await to(getPersonalFM());
+  if (err || !res) return rejectWithValue(null);
+  const { code, data } = res;
+
+  if (code === 200 && data.length) {
+    return data;
+  } else {
+    return rejectWithValue(null);
+  }
+});
+
+export const nextFM = createAction('currentTrack/nextFM');
+
 export const currentTrackReducer = createReducer<CurrentTrack>(
-  { current: -1, tracks: [] },
+  { current: -1, tracks: [], fm: [] },
   builder => {
     builder.addCase(setCurrentTrack, (state, action) => {
       const { current, tracks } = action.payload;
@@ -67,6 +82,24 @@ export const currentTrackReducer = createReducer<CurrentTrack>(
     builder.addCase(changeCurrent, (state, action) => {
       const newState = { ...state };
       newState.current = action.payload;
+      return newState;
+    });
+
+    builder.addCase(setFM.fulfilled, (state, action) => {
+      const newState = { ...state };
+      newState.fm = action.payload;
+      newState.current = 0;
+      return newState;
+    });
+
+    builder.addCase(setFM.rejected, state => {
+      return state;
+    });
+
+    builder.addCase(nextFM, state => {
+      const newState = { ...state };
+      newState.current++;
+
       return newState;
     });
   }
