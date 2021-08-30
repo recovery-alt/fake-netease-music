@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect } from 'react';
 import type { RouteConfig } from '@/router';
-import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import './layout.less';
 import Sidebar from './sidebar';
 import Header from './header';
@@ -13,11 +13,9 @@ import { clearRequests } from '@/api/api';
 type Props = { routes?: Array<RouteConfig> };
 
 const Layout: React.FC<Props> = ({ routes }) => {
-  const { push } = useHistory();
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (pathname === '/') push('/find-music');
     clearRequests();
   }, [pathname]);
 

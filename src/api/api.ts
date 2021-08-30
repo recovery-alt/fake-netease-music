@@ -3,7 +3,7 @@ import axios, { AxiosResponse, Canceler } from 'axios';
 import json from 'json5';
 import { message } from 'antd';
 import { local } from '@/utils';
-import { UserInfo } from '.';
+import { UserInfo } from '@/types';
 import { noop } from '@/utils';
 
 // 接口请求报错的时候，伪装成正常错误，由业务代码处理

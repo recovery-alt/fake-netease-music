@@ -7,12 +7,15 @@ import SongList from './song-list';
 import AlbumList from './album-list';
 import { getTopSong } from '@/api';
 import { Song, AlbumType } from '@/types';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const Newest: React.FC = () => {
   const [isAlbum, setIsAlbum] = useState(0);
   const [areaIndex, setAreaIndex] = useState(0);
   const [songs, setSongs] = useState<Song[]>([]);
   const [albumType, setAlbumType] = useState<AlbumType>('hot');
+  const { push } = useHistory();
+  const { pathname } = useLocation();
   const songList = [
     { name: '播放全部', icon: PlayCircleOutlined },
     { name: '收藏全部', icon: FileAddOutlined },
@@ -20,6 +23,10 @@ const Newest: React.FC = () => {
   const albumOptions: { text: string; type: AlbumType }[] = [
     { text: '推荐', type: 'hot' },
     { text: '全部', type: 'new' },
+  ];
+  const switchItems = [
+    { path: '/find-music/newest', label: '新歌速递' },
+    { path: '/find-music/newest/album', label: '新碟上架' },
   ];
 
   const currentArea = useMemo(() => categoryList[areaIndex], [areaIndex]);
@@ -30,6 +37,11 @@ const Newest: React.FC = () => {
       setSongs(res.data);
     })();
   }, [areaIndex]);
+
+  useEffect(() => {
+    const index = switchItems.findIndex(item => item.path === pathname);
+    if (index > -1) setIsAlbum(index);
+  }, [pathname]);
 
   const SongControl = (
     <div className="newest__song-wrapper">
@@ -60,13 +72,16 @@ const Newest: React.FC = () => {
   return (
     <div className="newest">
       <header className="newest__switch">
-        {['新歌速递', '新碟上架'].map((item, i) => (
+        {switchItems.map((item, i) => (
           <div
-            key={item}
+            key={i}
             className={classNames('newest__switch-item', { ['--active']: isAlbum === i })}
-            onClick={() => setIsAlbum(i)}
+            onClick={() => {
+              push(item.path);
+              setIsAlbum(i);
+            }}
           >
-            {item}
+            {item.label}
           </div>
         ))}
       </header>

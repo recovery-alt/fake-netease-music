@@ -45,7 +45,11 @@ const Img: React.FC<Props> = ({
   }, []);
 
   return (
-    <div ref={ref} className={classNames(styles.img)} style={style}>
+    <div
+      ref={ref}
+      className={classNames(styles.img, className && { [className]: loading })}
+      style={style}
+    >
       {visible && <img className={className} src={src} alt={alt} onLoad={handleOnload} />}
       {!banLoading && loading && <LoadingOutlined className={styles.img__loading} />}
       {!loading && icon && <PlayCircleFilled className={styles.img__play} />}
