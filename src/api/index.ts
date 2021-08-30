@@ -20,7 +20,6 @@ import {
   TopAlbumParams,
   Toplist,
   TopPlaylist,
-  User,
   VideoCategogy,
   VideoType,
   Comment,
@@ -48,8 +47,6 @@ export const getSongUrl = (id: number) => get<{ data: Song[] }>('/song/url', { i
 export const getLyric = (id: number | string) => get<Lyric>('/lyric', { id });
 
 export const getPersonalFM = () => get<{ data: Array<Music> }>('/personal_fm');
-
-type BeReplied = { beRepliedCommentId: number; content: string; user: User };
 
 export const getCommentMusic = (id: number | string, offset = 0) =>
   get<{ total: number; comments: Comment[]; hotComments: Comment[] }>('/comment/music', {

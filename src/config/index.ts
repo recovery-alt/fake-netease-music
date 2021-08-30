@@ -34,7 +34,7 @@ export const topMenuMap: Data<Array<MenuConfig>> = {
     {
       label: '最新音乐',
       component: lazy(() => import('@/views/find-music/views/newest')),
-      path: '/find-music/newest/:type?',
+      path: '/find-music/newest',
     },
   ],
   video: [

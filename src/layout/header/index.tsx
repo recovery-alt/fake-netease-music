@@ -35,7 +35,11 @@ const List: React.FC = () => {
     if (!pathname) return;
     const match = pathname.match(/(?<=\/)[\w-\d]+\b/);
     if (match?.[0]) setTopMenu(topMenuMap[match[0]] || []);
-    setActived(pathname);
+    let pathArr = pathname.split('/');
+    if (pathArr.length > 3) pathArr = pathArr.slice(0, 3);
+
+    // 前两位相等 即选中
+    setActived(pathArr.join('/'));
   }, [pathname]);
 
   function handleHistoryChange(next = false) {

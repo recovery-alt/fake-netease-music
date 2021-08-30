@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './footer.module.less';
 import {
   HeartOutlined,
@@ -11,20 +11,22 @@ import {
 } from '@ant-design/icons';
 import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, changeSong, setSong, nextFM, setCurrentTime } from '@/store';
+import { RootState, changeSong, setSong, nextFM, setCurrentTime, setShowDetail } from '@/store';
 import { formatMS } from '@/utils';
-import { useCurrentTime, useMusicList, usePause, usePlayMode, useLyric } from './hooks';
-import { Tooltip } from 'antd';
+import { useCurrentTime, useMusicList, usePause, usePlayMode, useLyric, useVolume } from './hooks';
+import { Tooltip, Slider } from 'antd';
 import { PlayMode } from '@/enum';
 import MusicDetail from '../music-detail';
 import MusicList from '../music-list';
 import { Music } from '@/types';
+import { useHistory } from 'react-router-dom';
 
 const List: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLProgressElement>(null);
   const dispatch = useDispatch();
-  const [showDetail, setShowDetail] = useState(false);
+  const { push } = useHistory();
+  const showDetail = useSelector((state: RootState) => state.controller.showDetail);
   const { listButtonRef, showList, setShowList } = useMusicList();
   const isFMMode = useSelector((state: RootState) => state.currentTrack.fm.length);
   const { lyricActived, setLyricActived } = useLyric();
@@ -50,6 +52,8 @@ const List: React.FC = () => {
   );
 
   const { playMode, handleIconClick, currentPlayMode } = usePlayMode();
+
+  const { volume, handleSliderChange, handleVolumeChange } = useVolume(audioRef);
 
   function transformMusic2Track(music: Music) {
     const { id, name, duration: dt, album: al, artists: ar } = music;
@@ -78,6 +82,12 @@ const List: React.FC = () => {
     }
 
     if (next) dispatch(nextFM());
+  }
+
+  function handleCoverClick() {
+    if (isFMMode) push('/fm');
+
+    dispatch(setShowDetail(!showDetail));
   }
 
   useEffect(() => {
@@ -109,12 +119,9 @@ const List: React.FC = () => {
               onPlay={() => handlePause(false)}
               onPause={() => handlePause(true)}
               onEnded={handlePlayEnded}
+              onVolumeChange={handleVolumeChange}
             />
-            <img
-              src={currentTrack.al.picUrl}
-              alt="music"
-              onClick={() => setShowDetail(!showDetail)}
-            />
+            <img src={currentTrack.al.picUrl} alt="music" onClick={handleCoverClick} />
             <div className={styles['footer__left-name']}>
               <div>
                 {currentTrack.name} -{' '}
@@ -150,7 +157,7 @@ const List: React.FC = () => {
         <Tooltip title={currentPlayMode.tip}>
           <currentPlayMode.icon onClick={handleIconClick} />
         </Tooltip>
-        {!isFMMode && (
+        {!isFMMode && currentTrack && (
           <UnorderedListOutlined ref={listButtonRef} onClick={() => setShowList(!showList)} />
         )}
         <span
@@ -159,9 +166,19 @@ const List: React.FC = () => {
         >
           词
         </span>
-        <SoundOutlined />
+        {currentTrack && (
+          <Tooltip
+            title={() => (
+              <div className={styles['footer__volume']}>
+                <Slider vertical value={volume} onChange={handleSliderChange} />
+              </div>
+            )}
+          >
+            <SoundOutlined />
+          </Tooltip>
+        )}
       </div>
-      <MusicDetail visible={showDetail} setVisible={setShowDetail} />
+      <MusicDetail visible={showDetail} />
       <MusicList visible={showList} setVisible={setShowList} target={listButtonRef.current} />
     </footer>
   );

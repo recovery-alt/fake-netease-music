@@ -77,6 +77,7 @@
 
   &__lyric {
     cursor: pointer;
+    user-select: none;
 
     &:hover {
       color: #000;
@@ -123,6 +124,16 @@
       &[tabindex]:hover {
         color: #f3c5c2;
       }
+    }
+  }
+
+  &__volume {
+    height: 100px;
+    padding-bottom: 10px;
+
+    > div {
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 }

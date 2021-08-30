@@ -34,7 +34,7 @@ const FM: React.FC = () => {
   ];
 
   useEffect(() => {
-    dispatch(setFM());
+    if (!currentMusic) dispatch(setFM());
   }, []);
 
   return (

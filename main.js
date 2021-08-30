@@ -13,7 +13,7 @@ function createWindow() {
     ? mainWindow.loadURL('http://localhost:3000')
     : mainWindow.loadFile(join(__dirname, 'dist/index.html'));
 
-  mainWindow.webContents.openDevTools();
+  isDev && mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {

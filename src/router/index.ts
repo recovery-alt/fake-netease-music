@@ -23,6 +23,10 @@ const routes: Array<RouteConfig> = [
         path: '/list/:id?',
         component: lazy(() => import('@/views/list')),
       },
+      {
+        component: lazy(() => import('@/views/find-music/views/newest')),
+        path: '/find-music/newest/:type?',
+      },
       ...Object.values(topMenuMap).flat(),
     ],
   },

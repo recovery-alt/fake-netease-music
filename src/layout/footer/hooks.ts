@@ -1,4 +1,12 @@
-import { useState, useMemo, useEffect, RefObject, MouseEventHandler, useRef } from 'react';
+import {
+  useState,
+  useMemo,
+  useEffect,
+  RefObject,
+  MouseEventHandler,
+  useRef,
+  ReactEventHandler,
+} from 'react';
 import { PlayCircleFilled, PauseCircleFilled } from '@ant-design/icons';
 import {
   RetweetOutlined,
@@ -85,4 +93,19 @@ export const useLyric = () => {
   const [lyricActived, setLyricActived] = useState(false);
 
   return { lyricActived, setLyricActived };
+};
+
+export const useVolume = (audioRef: RefObject<HTMLAudioElement>) => {
+  const [volume, setVolume] = useState(60);
+
+  const handleVolumeChange: ReactEventHandler<HTMLAudioElement> = e => {
+    setVolume(e.currentTarget.volume * 100);
+  };
+
+  const handleSliderChange = (value: number) => {
+    if (!audioRef?.current) return;
+    audioRef.current.volume = value / 100;
+  };
+
+  return { volume, setVolume, handleVolumeChange, handleSliderChange };
 };

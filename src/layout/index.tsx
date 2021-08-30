@@ -9,13 +9,17 @@ import NotFound from './not-found';
 import Scrollbar from '@/components/scrollbar';
 import { Spin } from 'antd';
 import { clearRequests } from '@/api/api';
+import { setShowDetail } from '@/store';
+import { useDispatch } from 'react-redux';
 
 type Props = { routes?: Array<RouteConfig> };
 
 const Layout: React.FC<Props> = ({ routes }) => {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(setShowDetail(false));
     clearRequests();
   }, [pathname]);
 

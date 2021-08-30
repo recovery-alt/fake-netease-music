@@ -16,7 +16,7 @@ import {
 } from '@ant-design/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import Scrollbar from '@/components/scrollbar';
-import Login from '@/components/login';
+import Login from '../login';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState, setUserInfoFromCache, setUserPlaylist } from '@/store';
 import { local } from '@/utils';

@@ -63,8 +63,10 @@ export const currentTrackReducer = createReducer<CurrentTrack>(
   { current: -1, tracks: [], fm: [] },
   builder => {
     builder.addCase(setCurrentTrack, (state, action) => {
-      const { current, tracks } = action.payload;
-      return { ...state, current, tracks };
+      const { current, tracks, fm } = action.payload;
+      // 重置fm里面的歌
+      fm.length = 0;
+      return { ...state, current, tracks, fm };
     });
 
     builder.addCase(setSong.fulfilled, (state, action) => {

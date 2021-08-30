@@ -5,7 +5,16 @@ import styleImport from 'vite-plugin-style-import';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  css: { preprocessorOptions: { less: { javascriptEnabled: true } } },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+        modifyVars: {
+          'primary-color': '#d33a31',
+        },
+      },
+    },
+  },
   resolve: { alias: { '@': '/src' } },
   plugins: [
     reactRefresh(),
