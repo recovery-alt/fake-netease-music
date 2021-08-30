@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch, changeSong, setSong, nextFM } from '@/store';
+import { RootState, changeSong, setSong, nextFM, setCurrentTime } from '@/store';
 import { formatMS } from '@/utils';
 import { useCurrentTime, useMusicList, usePause, usePlayMode, useLyric } from './hooks';
 import { Tooltip } from 'antd';
@@ -23,7 +23,7 @@ import { Music } from '@/types';
 const List: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLProgressElement>(null);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const [showDetail, setShowDetail] = useState(false);
   const { listButtonRef, showList, setShowList } = useMusicList();
   const isFMMode = useSelector((state: RootState) => state.currentTrack.fm.length);
@@ -43,7 +43,7 @@ const List: React.FC = () => {
 
   const song = useSelector((state: RootState) => state.currentTrack.song);
   const { PlayIcon, pause, handlePause } = usePause(audioRef, currentTrack);
-  const { currentTime, setCurrentTime, handleTimeUpdate, handleProgressClick } = useCurrentTime(
+  const { currentTime, handleTimeUpdate, handleProgressClick } = useCurrentTime(
     audioRef,
     progressRef,
     currentTrack?.dt
@@ -65,7 +65,7 @@ const List: React.FC = () => {
     if (!currentTrack) return;
     if (playMode === PlayMode.SOLO) return;
     if (playMode === PlayMode.IN_TURN && isLastSong) {
-      setCurrentTime(0);
+      dispatch(setCurrentTime(0));
     } else {
       dispatch(changeSong({ mode: playMode, next: true }));
     }

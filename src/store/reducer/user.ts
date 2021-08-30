@@ -5,8 +5,10 @@ import avatar from '@/assets/img/avatar.svg';
 import { to } from '@/utils';
 import { message } from 'antd';
 
+const prefix = (name: string) => `userInfo/${name}`;
+
 export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password: string }>(
-  'userInfo/set',
+  prefix('set'),
   async ({ phone, password }, { rejectWithValue }) => {
     const [err, res] = await to(loginCellphone({ phone, password }));
     if (err || !res) return rejectWithValue(null);
@@ -20,7 +22,7 @@ export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password:
   }
 );
 
-export const setUserInfoFromCache = createAction<UserInfo>('userInfo/setCache');
+export const setUserInfoFromCache = createAction<UserInfo>(prefix('setCache'));
 
 export const userReducer = createReducer<UserInfo>(
   { cookie: '', profile: { avatarUrl: avatar, nickname: '未登录', userId: 0 } },

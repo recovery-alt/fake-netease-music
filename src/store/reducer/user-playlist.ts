@@ -4,8 +4,10 @@ import { UserPlaylist } from '@/types';
 import { to } from '@/utils';
 import { message } from 'antd';
 
+const prefix = (name: string) => `userPlaylist/${name}`;
+
 export const setUserPlaylist = createAsyncThunk<{ playlist: UserPlaylist[] }, number>(
-  'userPlaylist/set',
+  prefix('set'),
   async (uid, { rejectWithValue }) => {
     const [err, res] = await to(getUserPlaylist(uid));
     if (err || !res) return rejectWithValue(null);
@@ -19,7 +21,7 @@ export const setUserPlaylist = createAsyncThunk<{ playlist: UserPlaylist[] }, nu
   }
 );
 
-export const setUserPlaylistFromCache = createAction<UserPlaylist>('userPlaylist/setCache');
+export const setUserPlaylistFromCache = createAction<UserPlaylist>(prefix('setCache'));
 
 export const userPlaylistReducer = createReducer<{ playlist: UserPlaylist[] }>(
   { playlist: [] },

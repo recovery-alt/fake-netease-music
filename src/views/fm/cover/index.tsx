@@ -1,11 +1,21 @@
 import React from 'react';
 import styles from './cover.module.less';
-import { PlayCircleFilled } from '@ant-design/icons';
+import { PlayCircleFilled, PauseCircleFilled } from '@ant-design/icons';
 import { Music } from '@/types';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch, setPause } from '@/store';
+import classNames from 'classnames';
 
 type Props = { current?: Music; next?: Music };
 
 const Cover: React.FC<Props> = ({ current, next }) => {
+  const pause = useSelector((state: RootState) => state.controller.pause);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handlePauseClick = () => {
+    dispatch(setPause(!pause));
+  };
+
   return (
     <>
       <div className={styles.cover}>
@@ -15,7 +25,12 @@ const Cover: React.FC<Props> = ({ current, next }) => {
         {current?.album.picUrl && (
           <div className={styles['cover__img']}>
             <img src={current?.album?.picUrl} alt="cover" />
-            <PlayCircleFilled />
+            <div
+              className={classNames(styles.cover__play, { [styles['--pause']]: !pause })}
+              onClick={handlePauseClick}
+            >
+              {pause ? <PlayCircleFilled /> : <PauseCircleFilled />}
+            </div>
           </div>
         )}
       </div>

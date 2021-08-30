@@ -9,7 +9,7 @@ import {
 import { PlayMode } from '@/enum';
 import { Track } from '@/types';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState, setPause } from '@/store';
+import { AppDispatch, RootState, setPause, setCurrentTime } from '@/store';
 
 export const usePause = (audio?: RefObject<HTMLAudioElement>, currentTrack?: Track) => {
   const pause = useSelector((state: RootState) => state.controller.pause);
@@ -34,10 +34,12 @@ export const useCurrentTime = (
   progressRef?: RefObject<HTMLProgressElement>,
   duration?: number
 ) => {
-  const [currentTime, setCurrentTime] = useState(0);
+  const currentTime = useSelector((state: RootState) => state.controller.currentTime);
+  const dispatch = useDispatch<AppDispatch>();
+
   const handleTimeUpdate = () => {
     if (!audioRef?.current) return;
-    setCurrentTime(audioRef.current.currentTime * 1000);
+    dispatch(setCurrentTime(audioRef.current.currentTime * 1000));
   };
 
   const handleProgressClick: MouseEventHandler<HTMLProgressElement> = e => {
@@ -47,10 +49,10 @@ export const useCurrentTime = (
 
     const currentTime = (((pageX - left) / width) * duration) / 1000;
     audioRef.current.currentTime = currentTime;
-    setCurrentTime(currentTime);
+    dispatch(setCurrentTime(currentTime));
   };
 
-  return { currentTime, setCurrentTime, handleTimeUpdate, handleProgressClick };
+  return { currentTime, handleTimeUpdate, handleProgressClick };
 };
 
 export const usePlayMode = () => {

@@ -23,17 +23,27 @@
     left: 40px;
     position: absolute;
     width: 270px;
+  }
+
+  &__play {
+    cursor: pointer;
+    font-size: 50px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease-in-out;
 
     span {
       background-color: var(--primary-color);
       border-radius: 50%;
       color: #fff;
-      cursor: pointer;
-      font-size: 50px;
-      left: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
+    }
+
+    &.--pause {
+      left: 95%;
+      top: 95%;
+      transform: translate(-95%, -95%);
     }
   }
 }

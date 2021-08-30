@@ -11,6 +11,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { VerticalAlignMiddleOutlined } from '@ant-design/icons';
 import Recommend from './recommend';
+import {
+  HeartOutlined,
+  DeleteOutlined,
+  VerticalLeftOutlined,
+  MoreOutlined,
+} from '@ant-design/icons';
 
 type Props = { visible: boolean; setVisible: (visible: boolean) => void };
 
@@ -21,6 +27,12 @@ const MusicDetail: React.FC<Props> = ({ visible, setVisible }) => {
     if (current < 0 || fm.length > 0) return;
     if (tracks[current]) return transformTrack2Music(tracks[current]);
   });
+  const data = [
+    { icon: HeartOutlined },
+    { icon: DeleteOutlined },
+    { icon: VerticalLeftOutlined },
+    { icon: MoreOutlined },
+  ];
 
   function transformTrack2Music(track: Track): Music {
     const { name, id, dt: duration, al: album, ar: artists } = track;
@@ -39,7 +51,7 @@ const MusicDetail: React.FC<Props> = ({ visible, setVisible }) => {
           <section className={styles['music-detail__player']}>
             <div>
               <Cover img={currentMusic.album.picUrl} pause={pause} />
-              <ButtonGroup />
+              <ButtonGroup data={data} />
             </div>
             <Lyric music={currentMusic} />
           </section>

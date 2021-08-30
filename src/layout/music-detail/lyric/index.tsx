@@ -4,18 +4,23 @@ import Scrollbar from '@/components/scrollbar';
 import { QuestionOutlined } from '@ant-design/icons';
 import { Music } from '@/types';
 import { getLyric } from '@/api';
+import { resolveLyricTime } from '@/utils';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 type Props = { music: Music };
 
 const Lyric: React.FC<Props> = ({ music }) => {
-  type LyricItem = { timestamp: string; value: string };
+  type LyricItem = { rawTimestamp: string; timestamp: number[]; value: string };
   const [lyrics, setLyrics] = useState<LyricItem[]>([]);
+  const currentTime = useSelector((state: RootState) => state.controller.currentTime);
 
   function transLyric2Arr(lyric: string) {
     const result: Array<LyricItem> = [];
     lyric.replace(/((?:\[\d{2}:\d{2}\.\d{2}\])+)(.*)(?=\n)/g, ($1, $2, value) => {
-      const timestamp = $2.match(/(?<=\[)\d{2}:\d{2}\.\d{2}(?=\])/g);
-      result.push({ timestamp, value });
+      const matcher = $2.match(/(?<=\[)\d{2}:\d{2}\.\d{2}(?=\])/g) as [];
+      const timestamp = matcher.map(item => resolveLyricTime(item));
+      result.push({ rawTimestamp: $2, timestamp, value });
       return '';
     });
     return result;
@@ -28,6 +33,11 @@ const Lyric: React.FC<Props> = ({ music }) => {
       setLyrics(nolyric ? [] : transLyric2Arr(lrc.lyric));
     });
   }, [music?.id]);
+
+  useEffect(() => {
+    if (!lyrics.length) return;
+  }, [currentTime, lyrics]);
+
   return (
     <div className={styles.lyric}>
       <h2>
@@ -52,7 +62,7 @@ const Lyric: React.FC<Props> = ({ music }) => {
         {lyrics.length > 0 ? (
           <Scrollbar className={styles.lyric__wrapper}>
             {lyrics.map(lyric => (
-              <p key={lyric.timestamp}>{lyric.value}</p>
+              <p key={lyric.rawTimestamp}>{lyric.value}</p>
             ))}
           </Scrollbar>
         ) : (

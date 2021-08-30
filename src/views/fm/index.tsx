@@ -5,7 +5,13 @@ import Lyric from '@/layout/music-detail/lyric';
 import ButtonGroup from '@/layout/music-detail/button-group';
 import CommentGroup from '@/layout/music-detail/comment-group';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState, setFM } from '@/store';
+import { AppDispatch, RootState, setFM, nextFM } from '@/store';
+import {
+  HeartOutlined,
+  DeleteOutlined,
+  VerticalLeftOutlined,
+  MoreOutlined,
+} from '@ant-design/icons';
 
 const FM: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,6 +20,18 @@ const FM: React.FC = () => {
     if (!fm[current]) return [];
     return [fm[current], fm[current + 1]];
   });
+
+  const data = [
+    { icon: HeartOutlined },
+    { icon: DeleteOutlined },
+    {
+      icon: VerticalLeftOutlined,
+      event: () => {
+        dispatch(nextFM());
+      },
+    },
+    { icon: MoreOutlined },
+  ];
 
   useEffect(() => {
     dispatch(setFM());
@@ -24,7 +42,7 @@ const FM: React.FC = () => {
       <section className="fm__player">
         <div className="fm__cover-wrapper">
           <Cover current={currentMusic} next={preMusic} />
-          <ButtonGroup />
+          <ButtonGroup data={data} />
         </div>
         <Lyric music={currentMusic} />
       </section>

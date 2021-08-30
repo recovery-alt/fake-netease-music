@@ -4,12 +4,16 @@ import { to } from '@/utils';
 import { PlayMode } from '@/enum';
 import { message } from 'antd';
 import { Music, Track, Song } from '@/types';
+import { RootState } from '..';
 
 type CurrentTrack = { current: number; tracks: Track[]; song?: Song; fm: Music[] };
 
-export const setCurrentTrack = createAction<CurrentTrack>('currentTrack/set');
+const prefix = (name: string) => `currentTrack/${name}`;
+
+export const setCurrentTrack = createAction<CurrentTrack>(prefix('set'));
+
 export const setSong = createAsyncThunk<Song, number>(
-  'currentTrack/setSong',
+  prefix('setSong'),
   async (id, { rejectWithValue }) => {
     const [err, res] = await to(getSongUrl(id));
     if (err || !res) return rejectWithValue(null);
@@ -26,24 +30,34 @@ export const setSong = createAsyncThunk<Song, number>(
     }
   }
 );
-export const changeSong =
-  createAction<{ next: boolean; mode: PlayMode }>('currentTrack/changeSong');
 
-export const changeCurrent = createAction<number>('currentTrack/changeCurrent');
+export const changeSong = createAction<{ next: boolean; mode: PlayMode }>(prefix('changeSong'));
 
-export const setFM = createAsyncThunk('currentTrack/setFM', async (id, { rejectWithValue }) => {
+export const changeCurrent = createAction<number>(prefix('changeCurrent'));
+
+export const setFM = createAsyncThunk(prefix('setFM'), async (id, { rejectWithValue }) => {
   const [err, res] = await to(getPersonalFM());
   if (err || !res) return rejectWithValue(null);
   const { code, data } = res;
 
-  if (code === 200 && data.length) {
-    return data;
-  } else {
-    return rejectWithValue(null);
-  }
+  return code === 200 && data.length ? data : rejectWithValue(null);
 });
 
-export const nextFM = createAction('currentTrack/nextFM');
+export const nextFM = createAsyncThunk<CurrentTrack, void, { state: RootState }>(
+  prefix('nextFM'),
+  async (id, { getState, dispatch }) => {
+    const state = getState();
+    const { currentTrack } = state;
+    const { fm, current } = currentTrack;
+    const newCurrentTrack = { ...currentTrack };
+    const len = fm.length;
+    if (len === current + 1) await dispatch(setFM());
+    newCurrentTrack.current++;
+    newCurrentTrack.current %= len;
+
+    return newCurrentTrack;
+  }
+);
 
 export const currentTrackReducer = createReducer<CurrentTrack>(
   { current: -1, tracks: [], fm: [] },
@@ -96,7 +110,7 @@ export const currentTrackReducer = createReducer<CurrentTrack>(
       return state;
     });
 
-    builder.addCase(nextFM, state => {
+    builder.addCase(nextFM.fulfilled, state => {
       const newState = { ...state };
       newState.current++;
 

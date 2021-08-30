@@ -50,3 +50,11 @@ export const wrapNumber = (num?: number) => {
 export const noop = () => {};
 
 export const formatMS = (timestamp: number | string) => dayjs(timestamp).format('mm:ss');
+
+export const resolveLyricTime = (time: string) => {
+  const timeArr = time.split(':');
+  const minute = Number(timeArr[0]);
+  const second = Number(timeArr[1]);
+  const result = minute * 60 + second;
+  return Number.isNaN(result) ? 0 : result * 1000;
+};
