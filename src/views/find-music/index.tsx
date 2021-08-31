@@ -29,6 +29,10 @@ const FindMusic: React.FC = () => {
     });
   }
 
+  function handleBannerClick(id: number) {
+    console.log(id);
+  }
+
   useEffect(() => {
     getBanner().then(res => {
       setBanner(res.banners);
@@ -85,7 +89,7 @@ const FindMusic: React.FC = () => {
 
   return (
     <div className="find-music">
-      <Banner data={banner} />
+      <Banner data={banner} onBannerClick={handleBannerClick} />
       <Title name="推荐歌单" />
       <Card data={personalized} />
       <Title name="独家放送" welt />

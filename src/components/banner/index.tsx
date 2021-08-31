@@ -7,9 +7,10 @@ import Img from '@/components/img';
 
 type Props = {
   data: BannerType[];
+  onBannerClick?: (id: number) => void;
 };
 
-const Banner: React.FC<Props> = ({ data }) => {
+const Banner: React.FC<Props> = ({ data, onBannerClick }) => {
   const [current, setCurrent] = useState<number>(0);
   const len = data.length;
 
@@ -36,6 +37,7 @@ const Banner: React.FC<Props> = ({ data }) => {
           key={item.imageUrl}
           banLoading
           className={classNames(styles.banner__item, getState(i))}
+          onClick={() => onBannerClick?.(item.targetId)}
         />
       ))}
       <div className={styles['banner__dot-wrapper']}>

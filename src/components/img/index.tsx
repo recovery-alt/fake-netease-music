@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, ReactEventHandler } from 'react';
 import styles from './img.module.less';
 import classNames from 'classnames';
 import { AppProps } from '@/types';
@@ -9,6 +9,7 @@ interface Props extends AppProps {
   icon?: boolean;
   alt?: string;
   banLoading?: boolean;
+  onClick?: ReactEventHandler<HTMLDivElement>;
 }
 
 const Img: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const Img: React.FC<Props> = ({
   className,
   src,
   icon = false,
+  onClick,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -49,6 +51,7 @@ const Img: React.FC<Props> = ({
       ref={ref}
       className={classNames(styles.img, className && { [className]: loading })}
       style={style}
+      onClick={onClick}
     >
       {visible && <img className={className} src={src} alt={alt} onLoad={handleOnload} />}
       {!banLoading && loading && <LoadingOutlined className={styles.img__loading} />}

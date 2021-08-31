@@ -16,7 +16,7 @@ export type UserPlaylist = {
   tags: string[];
 };
 
-export type BannerType = { imageUrl: string };
+export type BannerType = { imageUrl: string; targetId: number };
 
 export type Personalized = { id: number; name: string; picUrl: string };
 
