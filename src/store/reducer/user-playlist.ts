@@ -1,10 +1,11 @@
-import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getUserPlaylist } from '@/api';
 import { UserPlaylist } from '@/types';
 import { to } from '@/utils';
 import { message } from 'antd';
 
-const prefix = (name: string) => `userPlaylist/${name}`;
+const prefix = (name?: string) => ('userPlaylist' + name ? `/${name}` : '');
+const initialState: { playlist: UserPlaylist[] } = { playlist: [] };
 
 export const setUserPlaylist = createAsyncThunk<{ playlist: UserPlaylist[] }, number>(
   prefix('set'),
@@ -21,11 +22,11 @@ export const setUserPlaylist = createAsyncThunk<{ playlist: UserPlaylist[] }, nu
   }
 );
 
-export const setUserPlaylistFromCache = createAction<UserPlaylist>(prefix('setCache'));
-
-export const userPlaylistReducer = createReducer<{ playlist: UserPlaylist[] }>(
-  { playlist: [] },
-  builder => {
+const { reducer } = createSlice({
+  name: prefix(),
+  initialState,
+  reducers: {},
+  extraReducers(builder) {
     builder.addCase(setUserPlaylist.fulfilled, (state, action) => {
       return { ...state, ...action.payload };
     });
@@ -34,5 +35,7 @@ export const userPlaylistReducer = createReducer<{ playlist: UserPlaylist[] }>(
       message.error('获取歌单列表失败，请稍后重试～');
       return state;
     });
-  }
-);
+  },
+});
+
+export { reducer as userPlaylistReducer };

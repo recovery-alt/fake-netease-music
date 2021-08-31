@@ -1,4 +1,4 @@
-import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getSongUrl, getPersonalFM } from '@/api';
 import { to } from '@/utils';
 import { PlayMode } from '@/enum';
@@ -9,8 +9,7 @@ import { RootState } from '..';
 type CurrentTrack = { current: number; tracks: Track[]; song?: Song; fm: Music[] };
 
 const prefix = (name: string) => `currentTrack/${name}`;
-
-export const setCurrentTrack = createAction<CurrentTrack>(prefix('set'));
+const initialState: CurrentTrack = { current: -1, tracks: [], fm: [] };
 
 export const setSong = createAsyncThunk<Song, number>(
   prefix('setSong'),
@@ -30,10 +29,6 @@ export const setSong = createAsyncThunk<Song, number>(
     }
   }
 );
-
-export const changeSong = createAction<{ next: boolean; mode: PlayMode }>(prefix('changeSong'));
-
-export const changeCurrent = createAction<number>(prefix('changeCurrent'));
 
 export const setFM = createAsyncThunk(prefix('setFM'), async (id, { rejectWithValue }) => {
   const [err, res] = await to(getPersonalFM());
@@ -59,25 +54,17 @@ export const nextFM = createAsyncThunk<CurrentTrack, void, { state: RootState }>
   }
 );
 
-export const currentTrackReducer = createReducer<CurrentTrack>(
-  { current: -1, tracks: [], fm: [] },
-  builder => {
-    builder.addCase(setCurrentTrack, (state, action) => {
+const { reducer, actions } = createSlice({
+  name: 'currentTrack',
+  initialState,
+  reducers: {
+    setCurrentTrack(state, action: PayloadAction<CurrentTrack>) {
       const { current, tracks, fm } = action.payload;
       // 重置fm里面的歌
       fm.length = 0;
       return { ...state, current, tracks, fm };
-    });
-
-    builder.addCase(setSong.fulfilled, (state, action) => {
-      return { ...state, song: action.payload };
-    });
-
-    builder.addCase(setSong.rejected, state => {
-      return state;
-    });
-
-    builder.addCase(changeSong, (state, action) => {
+    },
+    changeSong(state, action: PayloadAction<{ next: boolean; mode: PlayMode }>) {
       const getRandomPlayIndex = (len: number) => Math.floor((len - 1) * Math.random());
       const { mode, next } = action.payload;
       const { tracks, current } = state;
@@ -93,12 +80,20 @@ export const currentTrackReducer = createReducer<CurrentTrack>(
       const newState = { ...state };
       newState.current = index;
       return newState;
-    });
-
-    builder.addCase(changeCurrent, (state, action) => {
+    },
+    changeCurrent(state, action: PayloadAction<number>) {
       const newState = { ...state };
       newState.current = action.payload;
       return newState;
+    },
+  },
+  extraReducers(builder) {
+    builder.addCase(setSong.fulfilled, (state, action) => {
+      return { ...state, song: action.payload };
+    });
+
+    builder.addCase(setSong.rejected, state => {
+      return state;
     });
 
     builder.addCase(setFM.fulfilled, (state, action) => {
@@ -118,5 +113,9 @@ export const currentTrackReducer = createReducer<CurrentTrack>(
 
       return newState;
     });
-  }
-);
+  },
+});
+
+export const { setCurrentTrack, changeSong, changeCurrent } = actions;
+
+export { reducer as currentTrackReducer };

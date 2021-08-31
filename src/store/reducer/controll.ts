@@ -1,34 +1,30 @@
-import { createAction, createReducer } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Controller = { pause: boolean; currentTime: number; showDetail: boolean };
 
-const prefix = (name: string) => `controller/${name}`;
+const initialState: Controller = { pause: true, currentTime: 0, showDetail: false };
 
-export const setPause = createAction<boolean>(prefix('setPause'));
-
-export const setCurrentTime = createAction<number>(prefix('setCurrentTime'));
-
-export const setShowDetail = createAction<boolean>(prefix('setShowDetail'));
-
-export const controllerReducer = createReducer<Controller>(
-  { pause: true, currentTime: 0, showDetail: false },
-  builder => {
-    builder.addCase(setPause, (state, action) => {
+const { reducer: controllerReducer, actions } = createSlice({
+  name: 'controller',
+  initialState,
+  reducers: {
+    setPause(state, action: PayloadAction<boolean>) {
       const newState = { ...state };
       newState.pause = action.payload;
       return newState;
-    });
-
-    builder.addCase(setCurrentTime, (state, action) => {
+    },
+    setCurrentTime(state, action: PayloadAction<number>) {
       const newState = { ...state };
       newState.currentTime = action.payload;
       return newState;
-    });
-
-    builder.addCase(setShowDetail, (state, action) => {
+    },
+    setShowDetail(state, action: PayloadAction<boolean>) {
       const newState = { ...state };
       newState.showDetail = action.payload;
       return newState;
-    });
-  }
-);
+    },
+  },
+});
+
+export const { setPause, setCurrentTime, setShowDetail } = actions;
+export { controllerReducer };

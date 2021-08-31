@@ -1,11 +1,11 @@
-import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { loginCellphone } from '@/api';
 import { UserInfo } from '@/types';
 import avatar from '@/assets/img/avatar.svg';
 import { to } from '@/utils';
 import { message } from 'antd';
 
-const prefix = (name: string) => `userInfo/${name}`;
+const prefix = (name?: string) => ('userInfo' + name ? `/${name}` : '');
 
 export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password: string }>(
   prefix('set'),
@@ -22,11 +22,15 @@ export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password:
   }
 );
 
-export const setUserInfoFromCache = createAction<UserInfo>(prefix('setCache'));
-
-export const userReducer = createReducer<UserInfo>(
-  { cookie: '', profile: { avatarUrl: avatar, nickname: '未登录', userId: 0 } },
-  builder => {
+const { reducer, actions } = createSlice({
+  name: prefix(),
+  initialState: { cookie: '', profile: { avatarUrl: avatar, nickname: '未登录', userId: 0 } },
+  reducers: {
+    setUserInfoFromCache(state, action: PayloadAction<UserInfo>) {
+      return { ...state, ...action.payload };
+    },
+  },
+  extraReducers(builder) {
     builder.addCase(setUserInfo.fulfilled, (state, action) => {
       return { ...state, ...action.payload };
     });
@@ -34,8 +38,8 @@ export const userReducer = createReducer<UserInfo>(
       message.error('登录失败，请稍后重试～');
       return state;
     });
-    builder.addCase(setUserInfoFromCache, (state, action) => {
-      return { ...state, ...action.payload };
-    });
-  }
-);
+  },
+});
+
+export const { setUserInfoFromCache } = actions;
+export { reducer as userReducer };
