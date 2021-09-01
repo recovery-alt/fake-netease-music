@@ -1,12 +1,18 @@
-import React, { useRef, useEffect, useState, ReactEventHandler } from 'react';
+import React, { useRef, useEffect, useState, ReactEventHandler, useMemo } from 'react';
 import styles from './img.module.less';
 import classNames from 'classnames';
 import { AppProps } from '@/types';
 import { PlayCircleFilled, LoadingOutlined } from '@ant-design/icons';
 
+export type IconOptions = {
+  size?: 'small' | 'medium' | 'large';
+  placement?: 'center' | 'bottom';
+  hoverDisplay?: boolean;
+};
+
 interface Props extends AppProps {
   src: string;
-  icon?: boolean;
+  icon?: boolean | IconOptions;
   alt?: string;
   banLoading?: boolean;
   onClick?: ReactEventHandler<HTMLDivElement>;
@@ -24,6 +30,14 @@ const Img: React.FC<Props> = ({
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [showIcon, setShowIcon] = useState(false);
+
+  const iconConfig = useMemo(() => {
+    const defaultOptions = { size: 'small', placement: 'center', hoverDisplay: false };
+    if (icon === false) return false;
+    if (icon === true) return defaultOptions;
+    return { ...defaultOptions, ...icon };
+  }, [icon]);
 
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -53,9 +67,27 @@ const Img: React.FC<Props> = ({
       style={style}
       onClick={onClick}
     >
-      {visible && <img className={className} src={src} alt={alt} onLoad={handleOnload} />}
+      {visible && (
+        <img
+          className={className}
+          src={src}
+          alt={alt}
+          onLoad={handleOnload}
+          onMouseMove={() => setShowIcon(true)}
+          onMouseLeave={() => setShowIcon(false)}
+        />
+      )}
       {!banLoading && loading && <LoadingOutlined className={styles.img__loading} />}
-      {!loading && icon && <PlayCircleFilled className={styles.img__play} />}
+      {!loading && iconConfig && (
+        <PlayCircleFilled
+          className={classNames(
+            styles.img__play,
+            styles[`--${iconConfig.size}`],
+            styles[`--${iconConfig.placement}`],
+            { [styles['--show']]: !iconConfig.hoverDisplay || showIcon }
+          )}
+        />
+      )}
     </div>
   );
 };

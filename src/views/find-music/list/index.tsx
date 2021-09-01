@@ -11,9 +11,10 @@ type Props = {
   data: ListData[];
   size?: 'default' | 'medium' | 'large';
   functionChildren?: (params: ListParams) => ReactNode;
+  onItemClick?: (id: number) => void;
 };
 
-const List: React.FC<Props> = ({ data, functionChildren, size = 'default' }) => {
+const List: React.FC<Props> = ({ data, functionChildren, size = 'default', onItemClick }) => {
   const len = data.length;
   const newData = [data.slice(0, len / 2), data.slice(len / 2, len)];
 
@@ -22,9 +23,14 @@ const List: React.FC<Props> = ({ data, functionChildren, size = 'default' }) => 
       {newData.map((val, i) => (
         <div key={i} className={styles.list__col}>
           {val.map((item, j) => (
-            <div key={j} className={styles.list__item}>
+            <div key={j} className={styles.list__item} onDoubleClick={() => onItemClick?.(item.id)}>
               <div className={classNames(styles['list__img-wrapper'], styles[`--${size}`])}>
-                <Img className={styles.list__img} src={item.imgUrl} icon />
+                <Img
+                  className={styles.list__img}
+                  src={item.imgUrl}
+                  icon
+                  onClick={() => onItemClick?.(item.id)}
+                />
               </div>
               {functionChildren?.({ item, i, j, len })}
             </div>

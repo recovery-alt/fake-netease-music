@@ -45,6 +45,7 @@
     align-items: center;
     display: flex;
     height: 40px;
+    max-width: 320px;
 
     img {
       border-radius: 4px;
@@ -56,6 +57,9 @@
     &-name {
       height: 100%;
       margin-left: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
       div {
         height: 20px;

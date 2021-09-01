@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getSongUrl, getPersonalFM } from '@/api';
+import { getSongUrl, getPersonalFM, getSongDetail } from '@/api';
 import { to } from '@/utils';
 import { PlayMode } from '@/enum';
 import { message } from 'antd';
@@ -40,17 +40,29 @@ export const setFM = createAsyncThunk(prefix('setFM'), async (id, { rejectWithVa
 
 export const nextFM = createAsyncThunk<CurrentTrack, void, { state: RootState }>(
   prefix('nextFM'),
-  async (id, { getState, dispatch }) => {
+  async (id, { getState, dispatch, rejectWithValue }) => {
     const state = getState();
     const { currentTrack } = state;
     const { fm, current } = currentTrack;
     const newCurrentTrack = { ...currentTrack };
     const len = fm.length;
-    if (len === current + 1) await dispatch(setFM());
+    if (len === current + 1) {
+      const [err] = await to(dispatch(setFM()));
+      if (err) return rejectWithValue(null);
+    }
     newCurrentTrack.current++;
     newCurrentTrack.current %= len;
 
     return newCurrentTrack;
+  }
+);
+
+export const insertSong = createAsyncThunk<{ songs: Track[] }, number>(
+  prefix('insertSong'),
+  async (id, { rejectWithValue, dispatch }) => {
+    const [err, res] = await to(Promise.all([getSongDetail(id), dispatch(setSong(id))]));
+    if (err || !res?.[0]) return rejectWithValue(null);
+    return res[0];
   }
 );
 
@@ -112,6 +124,30 @@ const { reducer, actions } = createSlice({
       newState.current++;
 
       return newState;
+    });
+
+    builder.addCase(nextFM.rejected, state => {
+      return state;
+    });
+
+    builder.addCase(insertSong.fulfilled, (state, action) => {
+      const newState = { ...state };
+      newState.fm = [];
+      newState.tracks = [...newState.tracks];
+      let needSetCurrent = false;
+      action.payload.songs.forEach(song => {
+        if (!newState.tracks.find(track => song.id === track.id)) {
+          newState.tracks.push(song);
+          needSetCurrent = true;
+        }
+      });
+
+      if (needSetCurrent) newState.current = newState.tracks.length - 1;
+      return newState;
+    });
+
+    builder.addCase(insertSong.rejected, state => {
+      return state;
     });
   },
 });

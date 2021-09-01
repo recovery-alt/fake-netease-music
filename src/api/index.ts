@@ -23,6 +23,7 @@ import {
   VideoCategogy,
   VideoType,
   Comment,
+  Track,
 } from '@/types';
 import { get } from './api';
 
@@ -124,3 +125,6 @@ export const getSimiSong = (id: number) => get<{ songs: Music[] }>('/simi/song',
 
 export const getTopPlaylistHighquality = (cat = '全部', limit = 1) =>
   get<{ playlists: Playlist[] }>('/top/playlist/highquality', { cat, limit });
+
+export const getSongDetail = (ids: string | number) =>
+  get<{ songs: Track[] }>('/song/detail', { ids });

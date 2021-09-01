@@ -13,6 +13,9 @@ import {
   getPPList,
 } from '@/api';
 import { BannerType, Personalized } from '@/types';
+import { useDispatch } from 'react-redux';
+import { insertSong } from '@/store';
+import { useHistory } from 'react-router-dom';
 
 const FindMusic: React.FC = () => {
   const [banner, setBanner] = useState<BannerType[]>([]);
@@ -21,6 +24,8 @@ const FindMusic: React.FC = () => {
   const [personalizedMV, setPersonalizedMV] = useState<CardData[]>([]);
   const [albumNewest, setAlbumNewest] = useState<ListData[]>([]);
   const [djToplist, setDJToplist] = useState<ListData[]>([]);
+  const dispatch = useDispatch();
+  const { push } = useHistory();
 
   function CardDataAdapter(personalizedList: Personalized[]) {
     return personalizedList.map(item => {
@@ -29,8 +34,12 @@ const FindMusic: React.FC = () => {
     });
   }
 
-  function handleBannerClick(id: number) {
-    console.log(id);
+  function handleSongInserted(id: number) {
+    dispatch(insertSong(id));
+  }
+
+  function handlePersonalizedItemClick(id: number) {
+    push(`/list/${id}`);
   }
 
   useEffect(() => {
@@ -89,13 +98,21 @@ const FindMusic: React.FC = () => {
 
   return (
     <div className="find-music">
-      <Banner data={banner} onBannerClick={handleBannerClick} />
+      <Banner data={banner} onBannerClick={handleSongInserted} />
       <Title name="推荐歌单" />
-      <Card data={personalized} />
+      <Card
+        data={personalized}
+        icon={{ size: 'medium', hoverDisplay: true, placement: 'bottom' }}
+        onItemClick={handlePersonalizedItemClick}
+      />
       <Title name="独家放送" welt />
       <Card type="rectangle" data={privateList} />
       <Title name="最新音乐" />
-      <List data={albumNewest} functionChildren={renderAlbumNewest} />
+      <List
+        data={albumNewest}
+        functionChildren={renderAlbumNewest}
+        onItemClick={handleSongInserted}
+      />
       <Title name="推荐MV" />
       <Card type="rectangle" data={personalizedMV} />
       <Title name="主播电台" welt />
