@@ -45,7 +45,7 @@ const Banner: React.FC<Props> = ({ data, onBannerClick }) => {
           <div
             key={item.imageUrl}
             onMouseMove={() => setCurrent(i)}
-            className={classNames(styles.banner__dot, { [styles['--actived']]: i === current })}
+            className={classNames(styles.banner__dot, { [styles['--active']]: i === current })}
           ></div>
         ))}
       </div>

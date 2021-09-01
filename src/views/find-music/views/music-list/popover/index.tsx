@@ -4,17 +4,32 @@ import { Subcategory } from '@/types';
 import { getAllMusicCategory } from '@/api';
 import { GlobalOutlined } from '@ant-design/icons';
 import styles from './popover.module.less';
+import classNames from 'classnames';
 
-type Props = { setShowPopover: (show: boolean) => void; button: HTMLButtonElement | null };
+type Props = {
+  cat: string;
+  setCat: (cat: string) => void;
+  setShowPopover: (show: boolean) => void;
+  button: HTMLButtonElement | null;
+};
 
-const Popover: React.FC<Props> = ({ button, setShowPopover }) => {
+const Popover: React.FC<Props> = ({ cat, setCat, button, setShowPopover }) => {
   type MusicCategoryType = { name: string; data: Subcategory[] };
   const [allMusicCategory, setAllMusicCategory] = useState<MusicCategoryType[]>([]);
   const ref = useRef<HTMLDivElement>(null);
 
+  function handleItemClick(cat: string) {
+    setCat(cat);
+    setShowPopover(false);
+  }
+
   useClickAway(ref, e => {
     if (e.target !== button) setShowPopover(false);
   });
+
+  useEffect(() => {
+    console.log(cat);
+  }, [cat]);
 
   useEffect(() => {
     (async () => {
@@ -37,7 +52,12 @@ const Popover: React.FC<Props> = ({ button, setShowPopover }) => {
   return (
     <div ref={ref} className={styles.popover}>
       <header className={styles.popover__header}>
-        <button>全部歌单</button>
+        <button
+          className={classNames({ [styles['--active']]: cat === '全部' })}
+          onClick={() => handleItemClick('全部')}
+        >
+          全部歌单
+        </button>
       </header>
       {allMusicCategory.map(item => (
         <section key={item.name} className={styles.popover__item}>
@@ -47,7 +67,13 @@ const Popover: React.FC<Props> = ({ button, setShowPopover }) => {
           </div>
           <div className={styles.popover__right}>
             {item.data.map(sub => (
-              <div key={sub.name} className={styles.popover__label}>
+              <div
+                key={sub.name}
+                className={classNames(styles.popover__label, {
+                  [styles['--active']]: sub.name === cat,
+                })}
+                onClick={() => handleItemClick(sub.name)}
+              >
                 <span>{sub.name}</span>
                 {sub.hot && <strong>HOT</strong>}
               </div>

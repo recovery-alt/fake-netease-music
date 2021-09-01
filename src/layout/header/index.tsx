@@ -14,7 +14,7 @@ import { Link, useLocation, useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 
 const List: React.FC = () => {
-  const [actived, setActived] = useState('');
+  const [active, setActived] = useState('');
   const [topMenu, setTopMenu] = useState<Array<MenuConfig>>([]);
   const { pathname } = useLocation();
   const { go, push } = useHistory();
@@ -63,7 +63,7 @@ const List: React.FC = () => {
           {topMenu.map(item => (
             <li
               key={item.path}
-              className={classNames({ [styles['--actived']]: item.path === actived })}
+              className={classNames({ [styles['--active']]: item.path === active })}
             >
               <Link to={item.path} onClick={() => setActived(item.path)}>
                 {item.label}

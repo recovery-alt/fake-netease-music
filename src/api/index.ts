@@ -59,8 +59,9 @@ export const getMusicCategory = () => get<{ tags: Playlist[] }>('/playlist/hot')
 
 export const getAllMusicCategory = () => get<PlaylistCatlist>('/playlist/catlist');
 
-export const getTopPlaylist = (params: { offset?: number; limit?: number }) =>
-  get<{ total: number; playlists: TopPlaylist[] }>('/top/playlist', params);
+type TopPlaylistParams = { offset?: number; limit?: number; cat?: string };
+export const getTopPlaylist = ({ offset, limit, cat }: TopPlaylistParams) =>
+  get<{ total: number; playlists: TopPlaylist[] }>('/top/playlist', { cat, offset, limit });
 
 export const getDJCatelist = () => get<{ categories: DJCatelist[] }>('/dj/catelist');
 
@@ -123,7 +124,7 @@ export const getSimiPlaylist = (id: number) =>
 
 export const getSimiSong = (id: number) => get<{ songs: Music[] }>('/simi/song', { id });
 
-export const getTopPlaylistHighquality = (cat = '全部', limit = 1) =>
+export const getTopPlaylistHighquality = (cat: string, limit = 1) =>
   get<{ playlists: Playlist[] }>('/top/playlist/highquality', { cat, limit });
 
 export const getSongDetail = (ids: string | number) =>

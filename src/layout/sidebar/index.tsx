@@ -103,12 +103,12 @@ const List: React.FC = () => {
   };
 
   const Item: React.FC<ItemProps> = ({ menu, index }) => {
-    const actived = judgeSelected(selected, index);
+    const active = judgeSelected(selected, index);
     return (
       <div
         key={menu.path}
         className={classNames(styles.sidebar__item, {
-          [styles['--actived']]: actived,
+          [styles['--active']]: active,
         })}
         onClick={() => handleMenuClick({ menu, index })}
       >

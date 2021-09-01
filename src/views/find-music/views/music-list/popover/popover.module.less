@@ -26,11 +26,20 @@
     padding: 12px 20px;
 
     button {
-      background-color: #fdf6f5;
       border: 0;
-      color: var(--primary-color);
+      border: 15px;
       height: 30px;
       width: 80px;
+
+      &:hover {
+        background-color: transparent;
+        color: var(--primary-color);
+      }
+    }
+
+    .--active {
+      background-color: #fdf6f5;
+      color: var(--primary-color);
     }
   }
 
@@ -61,7 +70,9 @@
   }
 
   &__label {
+    border-radius: 15px;
     cursor: pointer;
+    height: 30px;
     margin-bottom: 24px;
     width: 100px;
 
@@ -72,7 +83,8 @@
       transform: translate(-5px, -3px) scale(0.5);
     }
 
-    &:hover {
+    &:hover,
+    &.--active {
       color: var(--primary-color);
     }
   }

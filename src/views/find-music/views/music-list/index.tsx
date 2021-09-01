@@ -1,18 +1,27 @@
 import React, { useEffect, useState, useRef } from 'react';
-import './list.less';
+import './music-list.less';
 import { CrownOutlined, RightOutlined } from '@ant-design/icons';
-import { getMusicCategory, getTopPlaylistHighquality } from '@/api';
+import { getMusicCategory } from '@/api';
 import { Playlist } from '@/types';
 import { useTopPlaylist } from './hooks';
 import { Pagination } from 'antd';
 import Img from '@/components/img';
 import { useHistory } from 'react-router-dom';
 import Popover from './popover';
+import classNames from 'classnames';
 
-const List: React.FC = () => {
+const MusicList: React.FC = () => {
   const [musicCategory, setMusicCategory] = useState<Playlist[]>([]);
-  const [topPlaylistHighquality, setTopPlaylistHighquality] = useState<Playlist>();
-  const { topPlaylist, total, current, setCurrent, loadTopPlaylist } = useTopPlaylist();
+  const {
+    topPlaylist,
+    total,
+    current,
+    setCurrent,
+    loadTopPlaylist,
+    topPlaylistHighquality,
+    cat,
+    setCat,
+  } = useTopPlaylist();
   const [showPopover, setShowPopover] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { push } = useHistory();
@@ -21,11 +30,6 @@ const List: React.FC = () => {
     (async () => {
       const res = await getMusicCategory();
       setMusicCategory(res.tags);
-    })();
-
-    (async () => {
-      const res = await getTopPlaylistHighquality();
-      setTopPlaylistHighquality(res.playlists[0]);
     })();
   }, []);
 
@@ -46,14 +50,27 @@ const List: React.FC = () => {
         </div>
       </header>
       <section className="music-list__guide">
-        {showPopover && <Popover button={buttonRef.current} setShowPopover={setShowPopover} />}
+        {showPopover && (
+          <Popover
+            cat={cat}
+            setCat={setCat}
+            button={buttonRef.current}
+            setShowPopover={setShowPopover}
+          />
+        )}
         <button ref={buttonRef} onClick={() => setShowPopover(!showPopover)}>
-          全部歌单
+          {cat === '全部' ? '全部歌单' : cat}
           <RightOutlined />
         </button>
         <ul>
           {musicCategory.map(item => (
-            <li key={item.id}>{item.name}</li>
+            <li
+              key={item.id}
+              className={classNames({ '--active': item.name === cat })}
+              onClick={() => setCat(item.name)}
+            >
+              {item.name}
+            </li>
           ))}
         </ul>
       </section>
@@ -87,4 +104,4 @@ const List: React.FC = () => {
   );
 };
 
-export default List;
+export default MusicList;

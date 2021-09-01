@@ -13,8 +13,8 @@ export const topMenuMap: Data<Array<MenuConfig>> = {
     },
     {
       label: '歌单',
-      component: lazy(() => import('@/views/find-music/views/list')),
-      path: '/find-music/list',
+      component: lazy(() => import('@/views/find-music/views/music-list')),
+      path: '/find-music/music-list',
     },
     {
       label: '主播电台',

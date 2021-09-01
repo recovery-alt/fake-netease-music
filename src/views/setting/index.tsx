@@ -10,9 +10,9 @@ import { Checkbox, Radio, Space, Slider } from 'antd';
 
 const Setting: React.FC = () => {
   const bindAccount = [
-    { icon: WeiboCircleOutlined, actived: false },
-    { icon: QqCircleFilled, actived: false },
-    { icon: WechatOutlined, actived: false },
+    { icon: WeiboCircleOutlined, active: false },
+    { icon: QqCircleFilled, active: false },
+    { icon: WechatOutlined, active: false },
   ];
 
   const shortcuts = [
