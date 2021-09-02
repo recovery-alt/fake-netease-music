@@ -2,19 +2,24 @@ import React from 'react';
 import { PlaySquareOutlined } from '@ant-design/icons';
 import styles from './list.module.less';
 import { Song } from '@/types';
-import { formatMS } from '@/utils';
+import { formatMS, resizeImg } from '@/utils';
 import Img from '@/components/img';
 
-type Props = { data: Song[] };
+type Props = { data: Song[]; onItemClick: (id: number) => void };
 
-const SongList: React.FC<Props> = ({ data }) => (
+const SongList: React.FC<Props> = ({ data, onItemClick }) => (
   <div className={styles['song-list']}>
     {data.map((item, i) => (
       <div key={item.id} className={styles['song-list__item']}>
         <div className={styles['song-list__left']}>
           <div className={styles['song-list__ordinal']}>{i + 1}</div>
           <div className={styles['song-list__img-wrapper']}>
-            <Img className={styles['song-list__img']} src={item.album.picUrl} icon />
+            <Img
+              className={styles['song-list__img']}
+              src={resizeImg(item.album.picUrl, 100)}
+              icon
+              onClick={() => onItemClick(item.id)}
+            />
           </div>
           <div className={styles['song-list__song']}>
             <p>{item.name}</p>

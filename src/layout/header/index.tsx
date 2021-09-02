@@ -14,7 +14,7 @@ import { Link, useLocation, useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 
 const List: React.FC = () => {
-  const [active, setActived] = useState('');
+  const [active, setActive] = useState('');
   const [topMenu, setTopMenu] = useState<Array<MenuConfig>>([]);
   const { pathname } = useLocation();
   const { go, push } = useHistory();
@@ -39,7 +39,7 @@ const List: React.FC = () => {
     if (pathArr.length > 3) pathArr = pathArr.slice(0, 3);
 
     // 前两位相等 即选中
-    setActived(pathArr.join('/'));
+    setActive(pathArr.join('/'));
   }, [pathname]);
 
   function handleHistoryChange(next = false) {
@@ -65,7 +65,7 @@ const List: React.FC = () => {
               key={item.path}
               className={classNames({ [styles['--active']]: item.path === active })}
             >
-              <Link to={item.path} onClick={() => setActived(item.path)}>
+              <Link to={item.path} onClick={() => setActive(item.path)}>
                 {item.label}
               </Link>
             </li>

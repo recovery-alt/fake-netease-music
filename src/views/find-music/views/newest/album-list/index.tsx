@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './album-list.module.less';
 import { TopAlbumParams, Album } from '@/types';
 import Img from '@/components/img';
+import { resizeImg } from '@/utils';
 
 type Props = TopAlbumParams;
 
@@ -11,7 +12,7 @@ const AlbumList: React.FC<Props> = ({ type }) => {
 
   useEffect(() => {
     (async () => {
-      const res = await getTopAlbum({ area: 'ALL', type });
+      const res = await getTopAlbum({ area: 'ALL', type, limit: 20 });
       setData(res.monthData);
     })();
   }, []);
@@ -25,7 +26,7 @@ const AlbumList: React.FC<Props> = ({ type }) => {
         {data.map(item => (
           <div key={item.id} className={styles['album-list__item']}>
             <div className={styles['album-list__img-wrapper']}>
-              <Img className={styles['album-list__img']} src={item.picUrl} />
+              <Img className={styles['album-list__img']} src={resizeImg(item.picUrl, 100)} />
             </div>
             <div className={styles['album-list__description']}>
               <div className={styles['album-list__name']}>{item.name}</div>

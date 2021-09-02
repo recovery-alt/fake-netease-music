@@ -12,7 +12,7 @@ import {
 import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, changeSong, setSong, nextFM, setCurrentTime, setShowDetail } from '@/store';
-import { formatMS } from '@/utils';
+import { formatMS, resizeImg } from '@/utils';
 import { useCurrentTime, useMusicList, usePause, usePlayMode, useLyric, useVolume } from './hooks';
 import { Tooltip, Slider } from 'antd';
 import { PlayMode } from '@/enum';
@@ -29,7 +29,7 @@ const List: React.FC = () => {
   const showDetail = useSelector((state: RootState) => state.controller.showDetail);
   const { listButtonRef, showList, setShowList } = useMusicList();
   const isFMMode = useSelector((state: RootState) => state.currentTrack.fm.length);
-  const { lyricActived, setLyricActived } = useLyric();
+  const { lyricActive, setLyricActive } = useLyric();
 
   const currentTrack = useSelector((state: RootState) => {
     const { current, tracks, fm } = state.currentTrack;
@@ -121,7 +121,11 @@ const List: React.FC = () => {
               onEnded={handlePlayEnded}
               onVolumeChange={handleVolumeChange}
             />
-            <img src={currentTrack.al.picUrl} alt="music" onClick={handleCoverClick} />
+            <img
+              src={resizeImg(currentTrack.al.picUrl, 100)}
+              alt="music"
+              onClick={handleCoverClick}
+            />
             <div className={styles['footer__left-name']}>
               <div>
                 {currentTrack.name} -{' '}
@@ -161,8 +165,8 @@ const List: React.FC = () => {
           <UnorderedListOutlined ref={listButtonRef} onClick={() => setShowList(!showList)} />
         )}
         <span
-          className={classNames(styles['footer__lyric'], { [styles['--active']]: lyricActived })}
-          onClick={() => setLyricActived(!lyricActived)}
+          className={classNames(styles['footer__lyric'], { [styles['--active']]: lyricActive })}
+          onClick={() => setLyricActive(!lyricActive)}
         >
           词
         </span>

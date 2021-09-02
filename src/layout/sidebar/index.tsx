@@ -19,7 +19,7 @@ import Scrollbar from '@/components/scrollbar';
 import Login from '../login';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState, setUserInfoFromCache, setUserPlaylist } from '@/store';
-import { local } from '@/utils';
+import { local, resizeImg } from '@/utils';
 import { UserInfo } from '@/types';
 import json from 'json5';
 import classNames from 'classnames';
@@ -175,7 +175,7 @@ const List: React.FC = () => {
   return (
     <aside className={styles.sidebar}>
       <header className={styles.sidebar__header}>
-        <img src={profile.avatarUrl} alt="icon" />
+        <img src={resizeImg(profile.avatarUrl, 100)} alt="icon" />
         <strong onClick={login}>{profile.nickname}</strong>
         <CaretRightOutlined onClick={login} />
       </header>

@@ -2,72 +2,45 @@ import React, { useState, useEffect, useMemo } from 'react';
 import './newest.less';
 import classNames from 'classnames';
 import { categoryList } from '@/config';
-import { PlayCircleOutlined, FileAddOutlined } from '@ant-design/icons';
 import SongList from './song-list';
 import AlbumList from './album-list';
+import SongControl from './song-control';
+import AlbumControl from './album-control';
 import { getTopSong } from '@/api';
-import { Song, AlbumType } from '@/types';
+import { Song } from '@/types';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { insertSong } from '@/store';
 
 const Newest: React.FC = () => {
   const [isAlbum, setIsAlbum] = useState(0);
   const [areaIndex, setAreaIndex] = useState(0);
   const [songs, setSongs] = useState<Song[]>([]);
-  const [albumType, setAlbumType] = useState<AlbumType>('hot');
+  const currentArea = useMemo(() => categoryList[areaIndex], [areaIndex]);
   const { push } = useHistory();
   const { pathname } = useLocation();
-  const songList = [
-    { name: '播放全部', icon: PlayCircleOutlined },
-    { name: '收藏全部', icon: FileAddOutlined },
-  ];
-  const albumOptions: { text: string; type: AlbumType }[] = [
-    { text: '推荐', type: 'hot' },
-    { text: '全部', type: 'new' },
-  ];
+  const dispatch = useDispatch();
+
   const switchItems = [
     { path: '/find-music/newest', label: '新歌速递' },
     { path: '/find-music/newest/album', label: '新碟上架' },
   ];
 
-  const currentArea = useMemo(() => categoryList[areaIndex], [areaIndex]);
+  function handleItemClick(id: number) {
+    dispatch(insertSong(id));
+  }
 
   useEffect(() => {
     (async () => {
       const res = await getTopSong(currentArea.type);
       setSongs(res.data);
     })();
-  }, [areaIndex]);
+  }, [currentArea]);
 
   useEffect(() => {
     const index = switchItems.findIndex(item => item.path === pathname);
     if (index > -1) setIsAlbum(index);
   }, [pathname]);
-
-  const SongControl = (
-    <div className="newest__song-wrapper">
-      {songList.map(item => (
-        <div key={item.name} className="newest__song">
-          <item.icon />
-          {item.name}
-        </div>
-      ))}
-    </div>
-  );
-
-  const AlbumControl = (
-    <div className="newest__album-wrapper">
-      {albumOptions.map(item => (
-        <div key={item.text} className="newest__album">
-          <span
-            className={classNames({ ['--active']: albumType === item.type })}
-            onClick={() => setAlbumType(item.type)}
-          >
-            {item.text}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
 
   return (
     <div className="newest">
@@ -97,9 +70,9 @@ const Newest: React.FC = () => {
             </span>
           ))}
         </div>
-        {isAlbum ? AlbumControl : SongControl}
+        {isAlbum ? <AlbumControl /> : <SongControl />}
       </div>
-      {isAlbum ? <AlbumList /> : <SongList data={songs} />}
+      {isAlbum ? <AlbumList /> : <SongList data={songs} onItemClick={handleItemClick} />}
     </div>
   );
 };

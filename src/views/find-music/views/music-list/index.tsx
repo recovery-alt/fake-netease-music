@@ -9,6 +9,7 @@ import Img from '@/components/img';
 import { useHistory } from 'react-router-dom';
 import Popover from './popover';
 import classNames from 'classnames';
+import { resizeImg } from '@/utils';
 
 const MusicList: React.FC = () => {
   const [musicCategory, setMusicCategory] = useState<Playlist[]>([]);
@@ -40,7 +41,9 @@ const MusicList: React.FC = () => {
   return (
     <div className="music-list">
       <header className="music-list__banner">
-        <img src={topPlaylistHighquality?.coverImgUrl} alt="banner" />
+        {topPlaylistHighquality?.coverImgUrl && (
+          <img src={resizeImg(topPlaylistHighquality.coverImgUrl, 300)} alt="banner" />
+        )}
         <div className="music-list__banner-right">
           <button>
             <CrownOutlined /> 精品歌单
@@ -79,7 +82,7 @@ const MusicList: React.FC = () => {
           <div key={item.id} className="music-list__item">
             <Img
               className="music-list__img"
-              src={item.imgUrl}
+              src={resizeImg(item.imgUrl)}
               icon={{ size: 'large', hoverDisplay: true, placement: 'bottom' }}
               onClick={() => handleListItemClick(item.id)}
             />

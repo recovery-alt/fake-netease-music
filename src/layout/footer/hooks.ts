@@ -90,9 +90,9 @@ export const useMusicList = () => {
 };
 
 export const useLyric = () => {
-  const [lyricActived, setLyricActived] = useState(false);
+  const [lyricActive, setLyricActive] = useState(false);
 
-  return { lyricActived, setLyricActived };
+  return { lyricActive, setLyricActive };
 };
 
 export const useVolume = (audioRef: RefObject<HTMLAudioElement>) => {

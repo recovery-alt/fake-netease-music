@@ -5,6 +5,7 @@ import { LikeOutlined, ExportOutlined, CommentOutlined } from '@ant-design/icons
 import { Comment } from '@/types';
 import dayjs from 'dayjs';
 import Img from '@/components/img';
+import { resizeImg } from '@/utils';
 
 type Props = { comment: Comment };
 
@@ -17,7 +18,10 @@ const Comments: React.FC<Props> = ({ comment }) => {
   return (
     <div className={styles.comments}>
       <div className={styles.comments__left}>
-        <Img className={styles.comments__img} src={comment?.user.avatarUrl || avatar} />
+        <Img
+          className={styles.comments__img}
+          src={resizeImg(comment?.user.avatarUrl || avatar, 100)}
+        />
       </div>
       <div className={styles.comments__right}>
         <p>

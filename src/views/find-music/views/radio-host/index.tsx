@@ -31,7 +31,7 @@ const RadioHost: React.FC = () => {
 
   useEffect(() => {
     getDJBanner().then(res => {
-      setBanner(res.data.map(item => ({ imageUrl: item.pic })));
+      setBanner(res.data.map(item => ({ targetId: item.targetId, imageUrl: item.pic })));
     });
 
     getDJCatelist().then(res => {

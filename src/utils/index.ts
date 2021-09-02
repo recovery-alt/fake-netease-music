@@ -58,3 +58,7 @@ export const resolveLyricTime = (time: string) => {
   const result = minute * 60 + second;
   return Number.isNaN(result) ? 0 : result * 1000;
 };
+
+export const resizeImg = (url: string, x = 200, y?: number) => {
+  return `${url}?param=${x}y${y || x}`;
+};

@@ -22,15 +22,18 @@ import {
   TopPlaylist,
   VideoCategogy,
   VideoType,
-  Comment,
   Track,
+  ArtistListParams,
+  TopPlaylistParams,
+  CommentMusic,
 } from '@/types';
 import { get } from './api';
 
 export * from './login';
 
 export const getBanner = () => get<{ banners: BannerType[] }>('/banner');
-export const getDJBanner = () => get<{ data: { pic: string; url: string }[] }>('/dj/banner');
+export const getDJBanner = () =>
+  get<{ data: { targetId: number; pic: string; url: string }[] }>('/dj/banner');
 
 export const getPersonalized = (params: Data) => get<Personalized[]>('/personalized', params);
 
@@ -50,16 +53,12 @@ export const getLyric = (id: number | string) => get<Lyric>('/lyric', { id });
 export const getPersonalFM = () => get<{ data: Array<Music> }>('/personal_fm');
 
 export const getCommentMusic = (id: number | string, offset = 0) =>
-  get<{ total: number; comments: Comment[]; hotComments: Comment[] }>('/comment/music', {
-    id,
-    offset,
-  });
+  get<CommentMusic>('/comment/music', { id, offset });
 
 export const getMusicCategory = () => get<{ tags: Playlist[] }>('/playlist/hot');
 
 export const getAllMusicCategory = () => get<PlaylistCatlist>('/playlist/catlist');
 
-type TopPlaylistParams = { offset?: number; limit?: number; cat?: string };
 export const getTopPlaylist = ({ offset, limit, cat }: TopPlaylistParams) =>
   get<{ total: number; playlists: TopPlaylist[] }>('/top/playlist', { cat, offset, limit });
 
@@ -84,13 +83,8 @@ export const getToplistDetail = () => get('/toplist/detail');
 export const getPlaylistDetail = (id: number) =>
   get<{ playlist: PlaylistDetail }>('/playlist/detail', { id });
 
-export const getArtistList = (params?: {
-  type?: number;
-  area?: number;
-  initial?: string;
-  limit?: number;
-  offset?: number;
-}) => get<{ artists: Artist[] }>('/artist/list', params);
+export const getArtistList = (params?: ArtistListParams) =>
+  get<{ artists: Artist[] }>('/artist/list', params);
 
 export const getTopSong = (type: number) => get<{ data: Song[] }>('/top/song', { type });
 

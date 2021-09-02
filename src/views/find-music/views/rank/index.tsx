@@ -2,12 +2,22 @@ import React, { useEffect, useState } from 'react';
 import './rank.less';
 import Official from './official';
 import { getToplist, getPlaylistDetail } from '@/api';
-import { Toplist, PlaylistDetail } from '@/types';
+import { Toplist, PlaylistDetail, Track } from '@/types';
 import Img from '@/components/img';
+import { useDispatch } from 'react-redux';
+import { setCurrentTrack } from '@/store';
+import { useHistory } from 'react-router-dom';
+import { resizeImg } from '@/utils';
 
 const Rank: React.FC = () => {
   const [toplist, setToplist] = useState<Toplist[]>([]);
   const [playlistDetail, SetPlaylistDetail] = useState<PlaylistDetail[]>([]);
+  const dispatch = useDispatch();
+  const { push } = useHistory();
+
+  function handleItemClick(tracks: Track[], current: number) {
+    dispatch(setCurrentTrack({ current, tracks, fm: [] }));
+  }
 
   useEffect(() => {
     (async () => {
@@ -23,12 +33,18 @@ const Rank: React.FC = () => {
       SetPlaylistDetail(playlist);
     })();
   }, []);
+
   return (
     <div className="rank">
       <header className="rank__header">官方榜</header>
       <div className="rank__official">
         {playlistDetail.map(item => (
-          <Official key={item.id} data={item} />
+          <Official
+            key={item.id}
+            data={item}
+            onItemClick={handleItemClick}
+            onViewAll={id => push(`/list/${id}`)}
+          />
         ))}
       </div>
       <header className="rank__header">全球榜</header>
@@ -36,9 +52,16 @@ const Rank: React.FC = () => {
         {toplist.map(item => (
           <div key={item.id} className="rank__item">
             <div className="rank__img-wrapper">
-              <Img className="rank__img" src={item.coverImgUrl} />
+              <Img
+                className="rank__img"
+                src={resizeImg(item.coverImgUrl)}
+                icon={{ size: 'large', hoverDisplay: true }}
+                onClick={() => push(`/list/${item.id}`)}
+              />
             </div>
-            <div className="rank__detail">{item.name}</div>
+            <div className="rank__detail" onClick={() => push(`/list/${item.id}`)}>
+              {item.name}
+            </div>
           </div>
         ))}
       </div>

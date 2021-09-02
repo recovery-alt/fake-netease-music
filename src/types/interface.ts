@@ -145,3 +145,15 @@ export type MVSublist = {
   title: string;
   playTime: number;
 };
+
+export type ArtistListParams = {
+  type?: number | string;
+  area?: number | string;
+  initial?: number | string;
+  limit?: number;
+  offset?: number;
+};
+
+export type TopPlaylistParams = { offset?: number; limit?: number; cat?: string };
+
+export type CommentMusic = { total: number; comments: Comment[]; hotComments: Comment[] };

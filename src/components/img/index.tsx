@@ -86,6 +86,7 @@ const Img: React.FC<Props> = ({
             styles[`--${iconConfig.placement}`],
             { [styles['--show']]: !iconConfig.hoverDisplay || showIcon }
           )}
+          onMouseMove={() => setShowIcon(true)}
         />
       )}
     </div>

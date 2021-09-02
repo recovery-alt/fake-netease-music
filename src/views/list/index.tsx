@@ -10,7 +10,7 @@ import { HeartFilled } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import dayjs from 'dayjs';
-import { wrapNumber, formatMS } from '@/utils';
+import { wrapNumber, formatMS, resizeImg } from '@/utils';
 import { getPlaylistDetail } from '@/api';
 import { Track } from '@/types';
 import { useDispatch } from 'react-redux';
@@ -62,8 +62,8 @@ const List: React.FC = () => {
   return (
     <div className="list">
       <header className="list__header">
-        {params.id ? (
-          <img className="list__img" src={curPlaylist?.coverImgUrl} alt="avatar" />
+        {params.id && curPlaylist?.coverImgUrl ? (
+          <img className="list__img" src={resizeImg(curPlaylist.coverImgUrl, 300)} alt="avatar" />
         ) : (
           <div className="list__img-default">
             <HeartFilled />
@@ -76,7 +76,7 @@ const List: React.FC = () => {
             <strong>{curPlaylist?.name || '我喜欢的音乐'}</strong>
           </div>
           <div className="list__user-info">
-            <img src={profile.avatarUrl || avatar} alt="avatar" />
+            <img src={resizeImg(profile.avatarUrl || avatar, 100)} alt="avatar" />
             <a>{profile.nickname}</a>
             <span>{dayjs(curPlaylist?.createTime).format('YYYY-MM-DD')}创建</span>
           </div>

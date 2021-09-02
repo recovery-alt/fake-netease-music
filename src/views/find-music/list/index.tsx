@@ -3,6 +3,7 @@ import styles from './list.module.less';
 import { Data } from '@/types';
 import Img from '@/components/img';
 import classNames from 'classnames';
+import { resizeImg } from '@/utils';
 
 export type ListData = { id: number; name: string; imgUrl: string; extra?: Data<string> };
 export type ListParams = { item: ListData; i: number; j: number; len: number };
@@ -27,7 +28,7 @@ const List: React.FC<Props> = ({ data, functionChildren, size = 'default', onIte
               <div className={classNames(styles['list__img-wrapper'], styles[`--${size}`])}>
                 <Img
                   className={styles.list__img}
-                  src={item.imgUrl}
+                  src={resizeImg(item.imgUrl)}
                   icon
                   onClick={() => onItemClick?.(item.id)}
                 />

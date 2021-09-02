@@ -5,6 +5,7 @@ import { Music } from '@/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch, setPause } from '@/store';
 import classNames from 'classnames';
+import { resizeImg } from '@/utils';
 
 type Props = { current?: Music; next?: Music };
 
@@ -20,11 +21,15 @@ const Cover: React.FC<Props> = ({ current, next }) => {
     <>
       <div className={styles.cover}>
         {next?.album?.picUrl && (
-          <img className={styles['cover__pre-img']} src={next?.album?.picUrl} alt="pre-cover" />
+          <img
+            className={styles['cover__pre-img']}
+            src={resizeImg(next.album.picUrl, 300)}
+            alt="pre-cover"
+          />
         )}
         {current?.album.picUrl && (
           <div className={styles['cover__img']}>
-            <img src={current?.album?.picUrl} alt="cover" />
+            <img src={resizeImg(current.album.picUrl, 300)} alt="cover" />
             <div
               className={classNames(styles.cover__play, { [styles['--pause']]: !pause })}
               onClick={handlePauseClick}
