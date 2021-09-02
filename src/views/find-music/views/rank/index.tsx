@@ -5,7 +5,7 @@ import { getToplist, getPlaylistDetail } from '@/api';
 import { Toplist, PlaylistDetail, Track } from '@/types';
 import Img from '@/components/img';
 import { useDispatch } from 'react-redux';
-import { setCurrentTrack } from '@/store';
+import { setCurrentTrack, fetchAndSetCurrentTrack } from '@/store';
 import { useHistory } from 'react-router-dom';
 import { resizeImg } from '@/utils';
 
@@ -57,6 +57,7 @@ const Rank: React.FC = () => {
                 src={resizeImg(item.coverImgUrl)}
                 icon={{ size: 'large', hoverDisplay: true }}
                 onClick={() => push(`/list/${item.id}`)}
+                onIconClick={() => dispatch(fetchAndSetCurrentTrack(item.id))}
               />
             </div>
             <div className="rank__detail" onClick={() => push(`/list/${item.id}`)}>

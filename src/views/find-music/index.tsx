@@ -14,7 +14,7 @@ import {
 } from '@/api';
 import { BannerType, Personalized } from '@/types';
 import { useDispatch } from 'react-redux';
-import { insertSong } from '@/store';
+import { insertSong, fetchAndSetCurrentTrack } from '@/store';
 import { useHistory } from 'react-router-dom';
 
 const FindMusic: React.FC = () => {
@@ -36,10 +36,6 @@ const FindMusic: React.FC = () => {
 
   function handleSongInserted(id: number) {
     dispatch(insertSong(id));
-  }
-
-  function handlePersonalizedItemClick(id: number) {
-    push(`/list/${id}`);
   }
 
   useEffect(() => {
@@ -103,7 +99,8 @@ const FindMusic: React.FC = () => {
       <Card
         data={personalized}
         icon={{ size: 'medium', hoverDisplay: true, placement: 'bottom' }}
-        onItemClick={handlePersonalizedItemClick}
+        onItemClick={id => push(`/list/${id}`)}
+        onItemIconClick={id => dispatch(fetchAndSetCurrentTrack(id))}
       />
       <Title name="独家放送" welt />
       <Card type="rectangle" data={privateList} />

@@ -26,6 +26,7 @@ import {
   ArtistListParams,
   TopPlaylistParams,
   CommentMusic,
+  TopAlbum,
 } from '@/types';
 import { get } from './api';
 
@@ -88,8 +89,7 @@ export const getArtistList = (params?: ArtistListParams) =>
 
 export const getTopSong = (type: number) => get<{ data: Song[] }>('/top/song', { type });
 
-export const getTopAlbum = (params: TopAlbumParams) =>
-  get<{ monthData: Album[]; weekData?: Album[] }>('/top/album', params);
+export const getTopAlbum = (params: TopAlbumParams) => get<TopAlbum>('/top/album', params);
 
 export const getVideoCategoryList = () => get<{ data: VideoCategogy[] }>('/video/category/list');
 

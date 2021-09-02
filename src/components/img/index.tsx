@@ -15,7 +15,8 @@ interface Props extends AppProps {
   icon?: boolean | IconOptions;
   alt?: string;
   banLoading?: boolean;
-  onClick?: ReactEventHandler<HTMLDivElement>;
+  onClick?: ReactEventHandler<HTMLImageElement>;
+  onIconClick?: ReactEventHandler<HTMLSpanElement>;
 }
 
 const Img: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const Img: React.FC<Props> = ({
   src,
   icon = false,
   onClick,
+  onIconClick,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -65,7 +67,6 @@ const Img: React.FC<Props> = ({
       ref={ref}
       className={classNames(styles.img, className && { [className]: loading })}
       style={style}
-      onClick={onClick}
     >
       {visible && (
         <img
@@ -75,6 +76,7 @@ const Img: React.FC<Props> = ({
           onLoad={handleOnload}
           onMouseMove={() => setShowIcon(true)}
           onMouseLeave={() => setShowIcon(false)}
+          onClick={onClick}
         />
       )}
       {!banLoading && loading && <LoadingOutlined className={styles.img__loading} />}
@@ -87,6 +89,7 @@ const Img: React.FC<Props> = ({
             { [styles['--show']]: !iconConfig.hoverDisplay || showIcon }
           )}
           onMouseMove={() => setShowIcon(true)}
+          onClick={onIconClick}
         />
       )}
     </div>

@@ -10,6 +10,8 @@ import { useHistory } from 'react-router-dom';
 import Popover from './popover';
 import classNames from 'classnames';
 import { resizeImg } from '@/utils';
+import { fetchAndSetCurrentTrack } from '@/store';
+import { useDispatch } from 'react-redux';
 
 const MusicList: React.FC = () => {
   const [musicCategory, setMusicCategory] = useState<Playlist[]>([]);
@@ -26,6 +28,7 @@ const MusicList: React.FC = () => {
   const [showPopover, setShowPopover] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { push } = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -36,6 +39,10 @@ const MusicList: React.FC = () => {
 
   function handleListItemClick(id: number) {
     push(`/list/${id}`);
+  }
+
+  function handleListItemIconClick(id: number) {
+    dispatch(fetchAndSetCurrentTrack(id));
   }
 
   return (
@@ -85,6 +92,7 @@ const MusicList: React.FC = () => {
               src={resizeImg(item.imgUrl)}
               icon={{ size: 'large', hoverDisplay: true, placement: 'bottom' }}
               onClick={() => handleListItemClick(item.id)}
+              onIconClick={() => handleListItemIconClick(item.id)}
             />
             <p onClick={() => handleListItemClick(item.id)}>{item.name}</p>
           </div>

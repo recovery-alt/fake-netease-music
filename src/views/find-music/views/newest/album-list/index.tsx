@@ -1,33 +1,42 @@
-import { getTopAlbum } from '@/api';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import styles from './album-list.module.less';
-import { TopAlbumParams, Album, AlbumType } from '@/types';
+import { TopAlbumParams, Album, TopAlbum } from '@/types';
 import Img from '@/components/img';
 import { resizeImg } from '@/utils';
+import { fetchAndSetCurrentTrack } from '@/store';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { getTopAlbum } from '@/api';
 
 const AlbumList: React.FC<TopAlbumParams> = ({ type, area }) => {
-  const [data, setData] = useState<Album[]>([]);
+  const [data, setData] = useState<TopAlbum>();
+  const dispatch = useDispatch();
+  const { push } = useHistory();
+  const albums = useMemo(() => data?.weekData || data?.monthData, [data]);
+  const isWeek = useMemo(() => !!data?.weekData?.length, [data]);
 
   useEffect(() => {
     (async () => {
       const res = await getTopAlbum({ area, type, limit: 20 });
-      setData(res.weekData || res.monthData);
+      setData(res);
     })();
   }, [area, type]);
 
   return (
     <div className={styles['album-list']}>
       <div className={styles['album-list__left']}>
-        <h2>本周新碟</h2>
+        <h2>本{isWeek ? '周' : '月'}新碟</h2>
       </div>
       <div className={styles['album-list__right']}>
-        {data.map(item => (
+        {albums?.map(item => (
           <div key={item.id} className={styles['album-list__item']}>
             <div className={styles['album-list__img-wrapper']}>
               <Img
                 className={styles['album-list__img']}
                 src={resizeImg(item.picUrl, 100)}
                 icon={{ size: 'large', hoverDisplay: true }}
+                onClick={() => push(`/list/${item.id}`)}
+                onIconClick={() => dispatch(fetchAndSetCurrentTrack(item.id))}
               />
             </div>
             <div className={styles['album-list__description']}>

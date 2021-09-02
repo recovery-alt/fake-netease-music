@@ -20,6 +20,7 @@ const SongList = forwardRef<Song[], Props>(({ type }, ref) => {
 
   useEffect(() => {
     (async () => {
+      if (type === undefined) return;
       const res = await getTopSong(type);
       setSongs(res.data);
     })();

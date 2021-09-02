@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styles from './card.module.less';
 import Img, { IconOptions } from '@/components/img';
 import classNames from 'classnames';
@@ -11,9 +11,10 @@ type Props = {
   type?: 'square' | 'rectangle';
   icon?: IconOptions;
   onItemClick?: (id: number) => void;
+  onItemIconClick?: (id: number) => void;
 };
 
-const Card: React.FC<Props> = ({ type = 'square', data, icon, onItemClick }) => {
+const Card: React.FC<Props> = ({ type = 'square', data, icon, onItemClick, onItemIconClick }) => {
   return (
     <div className={styles.card}>
       {data.map(item => (
@@ -23,6 +24,7 @@ const Card: React.FC<Props> = ({ type = 'square', data, icon, onItemClick }) => 
             src={type === 'rectangle' ? item.imgUrl : resizeImg(item.imgUrl)}
             icon={icon}
             onClick={() => onItemClick?.(item.id)}
+            onIconClick={() => onItemIconClick?.(item.id)}
           />
           <p>{item.name}</p>
         </div>

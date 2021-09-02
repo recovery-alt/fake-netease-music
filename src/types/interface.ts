@@ -113,6 +113,9 @@ export type Album = {
   size: number;
   artists: Artist[];
 };
+
+export type TopAlbum = { monthData: Album[]; weekData?: Album[] };
+
 export type TopAlbumParams = { area?: AlbumArea; limit?: number; type?: AlbumType };
 
 export type VideoCategogy = { id: number; name: string };
