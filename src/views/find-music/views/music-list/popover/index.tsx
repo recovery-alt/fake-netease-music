@@ -28,10 +28,6 @@ const Popover: React.FC<Props> = ({ cat, setCat, button, setShowPopover }) => {
   });
 
   useEffect(() => {
-    console.log(cat);
-  }, [cat]);
-
-  useEffect(() => {
     (async () => {
       const res = await getAllMusicCategory();
       const allMusicCategory = Object.keys(res.categories).map(key => {

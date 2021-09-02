@@ -28,6 +28,7 @@ export type Song = {
   duration: number;
   album: Album;
   url: string;
+  artists: Array<{ id: number; name: string }>;
 };
 
 export type Lyric = { nolyric: boolean; lrc: { lyric: string } };

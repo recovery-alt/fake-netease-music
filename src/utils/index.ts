@@ -1,6 +1,7 @@
 import json from 'json5';
-import { Data } from '@/types';
+import { Data, Song } from '@/types';
 import dayjs from 'dayjs';
+import { Music } from '@/types';
 
 // 封装localStorage，可设置过期事件
 export const local = {
@@ -61,4 +62,14 @@ export const resolveLyricTime = (time: string) => {
 
 export const resizeImg = (url: string, x = 200, y?: number) => {
   return `${url}?param=${x}y${y || x}`;
+};
+
+export const transformMusic2Track = (music: Music) => {
+  const { id, name, duration: dt, album: al, artists: ar } = music;
+  return { id, name, dt, al, ar };
+};
+
+export const transformSong2Track = (song: Song) => {
+  const { id, name, duration: dt, album: al, artists: ar } = song;
+  return { id, name, dt, al, ar };
 };

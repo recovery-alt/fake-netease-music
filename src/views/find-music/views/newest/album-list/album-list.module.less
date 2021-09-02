@@ -16,10 +16,9 @@
   }
 
   &__right {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-column-gap: 18px;
+    grid-template-columns: repeat(4, 1fr);
   }
 
   &__img {
@@ -28,14 +27,11 @@
     width: 130px;
 
     &-wrapper {
+      background-image: url('/src/assets/img/coverall.png');
+      background-position-y: 650px;
       display: flex;
-
-      &::after {
-        content: '';
-        display: block;
-        height: 130px;
-        width: 24px;
-      }
+      height: 130px;
+      width: 154px;
     }
   }
 

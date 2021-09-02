@@ -12,13 +12,12 @@ import {
 import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, changeSong, setSong, nextFM, setCurrentTime, setShowDetail } from '@/store';
-import { formatMS, resizeImg } from '@/utils';
+import { formatMS, resizeImg, transformMusic2Track } from '@/utils';
 import { useCurrentTime, useMusicList, usePause, usePlayMode, useLyric, useVolume } from './hooks';
 import { Tooltip, Slider } from 'antd';
 import { PlayMode } from '@/enum';
 import MusicDetail from '../music-detail';
 import MusicList from '../music-list';
-import { Music } from '@/types';
 import { useHistory } from 'react-router-dom';
 
 const List: React.FC = () => {
@@ -54,11 +53,6 @@ const List: React.FC = () => {
   const { playMode, handleIconClick, currentPlayMode } = usePlayMode();
 
   const { volume, handleSliderChange, handleVolumeChange } = useVolume(audioRef);
-
-  function transformMusic2Track(music: Music) {
-    const { id, name, duration: dt, album: al, artists: ar } = music;
-    return { id, name, dt, al, ar };
-  }
 
   function handlePlayEnded() {
     if (isFMMode) {

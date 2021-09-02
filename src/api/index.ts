@@ -89,7 +89,7 @@ export const getArtistList = (params?: ArtistListParams) =>
 export const getTopSong = (type: number) => get<{ data: Song[] }>('/top/song', { type });
 
 export const getTopAlbum = (params: TopAlbumParams) =>
-  get<{ monthData: Album[] }>('/top/album', params);
+  get<{ monthData: Album[]; weekData?: Album[] }>('/top/album', params);
 
 export const getVideoCategoryList = () => get<{ data: VideoCategogy[] }>('/video/category/list');
 
