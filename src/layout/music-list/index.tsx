@@ -68,7 +68,7 @@ const MusicList: React.FC<Props> = ({ visible, setVisible, target }) => {
         />
       </section>
     </div>,
-    document.getElementById('music-list')!
+    document.getElementById('drawer')!
   );
 };
 

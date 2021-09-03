@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState, Reducer } from 'react';
 import './singer.less';
 import classNames from 'classnames';
 import { getArtistList } from '@/api';
@@ -8,9 +8,16 @@ import Img from '@/components/img';
 import { resizeImg } from '@/utils';
 
 const Singer: React.FC = () => {
-  const [data, setData] = useState<Artist[]>([]);
+  const [data, dataDispatch] = useReducer<Reducer<Artist[], Artist[]>>((state, action) => {
+    return [...state, ...action];
+  }, []);
   type Selected = Array<number | string | undefined>;
   const [selected, setSelected] = useState<Selected>([-1, -1, undefined]);
+  const footerRef = useRef<HTMLElement>(null);
+  const [more, setMore] = useState(true);
+  const limit = 20;
+  let offset = 0;
+  const [moreText, setMoreText] = useState('');
 
   const searchData: Array<{ label: string; key: string; list: Array<Data<string | number>> }> = [
     {
@@ -49,13 +56,37 @@ const Singer: React.FC = () => {
     setSelected(newSelected);
   }
 
+  async function loadArtistList() {
+    const [area, type, initial] = selected;
+    const res = await getArtistList({ area, type, initial, limit, offset });
+    setMore(res.more);
+    dataDispatch(res.artists);
+  }
+
   useEffect(() => {
-    (async () => {
-      const [area, type, initial] = selected;
-      const res = await getArtistList({ area, type, initial });
-      setData(res.artists);
-    })();
+    loadArtistList();
   }, [selected]);
+
+  useEffect(() => {
+    if (!footerRef.current) return;
+    const io = new IntersectionObserver(entries => {
+      if (entries[0].intersectionRatio <= 0) return;
+      if (more) {
+        setMoreText('加载中...');
+        offset += limit;
+        loadArtistList();
+      } else {
+        setMoreText('没有更多了~');
+      }
+    });
+
+    io.observe(footerRef.current);
+
+    return () => {
+      if (footerRef.current) io.unobserve(footerRef.current);
+      io.disconnect();
+    };
+  }, []);
 
   return (
     <div className="singer">
@@ -85,6 +116,9 @@ const Singer: React.FC = () => {
           </div>
         ))}
       </div>
+      <footer className="singer__footer" ref={footerRef}>
+        {moreText}
+      </footer>
     </div>
   );
 };

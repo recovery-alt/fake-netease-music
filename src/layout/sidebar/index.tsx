@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, Reducer } from 'react';
 import styles from './sidebar.module.less';
 import {
   CustomerServiceOutlined,
@@ -38,7 +38,7 @@ const List: React.FC = () => {
   const playlist = useSelector((state: RootState) => state.userPlaylist.playlist);
   const dispatch = useDispatch<AppDispatch>();
 
-  const [menuList, menuListDispatch] = useReducer<React.Reducer<MenuItem[], MenuListAction>>(
+  const [menuList, menuListDispatch] = useReducer<Reducer<MenuItem[], MenuListAction>>(
     (state, action) => {
       const newState = state.slice(0, 2);
       return [...newState, ...action.payload];

@@ -60,9 +60,9 @@
   }
 
   &__list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-column-gap: 18px;
+    grid-template-columns: repeat(5, 1fr);
     margin-top: 20px;
   }
 
@@ -79,5 +79,10 @@
   &__description {
     height: 54px;
     margin-top: 8px;
+  }
+
+  &__footer {
+    margin-top: 8px;
+    text-align: center;
   }
 }

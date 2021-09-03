@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { AlbumType } from '@/types';
 import styles from './album-control.module.less';

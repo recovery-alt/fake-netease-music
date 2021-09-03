@@ -27,6 +27,7 @@ import {
   TopPlaylistParams,
   CommentMusic,
   TopAlbum,
+  SearchHot,
 } from '@/types';
 import { get } from './api';
 
@@ -85,7 +86,7 @@ export const getPlaylistDetail = (id: number) =>
   get<{ playlist: PlaylistDetail }>('/playlist/detail', { id });
 
 export const getArtistList = (params?: ArtistListParams) =>
-  get<{ artists: Artist[] }>('/artist/list', params);
+  get<{ more: boolean; artists: Artist[] }>('/artist/list', params);
 
 export const getTopSong = (type: number) => get<{ data: Song[] }>('/top/song', { type });
 
@@ -123,3 +124,5 @@ export const getTopPlaylistHighquality = (cat: string, limit = 1) =>
 
 export const getSongDetail = (ids: string | number) =>
   get<{ songs: Track[] }>('/song/detail', { ids });
+
+export const getSearchHotDetail = () => get<{ data: SearchHot[] }>('/search/hot/detail');

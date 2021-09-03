@@ -161,3 +161,5 @@ export type ArtistListParams = {
 export type TopPlaylistParams = { offset?: number; limit?: number; cat?: string };
 
 export type CommentMusic = { total: number; comments: Comment[]; hotComments: Comment[] };
+
+export type SearchHot = { searchWord: string; content: string; score: number; iconUrl: string };

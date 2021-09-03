@@ -3,7 +3,6 @@ import styles from './header.module.less';
 import {
   LeftOutlined,
   RightOutlined,
-  SearchOutlined,
   SettingOutlined,
   MailOutlined,
   SkinOutlined,
@@ -12,13 +11,16 @@ import {
 import { topMenuMap, MenuConfig } from '@/config';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import classNames from 'classnames';
+import Input from '@/components/input';
+import SearchList from '@/layout/search-list';
 
 const List: React.FC = () => {
   const [active, setActive] = useState('');
   const [topMenu, setTopMenu] = useState<Array<MenuConfig>>([]);
   const { pathname } = useLocation();
   const { go, push } = useHistory();
-
+  const [showSearch, setShowSearch] = useState(false);
+  const [inputVal, setInputVal] = useState('');
   const buttonList = [
     {
       icon: SettingOutlined,
@@ -72,10 +74,13 @@ const List: React.FC = () => {
           ))}
         </ul>
         <div className={styles['header__right-wrapper']}>
-          <div className={styles['header__right-search']}>
-            <SearchOutlined />
-            <input type="text" placeholder="搜索" />
-          </div>
+          <Input
+            type="normal"
+            placeholder="搜索"
+            value={inputVal}
+            onInput={e => setInputVal(e.currentTarget.value)}
+            onFocus={() => setShowSearch(true)}
+          />
           <div className={styles['header__right-icons']}>
             {buttonList.map((item, i) => (
               <item.icon key={i} onClick={item.event} />
@@ -83,6 +88,7 @@ const List: React.FC = () => {
           </div>
         </div>
       </div>
+      <SearchList visible={showSearch} keyword={inputVal} />
     </header>
   );
 };
