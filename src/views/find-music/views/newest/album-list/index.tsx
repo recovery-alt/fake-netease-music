@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import styles from './album-list.module.less';
-import { TopAlbumParams, Album, TopAlbum } from '@/types';
+import { TopAlbumParams, TopAlbum } from '@/types';
 import Img from '@/components/img';
 import { resizeImg } from '@/utils';
 import { fetchAndSetCurrentTrack } from '@/store';

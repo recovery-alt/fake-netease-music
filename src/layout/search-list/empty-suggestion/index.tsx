@@ -4,7 +4,6 @@ import { DeleteOutlined, CloseOutlined } from '@ant-design/icons';
 import { getSearchHotDetail } from '@/api';
 import { SearchHot } from '@/types';
 import json from 'json5';
-import { useClickAway } from 'react-use';
 
 const EmptySuggestion: React.FC = () => {
   const [searchHot, setSearchHot] = useState<SearchHot[]>([]);

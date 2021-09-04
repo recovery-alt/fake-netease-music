@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
+import React, { useState, useEffect, useImperativeHandle } from 'react';
 import { PlaySquareOutlined } from '@ant-design/icons';
 import styles from './list.module.less';
 import { Song } from '@/types';
@@ -10,7 +10,7 @@ import { insertSong } from '@/store';
 
 type Props = { type: number };
 
-const SongList = forwardRef<Song[], Props>(({ type }, ref) => {
+const SongList = React.forwardRef<Song[], Props>(({ type }, ref) => {
   const [songs, setSongs] = useState<Song[]>([]);
   const dispatch = useDispatch();
 

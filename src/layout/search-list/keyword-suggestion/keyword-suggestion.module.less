@@ -1,3 +1,33 @@
 .keyword-suggestion {
-  padding: 0;
+  padding: 8px 0;
+
+  &__header {
+    margin-bottom: 8px;
+    padding: 0 8px;
+
+    span {
+      color: #6088b7;
+    }
+  }
+
+  &__title {
+    color: #999;
+    line-height: 1;
+    padding: 10px 8px;
+
+    span {
+      margin-right: 5px;
+    }
+  }
+
+  &__item {
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 25px;
+
+    &:hover {
+      background-color: #f2f3f2;
+    }
+  }
 }

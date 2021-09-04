@@ -4,8 +4,6 @@ import { RightOutlined } from '@ant-design/icons';
 import { PlaylistDetail, Track } from '@/types';
 import Img from '@/components/img';
 import { resizeImg } from '@/utils';
-import { fetchAndSetCurrentTrack } from '@/store';
-import { useDispatch } from 'react-redux';
 
 type Props = {
   data: PlaylistDetail;

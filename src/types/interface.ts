@@ -28,6 +28,8 @@ export type Song = {
   duration: number;
   album: Album;
   url: string;
+  alias?: string[];
+  transNames?: string[];
   artists: Array<{ id: number; name: string }>;
 };
 
@@ -177,4 +179,18 @@ export type Subscriber = {
   userId: number;
   signature: string;
   gender: number;
+};
+
+export type PlaylistSubscriberParams = { id: number; offset: number; limit?: number };
+
+export type SuggestOrderType = 'albums' | 'artists' | 'playlists' | 'songs';
+
+export type SimpleAlbum = { id: number; name: string; artist: Artist };
+
+export type SearchSuggest = {
+  albums?: SimpleAlbum[];
+  artists?: Artist[];
+  playlists?: Playlist[];
+  songs?: Song[];
+  order?: SuggestOrderType[];
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { PlayCircleOutlined, FileAddOutlined } from '@ant-design/icons';
 import styles from './song-control.module.less';
 
