@@ -106,6 +106,7 @@ const FindMusic: React.FC = () => {
       <Card type="rectangle" data={privateList} />
       <Title name="最新音乐" />
       <List
+        icon
         data={albumNewest}
         functionChildren={renderAlbumNewest}
         onItemClick={handleSongInserted}

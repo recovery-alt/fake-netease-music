@@ -4,10 +4,12 @@ import { DeleteOutlined, CloseOutlined } from '@ant-design/icons';
 import { getSearchHotDetail } from '@/api';
 import { SearchHot } from '@/types';
 import json from 'json5';
+import { useClickAway } from 'react-use';
 
 const EmptySuggestion: React.FC = () => {
   const [searchHot, setSearchHot] = useState<SearchHot[]>([]);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
+
   const handleCloseClick: React.MouseEventHandler<HTMLSpanElement> = e => {
     e.stopPropagation();
   };
@@ -18,9 +20,7 @@ const EmptySuggestion: React.FC = () => {
 
   useEffect(() => {
     const searchHistory = localStorage.getItem('search-history');
-    if (searchHistory) {
-      json.parse<string[]>(searchHistory);
-    }
+    if (searchHistory) setSearchHistory(json.parse<string[]>(searchHistory));
 
     (async () => {
       const res = await getSearchHotDetail();
@@ -56,7 +56,7 @@ const EmptySuggestion: React.FC = () => {
           <div className={styles['empty-suggestion__item-right']}>
             <div className={styles['empty-suggestion__item-top']}>
               <strong>{item.searchWord}</strong>
-              <mark>HOT</mark>
+              {item.iconUrl ? <mark>HOT</mark> : null}
               <span>{item.score}</span>
             </div>
             <div className={styles['empty-suggestion__item-bottom']}>{item.content}</div>

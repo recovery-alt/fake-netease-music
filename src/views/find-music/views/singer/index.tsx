@@ -8,8 +8,11 @@ import Img from '@/components/img';
 import { resizeImg } from '@/utils';
 
 const Singer: React.FC = () => {
-  const [data, dataDispatch] = useReducer<Reducer<Artist[], Artist[]>>((state, action) => {
-    return [...state, ...action];
+  type ActionType = 'add' | 'reset';
+  type Action = { type: ActionType; payload: Artist[] };
+  const [data, dataDispatch] = useReducer<Reducer<Artist[], Action>>((state, action) => {
+    if (action.type === 'add') return [...state, ...action.payload];
+    return action.payload;
   }, []);
   type Selected = Array<number | string | undefined>;
   const [selected, setSelected] = useState<Selected>([-1, -1, undefined]);
@@ -56,15 +59,16 @@ const Singer: React.FC = () => {
     setSelected(newSelected);
   }
 
-  async function loadArtistList() {
+  async function loadArtistList(actionType: ActionType) {
     const [area, type, initial] = selected;
     const res = await getArtistList({ area, type, initial, limit, offset });
     setMore(res.more);
-    dataDispatch(res.artists);
+    dataDispatch({ type: actionType, payload: res.artists });
   }
 
   useEffect(() => {
-    loadArtistList();
+    offset = 0;
+    loadArtistList('reset');
   }, [selected]);
 
   useEffect(() => {
@@ -74,7 +78,7 @@ const Singer: React.FC = () => {
       if (more) {
         setMoreText('加载中...');
         offset += limit;
-        loadArtistList();
+        loadArtistList('add');
       } else {
         setMoreText('没有更多了~');
       }

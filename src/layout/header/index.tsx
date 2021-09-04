@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, KeyboardEventHandler } from 'react';
 import styles from './header.module.less';
 import {
   LeftOutlined,
@@ -32,6 +32,12 @@ const List: React.FC = () => {
     { icon: SkinOutlined },
     { icon: CompressOutlined },
   ];
+
+  const handleMouseup: KeyboardEventHandler = e => {
+    if (e.key === 'Enter' && inputVal) {
+      console.log(inputVal);
+    }
+  };
 
   useEffect(() => {
     if (!pathname) return;
@@ -80,6 +86,7 @@ const List: React.FC = () => {
             value={inputVal}
             onInput={e => setInputVal(e.currentTarget.value)}
             onFocus={() => setShowSearch(true)}
+            onKeyUp={handleMouseup}
           />
           <div className={styles['header__right-icons']}>
             {buttonList.map((item, i) => (
@@ -88,7 +95,7 @@ const List: React.FC = () => {
           </div>
         </div>
       </div>
-      <SearchList visible={showSearch} keyword={inputVal} />
+      <SearchList visible={showSearch} setVisible={setShowSearch} keyword={inputVal} />
     </header>
   );
 };

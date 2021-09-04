@@ -2,7 +2,6 @@
   border-radius: 12px;
   height: 24px;
   position: relative;
-  width: 125px;
 
   input {
     border: 0;
@@ -10,6 +9,7 @@
     height: 100%;
     outline: 0;
     padding-left: 30px;
+    padding-right: 25px;
     width: 100%;
 
     &::placeholder {
@@ -17,16 +17,24 @@
     }
   }
 
-  .--normal {
-    background-color: #ececec;
+  &.--normal {
+    width: 150px;
+
+    input {
+      background-color: #ececec;
+    }
   }
 
-  .--transparent {
-    background-color: transparent;
+  &.--transparent {
+    width: 125px;
 
-    &:focus,
-    &:hover {
-      background-color: #f8f7f7;
+    input {
+      background-color: transparent;
+
+      &:focus,
+      &:hover {
+        background-color: #f8f7f7;
+      }
     }
   }
 

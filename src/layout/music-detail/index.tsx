@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Cover from './cover';
 import ButtonGroup from './button-group';
 import Lyric from './lyric';
-import CommentGroup from './comment-group';
+import CommentGroup from '@/components/comment-group';
 import { Music, Track } from '@/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store';
@@ -18,6 +18,8 @@ import {
   MoreOutlined,
 } from '@ant-design/icons';
 import { setShowDetail } from '@/store';
+import WriteComment from './write-comment';
+import { getCommentMusic } from '@/api';
 
 type Props = { visible: boolean };
 
@@ -58,7 +60,9 @@ const MusicDetail: React.FC<Props> = ({ visible }) => {
             <Lyric music={currentMusic} />
           </section>
           <div className={styles['music-detail__info']}>
-            <CommentGroup currentMusic={currentMusic} />
+            <CommentGroup id={currentMusic.id} api={getCommentMusic}>
+              <WriteComment />
+            </CommentGroup>
             <Recommend id={currentMusic.id} />
           </div>
         </div>

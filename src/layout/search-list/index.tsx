@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './search-list.module.less';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import EmptySuggestion from './empty-suggestion';
 import KeywordSuggestion from './keyword-suggestion';
+import { useClickAway } from 'react-use';
 
-type Props = { visible: boolean; keyword: string };
+type Props = { visible: boolean; setVisible: (visible: boolean) => void; keyword: string };
 
-const SearchList: React.FC<Props> = ({ visible, keyword }) => {
+const SearchList: React.FC<Props> = ({ visible, setVisible, keyword }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  useClickAway(ref, () => setVisible(false));
+
   return createPortal(
-    <div className={classNames(styles['search-list'], { [styles['--show']]: visible })}>
+    <div ref={ref} className={classNames(styles['search-list'], { [styles['--show']]: visible })}>
       {keyword ? <KeywordSuggestion /> : <EmptySuggestion />}
     </div>,
     document.getElementById('drawer')!

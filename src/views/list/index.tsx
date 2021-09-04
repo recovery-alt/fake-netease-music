@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import './list.less';
 import Button from '@/components/button';
 import { FolderAddOutlined, ShareAltOutlined, DownloadOutlined } from '@ant-design/icons';
-import Tab from './tab';
 import Table, { Column } from '@/components/table';
 import { useParams } from 'react-router-dom';
 import avatar from '@/assets/img/avatar.svg';
@@ -15,21 +14,16 @@ import { getPlaylistDetail } from '@/api';
 import { Track } from '@/types';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, setCurrentTrack } from '@/store';
+import { Tabs } from 'antd';
+import Collector from './collector';
+import CommentsList from './comments-list';
 
 const List: React.FC = () => {
   const params = useParams<{ id: string }>();
   const [tracks, setTracks] = useState<Track[]>([]);
   const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    const id = Number(params.id);
-    if (Number.isNaN(id)) return;
-
-    (async () => {
-      const playlistDetail = await getPlaylistDetail(id);
-      setTracks(playlistDetail.playlist.tracks);
-    })();
-  }, [params]);
+  const [commentCount, setCommentCount] = useState(0);
+  const id = useMemo(() => Number(params.id), [params.id]);
   const columns: Column<Track>[] = [
     { title: '', key: 'ordinal' },
     { title: '', key: 'action' },
@@ -50,10 +44,15 @@ const List: React.FC = () => {
   const profile = useSelector((state: RootState) => state.user.profile);
   const playList = useSelector((state: RootState) => state.userPlaylist.playlist);
 
-  const curPlaylist = useMemo(
-    () => playList.find(item => item.id === Number(params.id)),
-    [playList, params]
-  );
+  const curPlaylist = useMemo(() => playList.find(item => item.id === id), [playList, params]);
+
+  useEffect(() => {
+    (async () => {
+      const playlistDetail = await getPlaylistDetail(id);
+      setCommentCount(playlistDetail.playlist.commentCount);
+      setTracks(playlistDetail.playlist.tracks);
+    })();
+  }, [params.id]);
 
   const handleTableDoubleClick = (current: number) => {
     dispatch(setCurrentTrack({ current, tracks, fm: [] }));
@@ -62,7 +61,7 @@ const List: React.FC = () => {
   return (
     <div className="list">
       <header className="list__header">
-        {params.id && curPlaylist?.coverImgUrl ? (
+        {id && curPlaylist?.coverImgUrl ? (
           <img className="list__img" src={resizeImg(curPlaylist.coverImgUrl, 300)} alt="avatar" />
         ) : (
           <div className="list__img-default">
@@ -117,8 +116,19 @@ const List: React.FC = () => {
           </div>
         </div>
       </header>
-      <Tab />
-      <Table columns={columns} data={tracks} doubleClick={handleTableDoubleClick} />
+      <section className="list__tabs">
+        <Tabs>
+          <Tabs.TabPane tab="歌曲列表" key="1">
+            <Table columns={columns} data={tracks} doubleClick={handleTableDoubleClick} />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab={`评论(${commentCount})`} key="2">
+            <CommentsList id={id} />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="收藏者" key="3">
+            <Collector id={id} />
+          </Tabs.TabPane>
+        </Tabs>
+      </section>
     </div>
   );
 };

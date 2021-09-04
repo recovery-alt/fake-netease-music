@@ -9,7 +9,7 @@ import AlbumControl from './album-control';
 import { AlbumType, Song } from '@/types';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { insertSong, setCurrentTrack } from '@/store';
+import { setCurrentTrack } from '@/store';
 import { transformSong2Track } from '@/utils';
 
 const Newest: React.FC = () => {

@@ -46,6 +46,7 @@ type BeReplied = { beRepliedCommentId: number; content: string; user: User };
 export type Comment = {
   content: string;
   commentId: number;
+  commentCount: number;
   likedCount: number;
   liked: boolean;
   time: number;
@@ -95,7 +96,13 @@ export type Track = {
   al: Album;
   ar: { id: number; name: string }[];
 };
-export type PlaylistDetail = { id: number; name: string; coverImgUrl: string; tracks: Track[] };
+export type PlaylistDetail = {
+  id: number;
+  name: string;
+  coverImgUrl: string;
+  commentCount: number;
+  tracks: Track[];
+};
 
 export type Artist = {
   picUrl: string;
@@ -160,6 +167,14 @@ export type ArtistListParams = {
 
 export type TopPlaylistParams = { offset?: number; limit?: number; cat?: string };
 
-export type CommentMusic = { total: number; comments: Comment[]; hotComments: Comment[] };
+export type CommentData = { total: number; comments: Comment[]; hotComments: Comment[] };
 
 export type SearchHot = { searchWord: string; content: string; score: number; iconUrl: string };
+
+export type Subscriber = {
+  avatarUrl: string;
+  nickname: string;
+  userId: number;
+  signature: string;
+  gender: number;
+};

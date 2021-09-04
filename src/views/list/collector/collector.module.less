@@ -1,0 +1,46 @@
+.collector {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 30px;
+
+  &__item {
+    align-items: center;
+    display: flex;
+    margin-top: 20px;
+    width: 50%;
+  }
+
+  &__img {
+    border-radius: 50%;
+    height: 90px;
+    margin-right: 8px;
+    width: 90px;
+  }
+
+  &__title {
+    color: #333;
+    cursor: pointer;
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+  &__subtitle {
+    color: #999;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  &__empty {
+    color: #999;
+    margin-top: 70px;
+    text-align: center;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+}

@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import styles from './list.module.less';
 import { Data } from '@/types';
-import Img from '@/components/img';
+import Img, { IconOptions } from '@/components/img';
 import classNames from 'classnames';
 import { resizeImg } from '@/utils';
 
@@ -13,9 +13,10 @@ type Props = {
   size?: 'default' | 'medium' | 'large';
   functionChildren?: (params: ListParams) => ReactNode;
   onItemClick?: (id: number) => void;
+  icon?: IconOptions | boolean;
 };
 
-const List: React.FC<Props> = ({ data, functionChildren, size = 'default', onItemClick }) => {
+const List: React.FC<Props> = ({ icon, data, functionChildren, size = 'default', onItemClick }) => {
   const len = data.length;
   const newData = [data.slice(0, len / 2), data.slice(len / 2, len)];
 
@@ -29,7 +30,7 @@ const List: React.FC<Props> = ({ data, functionChildren, size = 'default', onIte
                 <Img
                   className={styles.list__img}
                   src={resizeImg(item.imgUrl)}
-                  icon
+                  icon={icon}
                   onClick={() => onItemClick?.(item.id)}
                 />
               </div>

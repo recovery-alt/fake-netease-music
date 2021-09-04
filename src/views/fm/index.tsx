@@ -3,7 +3,7 @@ import './fm.less';
 import Cover from './cover';
 import Lyric from '@/layout/music-detail/lyric';
 import ButtonGroup from '@/layout/music-detail/button-group';
-import CommentGroup from '@/layout/music-detail/comment-group';
+import CommentGroup from '@/components/comment-group';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState, setFM, nextFM } from '@/store';
 import {
@@ -12,6 +12,8 @@ import {
   VerticalLeftOutlined,
   MoreOutlined,
 } from '@ant-design/icons';
+import { getCommentMusic } from '@/api';
+import WriteComment from '@/layout/music-detail/write-comment';
 
 const FM: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -46,7 +48,9 @@ const FM: React.FC = () => {
         </div>
         <Lyric music={currentMusic} />
       </section>
-      <CommentGroup currentMusic={currentMusic} />
+      <CommentGroup id={currentMusic.id} api={getCommentMusic}>
+        <WriteComment />
+      </CommentGroup>
     </div>
   );
 };

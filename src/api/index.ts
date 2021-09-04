@@ -25,9 +25,10 @@ import {
   Track,
   ArtistListParams,
   TopPlaylistParams,
-  CommentMusic,
+  CommentData,
   TopAlbum,
   SearchHot,
+  Subscriber,
 } from '@/types';
 import { get } from './api';
 
@@ -55,7 +56,10 @@ export const getLyric = (id: number | string) => get<Lyric>('/lyric', { id });
 export const getPersonalFM = () => get<{ data: Array<Music> }>('/personal_fm');
 
 export const getCommentMusic = (id: number | string, offset = 0) =>
-  get<CommentMusic>('/comment/music', { id, offset });
+  get<CommentData>('/comment/music', { id, offset });
+
+export const getCommentPlaylist = (id: number | string, offset = 0) =>
+  get<CommentData>('/comment/playlist', { id, offset });
 
 export const getMusicCategory = () => get<{ tags: Playlist[] }>('/playlist/hot');
 
@@ -126,3 +130,7 @@ export const getSongDetail = (ids: string | number) =>
   get<{ songs: Track[] }>('/song/detail', { ids });
 
 export const getSearchHotDetail = () => get<{ data: SearchHot[] }>('/search/hot/detail');
+
+type PlaylistSubscriberParams = { id: number; offset: number; limit?: number };
+export const getPlaylistSubscribers = ({ id, offset, limit = 20 }: PlaylistSubscriberParams) =>
+  get<{ subscribers: Subscriber[]; total: number }>('/playlist/subscribers', { id, offset, limit });

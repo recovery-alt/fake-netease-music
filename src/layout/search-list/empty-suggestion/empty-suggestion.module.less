@@ -3,7 +3,12 @@
     padding: 18px 20px;
 
     &-delete {
+      cursor: pointer;
       margin-left: 10px;
+
+      &:hover {
+        color: #000;
+      }
     }
 
     h2 {
@@ -22,13 +27,10 @@
     padding: 0 20px;
 
     p {
+      color: #c9c9c9;
       flex-shrink: 0;
       margin: 0;
       width: 34px;
-    }
-
-    &:nth-child(-n + 5) p {
-      color: #ff393b;
     }
 
     &:hover {
@@ -39,8 +41,9 @@
       line-height: 1;
 
       strong {
-        color: #000;
+        color: #333;
         font-size: 12px;
+        font-weight: normal;
       }
 
       mark {
@@ -54,14 +57,16 @@
 
       span {
         color: #ccc;
-        font-size: 14px;
+        font-size: 11px;
         margin-left: 11px;
       }
     }
 
     &-right {
+      color: #b9b9b8;
       display: flex;
       flex-direction: column;
+      font-size: 12px;
       height: 100%;
       justify-content: center;
       line-height: 1;
@@ -75,6 +80,16 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    &:nth-child(-n + 5) {
+      p {
+        color: #ff393b;
+      }
+
+      .empty-suggestion__item-top strong {
+        color: #000;
+      }
     }
   }
 
@@ -90,7 +105,7 @@
       flex-shrink: 0;
       font-size: 14px;
       height: 24px;
-      line-height: 22px;
+      line-height: 20px;
       margin-bottom: 10px;
       margin-right: 10px;
       padding: 0 15px;
@@ -121,7 +136,7 @@
     font-weight: normal;
     line-height: 1;
     margin-bottom: 16px;
-    margin-top: 24px;
+    margin-top: 6px;
     padding: 0 20px;
   }
 }
