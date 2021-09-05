@@ -6,7 +6,12 @@
     padding: 0 8px;
 
     span {
+      cursor: pointer;
+    }
+
+    strong {
       color: #6088b7;
+      font-weight: normal;
     }
   }
 
@@ -24,7 +29,10 @@
     cursor: pointer;
     height: 30px;
     line-height: 30px;
+    overflow: hidden;
     padding: 0 25px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &:hover {
       background-color: #f2f3f2;

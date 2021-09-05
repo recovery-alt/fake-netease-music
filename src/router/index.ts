@@ -24,6 +24,10 @@ const routes: Array<RouteConfig> = [
         component: lazy(() => import('@/views/list')),
       },
       {
+        path: '/search-result',
+        component: lazy(() => import('@/views/search-result')),
+      },
+      {
         component: lazy(() => import('@/views/find-music/views/newest')),
         path: '/find-music/newest/:type?',
       },

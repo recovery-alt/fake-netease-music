@@ -15,7 +15,7 @@ export type Column<T = Data> = {
 
 type Props = {
   columns: Column<any>[];
-  data: Data[];
+  data: Data<any>[];
   noHead?: boolean;
   doubleClick?: (index: number) => void;
 };

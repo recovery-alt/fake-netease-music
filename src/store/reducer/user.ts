@@ -24,7 +24,10 @@ export const setUserInfo = createAsyncThunk<UserInfo, { phone: string; password:
 
 const { reducer, actions } = createSlice({
   name: prefix(),
-  initialState: { cookie: '', profile: { avatarUrl: avatar, nickname: '未登录', userId: 0 } },
+  initialState: {
+    cookie: '',
+    profile: { avatarUrl: avatar, nickname: '未登录', userId: 0, description: '' },
+  },
   reducers: {
     setUserInfoFromCache(state, action: PayloadAction<UserInfo>) {
       return { ...state, ...action.payload };

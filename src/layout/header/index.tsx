@@ -1,4 +1,4 @@
-import React, { useState, useEffect, KeyboardEventHandler } from 'react';
+import React, { useState, useEffect, KeyboardEventHandler, useRef } from 'react';
 import styles from './header.module.less';
 import {
   LeftOutlined,
@@ -13,6 +13,8 @@ import { Link, useLocation, useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 import Input from '@/components/input';
 import SearchList from '@/layout/search-list';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, setKeywords } from '@/store';
 
 const List: React.FC = () => {
   const [active, setActive] = useState('');
@@ -20,7 +22,9 @@ const List: React.FC = () => {
   const { pathname } = useLocation();
   const { go, push } = useHistory();
   const [showSearch, setShowSearch] = useState(false);
-  const [inputVal, setInputVal] = useState('');
+  const keywords = useSelector((state: RootState) => state.controller.keywords);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
   const buttonList = [
     {
       icon: SettingOutlined,
@@ -34,8 +38,9 @@ const List: React.FC = () => {
   ];
 
   const handleMouseup: KeyboardEventHandler = e => {
-    if (e.key === 'Enter' && inputVal) {
-      console.log(inputVal);
+    if (e.key === 'Enter' && keywords) {
+      setShowSearch(false);
+      push({ pathname: '/search-result', state: { keywords } });
     }
   };
 
@@ -81,10 +86,11 @@ const List: React.FC = () => {
         </ul>
         <div className={styles['header__right-wrapper']}>
           <Input
+            ref={inputRef}
             type="normal"
             placeholder="搜索"
-            value={inputVal}
-            onInput={e => setInputVal(e.currentTarget.value)}
+            value={keywords}
+            onInput={e => dispatch(setKeywords(e.currentTarget.value))}
             onFocus={() => setShowSearch(true)}
             onKeyUp={handleMouseup}
           />
@@ -95,7 +101,7 @@ const List: React.FC = () => {
           </div>
         </div>
       </div>
-      <SearchList visible={showSearch} setVisible={setShowSearch} keyword={inputVal} />
+      <SearchList visible={showSearch} setVisible={setShowSearch} inputRef={inputRef.current} />
     </header>
   );
 };

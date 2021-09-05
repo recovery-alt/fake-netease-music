@@ -1,0 +1,68 @@
+.list {
+  &__item {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    height: 80px;
+    padding: 0 30px;
+
+    &:nth-child(2n) {
+      background-color: #fafafb;
+    }
+
+    &:hover {
+      background-color: #f2f2f4;
+    }
+  }
+
+  &__img {
+    border-radius: 4px;
+    height: 60px;
+    width: 60px;
+
+    &-wrapper {
+      background-image: url('/src/assets/img/coverall.png');
+      background-position: 117px 365px;
+      border-radius: 4px;
+      height: 60px;
+
+      &.--circle {
+        border-radius: 50%;
+        width: 60px;
+
+        .list__img {
+          border-radius: 50%;
+        }
+      }
+
+      &.--extra {
+        width: 70px;
+      }
+
+      &.--normal {
+        height: 60px;
+        width: 60px;
+      }
+    }
+  }
+
+  &__name {
+    flex-shrink: 0;
+    margin-left: 10px;
+    width: 400px;
+  }
+
+  &__col2 {
+    color: #bfbfc0;
+    flex-shrink: 0;
+    font-size: 12px;
+    margin-left: 10px;
+    width: 110px;
+  }
+
+  &__col3 {
+    color: #bfbfc0;
+    font-size: 12px;
+    margin-left: 10px;
+  }
+}

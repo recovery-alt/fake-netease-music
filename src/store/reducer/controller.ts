@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type Controller = { pause: boolean; currentTime: number; showDetail: boolean };
+type Controller = { pause: boolean; currentTime: number; showDetail: boolean; keywords: string };
 
-const initialState: Controller = { pause: true, currentTime: 0, showDetail: false };
+const initialState: Controller = { pause: true, currentTime: 0, showDetail: false, keywords: '' };
 
 const { reducer: controllerReducer, actions } = createSlice({
   name: 'controller',
@@ -23,8 +23,13 @@ const { reducer: controllerReducer, actions } = createSlice({
       newState.showDetail = action.payload;
       return newState;
     },
+    setKeywords(state, action: PayloadAction<string>) {
+      const newState = { ...state };
+      newState.keywords = action.payload;
+      return newState;
+    },
   },
 });
 
-export const { setPause, setCurrentTime, setShowDetail } = actions;
+export const { setPause, setCurrentTime, setShowDetail, setKeywords } = actions;
 export { controllerReducer };

@@ -1,0 +1,49 @@
+.video {
+  display: grid;
+  grid-gap: 0 18px;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 12px 30px;
+
+  &__img {
+    border-radius: 4px;
+    height: 130px;
+    width: 230px;
+  }
+
+  &__description {
+    height: 80px;
+    padding-top: 8px;
+    width: 230px;
+
+    h2,
+    h3 {
+      font-size: 12px;
+      font-weight: normal;
+    }
+
+    h2 {
+      color: #333;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    h3 {
+      color: #c6c6c6;
+    }
+
+    .--mv::before {
+      border: 1px solid var(--primary-color);
+      border-radius: 2px;
+      color: var(--primary-color);
+      content: 'MV';
+      display: inline-block;
+      font-size: 12px;
+      height: 16px;
+      line-height: 16px;
+      margin-right: 8px;
+      text-align: center;
+      width: 24px;
+    }
+  }
+}

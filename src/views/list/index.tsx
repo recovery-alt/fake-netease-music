@@ -19,7 +19,7 @@ import Collector from './collector';
 import CommentsList from './comments-list';
 
 const List: React.FC = () => {
-  const params = useParams<{ id: string }>();
+  const params = useParams<{ id?: string }>();
   const [tracks, setTracks] = useState<Track[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const [commentCount, setCommentCount] = useState(0);
@@ -48,11 +48,12 @@ const List: React.FC = () => {
 
   useEffect(() => {
     (async () => {
+      if (Number.isNaN(id)) return;
       const playlistDetail = await getPlaylistDetail(id);
       setCommentCount(playlistDetail.playlist.commentCount);
       setTracks(playlistDetail.playlist.tracks);
     })();
-  }, [params.id]);
+  }, [id]);
 
   const handleTableDoubleClick = (current: number) => {
     dispatch(setCurrentTrack({ current, tracks, fm: [] }));

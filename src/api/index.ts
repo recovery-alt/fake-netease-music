@@ -21,7 +21,7 @@ import {
   Toplist,
   TopPlaylist,
   VideoCategogy,
-  VideoType,
+  VideoSingleCreator,
   Track,
   ArtistListParams,
   TopPlaylistParams,
@@ -31,8 +31,12 @@ import {
   Subscriber,
   PlaylistSubscriberParams,
   SearchSuggest,
+  SearchParams,
+  ComposeSearch,
+  SearchResult,
 } from '@/types';
 import { get } from './api';
+import { SearchType } from '@/enum';
 
 export * from './login';
 
@@ -101,7 +105,7 @@ export const getTopAlbum = (params: TopAlbumParams) => get<TopAlbum>('/top/album
 export const getVideoCategoryList = () => get<{ data: VideoCategogy[] }>('/video/category/list');
 
 export const getVideoGroup = (id: number, offset = 0) =>
-  get<{ datas: VideoType[] }>('/video/group', { id, offset });
+  get<{ datas: { data: VideoSingleCreator }[] }>('/video/group', { id, offset });
 
 export const getMVFirst = (area: string, limit = 6) =>
   get<{ data: MVType[] }>('/mv/first', { area, limit });
@@ -138,3 +142,8 @@ export const getPlaylistSubscribers = ({ id, offset, limit = 20 }: PlaylistSubsc
 
 export const getSearchSuggest = (keywords: string) =>
   get<{ result: SearchSuggest }>('/search/suggest', { keywords });
+
+export const getSearch = <T>(params: SearchParams) => get<T>('/search', params);
+
+export const getSearchMultimatch = (keywords: string) =>
+  get<SearchResult<SearchSuggest>>('/search/multimatch', { keywords });

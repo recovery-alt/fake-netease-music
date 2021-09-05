@@ -7,12 +7,17 @@ import {
   UnorderedListOutlined,
   PlayCircleOutlined,
 } from '@ant-design/icons';
-import { Album, Artist, Playlist, SearchSuggest, Song, SimpleAlbum } from '@/types';
+import { Artist, Playlist, SearchSuggest, Song, SimpleAlbum, SuggestOrderType } from '@/types';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { useHistory } from 'react-router-dom';
 
-type Props = { keyword: string };
+type Props = { setVisible: (visible: boolean) => void };
 
-const KeywordSuggestion: React.FC<Props> = ({ keyword }) => {
+const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
+  const keywords = useSelector((state: RootState) => state.controller.keywords);
   const [data, setData] = useState<SearchSuggest>({});
+  const { push } = useHistory();
   const map = {
     albums: {
       label: '专辑',
@@ -32,66 +37,84 @@ const KeywordSuggestion: React.FC<Props> = ({ keyword }) => {
     },
   };
 
+  function handleItemClick(id: number, key: SuggestOrderType) {
+    // TODO
+  }
+
+  function handleTitleClick() {
+    setVisible(false);
+    push({ pathname: '/search-result', state: { keywords } });
+  }
+
+  function renderOrder(key: SuggestOrderType) {
+    const item = map[key];
+    const dataArr = data[key];
+
+    return (
+      <>
+        <div className={styles['keyword-suggestion__title']}>
+          <item.icon />
+          {item.label}
+        </div>
+        {dataArr?.map(datItem => renderSuggestionItem(datItem, key))}
+      </>
+    );
+  }
+
+  function renderSuggestionItem(
+    dataItem: Song | Artist | SimpleAlbum | Playlist,
+    key: SuggestOrderType
+  ) {
+    const stratrgy = {
+      albums: () => {
+        const item = dataItem as SimpleAlbum;
+        return `${item.name} - ${item.artist.name}`;
+      },
+      artists: () => {
+        const item = dataItem as Artist;
+        return item.name;
+      },
+      playlists: () => {
+        const item = dataItem as Playlist;
+        return item.name;
+      },
+      songs: () => {
+        const item = dataItem as Song;
+        let transNames = item.transNames || item.alias?.join(' ') || '';
+        transNames = transNames ? `（${transNames}）` : '';
+        const artist = item.artists.reduce((acc, val) => `${acc} ${val.name}`, '').slice(1);
+        return `${item.name} ${transNames}- ${artist}`;
+      },
+    };
+
+    const execute = stratrgy[key];
+
+    return (
+      <div
+        key={dataItem.id}
+        className={styles['keyword-suggestion__item']}
+        onClick={() => handleItemClick(dataItem.id, key)}
+      >
+        {execute()}
+      </div>
+    );
+  }
+
   useEffect(() => {
     (async () => {
-      const res = await getSearchSuggest(keyword);
+      const res = await getSearchSuggest(keywords);
       setData(res.result);
     })();
-  }, [keyword]);
+  }, [keywords]);
 
   return data.order?.length ? (
     <div className={styles['keyword-suggestion']}>
       <header className={styles['keyword-suggestion__header']}>
-        搜“<span>{keyword}</span>”相关的结果 &gt;
+        <span onClick={handleTitleClick}>
+          搜“<strong>{keywords}</strong>”相关的结果 &gt;
+        </span>
       </header>
-      {data.order.map(key => {
-        const item = map[key];
-        const dataArr = data[key];
-
-        return (
-          <>
-            <div className={styles['keyword-suggestion__title']}>
-              <item.icon />
-              {item.label}
-            </div>
-            {dataArr?.map(dataItem => {
-              const stratrgy = {
-                albums: () => {
-                  const item = dataItem as SimpleAlbum;
-                  return (
-                    <>
-                      {item.name} - {item.artist.name}
-                    </>
-                  );
-                },
-                artists: () => {
-                  const item = dataItem as Artist;
-                  return <>{item.name}</>;
-                },
-                playlists: () => {
-                  const item = dataItem as Playlist;
-                  return <>{item.name}</>;
-                },
-                songs: () => {
-                  const item = dataItem as Song;
-                  const transNames = item.transNames || item.alias?.join(' ') || '';
-                  return (
-                    <>
-                      {item.name}
-                      {transNames ? `（${transNames}）` : ''}-{' '}
-                      {item.artists.reduce((acc, val) => `${acc} ${val.name}`, '').slice(1)}
-                    </>
-                  );
-                },
-              };
-
-              const execute = stratrgy[key];
-
-              return <div className={styles['keyword-suggestion__item']}>{execute()}</div>;
-            })}
-          </>
-        );
-      })}
+      {data.order.map(renderOrder)}
     </div>
   ) : null;
 };

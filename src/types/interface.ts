@@ -1,6 +1,7 @@
-import { AlbumType, AlbumArea } from '@/types';
+import { AlbumType, AlbumArea, Data } from '@/types';
+import { SearchType } from '@/enum';
 
-export type User = { nickname: string; avatarUrl: string; userId: number };
+export type User = { nickname: string; avatarUrl: string; userId: number; description: string };
 export type UserInfo = { cookie: string; profile: User };
 
 export type UserPlaylist = {
@@ -33,6 +34,10 @@ export type Song = {
   artists: Array<{ id: number; name: string }>;
 };
 
+export interface SongWithLyric extends Song {
+  lyrics: { txt: string };
+}
+
 export type Lyric = { nolyric: boolean; lrc: { lyric: string } };
 
 export type Music = {
@@ -60,8 +65,10 @@ export type Playlist = {
   name: string;
   id: number;
   playCount: number;
+  trackCount: number;
   coverImgUrl: string;
   copywriter: string;
+  creator: User;
 };
 
 export type Subcategory = { category: number; name: string; hot: boolean };
@@ -118,7 +125,7 @@ export type Album = {
   id: number;
   picUrl: string;
   name: string;
-  artist: { name: string };
+  artist: { name: string; alias: string[] };
   size: number;
   artists: Artist[];
 };
@@ -129,19 +136,23 @@ export type TopAlbumParams = { area?: AlbumArea; limit?: number; type?: AlbumTyp
 
 export type VideoCategogy = { id: number; name: string };
 
-export type VideoType = {
-  data: {
-    coverUrl: string;
-    durationms: number;
-    playTime: number;
-    previewUrl: string;
-    title: string;
-    vid: string;
-    creator: {
-      nickname: string;
-    };
-  };
+export type Video = {
+  type: number;
+  coverUrl: string;
+  durationms: number;
+  playTime: number;
+  previewUrl: string;
+  title: string;
+  vid: string;
 };
+
+export interface VideoSingleCreator extends Video {
+  creator: { nickname: string };
+}
+
+export interface VideoMultiCreator extends Video {
+  creator: Array<{ userName: string }>;
+}
 
 export type MVType = {
   id: number;
@@ -183,14 +194,93 @@ export type Subscriber = {
 
 export type PlaylistSubscriberParams = { id: number; offset: number; limit?: number };
 
+export type Concert = { cover: string; title: string; url: string; time: [number, number] };
+
+export type Orpheus = any;
+
 export type SuggestOrderType = 'albums' | 'artists' | 'playlists' | 'songs';
 
-export type SimpleAlbum = { id: number; name: string; artist: Artist };
+export type SimpleAlbum = { id: number; name: string; picUrl: string; artist: Artist };
 
-export type SearchSuggest = {
+export interface SearchSuggest extends Data<any> {
   albums?: SimpleAlbum[];
   artists?: Artist[];
   playlists?: Playlist[];
   songs?: Song[];
   order?: SuggestOrderType[];
+}
+
+export type SearchMultimatchOrderType =
+  | 'album'
+  | 'artist'
+  | 'playlist'
+  | 'song'
+  | 'concert'
+  | 'orpheus';
+export interface SearchMultimatch extends Data<any> {
+  album?: SimpleAlbum[];
+  artist?: Artist[];
+  playlist?: Playlist[];
+  song?: Song[];
+  concert?: Concert;
+  orpheus?: Orpheus;
+  orders?: SearchMultimatchOrderType[];
+}
+
+export type SearchParams = {
+  keywords: string;
+  type: SearchType;
+  limit: number;
+  offset: number;
 };
+
+export type SearchResult<T> = { result: T };
+
+export type SearchSong = {
+  songCount: number;
+  songs: Song[];
+};
+
+export type SearchSinger = {
+  artistCount: number;
+  artists: Artist[];
+};
+
+export type SearchAlbum = {
+  albumCount: number;
+  albums: Album[];
+};
+
+export type SearchVideo = {
+  videoCount: number;
+  videos: VideoMultiCreator[];
+};
+
+export type SearchPlaylist = {
+  playlistCount: number;
+  playlists: Playlist[];
+};
+
+export type SearchLyric = {
+  songCount: number;
+  songs: SongWithLyric[];
+};
+
+export type SearchRadio = {
+  djRadioCount: number;
+  djRadios: DJRadio[];
+};
+export type SearchUser = {
+  userprofileCount: number;
+  userprofiles: User[];
+};
+
+export type ComposeSearch =
+  | SearchSong
+  | SearchSinger
+  | SearchAlbum
+  | SearchVideo
+  | SearchPlaylist
+  | SearchLyric
+  | SearchRadio
+  | SearchUser;
