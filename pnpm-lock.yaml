@@ -52,7 +52,7 @@ specifiers:
   stylelint-order: ^4.1.0
   stylelint-prettier: ^1.2.0
   typescript: ^4.4.2
-  vite: ^2.5.3
+  vite: ^2.5.4
   vite-plugin-style-import: 1.1.1
   wait-on: ^6.0.0
 
@@ -110,8 +110,8 @@ devDependencies:
   stylelint-order: 4.1.0_stylelint@13.13.1
   stylelint-prettier: 1.2.0_prettier@2.3.2+stylelint@13.13.1
   typescript: registry.nlark.com/typescript/4.4.2
-  vite: registry.nlark.com/vite/2.5.3
-  vite-plugin-style-import: registry.nlark.com/vite-plugin-style-import/1.1.1_vite@2.5.3
+  vite: registry.nlark.com/vite/2.5.4
+  vite-plugin-style-import: registry.nlark.com/vite-plugin-style-import/1.1.1_vite@2.5.4
   wait-on: registry.nlark.com/wait-on/6.0.0
 
 packages:
@@ -816,7 +816,7 @@ packages:
       source-map: registry.nlark.com/source-map/0.6.1
       wordwrap: registry.nlark.com/wordwrap/1.0.0
     optionalDependencies:
-      uglify-js: registry.nlark.com/uglify-js/3.14.1
+      uglify-js: registry.nlark.com/uglify-js/3.14.2
     dev: true
 
   /has-symbols/1.0.2:
@@ -928,10 +928,6 @@ packages:
   /is-typedarray/1.0.0:
     resolution: {integrity: sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=, tarball: is-typedarray/download/is-typedarray-1.0.0.tgz}
     dev: true
-
-  /isarray/0.0.1:
-    resolution: {integrity: sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=, tarball: isarray/download/isarray-0.0.1.tgz}
-    dev: false
 
   /isexe/2.0.0:
     resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=, tarball: isexe/download/isexe-2.0.0.tgz}
@@ -1826,7 +1822,7 @@ packages:
     dev: false
 
   registry.nlark.com/@babel/code-frame/7.12.11:
-    resolution: {integrity: sha1-9K1DWqJj25NbjxDyxVLSP7cWpj8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@babel/code-frame/download/@babel/code-frame-7.12.11.tgz?cache=0&sync_timestamp=1623285092811&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Fcode-frame%2Fdownload%2F%40babel%2Fcode-frame-7.12.11.tgz}
+    resolution: {integrity: sha1-9K1DWqJj25NbjxDyxVLSP7cWpj8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@babel/code-frame/download/@babel/code-frame-7.12.11.tgz}
     name: '@babel/code-frame'
     version: 7.12.11
     dependencies:
@@ -2898,7 +2894,7 @@ packages:
     dev: true
 
   registry.nlark.com/antd/4.16.13_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha1-6bm0pZDbKHR6rhyrmJgWSaNYgK8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/antd/download/antd-4.16.13.tgz}
+    resolution: {integrity: sha1-6bm0pZDbKHR6rhyrmJgWSaNYgK8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/antd/download/antd-4.16.13.tgz?cache=0&sync_timestamp=1631006679887&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fantd%2Fdownload%2Fantd-4.16.13.tgz}
     id: registry.nlark.com/antd/4.16.13
     name: antd
     version: 4.16.13
@@ -3057,7 +3053,7 @@ packages:
     dependencies:
       browserslist: registry.nlark.com/browserslist/4.17.0
       caniuse-lite: registry.nlark.com/caniuse-lite/1.0.30001255
-      colorette: registry.nlark.com/colorette/1.3.0
+      colorette: registry.nlark.com/colorette/1.4.0
       normalize-range: registry.nlark.com/normalize-range/0.1.2
       num2fraction: 1.2.2
       postcss: registry.nlark.com/postcss/7.0.36
@@ -3131,8 +3127,8 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: registry.nlark.com/caniuse-lite/1.0.30001255
-      colorette: registry.nlark.com/colorette/1.3.0
-      electron-to-chromium: registry.nlark.com/electron-to-chromium/1.3.830
+      colorette: registry.nlark.com/colorette/1.4.0
+      electron-to-chromium: registry.nlark.com/electron-to-chromium/1.3.832
       escalade: 3.1.1
       node-releases: registry.nlark.com/node-releases/1.1.75
     dev: true
@@ -3367,10 +3363,10 @@ packages:
       color-name: 1.1.4
     dev: true
 
-  registry.nlark.com/colorette/1.3.0:
-    resolution: {integrity: sha1-/0XS8O2yRAadO3cq3rBP7TjQoK8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/colorette/download/colorette-1.3.0.tgz}
+  registry.nlark.com/colorette/1.4.0:
+    resolution: {integrity: sha1-UZD7uHJ2JZqGrXAL/yxtb6o/ykA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/colorette/download/colorette-1.4.0.tgz}
     name: colorette
-    version: 1.3.0
+    version: 1.4.0
     dev: true
 
   registry.nlark.com/commander/2.9.0:
@@ -3802,14 +3798,14 @@ packages:
       mime: 2.5.2
     dev: true
 
-  registry.nlark.com/electron-to-chromium/1.3.830:
-    resolution: {integrity: sha1-QOMUQgT4yhGyzr7IPPFMINNJkjY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/electron-to-chromium/download/electron-to-chromium-1.3.830.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Felectron-to-chromium%2Fdownload%2Felectron-to-chromium-1.3.830.tgz}
+  registry.nlark.com/electron-to-chromium/1.3.832:
+    resolution: {integrity: sha1-uUcgVSWngl7/mzlWYUDVRxJBwkQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/electron-to-chromium/download/electron-to-chromium-1.3.832.tgz}
     name: electron-to-chromium
-    version: 1.3.830
+    version: 1.3.832
     dev: true
 
   registry.nlark.com/electron/14.0.0:
-    resolution: {integrity: sha1-oJZIS/v3HYf8D6halDp4ada5v5Q=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/electron/download/electron-14.0.0.tgz?cache=0&sync_timestamp=1630601115206&other_urls=https%3A%2F%2Fregistry.nlark.com%2Felectron%2Fdownload%2Felectron-14.0.0.tgz}
+    resolution: {integrity: sha1-oJZIS/v3HYf8D6halDp4ada5v5Q=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/electron/download/electron-14.0.0.tgz?cache=0&sync_timestamp=1631014457741&other_urls=https%3A%2F%2Fregistry.nlark.com%2Felectron%2Fdownload%2Felectron-14.0.0.tgz}
     name: electron
     version: 14.0.0
     engines: {node: '>= 8.6'}
@@ -4944,6 +4940,12 @@ packages:
     version: 0.3.0
     dev: true
 
+  registry.nlark.com/isarray/0.0.1:
+    resolution: {integrity: sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/isarray/download/isarray-0.0.1.tgz}
+    name: isarray
+    version: 0.0.1
+    dev: false
+
   registry.nlark.com/isarray/1.0.0:
     resolution: {integrity: sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/isarray/download/isarray-1.0.0.tgz}
     name: isarray
@@ -5111,7 +5113,7 @@ packages:
       enquirer: '>= 2.3.0 < 3'
     dependencies:
       cli-truncate: registry.nlark.com/cli-truncate/2.1.0
-      colorette: registry.nlark.com/colorette/1.3.0
+      colorette: registry.nlark.com/colorette/1.4.0
       enquirer: 2.3.6
       log-update: 4.0.0
       p-map: registry.nlark.com/p-map/4.0.0
@@ -5345,7 +5347,7 @@ packages:
     dev: true
 
   registry.nlark.com/ms/2.1.2:
-    resolution: {integrity: sha1-0J0fNXtEP0kzgqjrPM0YOHKuYAk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/ms/download/ms-2.1.2.tgz}
+    resolution: {integrity: sha1-0J0fNXtEP0kzgqjrPM0YOHKuYAk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/ms/download/ms-2.1.2.tgz?cache=0&sync_timestamp=1629910562433&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fms%2Fdownload%2Fms-2.1.2.tgz}
     name: ms
     version: 2.1.2
     dev: true
@@ -5724,7 +5726,7 @@ packages:
     name: path-to-regexp
     version: 1.8.0
     dependencies:
-      isarray: 0.0.1
+      isarray: registry.nlark.com/isarray/0.0.1
     dev: false
 
   registry.nlark.com/path-type/3.0.0:
@@ -5907,7 +5909,7 @@ packages:
     version: 8.3.6
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
-      colorette: registry.nlark.com/colorette/1.3.0
+      colorette: registry.nlark.com/colorette/1.4.0
       nanoid: registry.nlark.com/nanoid/3.1.25
       source-map-js: 0.6.2
     dev: true
@@ -6854,7 +6856,7 @@ packages:
     dev: true
 
   registry.nlark.com/resolve-from/5.0.0:
-    resolution: {integrity: sha1-w1IlhD3493bfIcV1V7wIfp39/Gk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/resolve-from/download/resolve-from-5.0.0.tgz?cache=0&sync_timestamp=1622605305717&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fresolve-from%2Fdownload%2Fresolve-from-5.0.0.tgz}
+    resolution: {integrity: sha1-w1IlhD3493bfIcV1V7wIfp39/Gk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/resolve-from/download/resolve-from-5.0.0.tgz}
     name: resolve-from
     version: 5.0.0
     engines: {node: '>=8'}
@@ -6953,7 +6955,7 @@ packages:
     dev: true
 
   registry.nlark.com/scheduler/0.20.2:
-    resolution: {integrity: sha1-S67jlDbjSqk7SHS93L8P6Li1DpE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/scheduler/download/scheduler-0.20.2.tgz}
+    resolution: {integrity: sha1-S67jlDbjSqk7SHS93L8P6Li1DpE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/scheduler/download/scheduler-0.20.2.tgz?cache=0&sync_timestamp=1631031578729&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fscheduler%2Fdownload%2Fscheduler-0.20.2.tgz}
     name: scheduler
     version: 0.20.2
     dependencies:
@@ -7601,10 +7603,10 @@ packages:
     hasBin: true
     dev: true
 
-  registry.nlark.com/uglify-js/3.14.1:
-    resolution: {integrity: sha1-4suf4025y0z3410dJt/qKOCafQY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/uglify-js/download/uglify-js-3.14.1.tgz?cache=0&sync_timestamp=1627379738025&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fuglify-js%2Fdownload%2Fuglify-js-3.14.1.tgz}
+  registry.nlark.com/uglify-js/3.14.2:
+    resolution: {integrity: sha1-191qRspXIU9UotCkPK0PNduCrJk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/uglify-js/download/uglify-js-3.14.2.tgz?cache=0&sync_timestamp=1631026519465&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fuglify-js%2Fdownload%2Fuglify-js-3.14.2.tgz}
     name: uglify-js
-    version: 3.14.1
+    version: 3.14.2
     engines: {node: '>=0.8.0'}
     hasBin: true
     dev: true
@@ -7709,7 +7711,7 @@ packages:
       vfile-message: registry.nlark.com/vfile-message/2.0.4
     dev: true
 
-  registry.nlark.com/vite-plugin-style-import/1.1.1_vite@2.5.3:
+  registry.nlark.com/vite-plugin-style-import/1.1.1_vite@2.5.4:
     resolution: {integrity: sha1-fM67BCvOlO6y9pXHM5NUotrEjCU=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/vite-plugin-style-import/download/vite-plugin-style-import-1.1.1.tgz}
     id: registry.nlark.com/vite-plugin-style-import/1.1.1
     name: vite-plugin-style-import
@@ -7722,13 +7724,13 @@ packages:
       debug: registry.nlark.com/debug/4.3.2
       es-module-lexer: registry.nlark.com/es-module-lexer/0.7.1
       magic-string: 0.25.7
-      vite: registry.nlark.com/vite/2.5.3
+      vite: registry.nlark.com/vite/2.5.4
     dev: true
 
-  registry.nlark.com/vite/2.5.3:
-    resolution: {integrity: sha1-iNQKnvub7Ga9h6dnbFaJ81/2N0I=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/vite/download/vite-2.5.3.tgz}
+  registry.nlark.com/vite/2.5.4:
+    resolution: {integrity: sha1-LauYg1vmTEFX66Il4L7LnTc/YIo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/vite/download/vite-2.5.4.tgz?cache=0&sync_timestamp=1631015784883&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvite%2Fdownload%2Fvite-2.5.4.tgz}
     name: vite
-    version: 2.5.3
+    version: 2.5.4
     engines: {node: '>=12.2.0'}
     hasBin: true
     dependencies:

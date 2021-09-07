@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './song.module.less';
 import Img from '@/components/img';
 import { RightOutlined } from '@ant-design/icons';

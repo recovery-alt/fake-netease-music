@@ -31,12 +31,10 @@ import {
   PlaylistSubscriberParams,
   SearchSuggest,
   SearchParams,
-  ComposeSearch,
   SearchResult,
   UserPlaylist,
 } from '@/types';
 import { get } from './api';
-import { SearchType } from '@/enum';
 
 export * from './login';
 

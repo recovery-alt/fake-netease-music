@@ -37,7 +37,7 @@ const Lyric: React.FC<Props> = ({ music }) => {
     const dom = containerRef.current;
     let index = 0;
     for (let i = currentIndex; i < len; i++) {
-      if (!lyrics[i]?.timestamp?.[0]) break;
+      if (!lyrics[i]?.timestamp?.[0]) continue;
       if (currentTime <= lyrics[i].timestamp[0]) {
         setCurrentIndex(i - 1);
         index = i - 1;
@@ -49,6 +49,7 @@ const Lyric: React.FC<Props> = ({ music }) => {
 
   useEffect(() => {
     if (!music?.id) return;
+    setCurrentIndex(0);
     getLyric(music.id).then(res => {
       const { lrc, nolyric } = res;
       setLyrics(nolyric ? [] : transLyric2Arr(lrc.lyric));
@@ -58,10 +59,6 @@ const Lyric: React.FC<Props> = ({ music }) => {
   useEffect(() => {
     if (lyrics.length) scroll();
   }, [currentTime, lyrics]);
-
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [music.id]);
 
   return (
     <div className={styles.lyric}>
