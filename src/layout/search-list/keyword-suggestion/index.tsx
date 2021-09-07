@@ -11,6 +11,7 @@ import { Artist, Playlist, SearchSuggest, Song, SimpleAlbum, SuggestOrderType } 
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { useHistory } from 'react-router-dom';
+import { debounce } from 'lodash';
 
 type Props = { setVisible: (visible: boolean) => void };
 
@@ -100,12 +101,15 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
     );
   }
 
-  useEffect(() => {
-    (async () => {
-      const res = await getSearchSuggest(keywords);
-      setData(res.result);
-    })();
-  }, [keywords]);
+  useEffect(
+    debounce(() => {
+      (async () => {
+        const res = await getSearchSuggest(keywords);
+        setData(res.result);
+      })();
+    }, 500),
+    [keywords]
+  );
 
   return data.order?.length ? (
     <div className={styles['keyword-suggestion']}>

@@ -12,7 +12,7 @@ import classNames from 'classnames';
 type Props = { music: Music };
 
 const Lyric: React.FC<Props> = ({ music }) => {
-  type LyricItem = { rawTimestamp: string; timestamp: number[]; value: string };
+  type LyricItem = { timestamp: number[]; value: string };
   const [lyrics, setLyrics] = useState<LyricItem[]>([]);
   const currentTime = useSelector((state: RootState) => state.controller.currentTime);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -23,7 +23,7 @@ const Lyric: React.FC<Props> = ({ music }) => {
     lyric.replace(/((?:\[\d{2}:\d{2}\.\d{2,3}\])+)([\s\S]*?)(?=\[)/g, ($1, $2, value) => {
       const matcher = $2.match(/(?<=\[)\d{2}:\d{2}\.\d{2,3}(?=\])/g) as [];
       const timestamp = matcher.map(item => resolveLyricTime(item));
-      result.push({ rawTimestamp: $2, timestamp, value });
+      result.push({ timestamp, value });
       return '';
     });
 
@@ -87,10 +87,7 @@ const Lyric: React.FC<Props> = ({ music }) => {
         {lyrics.length > 0 ? (
           <Scrollbar ref={containerRef} className={styles.lyric__wrapper}>
             {lyrics.map((lyric, i) => (
-              <p
-                key={lyric.rawTimestamp}
-                className={classNames({ [styles['--selected']]: i === currentIndex })}
-              >
+              <p key={i} className={classNames({ [styles['--selected']]: i === currentIndex })}>
                 {lyric.value}
               </p>
             ))}
