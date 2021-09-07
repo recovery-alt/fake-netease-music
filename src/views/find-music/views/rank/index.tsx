@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './rank.less';
 import Official from './official';
 import { getToplist, getPlaylistDetail } from '@/api';
-import { Toplist, PlaylistDetail, Track } from '@/types';
+import { Toplist, UserPlaylist, Track } from '@/types';
 import Img from '@/components/img';
 import { useDispatch } from 'react-redux';
 import { setCurrentTrack, fetchAndSetCurrentTrack } from '@/store';
@@ -11,7 +11,7 @@ import { resizeImg } from '@/utils';
 
 const Rank: React.FC = () => {
   const [toplist, setToplist] = useState<Toplist[]>([]);
-  const [playlistDetail, SetPlaylistDetail] = useState<PlaylistDetail[]>([]);
+  const [playlistDetail, SetPlaylistDetail] = useState<UserPlaylist[]>([]);
   const dispatch = useDispatch();
   const { push } = useHistory();
 
@@ -24,7 +24,7 @@ const Rank: React.FC = () => {
       const res = await getToplist();
       setToplist(res.list);
       const list = res.list.slice(0, 5);
-      const playlist: PlaylistDetail[] = [];
+      const playlist: UserPlaylist[] = [];
       for (const item of list) {
         const playlistDetail = await getPlaylistDetail(item.id);
         const { tracks, ...rest } = playlistDetail.playlist;

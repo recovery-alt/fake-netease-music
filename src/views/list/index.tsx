@@ -11,7 +11,7 @@ import { RootState } from '@/store';
 import dayjs from 'dayjs';
 import { wrapNumber, formatMS, resizeImg } from '@/utils';
 import { getPlaylistDetail } from '@/api';
-import { Track } from '@/types';
+import { UserPlaylist, Track } from '@/types';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, setCurrentTrack } from '@/store';
 import { Tabs } from 'antd';
@@ -23,6 +23,7 @@ const List: React.FC = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const [commentCount, setCommentCount] = useState(0);
+  const [curPlaylist, setCurPlaylist] = useState<UserPlaylist>();
   const id = useMemo(() => Number(params.id), [params.id]);
   const columns: Column<Track>[] = [
     { title: '', key: 'ordinal' },
@@ -42,9 +43,6 @@ const List: React.FC = () => {
     },
   ];
   const profile = useSelector((state: RootState) => state.user.profile);
-  const playList = useSelector((state: RootState) => state.userPlaylist.playlist);
-
-  const curPlaylist = useMemo(() => playList.find(item => item.id === id), [playList, params]);
 
   useEffect(() => {
     (async () => {
@@ -52,6 +50,7 @@ const List: React.FC = () => {
       const playlistDetail = await getPlaylistDetail(id);
       setCommentCount(playlistDetail.playlist.commentCount);
       setTracks(playlistDetail.playlist.tracks);
+      setCurPlaylist(playlistDetail.playlist);
     })();
   }, [id]);
 
@@ -88,7 +87,7 @@ const List: React.FC = () => {
             </button>
             <button className="">
               <ShareAltOutlined />
-              分享(0)
+              分享({wrapNumber(curPlaylist?.shareCount || 0)})
             </button>
             <button className="">
               <DownloadOutlined />

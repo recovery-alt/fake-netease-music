@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './official.module.less';
 import { RightOutlined } from '@ant-design/icons';
-import { PlaylistDetail, Track } from '@/types';
+import { UserPlaylist, Track } from '@/types';
 import Img from '@/components/img';
 import { resizeImg } from '@/utils';
 
 type Props = {
-  data: PlaylistDetail;
+  data: UserPlaylist;
   onItemClick: (tracks: Track[], index: number) => void;
   onViewAll: (id: number) => void;
 };

@@ -15,7 +15,6 @@ import {
   Personalized,
   Playlist,
   PlaylistCatlist,
-  PlaylistDetail,
   Song,
   TopAlbumParams,
   Toplist,
@@ -34,6 +33,7 @@ import {
   SearchParams,
   ComposeSearch,
   SearchResult,
+  UserPlaylist,
 } from '@/types';
 import { get } from './api';
 import { SearchType } from '@/enum';
@@ -93,7 +93,7 @@ export const getToplist = () => get<{ list: Toplist[] }>('/toplist');
 export const getToplistDetail = () => get('/toplist/detail');
 
 export const getPlaylistDetail = (id: number) =>
-  get<{ playlist: PlaylistDetail }>('/playlist/detail', { id });
+  get<{ playlist: UserPlaylist }>('/playlist/detail', { id });
 
 export const getArtistList = (params?: ArtistListParams) =>
   get<{ more: boolean; artists: Artist[] }>('/artist/list', params);

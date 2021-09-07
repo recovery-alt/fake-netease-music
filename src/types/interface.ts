@@ -12,9 +12,12 @@ export type UserPlaylist = {
   subscribedCount: number;
   coverImgUrl: string;
   playCount: number;
+  shareCount: number;
   trackCount: number;
   description: string;
+  commentCount: number;
   tags: string[];
+  tracks: Track[];
 };
 
 export type BannerType = { imageUrl: string; targetId: number };
@@ -104,13 +107,6 @@ export type Track = {
   dt: number;
   al: Album;
   ar: { id: number; name: string }[];
-};
-export type PlaylistDetail = {
-  id: number;
-  name: string;
-  coverImgUrl: string;
-  commentCount: number;
-  tracks: Track[];
 };
 
 export type Artist = {
