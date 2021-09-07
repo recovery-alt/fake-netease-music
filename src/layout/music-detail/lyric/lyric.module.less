@@ -55,9 +55,24 @@
     overflow-y: auto;
     width: 320px;
 
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      height: 50%;
+      width: 100%;
+    }
+
     p {
+      color: #737373;
+      font-size: 12px;
       line-height: 24px;
       margin-top: 20px;
+    }
+
+    .--selected {
+      color: #000;
+      font-size: 16px;
     }
   }
 

@@ -52,7 +52,7 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
 
     return (
       <>
-        <div className={styles['keyword-suggestion__title']}>
+        <div key={item.label} className={styles['keyword-suggestion__title']}>
           <item.icon />
           {item.label}
         </div>

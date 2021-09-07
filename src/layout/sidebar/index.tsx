@@ -30,7 +30,7 @@ const List: React.FC = () => {
   type ItemProps = { menu: Menu; index: [number, number]; plus?: number };
   type MenuListAction = { type: number; payload: MenuItem[] };
 
-  const [selected, setSelected] = useState([0, 0]);
+  const [selected, setSelected] = useState<number[]>();
   const history = useHistory();
   const { pathname } = useLocation();
   const [showLogin, setShowLogin] = useState(false);
@@ -73,7 +73,7 @@ const List: React.FC = () => {
   useEffect(() => {
     (async () => {
       const index = findIndex();
-      if (index) setSelected(index);
+      setSelected(index);
     })();
   }, [pathname]);
 
@@ -141,7 +141,8 @@ const List: React.FC = () => {
     }
   }
 
-  function judgeSelected(a: number[], b: number[]) {
+  function judgeSelected(a?: number[], b?: number[]) {
+    if (!a || !b) return false;
     if (a.length !== a.length) return false;
 
     for (let i = 0, len = a.length; i < len; i++) {

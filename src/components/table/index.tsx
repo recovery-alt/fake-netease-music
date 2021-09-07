@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './table.module.less';
 import { Data } from '@/types';
 import NoData from '../no-data';
@@ -17,16 +17,22 @@ type Props = {
   columns: Column<any>[];
   data: Data<any>[];
   noHead?: boolean;
+  selectedRow?: number;
   doubleClick?: (index: number) => void;
 };
 
-const Table: React.FC<Props> = ({ columns, data, noHead = false, doubleClick }) => {
+const Table: React.FC<Props> = ({ columns, data, noHead = false, selectedRow, doubleClick }) => {
   const [selected, setSelected] = useState(-1);
 
   const handleDoubleClick = (index: number) => {
+    if (!doubleClick) return;
     setSelected(index);
-    doubleClick?.(index);
+    doubleClick(index);
   };
+
+  useEffect(() => {
+    if (selectedRow) setSelected(selectedRow);
+  }, [selectedRow]);
 
   return (
     <>

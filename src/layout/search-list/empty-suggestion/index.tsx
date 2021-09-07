@@ -72,7 +72,9 @@ const EmptySuggestion: React.FC<Props> = ({ visible, setVisible }) => {
               {item.iconUrl ? <mark>HOT</mark> : null}
               <span>{item.score}</span>
             </div>
-            <div className={styles['empty-suggestion__item-bottom']}>{item.content}</div>
+            {item.content && (
+              <div className={styles['empty-suggestion__item-bottom']}>{item.content}</div>
+            )}
           </div>
         </div>
       ))}

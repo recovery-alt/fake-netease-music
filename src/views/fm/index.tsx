@@ -48,7 +48,7 @@ const FM: React.FC = () => {
         </div>
         <Lyric music={currentMusic} />
       </section>
-      <CommentGroup id={currentMusic.id} api={getCommentMusic}>
+      <CommentGroup id={currentMusic?.id} api={getCommentMusic}>
         <WriteComment />
       </CommentGroup>
     </div>

@@ -60,10 +60,10 @@ const MusicDetail: React.FC<Props> = ({ visible }) => {
             <Lyric music={currentMusic} />
           </section>
           <div className={styles['music-detail__info']}>
-            <CommentGroup id={currentMusic.id} api={getCommentMusic}>
+            <CommentGroup id={currentMusic?.id} api={getCommentMusic}>
               <WriteComment />
             </CommentGroup>
-            <Recommend id={currentMusic.id} />
+            <Recommend id={currentMusic?.id} />
           </div>
         </div>
       )}

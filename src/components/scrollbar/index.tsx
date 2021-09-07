@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import styles from './scrollbar.module.less';
 import { AppProps } from '@/types';
+import classNames from 'classnames';
 
-const Scrollbar: React.FC<AppProps> = ({ children, className }) => {
+const Scrollbar = forwardRef<HTMLDivElement, AppProps>(({ children, className }, ref) => {
   return (
-    <div className={`${styles.scrollbar} ${className}`}>
+    <div ref={ref} className={classNames(styles.scrollbar, className)}>
       <div className={styles.scrollbar__content}>{children}</div>
     </div>
   );
-};
+});
 
 export default Scrollbar;

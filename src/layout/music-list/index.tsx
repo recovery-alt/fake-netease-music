@@ -62,6 +62,7 @@ const MusicList: React.FC<Props> = ({ visible, setVisible, target }) => {
       <section className={styles['music-list__subtitle-table']}>
         <Table
           noHead
+          selectedRow={currentTrack.current}
           data={currentTrack.tracks}
           columns={columns}
           doubleClick={handleDoubleClick}

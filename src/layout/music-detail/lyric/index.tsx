@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './lyric.module.less';
 import Scrollbar from '@/components/scrollbar';
 import { QuestionOutlined } from '@ant-design/icons';
@@ -7,6 +7,7 @@ import { getLyric } from '@/api';
 import { resolveLyricTime } from '@/utils';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import classNames from 'classnames';
 
 type Props = { music: Music };
 
@@ -14,16 +15,36 @@ const Lyric: React.FC<Props> = ({ music }) => {
   type LyricItem = { rawTimestamp: string; timestamp: number[]; value: string };
   const [lyrics, setLyrics] = useState<LyricItem[]>([]);
   const currentTime = useSelector((state: RootState) => state.controller.currentTime);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   function transLyric2Arr(lyric: string) {
     const result: Array<LyricItem> = [];
-    lyric.replace(/((?:\[\d{2}:\d{2}\.\d{2}\])+)(.*)(?=\n)/g, ($1, $2, value) => {
-      const matcher = $2.match(/(?<=\[)\d{2}:\d{2}\.\d{2}(?=\])/g) as [];
+    lyric.replace(/((?:\[\d{2}:\d{2}\.\d{2,3}\])+)([\s\S]*?)(?=\[)/g, ($1, $2, value) => {
+      const matcher = $2.match(/(?<=\[)\d{2}:\d{2}\.\d{2,3}(?=\])/g) as [];
       const timestamp = matcher.map(item => resolveLyricTime(item));
       result.push({ rawTimestamp: $2, timestamp, value });
       return '';
     });
+
     return result;
+  }
+
+  function scroll() {
+    if (!containerRef?.current) return;
+    const len = lyrics.length;
+    if (currentIndex === len - 1) return;
+    const dom = containerRef.current;
+    let index = 0;
+    for (let i = currentIndex; i < len; i++) {
+      if (!lyrics[i]?.timestamp?.[0]) break;
+      if (currentTime <= lyrics[i].timestamp[0]) {
+        setCurrentIndex(i - 1);
+        index = i - 1;
+        break;
+      }
+    }
+    if (index !== currentIndex) dom.scrollTo({ top: 48 * index, behavior: 'smooth' });
   }
 
   useEffect(() => {
@@ -35,8 +56,12 @@ const Lyric: React.FC<Props> = ({ music }) => {
   }, [music?.id]);
 
   useEffect(() => {
-    if (!lyrics.length) return;
+    if (lyrics.length) scroll();
   }, [currentTime, lyrics]);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [music.id]);
 
   return (
     <div className={styles.lyric}>
@@ -60,9 +85,14 @@ const Lyric: React.FC<Props> = ({ music }) => {
       </div>
       <div className={styles.lyric__container}>
         {lyrics.length > 0 ? (
-          <Scrollbar className={styles.lyric__wrapper}>
-            {lyrics.map(lyric => (
-              <p key={lyric.rawTimestamp}>{lyric.value}</p>
+          <Scrollbar ref={containerRef} className={styles.lyric__wrapper}>
+            {lyrics.map((lyric, i) => (
+              <p
+                key={lyric.rawTimestamp}
+                className={classNames({ [styles['--selected']]: i === currentIndex })}
+              >
+                {lyric.value}
+              </p>
             ))}
           </Scrollbar>
         ) : (
