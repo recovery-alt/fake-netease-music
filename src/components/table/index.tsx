@@ -4,6 +4,7 @@ import { Data } from '@/types';
 import NoData from '../no-data';
 import { get } from 'lodash';
 import classNames from 'classnames';
+import { message } from 'antd';
 
 export type Column<T = Data> = {
   width?: number;
@@ -19,14 +20,26 @@ type Props = {
   noHead?: boolean;
   selectedRow?: number;
   doubleClick?: (index: number) => void;
+  disableColumn?: string;
 };
 
-const Table: React.FC<Props> = ({ columns, data, noHead = false, selectedRow, doubleClick }) => {
+const Table: React.FC<Props> = ({
+  columns,
+  data,
+  disableColumn = 'disable',
+  noHead = false,
+  selectedRow,
+  doubleClick,
+}) => {
   const [selected, setSelected] = useState(-1);
 
   const handleDoubleClick = (index: number) => {
     if (!doubleClick) return;
-    setSelected(index);
+    if (data[index][disableColumn]) {
+      message.error('应合作方要求，该资源暂时下架>_<');
+      return;
+    }
+    // setSelected(index);
     doubleClick(index);
   };
 
@@ -54,7 +67,10 @@ const Table: React.FC<Props> = ({ columns, data, noHead = false, selectedRow, do
             ? data.map((item, i) => (
                 <tr
                   key={i}
-                  className={classNames({ [styles['--active']]: selected === i })}
+                  className={classNames({
+                    [styles['--active']]: selected === i,
+                    [styles['--disable']]: item[disableColumn],
+                  })}
                   onDoubleClick={() => handleDoubleClick(i)}
                 >
                   {columns.map((column, j) => {

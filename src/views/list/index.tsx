@@ -44,19 +44,24 @@ const List: React.FC = () => {
   ];
   const profile = useSelector((state: RootState) => state.user.profile);
 
+  function handleTableDoubleClick(current: number) {
+    dispatch(setCurrentTrack({ current, tracks, fm: [] }));
+  }
+
   useEffect(() => {
     (async () => {
       if (Number.isNaN(id)) return;
       const playlistDetail = await getPlaylistDetail(id);
+      const tracksWithPrivilege = playlistDetail.playlist.tracks.map((track, i) => {
+        track.disable = !playlistDetail.privileges[i].cp;
+        return track;
+      });
+      console.log(tracksWithPrivilege);
       setCommentCount(playlistDetail.playlist.commentCount);
-      setTracks(playlistDetail.playlist.tracks);
+      setTracks(tracksWithPrivilege);
       setCurPlaylist(playlistDetail.playlist);
     })();
   }, [id]);
-
-  const handleTableDoubleClick = (current: number) => {
-    dispatch(setCurrentTrack({ current, tracks, fm: [] }));
-  };
 
   return (
     <div className="list">

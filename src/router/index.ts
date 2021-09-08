@@ -1,10 +1,10 @@
 import Layout from '@/layout';
 import { topMenuMap } from '@/config';
-import { lazy } from 'react';
+import React, { lazy } from 'react';
 
 export type RouteConfig = {
   path: string;
-  component: React.FC<RouteConfig>;
+  component: React.FC<any>;
   exact?: boolean;
   routes?: Array<RouteConfig>;
 };

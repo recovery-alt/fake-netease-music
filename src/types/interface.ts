@@ -20,6 +20,13 @@ export type UserPlaylist = {
   tracks: Track[];
 };
 
+export type Privilege = { cp: number };
+
+export type PlaylistDetail = {
+  playlist: UserPlaylist;
+  privileges: Privilege[];
+};
+
 export type BannerType = { imageUrl: string; targetId: number };
 
 export type Personalized = { id: number; name: string; picUrl: string };
@@ -106,6 +113,7 @@ export type Track = {
   id: number;
   dt: number;
   al: Album;
+  disable?: boolean;
   ar: { id: number; name: string }[];
 };
 

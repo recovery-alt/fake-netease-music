@@ -44,7 +44,8 @@ const Lyric: React.FC<Props> = ({ music }) => {
         break;
       }
     }
-    if (index !== currentIndex) dom.scrollTo({ top: 48 * index, behavior: 'smooth' });
+    const top = (44 * index * window.innerWidth) / 1000;
+    if (index !== currentIndex) dom.scrollTo({ top, behavior: 'smooth' });
   }
 
   useEffect(() => {

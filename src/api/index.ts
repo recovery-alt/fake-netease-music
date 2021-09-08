@@ -32,7 +32,7 @@ import {
   SearchSuggest,
   SearchParams,
   SearchResult,
-  UserPlaylist,
+  PlaylistDetail,
 } from '@/types';
 import { get } from './api';
 
@@ -90,8 +90,7 @@ export const getToplist = () => get<{ list: Toplist[] }>('/toplist');
 
 export const getToplistDetail = () => get('/toplist/detail');
 
-export const getPlaylistDetail = (id: number) =>
-  get<{ playlist: UserPlaylist }>('/playlist/detail', { id });
+export const getPlaylistDetail = (id: number) => get<PlaylistDetail>('/playlist/detail', { id });
 
 export const getArtistList = (params?: ArtistListParams) =>
   get<{ more: boolean; artists: Artist[] }>('/artist/list', params);

@@ -86,18 +86,33 @@ const { reducer, actions } = createSlice({
       return { ...state, current, tracks, fm };
     },
     changeSong(state, action: PayloadAction<{ next: boolean; mode: PlayMode }>) {
-      const getRandomPlayIndex = (len: number) => Math.floor((len - 1) * Math.random());
-      const { mode, next } = action.payload;
       const { tracks, current } = state;
-      const len = tracks.length;
-      let index: number;
-      if (mode === PlayMode.RANDOM) {
-        index = getRandomPlayIndex(len);
-      } else {
-        index = next ? current + 1 : current - 1;
-        if (index < 0) index += len;
-        index %= len;
-      }
+      const getRandomPlayIndex = (len: number) => Math.floor((len - 1) * Math.random());
+      // 用来跳出死循环
+      const matchedIndex: number[] = [];
+
+      const getIndex = (current: number) => {
+        const { mode, next } = action.payload;
+        const len = tracks.length;
+        let index: number;
+        if (mode === PlayMode.RANDOM) {
+          index = getRandomPlayIndex(len);
+        } else {
+          index = next ? current + 1 : current - 1;
+          if (index < 0) index += len;
+          index %= len;
+        }
+
+        if (!matchedIndex.includes(index)) matchedIndex.push(index);
+
+        // 递归找寻可用歌曲
+        if (tracks[index].disable && matchedIndex.length < tracks.length) index = getIndex(index);
+
+        return index;
+      };
+
+      const index = getIndex(current);
+
       const newState = { ...state };
       newState.current = index;
       return newState;
@@ -115,7 +130,10 @@ const { reducer, actions } = createSlice({
       return { ...state, song: action.payload };
     });
 
-    builder.addCase(setSong.rejected, defaultHandler);
+    builder.addCase(setSong.rejected, (state: CurrentTrack) => {
+      const newState = { ...state };
+      return newState;
+    });
 
     builder.addCase(setFM.fulfilled, (state, action) => {
       const newState = { ...state };
