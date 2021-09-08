@@ -1,0 +1,106 @@
+.album {
+  padding: 20px 0;
+}
+
+.overview {
+  &__item {
+    display: flex;
+    margin-bottom: 30px;
+  }
+
+  &__img {
+    border-radius: 4px;
+    height: 150px;
+    width: 150px;
+  }
+
+  &__header {
+    align-items: center;
+    display: flex;
+    height: 30px;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  &__right {
+    flex: 1;
+    margin-left: 60px;
+  }
+
+  &__icon {
+    color: #666;
+    margin-left: 16px;
+
+    span {
+      border-right: 1px solid #ebeaeb;
+      font-size: 16px;
+      margin-left: 14px;
+      padding-right: 14px;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+
+  &__footer {
+    align-items: center;
+    background-color: #fafafb;
+    cursor: pointer;
+    display: flex;
+    height: 35px;
+    justify-content: flex-end;
+    padding-right: 30px;
+  }
+}
+
+.card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 30px;
+
+  &__item {
+    width: 160px;
+  }
+
+  &__img {
+    border-radius: 4px;
+    height: 135px;
+    position: relative;
+    width: 135px;
+
+    &::after {
+      background-image: url('/src/assets/img/coverall.png');
+      background-position: 250px 650px;
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      right: -30px;
+      top: 0;
+      width: 30px;
+    }
+  }
+
+  &__description {
+    height: 93px;
+    line-height: 1;
+    padding-top: 6px;
+    width: 135px;
+  }
+
+  &__title {
+    color: #333;
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+  &__subtitle {
+    color: #bfbebf;
+    margin-top: 10px;
+  }
+}

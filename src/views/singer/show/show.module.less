@@ -1,0 +1,45 @@
+.show {
+  &__item {
+    display: flex;
+    height: 140px;
+    padding: 10px;
+  }
+
+  &__img {
+    border-radius: 4px;
+    height: 120px;
+    width: 90px;
+  }
+
+  &__description {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+
+    div {
+      line-height: 1;
+      margin-top: 12px;
+
+      &:nth-child(2) {
+        color: #ccc;
+      }
+
+      &:last-child {
+        color: #b72814;
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+      &:first-child {
+        color: #333;
+        margin-top: 0;
+
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+  }
+}

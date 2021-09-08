@@ -6,6 +6,7 @@ import { Artist, Data } from '@/types';
 import { categoryList } from '@/config';
 import Img from '@/components/img';
 import { resizeImg } from '@/utils';
+import { useHistory } from 'react-router-dom';
 
 const Singer: React.FC = () => {
   type ActionType = 'add' | 'reset';
@@ -18,6 +19,7 @@ const Singer: React.FC = () => {
   const [selected, setSelected] = useState<Selected>([-1, -1, undefined]);
   const footerRef = useRef<HTMLElement>(null);
   const [more, setMore] = useState(true);
+  const { push } = useHistory();
   const limit = 20;
   let offset = 0;
   const [moreText, setMoreText] = useState('');
@@ -93,15 +95,15 @@ const Singer: React.FC = () => {
   }, []);
 
   return (
-    <div className="singer">
+    <div className="music-singer">
       {searchData.map((item, i) => (
-        <header key={item.label} className="singer__header">
-          <div className="singer__label">{item.label}：</div>
-          <div className="singer__category">
+        <header key={item.label} className="music-singer__header">
+          <div className="music-singer__label">{item.label}：</div>
+          <div className="music-singer__category">
             {item.list.map(val => (
               <div
                 key={val.name}
-                className="singer__category-item"
+                className="music-singer__category-item"
                 onClick={() => handleCatClick(i, val[item.key])}
               >
                 <span className={classNames({ ['--active']: val[item.key] === selected[i] })}>
@@ -112,15 +114,19 @@ const Singer: React.FC = () => {
           </div>
         </header>
       ))}
-      <div className="singer__list">
+      <div className="music-singer__list">
         {data.map(item => (
-          <div key={item.id} className="singer__item">
-            <Img className="singer__img" src={resizeImg(item.picUrl)} />
-            <div className="singer__description">{item.name}</div>
+          <div
+            key={item.id}
+            className="music-singer__item"
+            onClick={() => push(`/singer/${item.id}`)}
+          >
+            <Img className="music-singer__img" src={resizeImg(item.picUrl)} />
+            <div className="music-singer__description">{item.name}</div>
           </div>
         ))}
       </div>
-      <footer className="singer__footer" ref={footerRef}>
+      <footer className="music-singer__footer" ref={footerRef}>
         {moreText}
       </footer>
     </div>
