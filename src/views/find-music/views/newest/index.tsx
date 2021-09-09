@@ -6,7 +6,7 @@ import SongList from './song-list';
 import AlbumList from './album-list';
 import SongControl from './song-control';
 import AlbumControl from './album-control';
-import { AlbumType, Song } from '@/types';
+import { AlbumCategory, Song } from '@/types';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setCurrentTrack } from '@/store';
@@ -20,7 +20,7 @@ const Newest: React.FC = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const songs = useRef<Song[]>([]);
-  const [albumType, setAlbumType] = useState<AlbumType>('hot');
+  const [albumType, setAlbumType] = useState<AlbumCategory>('hot');
 
   const switchItems = [
     { path: '/find-music/newest', label: '新歌速递' },

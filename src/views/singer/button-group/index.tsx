@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './button-group.module.less';
 import { UngroupOutlined, AlignCenterOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
+import { AlbumPageMode } from '../album';
 
-const Album: React.FC = () => {
-  const data = [UngroupOutlined, AlignCenterOutlined, UnorderedListOutlined];
-  const [active, setActive] = useState(2);
+type Props = { activeButton: AlbumPageMode; setActiveButton: (button: AlbumPageMode) => void };
+
+const Album: React.FC<Props> = ({ activeButton, setActiveButton }) => {
+  const data: Array<{ key: AlbumPageMode; component: React.FC }> = [
+    { key: 'list', component: UngroupOutlined },
+    { key: 'card', component: AlignCenterOutlined },
+    { key: 'overview', component: UnorderedListOutlined },
+  ];
 
   return (
     <div className={styles['button-group']}>
-      {data.map((Item, i) => (
+      {data.map(item => (
         <button
-          key={i}
+          key={item.key}
           className={classNames(styles['button-group__item'], {
-            [styles['--active']]: i === active,
+            [styles['--active']]: item.key === activeButton,
           })}
-          onClick={() => setActive(i)}
+          onClick={() => setActiveButton(item.key)}
         >
-          <Item />
+          <item.component />
         </button>
       ))}
     </div>

@@ -56,7 +56,6 @@ const List: React.FC = () => {
         track.disable = !playlistDetail.privileges[i].cp;
         return track;
       });
-      console.log(tracksWithPrivilege);
       setCommentCount(playlistDetail.playlist.commentCount);
       setTracks(tracksWithPrivilege);
       setCurPlaylist(playlistDetail.playlist);

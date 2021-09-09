@@ -68,6 +68,10 @@ const Singer: React.FC = () => {
     dataDispatch({ type: actionType, payload: res.artists });
   }
 
+  function handleSingerClick(item: Artist) {
+    push({ pathname: `/singer/${item.id}`, state: item.alias });
+  }
+
   useEffect(() => {
     offset = 0;
     loadArtistList('reset');
@@ -116,11 +120,7 @@ const Singer: React.FC = () => {
       ))}
       <div className="music-singer__list">
         {data.map(item => (
-          <div
-            key={item.id}
-            className="music-singer__item"
-            onClick={() => push(`/singer/${item.id}`)}
-          >
+          <div key={item.id} className="music-singer__item" onClick={() => handleSingerClick(item)}>
             <Img className="music-singer__img" src={resizeImg(item.picUrl)} />
             <div className="music-singer__description">{item.name}</div>
           </div>

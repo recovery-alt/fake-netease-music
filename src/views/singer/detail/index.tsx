@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './detail.module.less';
+import { getArtistDesc } from '@/api';
+import { ArtistDesc } from '@/types';
 
-const Detail: React.FC = () => (
-  <div className={styles.detail}>
-    <h2 className={styles.detail__title}>薛之谦简介</h2>
-    <p className={styles.detail__article}>
-      薛之谦（Joker
-      Xue），1983年7月17日出生于上海，中国内地流行乐男歌手、影视演员、音乐制作人，毕业于格里昂酒店管理学院。
-      2005年，因参加选秀节目《我型我秀》而正式出道。2006年，发行首张同名专辑《薛之谦》，随后凭借歌曲《认真的雪》获得广泛关注。2007年，凭借专辑《你过得好吗》获得MusicRadio中国TOP排行榜内地年度最受欢迎男歌手奖。2008年，发行专辑《深深爱过你》，同年在上海举行个人首场演唱会“谦年传说”。2013年，专辑《几个薛之谦》获得MusicRadio中国TOP排行榜内地推荐唱片。2014年，凭借专辑《意外》获得第21届东方风云榜颁奖最佳唱作人；同年他还获得音悦V榜年度盛典年度创作歌手奖。
-      2015年6月，薛之谦首度担当制作人并发行原创EP《绅士》；同年，他还主演都市励志剧《妈妈像花儿一样》。2016年，凭借EP《绅士》、《一半》获得第16届全球华语歌曲排行榜最受欢迎男歌手、五大最受欢迎男歌手奖、上海地区杰出歌手奖及最受欢迎创作歌手奖，而歌曲《初学者》则获得年度二十大金曲奖。2017年4月，开启“我好像在哪见过你”全国巡回演唱会；同年，薛之谦获得第7届全球流行音乐年度盛典年度最佳男歌手及MusicRadio榜中国TOP排行榜内地最佳男歌手。
-      2018年7月，薛之谦“摩天大楼”世界巡回演唱会于北京站启程，整个巡演横跨4大洲，8个国家，21个城市，累计上演场次23场。2020年12月31日，发行第11张个人专辑《天外来物》。
-    </p>
-    
-  </div>
-);
+type Props = { id: number };
+
+const Detail: React.FC<Props> = ({ id }) => {
+  const [artistDesc, setArtistDesc] = useState<ArtistDesc>();
+
+  async function loadArtistDesc() {
+    const res = await getArtistDesc(id);
+    setArtistDesc(res);
+  }
+
+  useEffect(() => {
+    loadArtistDesc();
+  }, [id]);
+
+  return (
+    <div className={styles.detail}>
+      {artistDesc?.introduction.map(item => (
+        <div key={item.ti}>
+          <h2>{item.ti}</h2>
+          <p>{item.txt}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default Detail;

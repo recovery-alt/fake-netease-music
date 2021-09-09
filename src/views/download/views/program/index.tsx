@@ -5,7 +5,7 @@ import { Data } from '@/types';
 
 const Program: React.FC = () => {
   const columns: Column[] = [
-    { key: 'ordinal', title: '' },
+    { key: 'ordinal' },
     { key: 'title', title: '节目标题' },
     { key: 'artist', title: '主播' },
     { key: 'album', title: '电台' },

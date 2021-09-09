@@ -11,7 +11,7 @@ export type IconOptions = {
 };
 
 interface Props extends AppProps {
-  src: string;
+  src?: string;
   icon?: boolean | IconOptions;
   alt?: string;
   banLoading?: boolean;
@@ -63,14 +63,9 @@ const Img: React.FC<Props> = ({
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className={classNames(styles.img, className && { [className]: loading })}
-      style={style}
-    >
+    <div ref={ref} className={classNames(styles.img, className)} style={style}>
       {visible && (
         <img
-          className={className}
           src={src}
           alt={alt}
           onLoad={handleOnload}

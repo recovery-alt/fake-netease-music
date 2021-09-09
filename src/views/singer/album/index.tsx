@@ -1,14 +1,20 @@
-import React, { lazy } from 'react';
+import React, { Suspense, useMemo, lazy } from 'react';
 import styles from './album.module.less';
+import { Album as AlbumType } from '@/types';
 
-type Props = { type?: 'card' | 'list' | 'overview' };
+export type AlbumPageMode = 'card' | 'list' | 'overview';
 
-const Album: React.FC<Props> = ({ type = 'overview' }) => {
-  const Component = lazy(() => import(`./components/${type}`));
+export type Props = { type: AlbumPageMode; id: number; albums: AlbumType[] };
+
+const Album: React.FC<Props> = props => {
+  const { type, ...rest } = props;
+  const Component = lazy(() => import(/* @vite-ignore */ `./components/${type}`));
 
   return (
     <div className={styles.album}>
-      <Component />
+      <Suspense fallback="加载中...">
+        <Component {...rest} />
+      </Suspense>
     </div>
   );
 };

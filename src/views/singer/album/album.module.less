@@ -11,15 +11,35 @@
   &__img {
     border-radius: 4px;
     height: 150px;
+    position: relative;
     width: 150px;
+
+    &.--top50::after {
+      content: none;
+    }
+
+    &::after {
+      background-image: url('/src/assets/img/coverall.png');
+      background-position: 109px 777px;
+      background-size: 456px 1794px;
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      right: -50px;
+      top: 0;
+      width: 50px;
+    }
   }
 
   &__header {
     align-items: center;
     display: flex;
     height: 30px;
+    margin-bottom: 10px;
 
     h2 {
+      font-size: 16px;
       margin: 0;
     }
   }
@@ -30,12 +50,14 @@
   }
 
   &__icon {
+    align-items: center;
     color: #666;
+    display: flex;
     margin-left: 16px;
 
     span {
       border-right: 1px solid #ebeaeb;
-      font-size: 16px;
+      font-size: 18px;
       margin-left: 14px;
       padding-right: 14px;
 
@@ -43,6 +65,11 @@
         border-right: 0;
       }
     }
+  }
+
+  &__more {
+    padding: 10px 0;
+    text-align: center;
   }
 
   &__footer {

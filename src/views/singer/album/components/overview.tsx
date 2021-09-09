@@ -1,37 +1,67 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from '../album.module.less';
-import Img from '@/components/img';
-import { PlayCircleOutlined, FileAddOutlined } from '@ant-design/icons';
-import Table, { Column } from '@/components/table';
+import { getArtistTopSong } from '@/api';
+import { Album, Track } from '@/types';
+import OverviewItem from './overview-item';
+import { Props as AlbumProps } from '../';
+import { getAlbum } from '@/api';
 
-const Overview: React.FC = () => {
-  const columns: Column[] = [
-    { key: 'ordinal', title: '' },
-    { key: 'title', title: '音乐标题' },
-    { key: 'artist', title: '歌手' },
-    { key: 'time', title: '播放时间' },
-  ];
+type Props = Omit<AlbumProps, 'type'>;
+
+const Overview: React.FC<Props> = ({ id, albums }) => {
+  const [topSongs, setTopSongs] = useState<Track[]>([]);
+  const footerRef = useRef<HTMLElement>(null);
+  const [sliceAlbums, setSliceAlbums] = useState<Album[]>([]);
+  const [more, setMore] = useState('加载中...');
+  let index = 0;
+
+  async function loadArtistTopSong() {
+    const topSong = await getArtistTopSong(id);
+    setTopSongs(topSong.songs);
+  }
+
+  async function loadSongsOfAlbum(index: number) {
+    const currentAlbum = albums[index];
+    if (!currentAlbum.id) return;
+    const res = await getAlbum(currentAlbum.id);
+    currentAlbum.songs = res.songs;
+  }
+
+  useEffect(() => {
+    loadArtistTopSong();
+    loadSongsOfAlbum(index);
+  }, [id]);
+
+  useEffect(() => {
+    if (!footerRef?.current) return;
+    const io = new IntersectionObserver(entries => {
+      if (entries[0].intersectionRatio <= 0) return;
+      index++;
+      if (index < albums.length) {
+        loadSongsOfAlbum(index);
+        setSliceAlbums(albums.slice(0, index));
+      } else {
+        setMore('没有更多了~');
+      }
+    });
+
+    io.observe(footerRef.current);
+
+    return () => {
+      if (footerRef.current) io.unobserve(footerRef.current);
+      io.disconnect();
+    };
+  }, []);
 
   return (
     <div className={styles.overview}>
-      <section className={styles.overview__item}>
-        <Img src="" className={styles.overview__img} />
-        <div className={styles.overview__right}>
-          <header className={styles.overview__header}>
-            <h2>热门50首</h2>
-            <div className={styles.overview__icon}>
-              <PlayCircleOutlined />
-              <FileAddOutlined />
-            </div>
-          </header>
-          <div className={styles.overview__table}>
-            <Table noHead columns={columns} data={[]} />
-            <footer className={styles.overview__footer}>
-              <div>查看全部 &gt;</div>
-            </footer>
-          </div>
-        </div>
-      </section>
+      <OverviewItem data={topSongs} />
+      {sliceAlbums.map(album => (
+        <OverviewItem key={album.id} title={album.name} imgUrl={album.picUrl} data={album.songs} />
+      ))}
+      <footer ref={footerRef} className={styles.overview__more}>
+        {more}
+      </footer>
     </div>
   );
 };

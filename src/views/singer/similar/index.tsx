@@ -1,18 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './similar.module.less';
 import Img from '@/components/img';
+import { getSimiArtist } from '@/api';
+import { Artist } from '@/types';
+import { useHistory } from 'react-router-dom';
 
-const Similar: React.FC = () => (
-  <div className={styles.similar}>
-    {Array(30)
-      .fill(0)
-      .map((item, i) => (
-        <div key={i} className={styles.similar__item}>
-          <Img src="" className={styles.similar__img} />
-          <div className={styles.similar__description}>林俊杰</div>
+type Props = { id: number };
+
+const Similar: React.FC<Props> = ({ id }) => {
+  const [simiArtist, setSimiArtist] = useState<Artist[]>([]);
+  const { push } = useHistory();
+
+  async function loadSimiArtist() {
+    const res = await getSimiArtist(id);
+    setSimiArtist(res.artists);
+  }
+
+  useEffect(() => {
+    loadSimiArtist();
+  }, [id]);
+
+  return (
+    <div className={styles.similar}>
+      {simiArtist.map(item => (
+        <div
+          key={item.id}
+          className={styles.similar__item}
+          onClick={() => push(`/singer/${item.id}`)}
+        >
+          <Img src={item.picUrl} className={styles.similar__img} />
+          <div className={styles.similar__description}>{item.name}</div>
         </div>
       ))}
-  </div>
-);
+    </div>
+  );
+};
 
 export default Similar;

@@ -1,4 +1,4 @@
-import { AlbumType, AlbumArea, Data } from '@/types';
+import { Data } from '.';
 import { SearchType } from '@/enum';
 
 export type User = { nickname: string; avatarUrl: string; userId: number; description: string };
@@ -123,6 +123,19 @@ export type Artist = {
   id: number;
   albumSize: number;
   mvSize: number;
+  musicSize: number;
+  briefDesc: string;
+  cover: string;
+  alias?: string[];
+};
+
+export type Topic = any;
+
+export type ArtistDesc = {
+  briefDesc: string;
+  count: number;
+  introduction: Array<{ ti: string; txt: string }>;
+  topicData: Array<Topic>;
 };
 
 export type Album = {
@@ -131,12 +144,18 @@ export type Album = {
   name: string;
   artist: { name: string; alias: string[] };
   size: number;
+  publishTime: number;
   artists: Artist[];
+  songs: Track[];
 };
+
+export type AlbumCategory = 'hot' | 'new';
+
+export type AlbumArea = 'ALL' | 'ZH' | 'EA' | 'KR' | 'JP';
 
 export type TopAlbum = { monthData: Album[]; weekData?: Album[] };
 
-export type TopAlbumParams = { area?: AlbumArea; limit?: number; type?: AlbumType };
+export type TopAlbumParams = { area?: AlbumArea; limit?: number; type?: AlbumCategory };
 
 export type VideoCategogy = { id: number; name: string };
 
@@ -158,10 +177,11 @@ export interface VideoMultiCreator extends Video {
   creator: Array<{ userName: string }>;
 }
 
-export type MVType = {
+export type MV = {
   id: number;
   artistName: string;
   cover: string;
+  imgurl: string;
   name: string;
   playCount: number;
 };

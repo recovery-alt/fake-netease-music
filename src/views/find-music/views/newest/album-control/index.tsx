@@ -1,12 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
-import { AlbumType } from '@/types';
+import { AlbumCategory } from '@/types';
 import styles from './album-control.module.less';
 
-type Props = { albumType: AlbumType; setAlbumType: (albumType: AlbumType) => void };
+type Props = { albumType: AlbumCategory; setAlbumType: (albumType: AlbumCategory) => void };
 
 const AlbumControl: React.FC<Props> = ({ albumType, setAlbumType }) => {
-  const albumOptions: { text: string; type: AlbumType }[] = [
+  const albumOptions: { text: string; type: AlbumCategory }[] = [
     { text: '推荐', type: 'hot' },
     { text: '全部', type: 'new' },
   ];

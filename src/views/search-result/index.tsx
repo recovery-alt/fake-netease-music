@@ -9,20 +9,19 @@ import Playlist from './views/playlist';
 import Lyric from './views/lyric';
 import Radio from './views/radio';
 import User from './views/user';
-import { RouteChildrenProps } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Data, SearchSuggest } from '@/types';
 import { SearchType } from '@/enum';
 import { getSearchMultimatch } from '@/api';
 
-type Props = RouteChildrenProps<Data<string>, { keywords: string }>;
-
 const { TabPane } = Tabs;
 
-const SearchResult: React.FC<Props> = props => {
-  const { keywords } = props.location.state;
+const SearchResult: React.FC = () => {
   const [total, setTotal] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [bestMatch, setBestMatch] = useState<SearchSuggest>();
+  const { state } = useLocation<{ keywords: string }>();
+  const keywords = state.keywords;
   const tabs = [
     {
       type: SearchType.SONG,

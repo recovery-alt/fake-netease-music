@@ -7,7 +7,7 @@ import { Data } from '@/types';
 
 const CloudMusic: React.FC = () => {
   const columns: Column[] = [
-    { key: 'ordinal', title: '' },
+    { key: 'ordinal' },
     { key: 'title', title: '音乐标题' },
     { key: 'artist', title: '歌手' },
     { key: 'album', title: '专辑' },

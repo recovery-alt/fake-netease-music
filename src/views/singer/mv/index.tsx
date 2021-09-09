@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './mv.module.less';
 import Img from '@/components/img';
+import { getArtistMV } from '@/api';
+import { MV as MVType } from '@/types';
+import { resizeImg } from '@/utils';
 
-const MV: React.FC = () => (
-  <div className={styles.mv}>
-    {Array(31)
-      .fill(0)
-      .map((item, i) => (
-        <div key={i} className={styles.mv__item}>
-          <Img src="" className={styles.mv__img} />
-          <div className={styles.mv__description}>不爱我</div>
+type Props = { id: number };
+
+const MV: React.FC<Props> = ({ id }) => {
+  const [mvs, setMVs] = useState<MVType[]>([]);
+
+  async function loadArtistMV() {
+    const res = await getArtistMV(id);
+    setMVs(res.mvs);
+  }
+
+  useEffect(() => {
+    loadArtistMV();
+  }, [id]);
+  return (
+    <div className={styles.mv}>
+      {mvs.map((item, i) => (
+        <div key={item.id} className={styles.mv__item}>
+          <Img src={resizeImg(item.imgurl, 230, 130)} className={styles.mv__img} />
+          <div className={styles.mv__description}>{item.name}</div>
         </div>
       ))}
-  </div>
-);
+    </div>
+  );
+};
 
 export default MV;

@@ -11,7 +11,7 @@ import {
   Lyric,
   Music,
   MVSublist,
-  MVType,
+  MV,
   Personalized,
   Playlist,
   PlaylistCatlist,
@@ -33,6 +33,7 @@ import {
   SearchParams,
   SearchResult,
   PlaylistDetail,
+  ArtistDesc,
 } from '@/types';
 import { get } from './api';
 
@@ -105,13 +106,13 @@ export const getVideoGroup = (id: number, offset = 0) =>
   get<{ datas: { data: VideoSingleCreator }[] }>('/video/group', { id, offset });
 
 export const getMVFirst = (area: string, limit = 6) =>
-  get<{ data: MVType[] }>('/mv/first', { area, limit });
+  get<{ data: MV[] }>('/mv/first', { area, limit });
 
-export const getMVAll = (limit = 6) => get<{ data: MVType[] }>('/mv/all', { limit });
+export const getMVAll = (limit = 6) => get<{ data: MV[] }>('/mv/all', { limit });
 export const getMVExclusiveRcmd = (limit = 6) =>
-  get<{ data: MVType[] }>('/mv/exclusive/rcmd', { limit });
+  get<{ data: MV[] }>('/mv/exclusive/rcmd', { limit });
 
-export const getTopMV = (limit = 10) => get<{ data: MVType[] }>('/top/mv', { limit });
+export const getTopMV = (limit = 10) => get<{ data: MV[] }>('/top/mv', { limit });
 
 export const getDJSublist = () => get<{ count: number; djRadios: DJRadio[] }>('/dj/sublist');
 
@@ -144,3 +145,18 @@ export const getSearch = <T>(params: SearchParams) => get<T>('/search', params);
 
 export const getSearchMultimatch = (keywords: string) =>
   get<SearchResult<SearchSuggest>>('/search/multimatch', { keywords });
+
+export const getArtistDetail = (id: number) =>
+  get<{ data: { artist: Artist } }>('/artist/detail', { id });
+
+export const getArtistTopSong = (id: number) => get<{ songs: Track[] }>('/artist/top/song', { id });
+
+export const getArtistAlbum = (id: number) => get<{ hotAlbums: Album[] }>('/artist/album', { id });
+
+export const getArtistDesc = (id: number) => get<ArtistDesc>('/artist/desc', { id });
+
+export const getAlbum = (id: number) => get<{ songs: Track[] }>('/album', { id });
+
+export const getArtistMV = (id: number) => get<{ mvs: MV[] }>('/artist/mv', { id });
+
+export const getSimiArtist = (id: number) => get<{ artists: Artist[] }>('/simi/artist', { id });

@@ -8,7 +8,7 @@ import { message } from 'antd';
 
 export type Column<T = Data> = {
   width?: number;
-  title: string;
+  title?: string;
   key?: string;
   render?: (item: T) => React.ReactNode;
   format?: (item: string) => string;
