@@ -34,6 +34,7 @@ import {
   SearchResult,
   PlaylistDetail,
   ArtistDesc,
+  AlbumDetailDynamic,
 } from '@/types';
 import { get } from './api';
 
@@ -155,8 +156,14 @@ export const getArtistAlbum = (id: number) => get<{ hotAlbums: Album[] }>('/arti
 
 export const getArtistDesc = (id: number) => get<ArtistDesc>('/artist/desc', { id });
 
-export const getAlbum = (id: number) => get<{ songs: Track[] }>('/album', { id });
+export const getAlbum = (id: number) => get<{ album: Album; songs: Track[] }>('/album', { id });
 
 export const getArtistMV = (id: number) => get<{ mvs: MV[] }>('/artist/mv', { id });
 
 export const getSimiArtist = (id: number) => get<{ artists: Artist[] }>('/simi/artist', { id });
+
+export const getAlbumDetailDynamic = (id: number) =>
+  get<AlbumDetailDynamic>('/album/detail/dynamic', { id });
+
+export const getCommentAlbum = (id: number | string, offset = 0) =>
+  get<CommentData>('/comment/album', { id, offset });

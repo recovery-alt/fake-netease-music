@@ -10,21 +10,28 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import dayjs from 'dayjs';
 import { wrapNumber, formatMS, resizeImg } from '@/utils';
-import { getPlaylistDetail } from '@/api';
+import { getAlbum, getPlaylistDetail, getAlbumDetailDynamic } from '@/api';
 import { UserPlaylist, Track } from '@/types';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, setCurrentTrack } from '@/store';
 import { Tabs } from 'antd';
 import Collector from './collector';
 import CommentsList from './comments-list';
+import AlbumDetail from './album-detail';
+import Img from '@/components/img';
+import classNames from 'classnames';
+
+type CurrentInfo = Partial<UserPlaylist & { artistName: string }>;
 
 const List: React.FC = () => {
-  const params = useParams<{ id?: string }>();
+  const params = useParams<{ id?: string; type?: 'album' }>();
   const [tracks, setTracks] = useState<Track[]>([]);
   const dispatch = useDispatch<AppDispatch>();
-  const [commentCount, setCommentCount] = useState(0);
-  const [curPlaylist, setCurPlaylist] = useState<UserPlaylist>();
+  const [albumDescrition, setAlbumDescrition] = useState('');
+  const [current, setCurrent] = useState<CurrentInfo>();
   const id = useMemo(() => Number(params.id), [params.id]);
+  // 判断是否为专辑
+  const isAlbum = useMemo(() => !!params.type, [params.type]);
   const columns: Column<Track>[] = [
     { title: '', key: 'ordinal' },
     { title: '', key: 'action' },
@@ -48,25 +55,93 @@ const List: React.FC = () => {
     dispatch(setCurrentTrack({ current, tracks, fm: [] }));
   }
 
+  async function loadAlbum() {
+    const [album, albumDynamic] = await Promise.all([getAlbum(id), getAlbumDetailDynamic(id)]);
+
+    const tracksWithPrivilege = album.songs.map(item => {
+      item.disable = !item.privilege.cp;
+      return item;
+    });
+    setTracks(tracksWithPrivilege);
+    const { picUrl: coverImgUrl, name, artist, publishTime: createTime, description } = album.album;
+    const { subCount: subscribedCount, shareCount, commentCount } = albumDynamic;
+    const current: CurrentInfo = {
+      coverImgUrl,
+      name,
+      subscribedCount,
+      shareCount,
+      commentCount,
+      createTime,
+      artistName: artist.name,
+    };
+
+    setCurrent(current);
+    setAlbumDescrition(description);
+  }
+
+  async function loadPlaylist() {
+    const playlistDetail = await getPlaylistDetail(id);
+    const tracksWithPrivilege = playlistDetail.playlist.tracks.map((track, i) => {
+      track.disable = !playlistDetail.privileges[i].cp;
+      return track;
+    });
+    setTracks(tracksWithPrivilege);
+    setCurrent(playlistDetail.playlist);
+  }
+  function renderPlaylistDescription() {
+    return (
+      <div className="list__description">
+        <div className="list__tag">
+          <span className="--title">标签: </span>
+          <span>{current?.tags?.join('/')}</span>
+        </div>
+        <div className="list__count">
+          <span>
+            <span className="--title">歌曲数: </span>
+            {wrapNumber(current?.trackCount)}
+          </span>
+          <span className="--left">
+            <span className="--title">播放数: </span>
+            {wrapNumber(current?.playCount)}
+          </span>
+        </div>
+        <div className="list__introduction">
+          <span className="--title">简介: </span>
+          <div>{current?.description}</div>
+        </div>
+      </div>
+    );
+  }
+
+  function renderAlbumDescrition() {
+    return (
+      <div className="list__description">
+        <div className="list__singer">
+          <span className="--title">歌手: </span>
+          <span>{current?.artistName}</span>
+        </div>
+        <div className="list__publish-time">
+          <span className="--title">时间: </span>
+          <span>{dayjs(current?.createTime).format('YYYY-MM-DD')}</span>
+        </div>
+      </div>
+    );
+  }
+
   useEffect(() => {
-    (async () => {
-      if (Number.isNaN(id)) return;
-      const playlistDetail = await getPlaylistDetail(id);
-      const tracksWithPrivilege = playlistDetail.playlist.tracks.map((track, i) => {
-        track.disable = !playlistDetail.privileges[i].cp;
-        return track;
-      });
-      setCommentCount(playlistDetail.playlist.commentCount);
-      setTracks(tracksWithPrivilege);
-      setCurPlaylist(playlistDetail.playlist);
-    })();
-  }, [id]);
+    if (Number.isNaN(id)) return;
+    isAlbum ? loadAlbum() : loadPlaylist();
+  }, [id, isAlbum]);
 
   return (
     <div className="list">
       <header className="list__header">
-        {id && curPlaylist?.coverImgUrl ? (
-          <img className="list__img" src={resizeImg(curPlaylist.coverImgUrl, 300)} alt="avatar" />
+        {id && current?.coverImgUrl ? (
+          <Img
+            className={classNames('list__img', { '--album': isAlbum })}
+            src={resizeImg(current.coverImgUrl, 300)}
+            alt="avatar"
+          />
         ) : (
           <div className="list__img-default">
             <HeartFilled />
@@ -75,49 +150,32 @@ const List: React.FC = () => {
 
         <div className="list__right">
           <div className="list__title">
-            <span>歌单</span>
-            <strong>{curPlaylist?.name || '我喜欢的音乐'}</strong>
+            <span>{isAlbum ? '专辑' : '歌单'}</span>
+            <strong>{current?.name || '我喜欢的音乐'}</strong>
           </div>
-          <div className="list__user-info">
-            <img src={resizeImg(profile.avatarUrl || avatar, 100)} alt="avatar" />
-            <a>{profile.nickname}</a>
-            <span>{dayjs(curPlaylist?.createTime).format('YYYY-MM-DD')}创建</span>
-          </div>
+          {!isAlbum && (
+            <div className="list__user-info">
+              <img src={resizeImg(profile.avatarUrl || avatar, 100)} alt="avatar" />
+              <a>{profile.nickname}</a>
+              <span>{dayjs(current?.createTime).format('YYYY-MM-DD')}创建</span>
+            </div>
+          )}
           <div className="list__control">
             <Button />
-            <button className="">
+            <button>
               <FolderAddOutlined />
-              收藏({wrapNumber(curPlaylist?.subscribedCount)})
+              收藏({wrapNumber(current?.subscribedCount)})
             </button>
-            <button className="">
+            <button>
               <ShareAltOutlined />
-              分享({wrapNumber(curPlaylist?.shareCount || 0)})
+              分享({wrapNumber(current?.shareCount || 0)})
             </button>
-            <button className="">
+            <button>
               <DownloadOutlined />
               下载全部
             </button>
           </div>
-          <div className="list__description">
-            <div className="list__tag">
-              <span className="--title">标签: </span>
-              <span>{curPlaylist?.tags.join('/')}</span>
-            </div>
-            <div className="list__count">
-              <span>
-                <span className="--title">歌曲数: </span>
-                {wrapNumber(curPlaylist?.trackCount)}
-              </span>
-              <span className="--left">
-                <span className="--title">播放数: </span>
-                {wrapNumber(curPlaylist?.playCount)}
-              </span>
-            </div>
-            <div className="list__introduction">
-              <span className="--title">简介: </span>
-              <div>{curPlaylist?.description}</div>
-            </div>
-          </div>
+          {isAlbum ? renderAlbumDescrition() : renderPlaylistDescription()}
         </div>
       </header>
       <section className="list__tabs">
@@ -125,11 +183,11 @@ const List: React.FC = () => {
           <Tabs.TabPane tab="歌曲列表" key="1">
             <Table columns={columns} data={tracks} doubleClick={handleTableDoubleClick} />
           </Tabs.TabPane>
-          <Tabs.TabPane tab={`评论(${commentCount})`} key="2">
-            <CommentsList id={id} />
+          <Tabs.TabPane tab={`评论(${current?.commentCount || 0})`} key="2">
+            <CommentsList id={id} isAlbum={isAlbum} />
           </Tabs.TabPane>
-          <Tabs.TabPane tab="收藏者" key="3">
-            <Collector id={id} />
+          <Tabs.TabPane tab={isAlbum ? '专辑详情' : '收藏者'} key="3">
+            {isAlbum ? <AlbumDetail description={albumDescrition} /> : <Collector id={id} />}
           </Tabs.TabPane>
         </Tabs>
       </section>

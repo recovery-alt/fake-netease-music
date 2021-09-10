@@ -23,6 +23,24 @@
       justify-content: center;
       .img();
     }
+
+    // &.--album {
+    //   margin-right: 30px;
+    //   position: relative;
+
+    //   &::after {
+    //     background-image: url('/src/assets/img/coverall.png');
+    //     background-position: 109px 777px;
+    //     background-size: 760px 2990px;
+    //     content: '';
+    //     display: block;
+    //     height: 100%;
+    //     position: absolute;
+    //     right: -50px;
+    //     top: 0;
+    //     width: 50px;
+    //   }
+    // }
   }
 
   &__right {
@@ -112,11 +130,20 @@
       height: 30px;
       margin-left: 10px;
       padding: 0 13px;
-
-      span {
-        margin-right: 5px;
-      }
     }
+
+    span {
+      margin-right: 5px;
+    }
+  }
+
+  &__singer span:not(.--title) {
+    color: #507daf;
+    cursor: pointer;
+  }
+
+  &__publish-time {
+    margin-top: 10px;
   }
 
   &__tabs .ant-tabs > .ant-tabs-nav {

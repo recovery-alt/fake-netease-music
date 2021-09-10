@@ -22,6 +22,7 @@ const Card: React.FC<Props> = ({ albums }) => {
               src={resizeImg(item.picUrl, 150)}
               className={styles.card__img}
               icon={{ size: 'large', hoverDisplay: true }}
+              onClick={() => push(`/list/${item.id}/album`)}
             />
           </div>
           <div className={styles.card__description}>

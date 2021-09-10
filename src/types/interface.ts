@@ -114,6 +114,7 @@ export type Track = {
   dt: number;
   al: Album;
   disable?: boolean;
+  privilege: Privilege;
   ar: { id: number; name: string }[];
 };
 
@@ -144,6 +145,7 @@ export type Album = {
   name: string;
   artist: { name: string; alias: string[] };
   size: number;
+  description: string;
   publishTime: number;
   artists: Artist[];
   songs: Track[];
@@ -156,6 +158,16 @@ export type AlbumArea = 'ALL' | 'ZH' | 'EA' | 'KR' | 'JP';
 export type TopAlbum = { monthData: Album[]; weekData?: Album[] };
 
 export type TopAlbumParams = { area?: AlbumArea; limit?: number; type?: AlbumCategory };
+
+export type AlbumDetailDynamic = {
+  commentCount: number;
+  isSub: boolean;
+  likedCount: number;
+  onSale: boolean;
+  shareCount: number;
+  subCount: number;
+  subTime: number;
+};
 
 export type VideoCategogy = { id: number; name: string };
 

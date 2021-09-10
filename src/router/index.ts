@@ -20,7 +20,7 @@ const routes: Array<RouteConfig> = [
         component: lazy(() => import('@/views/fm')),
       },
       {
-        path: '/list/:id?',
+        path: '/list/:id?/:type?',
         component: lazy(() => import('@/views/list')),
       },
       {

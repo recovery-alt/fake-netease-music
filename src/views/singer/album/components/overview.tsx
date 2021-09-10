@@ -22,7 +22,7 @@ const Overview: React.FC<Props> = ({ id, albums }) => {
 
   async function loadSongsOfAlbum(index: number) {
     const currentAlbum = albums[index];
-    if (!currentAlbum.id) return;
+    if (!currentAlbum?.id) return;
     const res = await getAlbum(currentAlbum.id);
     currentAlbum.songs = res.songs;
   }
