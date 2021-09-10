@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from '../album.module.less';
-import { getArtistTopSong } from '@/api';
+import { getAlbum, getArtistTopSong } from '@/api';
 import { Album, Track } from '@/types';
 import OverviewItem from './overview-item';
 import { Props as AlbumProps } from '../';
-import { getAlbum } from '@/api';
 
 type Props = Omit<AlbumProps, 'type'>;
 
@@ -57,7 +56,13 @@ const Overview: React.FC<Props> = ({ id, albums }) => {
     <div className={styles.overview}>
       <OverviewItem data={topSongs} />
       {sliceAlbums.map(album => (
-        <OverviewItem key={album.id} title={album.name} imgUrl={album.picUrl} data={album.songs} />
+        <OverviewItem
+          key={album.id}
+          id={album.id}
+          title={album.name}
+          imgUrl={album.picUrl}
+          data={album.songs}
+        />
       ))}
       <footer ref={footerRef} className={styles.overview__more}>
         {more}

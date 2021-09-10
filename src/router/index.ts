@@ -32,6 +32,10 @@ const routes: Array<RouteConfig> = [
         component: lazy(() => import('@/views/search-result')),
       },
       {
+        path: '/user/:id',
+        component: lazy(() => import('@/views/user')),
+      },
+      {
         component: lazy(() => import('@/views/find-music/views/newest')),
         path: '/find-music/newest/:type?',
       },

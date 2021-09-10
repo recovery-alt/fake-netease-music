@@ -65,7 +65,7 @@ const MusicList: React.FC<Props> = ({ visible, setVisible, target }) => {
           selectedRow={currentTrack.current}
           data={currentTrack.tracks}
           columns={columns}
-          doubleClick={handleDoubleClick}
+          onDoubleClick={handleDoubleClick}
         />
       </section>
     </div>,

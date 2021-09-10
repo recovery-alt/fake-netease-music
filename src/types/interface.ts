@@ -127,6 +127,7 @@ export type Artist = {
   musicSize: number;
   briefDesc: string;
   cover: string;
+  user: User;
   alias?: string[];
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './button-group.module.less';
 import { UngroupOutlined, AlignCenterOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
-import { AlbumPageMode } from '../album';
+import { AlbumPageMode } from '@/views/singer/album';
 
 type Props = { activeButton: AlbumPageMode; setActiveButton: (button: AlbumPageMode) => void };
 

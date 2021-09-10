@@ -19,7 +19,7 @@ type Props = {
   data: Data<any>[];
   noHead?: boolean;
   selectedRow?: number;
-  doubleClick?: (index: number) => void;
+  onDoubleClick?: (index: number) => void;
   disableColumn?: string;
 };
 
@@ -29,22 +29,22 @@ const Table: React.FC<Props> = ({
   disableColumn = 'disable',
   noHead = false,
   selectedRow,
-  doubleClick,
+  onDoubleClick,
 }) => {
   const [selected, setSelected] = useState(-1);
 
   const handleDoubleClick = (index: number) => {
-    if (!doubleClick) return;
+    if (!onDoubleClick) return;
     if (data[index][disableColumn]) {
       message.error('应合作方要求，该资源暂时下架>_<');
       return;
     }
     // setSelected(index);
-    doubleClick(index);
+    onDoubleClick(index);
   };
 
   useEffect(() => {
-    if (selectedRow) setSelected(selectedRow);
+    if (selectedRow !== undefined) setSelected(selectedRow);
   }, [selectedRow]);
 
   return (

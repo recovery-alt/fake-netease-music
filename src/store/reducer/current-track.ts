@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getSongUrl, getPersonalFM, getSongDetail, getPlaylistDetail } from '@/api';
+import { getSongUrl, getPersonalFM, getSongDetail, getPlaylistDetail, getAlbum } from '@/api';
 import { to } from '@/utils';
 import { PlayMode } from '@/enum';
 import { message } from 'antd';
@@ -66,12 +66,33 @@ export const insertSong = createAsyncThunk<{ songs: Track[] }, number>(
   }
 );
 
-export const fetchAndSetCurrentTrack = createAsyncThunk<undefined, number>(
+type ActionParams = number | { id: number; isAlbum: boolean };
+
+export const fetchAndSetCurrentTrack = createAsyncThunk<void, ActionParams>(
   prefix('fetchAndSetCurrentTrack'),
-  async (id, { rejectWithValue, dispatch }) => {
-    const [err, res] = await to(getPlaylistDetail(id));
-    if (err || !res) return rejectWithValue(null);
-    dispatch(setCurrentTrack({ current: 0, tracks: res.playlist.tracks, fm: [] }));
+  async (params, { rejectWithValue, dispatch }) => {
+    let id: number;
+    let isAlbum = false;
+    if (typeof params === 'number') {
+      id = params;
+    } else {
+      id = params.id;
+      isAlbum = params.isAlbum;
+    }
+
+    let tracks: Track[];
+
+    if (isAlbum) {
+      const [err, res] = await to(getAlbum(id));
+      if (err || !res) return rejectWithValue(null);
+      tracks = res.songs;
+    } else {
+      const [err, res] = await to(getPlaylistDetail(id));
+      if (err || !res) return rejectWithValue(null);
+      tracks = res.playlist.tracks;
+    }
+
+    dispatch(setCurrentTrack({ current: 0, tracks, fm: [] }));
   }
 );
 

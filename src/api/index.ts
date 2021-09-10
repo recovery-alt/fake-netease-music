@@ -167,3 +167,5 @@ export const getAlbumDetailDynamic = (id: number) =>
 
 export const getCommentAlbum = (id: number | string, offset = 0) =>
   get<CommentData>('/comment/album', { id, offset });
+
+export const getUserDetail = (uid: number) => get('/user/detail', { uid });

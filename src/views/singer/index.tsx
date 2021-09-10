@@ -3,8 +3,8 @@ import './singer.less';
 import Img from '@/components/img';
 import { FileAddOutlined, UserOutlined } from '@ant-design/icons';
 import { Tabs } from 'antd';
-import ButtonGroup from './button-group';
-import { useParams, useLocation } from 'react-router-dom';
+import ButtonGroup from '@/views/user/button-group';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getArtistDetail, getArtistAlbum } from '@/api';
 import { Album as AlbumType, Artist } from '@/types';
 import { AlbumPageMode } from './album';
@@ -18,13 +18,14 @@ const Similar = lazy(() => import('./similar'));
 
 const Singer: React.FC = () => {
   const params = useParams<{ id: string }>();
+  const id = useMemo(() => Number(params.id), [params.id]);
   const location = useLocation<string[]>();
   const alias = location.state;
   const [activeKey, setActiveKey] = useState('album');
-  const id = useMemo(() => Number(params.id), [params.id]);
   const [artistDetail, setArtistDetail] = useState<Artist>();
   const [albums, setAlbums] = useState<AlbumType[]>([]);
   const [activeButton, setActiveButton] = useState<AlbumPageMode>('overview');
+  const { push } = useHistory();
 
   const extraContent =
     activeKey === 'album'
@@ -46,7 +47,6 @@ const Singer: React.FC = () => {
     if (Number.isNaN(id)) return;
     loadArtistDetail();
     loadArtistAlbum();
-    console.log(id);
   }, [id]);
 
   return (
@@ -61,7 +61,10 @@ const Singer: React.FC = () => {
               <FileAddOutlined />
               收藏
             </button>
-            <button className="singer__button">
+            <button
+              className="singer__button"
+              onClick={() => push(`/user/${artistDetail?.user.userId}`)}
+            >
               <UserOutlined />
               个人主页
             </button>

@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { resizeImg } from '@/utils';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { fetchAndSetCurrentTrack } from '@/store';
 
 type Props = Omit<AlbumProps, 'type'>;
 
@@ -23,6 +24,7 @@ const Card: React.FC<Props> = ({ albums }) => {
               className={styles.card__img}
               icon={{ size: 'large', hoverDisplay: true }}
               onClick={() => push(`/list/${item.id}/album`)}
+              onIconClick={() => dispatch(fetchAndSetCurrentTrack({ id: item.id, isAlbum: true }))}
             />
           </div>
           <div className={styles.card__description}>

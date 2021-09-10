@@ -181,7 +181,7 @@ const List: React.FC = () => {
       <section className="list__tabs">
         <Tabs>
           <Tabs.TabPane tab="歌曲列表" key="1">
-            <Table columns={columns} data={tracks} doubleClick={handleTableDoubleClick} />
+            <Table columns={columns} data={tracks} onDoubleClick={handleTableDoubleClick} />
           </Tabs.TabPane>
           <Tabs.TabPane tab={`评论(${current?.commentCount || 0})`} key="2">
             <CommentsList id={id} isAlbum={isAlbum} />
