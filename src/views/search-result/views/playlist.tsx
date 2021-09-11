@@ -10,10 +10,10 @@ const Playlist: React.FC<Props> = props => {
 
   function listDataAdapter(playlists: PlaylistType[]) {
     return playlists.map(playlist => {
-      const { coverImgUrl: imgUrl, name, trackCount, creator } = playlist;
+      const { coverImgUrl: imgUrl, name, trackCount, creator, id } = playlist;
       const col2 = `${trackCount}首`;
       const col3 = `by ${creator.nickname}`;
-      return { imgUrl, name, col2, col3 };
+      return { id, imgUrl, name, col2, col3 };
     });
   }
 

@@ -35,6 +35,9 @@ import {
   PlaylistDetail,
   ArtistDesc,
   AlbumDetailDynamic,
+  UserProfile,
+  Identify,
+  UserDetail,
 } from '@/types';
 import { get } from './api';
 
@@ -81,6 +84,8 @@ export const getDJPersonalizeRecommend = (limit = 5) =>
 
 export const getDJPaygift = (limit = 4) =>
   get<{ data: { list: DJRadio[] } }>('/dj/paygift', { limit });
+
+export const getUserAudio = (uid: number) => get<{ djRadios: DJRadio[] }>('/user/audio', { uid });
 
 export const getDJToplistPay = (limit = 5) =>
   get<{ data: { list: DJToplistPay[] } }>('/dj/toplist/pay', { limit });
@@ -148,7 +153,7 @@ export const getSearchMultimatch = (keywords: string) =>
   get<SearchResult<SearchSuggest>>('/search/multimatch', { keywords });
 
 export const getArtistDetail = (id: number) =>
-  get<{ data: { artist: Artist } }>('/artist/detail', { id });
+  get<{ data: { user: UserProfile; artist: Artist } }>('/artist/detail', { id });
 
 export const getArtistTopSong = (id: number) => get<{ songs: Track[] }>('/artist/top/song', { id });
 
@@ -168,4 +173,7 @@ export const getAlbumDetailDynamic = (id: number) =>
 export const getCommentAlbum = (id: number | string, offset = 0) =>
   get<CommentData>('/comment/album', { id, offset });
 
-export const getUserDetail = (uid: number) => get('/user/detail', { uid });
+export const getUserDetail = (uid: number) => get<UserDetail>('/user/detail', { uid });
+
+export const getUserPlaylist = (uid: number) =>
+  get<{ playlist: Playlist[] }>('/user/playlist', { uid });

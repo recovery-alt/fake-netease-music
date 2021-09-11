@@ -10,8 +10,8 @@ const Singer: React.FC<Props> = props => {
 
   function listDataAdapter(artists: Artist[]) {
     return artists.map(artist => {
-      const { picUrl: imgUrl, name } = artist;
-      return { imgUrl, name };
+      const { picUrl: imgUrl, name, id } = artist;
+      return { id, imgUrl, name };
     });
   }
 

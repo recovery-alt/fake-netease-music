@@ -26,7 +26,7 @@
     margin-top: 12px;
 
     span {
-      color: #999;
+      color: #8e8e8e;
     }
 
     div {
@@ -41,6 +41,7 @@
     height: 20px;
     justify-content: space-between;
     margin-bottom: 0;
+    margin-bottom: 16px;
     margin-top: 40px;
     padding: 0 30px;
 
@@ -62,27 +63,6 @@
       align-items: center;
       display: flex;
 
-      strong {
-        background-color: #fde4e1;
-        border-radius: 8px;
-        color: #f1483b;
-        font-size: 11px;
-        font-weight: normal;
-        line-height: 16px;
-        padding-right: 8px;
-
-        &::before {
-          background-color: #ed4037;
-          border-radius: 50%;
-          color: #fff;
-          content: 'V';
-          display: inline-block;
-          height: 16px;
-          text-align: center;
-          width: 16px;
-        }
-      }
-
       mark {
         background-color: #f0eff0;
         border-radius: 8px;
@@ -101,6 +81,29 @@
         line-height: 16px;
         margin-left: 5px;
         text-align: center;
+        width: 16px;
+      }
+    }
+
+    &-auth {
+      align-items: center;
+      background-color: #fde4e1;
+      border-radius: 8px;
+      color: #f1483b;
+      display: flex;
+      height: 16px;
+      line-height: 16px;
+      padding-right: 8px;
+
+      strong {
+        font-size: 11px;
+        font-weight: normal;
+        margin-left: 3px;
+      }
+
+      img {
+        border-radius: 50%;
+        height: 16px;
         width: 16px;
       }
     }

@@ -59,7 +59,7 @@ const List: React.FC = () => {
     const [album, albumDynamic] = await Promise.all([getAlbum(id), getAlbumDetailDynamic(id)]);
 
     const tracksWithPrivilege = album.songs.map(item => {
-      item.disable = !item.privilege.cp;
+      item.disable = item?.privilege?.cp ? !item.privilege.cp : false;
       return item;
     });
     setTracks(tracksWithPrivilege);

@@ -6,7 +6,7 @@ import { Tabs } from 'antd';
 import ButtonGroup from '@/views/user/button-group';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getArtistDetail, getArtistAlbum } from '@/api';
-import { Album as AlbumType, Artist } from '@/types';
+import { Album as AlbumType, Artist, UserProfile } from '@/types';
 import { AlbumPageMode } from './album';
 import { resizeImg } from '@/utils';
 
@@ -23,6 +23,7 @@ const Singer: React.FC = () => {
   const alias = location.state;
   const [activeKey, setActiveKey] = useState('album');
   const [artistDetail, setArtistDetail] = useState<Artist>();
+  const [user, setUser] = useState<UserProfile>();
   const [albums, setAlbums] = useState<AlbumType[]>([]);
   const [activeButton, setActiveButton] = useState<AlbumPageMode>('overview');
   const { push } = useHistory();
@@ -36,6 +37,7 @@ const Singer: React.FC = () => {
     const artistDetail = await getArtistDetail(id);
     artistDetail.data.artist.alias = alias;
     setArtistDetail(artistDetail.data.artist);
+    setUser(artistDetail.data.user);
   }
 
   async function loadArtistAlbum() {
@@ -61,10 +63,7 @@ const Singer: React.FC = () => {
               <FileAddOutlined />
               收藏
             </button>
-            <button
-              className="singer__button"
-              onClick={() => push(`/user/${artistDetail?.user.userId}`)}
-            >
+            <button className="singer__button" onClick={() => push(`/user/${user?.userId}`)}>
               <UserOutlined />
               个人主页
             </button>
@@ -86,7 +85,7 @@ const Singer: React.FC = () => {
       <Tabs destroyInactiveTabPane tabBarExtraContent={extraContent} onChange={setActiveKey}>
         <TabPane tab="专辑" key="album">
           <Suspense fallback="加载中...">
-            <Album type={activeButton} id={id} albums={albums} />
+            <Album type={activeButton} id={id} albums={albums} setAlbums={setAlbums} />
           </Suspense>
         </TabPane>
         <TabPane tab="MV" key="mv">

@@ -1,8 +1,26 @@
 import { Data } from '.';
 import { SearchType } from '@/enum';
 
-export type User = { nickname: string; avatarUrl: string; userId: number; description: string };
-export type UserInfo = { cookie: string; profile: User };
+export type UserProfile = {
+  nickname: string;
+  avatarUrl: string;
+  userId: number;
+  description: string;
+  follows?: number;
+  followeds?: number;
+  gender?: number;
+  eventCount?: number;
+  signature?: string;
+};
+
+export type Identify = {
+  imageDesc: string;
+  imageUrl: string;
+};
+
+export type UserInfo = { cookie: string; profile: UserProfile };
+
+export type UserDetail = { level: number; profile: UserProfile; identify: Identify };
 
 export type UserPlaylist = {
   id: number;
@@ -58,7 +76,7 @@ export type Music = {
   artists: Array<{ id: number; name: string }>;
 };
 
-type BeReplied = { beRepliedCommentId: number; content: string; user: User };
+type BeReplied = { beRepliedCommentId: number; content: string; user: UserProfile };
 
 export type Comment = {
   content: string;
@@ -68,7 +86,7 @@ export type Comment = {
   liked: boolean;
   time: number;
   beReplied: BeReplied[];
-  user: User;
+  user: UserProfile;
 };
 
 export type Playlist = {
@@ -78,7 +96,7 @@ export type Playlist = {
   trackCount: number;
   coverImgUrl: string;
   copywriter: string;
-  creator: User;
+  creator: UserProfile;
 };
 
 export type Subcategory = { category: number; name: string; hot: boolean };
@@ -101,6 +119,7 @@ export type DJRadio = {
   rcmdText: string;
   lastProgramName: string;
   programCount: number;
+  subCount: number;
   dj: { nickname: string };
 };
 
@@ -114,7 +133,7 @@ export type Track = {
   dt: number;
   al: Album;
   disable?: boolean;
-  privilege: Privilege;
+  privilege?: Privilege;
   ar: { id: number; name: string }[];
 };
 
@@ -127,7 +146,6 @@ export type Artist = {
   musicSize: number;
   briefDesc: string;
   cover: string;
-  user: User;
   alias?: string[];
 };
 
@@ -309,7 +327,7 @@ export type SearchRadio = {
 };
 export type SearchUser = {
   userprofileCount: number;
-  userprofiles: User[];
+  userprofiles: UserProfile[];
 };
 
 export type ComposeSearch =

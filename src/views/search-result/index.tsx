@@ -8,7 +8,7 @@ import Video from './views/video';
 import Playlist from './views/playlist';
 import Lyric from './views/lyric';
 import Radio from './views/radio';
-import User from './views/user';
+import UserProfile from './views/user';
 import { useLocation } from 'react-router-dom';
 import { Data, SearchSuggest } from '@/types';
 import { SearchType } from '@/enum';
@@ -77,7 +77,7 @@ const SearchResult: React.FC = () => {
       key: 'user',
       unit: '个',
       tab: '用户',
-      component: User,
+      component: UserProfile,
     },
   ];
   const current = useMemo(() => tabs[currentIndex], [currentIndex]);

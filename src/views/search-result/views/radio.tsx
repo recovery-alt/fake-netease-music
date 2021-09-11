@@ -10,9 +10,9 @@ const Radio: React.FC<Props> = props => {
 
   function listDataAdapter(radios: DJRadio[]) {
     return radios.map(radio => {
-      const { picUrl: imgUrl, name, dj } = radio;
+      const { picUrl: imgUrl, name, dj, id } = radio;
       const col3 = `by ${dj.nickname}`;
-      return { imgUrl, name, col3 };
+      return { id, imgUrl, name, col3 };
     });
   }
 

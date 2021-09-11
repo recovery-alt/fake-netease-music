@@ -10,10 +10,10 @@ const Album: React.FC<Props> = props => {
 
   function listDataAdapter(albums: AlbumType[]) {
     return albums.map(album => {
-      const { picUrl: imgUrl, name, artist } = album;
+      const { picUrl: imgUrl, name, artist, id } = album;
       const { name: artistName, alias } = artist;
       const col2 = `${artistName}（${alias.join(',')}）`;
-      return { imgUrl, name, col2 };
+      return { id, imgUrl, name, col2 };
     });
   }
 
