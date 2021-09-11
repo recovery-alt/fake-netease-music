@@ -13,7 +13,7 @@ import {
   MVSublist,
   MV,
   Personalized,
-  Playlist,
+  UserPlaylist,
   PlaylistCatlist,
   Song,
   TopAlbumParams,
@@ -70,7 +70,7 @@ export const getCommentMusic = (id: number | string, offset = 0) =>
 export const getCommentPlaylist = (id: number | string, offset = 0) =>
   get<CommentData>('/comment/playlist', { id, offset });
 
-export const getMusicCategory = () => get<{ tags: Playlist[] }>('/playlist/hot');
+export const getMusicCategory = () => get<{ tags: UserPlaylist[] }>('/playlist/hot');
 
 export const getAllMusicCategory = () => get<PlaylistCatlist>('/playlist/catlist');
 
@@ -129,12 +129,12 @@ export const getArtistSublist = () => get<{ data: Artist[] }>('/artist/sublist')
 export const getMVSublist = () => get<{ data: MVSublist[] }>('/mv/sublist');
 
 export const getSimiPlaylist = (id: number) =>
-  get<{ playlists: Playlist[] }>('/simi/playlist', { id });
+  get<{ playlists: UserPlaylist[] }>('/simi/playlist', { id });
 
 export const getSimiSong = (id: number) => get<{ songs: Music[] }>('/simi/song', { id });
 
 export const getTopPlaylistHighquality = (cat: string, limit = 1) =>
-  get<{ playlists: Playlist[] }>('/top/playlist/highquality', { cat, limit });
+  get<{ playlists: UserPlaylist[] }>('/top/playlist/highquality', { cat, limit });
 
 export const getSongDetail = (ids: string | number) =>
   get<{ songs: Track[] }>('/song/detail', { ids });
@@ -176,4 +176,4 @@ export const getCommentAlbum = (id: number | string, offset = 0) =>
 export const getUserDetail = (uid: number) => get<UserDetail>('/user/detail', { uid });
 
 export const getUserPlaylist = (uid: number) =>
-  get<{ playlist: Playlist[] }>('/user/playlist', { uid });
+  get<{ playlist: UserPlaylist[] }>('/user/playlist', { uid });

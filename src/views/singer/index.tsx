@@ -85,7 +85,7 @@ const Singer: React.FC = () => {
       <Tabs destroyInactiveTabPane tabBarExtraContent={extraContent} onChange={setActiveKey}>
         <TabPane tab="专辑" key="album">
           <Suspense fallback="加载中...">
-            <Album type={activeButton} id={id} albums={albums} setAlbums={setAlbums} />
+            <Album type={activeButton} id={id} albums={albums} />
           </Suspense>
         </TabPane>
         <TabPane tab="MV" key="mv">

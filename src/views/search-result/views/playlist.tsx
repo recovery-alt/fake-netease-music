@@ -1,4 +1,4 @@
-import { Playlist as PlaylistType, SearchPlaylist } from '@/types';
+import { UserPlaylist as UserPlaylist, SearchPlaylist } from '@/types';
 import React from 'react';
 import List from '../list';
 import { usePagination, Props } from '../hook';
@@ -8,7 +8,7 @@ const Playlist: React.FC<Props> = props => {
   const params = { ...props, currentType: SearchType.PLAYLIST };
   const { wrapEmpty } = usePagination<SearchPlaylist>(params);
 
-  function listDataAdapter(playlists: PlaylistType[]) {
+  function listDataAdapter(playlists: UserPlaylist[]) {
     return playlists.map(playlist => {
       const { coverImgUrl: imgUrl, name, trackCount, creator, id } = playlist;
       const col2 = `${trackCount}首`;

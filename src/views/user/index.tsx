@@ -14,7 +14,7 @@ import ButtonGroup from './button-group';
 import Album, { AlbumPageMode } from '@/views/singer/album';
 import { getUserDetail, getUserAudio, getUserPlaylist } from '@/api';
 import { useParams } from 'react-router-dom';
-import { Playlist, UserDetail } from '@/types';
+import { UserPlaylist, UserDetail } from '@/types';
 import { resizeImg } from '@/utils';
 
 const User: React.FC = () => {
@@ -23,7 +23,7 @@ const User: React.FC = () => {
   const [activeButton, setActiveButton] = useState<AlbumPageMode>('overview');
   const [userDetail, setUserDetail] = useState<UserDetail>();
   const [radios, setRadios] = useState<ListItem[]>([]);
-  const [playlist, setPlaylist] = useState<Playlist[]>([]);
+  const [playlist, setPlaylist] = useState<UserPlaylist[]>([]);
 
   async function loadUserDetail() {
     const res = await getUserDetail(id);

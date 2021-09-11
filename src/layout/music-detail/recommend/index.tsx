@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './recommend.module.less';
 import Img from '@/components/img';
 import { getSimiPlaylist, getSimiSong } from '@/api';
-import { Music, Playlist } from '@/types';
+import { Music, UserPlaylist } from '@/types';
 import { resizeImg, wrapNumber } from '@/utils';
 
 type Props = { id: number };
 
 const Recommend: React.FC<Props> = ({ id }) => {
-  const [simiPlaylist, setSimiPlaylist] = useState<Playlist[]>([]);
+  const [simiPlaylist, setSimiPlaylist] = useState<UserPlaylist[]>([]);
   const [simiSong, setSimiSong] = useState<Music[]>([]);
 
   useEffect(() => {

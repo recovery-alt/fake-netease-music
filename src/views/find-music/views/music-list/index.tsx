@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import './music-list.less';
 import { CrownOutlined, RightOutlined } from '@ant-design/icons';
 import { getMusicCategory } from '@/api';
-import { Playlist } from '@/types';
+import { UserPlaylist } from '@/types';
 import { useTopPlaylist } from './hooks';
 import { Pagination } from 'antd';
 import Img from '@/components/img';
@@ -14,7 +14,7 @@ import { fetchAndSetCurrentTrack } from '@/store';
 import { useDispatch } from 'react-redux';
 
 const MusicList: React.FC = () => {
-  const [musicCategory, setMusicCategory] = useState<Playlist[]>([]);
+  const [musicCategory, setMusicCategory] = useState<UserPlaylist[]>([]);
   const {
     topPlaylist,
     total,

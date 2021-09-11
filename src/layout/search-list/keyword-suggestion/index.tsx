@@ -7,7 +7,7 @@ import {
   UnorderedListOutlined,
   PlayCircleOutlined,
 } from '@ant-design/icons';
-import { Artist, Playlist, SearchSuggest, Song, SimpleAlbum, SuggestOrderType } from '@/types';
+import { Artist, UserPlaylist, SearchSuggest, Song, SimpleAlbum, SuggestOrderType } from '@/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { useHistory } from 'react-router-dom';
@@ -63,7 +63,7 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
   }
 
   function renderSuggestionItem(
-    dataItem: Song | Artist | SimpleAlbum | Playlist,
+    dataItem: Song | Artist | SimpleAlbum | UserPlaylist,
     key: SuggestOrderType
   ) {
     const stratrgy = {
@@ -76,7 +76,7 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
         return item.name;
       },
       playlists: () => {
-        const item = dataItem as Playlist;
+        const item = dataItem as UserPlaylist;
         return item.name;
       },
       songs: () => {

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { getTopPlaylist, getTopPlaylistHighquality } from '@/api';
-import { Playlist, TopPlaylist } from '@/types';
+import { UserPlaylist, TopPlaylist } from '@/types';
 import { CardData } from '@/components/card';
 
 export const useTopPlaylist = () => {
   const [topPlaylist, setTopPlaylist] = useState<CardData[]>([]);
-  const [topPlaylistHighquality, setTopPlaylistHighquality] = useState<Playlist>();
+  const [topPlaylistHighquality, setTopPlaylistHighquality] = useState<UserPlaylist>();
   const [total, setTotal] = useState(0);
   const [current, setCurrent] = useState(1);
   const [cat, setCat] = useState('全部');

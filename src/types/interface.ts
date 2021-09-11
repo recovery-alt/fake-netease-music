@@ -34,6 +34,8 @@ export type UserPlaylist = {
   trackCount: number;
   description: string;
   commentCount: number;
+  copywriter: string;
+  creator: UserProfile;
   tags: string[];
   tracks: Track[];
 };
@@ -87,16 +89,6 @@ export type Comment = {
   time: number;
   beReplied: BeReplied[];
   user: UserProfile;
-};
-
-export type Playlist = {
-  name: string;
-  id: number;
-  playCount: number;
-  trackCount: number;
-  coverImgUrl: string;
-  copywriter: string;
-  creator: UserProfile;
 };
 
 export type Subcategory = { category: number; name: string; hot: boolean };
@@ -260,7 +252,7 @@ export type SimpleAlbum = { id: number; name: string; picUrl: string; artist: Ar
 export interface SearchSuggest extends Data<any> {
   albums?: SimpleAlbum[];
   artists?: Artist[];
-  playlists?: Playlist[];
+  playlists?: UserPlaylist[];
   songs?: Song[];
   order?: SuggestOrderType[];
 }
@@ -275,7 +267,7 @@ export type SearchMultimatchOrderType =
 export interface SearchMultimatch extends Data<any> {
   album?: SimpleAlbum[];
   artist?: Artist[];
-  playlist?: Playlist[];
+  playlist?: UserPlaylist[];
   song?: Song[];
   concert?: Concert;
   orpheus?: Orpheus;
@@ -313,7 +305,7 @@ export type SearchVideo = {
 
 export type SearchPlaylist = {
   playlistCount: number;
-  playlists: Playlist[];
+  playlists: UserPlaylist[];
 };
 
 export type SearchLyric = {
@@ -329,13 +321,3 @@ export type SearchUser = {
   userprofileCount: number;
   userprofiles: UserProfile[];
 };
-
-export type ComposeSearch =
-  | SearchSong
-  | SearchSinger
-  | SearchAlbum
-  | SearchVideo
-  | SearchPlaylist
-  | SearchLyric
-  | SearchRadio
-  | SearchUser;

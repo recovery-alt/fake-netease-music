@@ -9,7 +9,7 @@ import {
   SearchMultimatchOrderType,
   SimpleAlbum,
   Artist,
-  Playlist,
+  UserPlaylist,
   Concert,
   Data,
 } from '@/types';
@@ -54,7 +54,7 @@ const Song: React.FC<Props> = props => {
         return { name, imgUrl };
       },
       playlist: () => {
-        const { name, coverImgUrl: imgUrl } = bestMatch[item][0] as Playlist;
+        const { name, coverImgUrl: imgUrl } = bestMatch[item][0] as UserPlaylist;
         return { name, imgUrl };
       },
       song: () => {
