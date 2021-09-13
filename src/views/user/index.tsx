@@ -13,18 +13,31 @@ import List, { ListItem } from '@/views/search-result/list';
 import ButtonGroup from './button-group';
 import MusicPresent, { PageMode, DataType } from './music-present';
 import { getUserDetail, getUserAudio, getUserPlaylist } from '@/api';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { UserPlaylist, UserDetail } from '@/types';
 import { resizeImg } from '@/utils';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 const User: React.FC = () => {
   const params = useParams<{ id: string }>();
+  const { push } = useHistory();
+  const userId = useSelector((state: RootState) => state.user.profile.userId);
   const id = useMemo(() => Number(params.id), [params.id]);
-  const [activeButton, setActiveButton] = useState<PageMode>('overview');
+  const { state: myself } = useLocation<boolean | undefined>();
   const [userDetail, setUserDetail] = useState<UserDetail>();
   const [radios, setRadios] = useState<ListItem[]>([]);
   const [playlist, setPlaylist] = useState<UserPlaylist[]>([]);
-  const transPlaylist = useMemo<DataType[]>(() => {
+  const transPlaylist = useMemo<DataType[]>(
+    () => dataTypeAdapter(playlist.filter(item => item.userId === userId)),
+    [playlist]
+  );
+  const transCollectPlaylist = useMemo<DataType[]>(
+    () => dataTypeAdapter(playlist.filter(item => item.userId !== userId)),
+    [playlist]
+  );
+
+  function dataTypeAdapter(playlist: UserPlaylist[]) {
     return playlist.map(item => {
       const {
         id,
@@ -38,7 +51,7 @@ const User: React.FC = () => {
       const songs = tracks || [];
       return { id, name, picUrl, size, description, publishTime, songs };
     });
-  }, [playlist]);
+  }
 
   async function loadUserDetail() {
     const res = await getUserDetail(id);
@@ -77,26 +90,24 @@ const User: React.FC = () => {
       );
   }
 
-  function renderPlaylist() {
-    if (playlist.length > 0)
-      return (
-        <>
-          <h2 className="user__tag">
-            <div>
-              歌单<strong>（{playlist.length}）</strong>
-            </div>
-            <ButtonGroup activeButton={activeButton} setActiveButton={setActiveButton} />
-          </h2>
-          <div className="user__playlist">
-            <MusicPresent type={activeButton} id={id} data={transPlaylist} />
-          </div>
-        </>
-      );
-  }
+  const PlaylistItem: React.FC<{ title: string; playlist: DataType[] }> = ({ title, playlist }) => {
+    const [activeButton, setActiveButton] = useState<PageMode>('overview');
 
-  function renderCollection() {
-    // TODO
-  }
+    return playlist.length > 0 ? (
+      <>
+        <h2 className="user__tag">
+          <div>
+            {title}
+            <strong>（{playlist.length}）</strong>
+          </div>
+          <ButtonGroup activeButton={activeButton} setActiveButton={setActiveButton} />
+        </h2>
+        <div className="user__playlist">
+          <MusicPresent type={activeButton} id={id} data={playlist} myself={myself} />
+        </div>
+      </>
+    ) : null;
+  };
 
   useEffect(() => {
     if (Number.isNaN(id)) return;
@@ -116,30 +127,34 @@ const User: React.FC = () => {
           <h2>{userDetail?.profile.nickname}</h2>
           <div className="user__title">
             <div className="user__title-left">
-              <div className="user__title-auth">
-                <img src={userDetail?.identify.imageUrl} />
-                <strong>{userDetail?.identify.imageDesc}</strong>
-              </div>
+              {userDetail?.identify && (
+                <div className="user__title-auth">
+                  <img src={userDetail.identify.imageUrl} />
+                  <strong>{userDetail.identify.imageDesc}</strong>
+                </div>
+              )}
               <mark>Lv{userDetail?.level}</mark>
               {userDetail?.profile.gender ? <ManOutlined /> : <WomanOutlined />}
             </div>
-            <div className="user__title-right">
-              <button>
-                <AudioOutlined />
-                歌手页
-              </button>
-              <button>
-                <MailOutlined />
-                发私信
-              </button>
-              <button>
-                <PlusOutlined />
-                关注
-              </button>
-              <button className="--circle">
-                <EllipsisOutlined />
-              </button>
-            </div>
+            {userDetail?.identify && (
+              <div className="user__title-right">
+                <button onClick={() => push(`/singer/${userDetail.profile.artistId}`)}>
+                  <AudioOutlined />
+                  歌手页
+                </button>
+                <button>
+                  <MailOutlined />
+                  发私信
+                </button>
+                <button>
+                  <PlusOutlined />
+                  关注
+                </button>
+                <button className="--circle">
+                  <EllipsisOutlined />
+                </button>
+              </div>
+            )}
           </div>
           <div className="user__statistic">
             <div className="user__statistic-item">
@@ -166,8 +181,8 @@ const User: React.FC = () => {
         </div>
       </header>
       {renderRadio()}
-      {renderPlaylist()}
-      {renderCollection()}
+      <PlaylistItem title="歌单" playlist={transPlaylist} />
+      <PlaylistItem title="收藏的歌单" playlist={transCollectPlaylist} />
     </div>
   );
 };

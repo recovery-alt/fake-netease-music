@@ -24,20 +24,19 @@ import { UserInfo } from '@/types';
 import json from 'json5';
 import classNames from 'classnames';
 
-const List: React.FC = () => {
-  type Menu = { name: string; icon: React.FC; path: string; loginShow?: boolean };
-  type MenuItem = { title?: string; menus: Menu[] };
-  type ItemProps = { menu: Menu; index: [number, number]; plus?: number };
-  type MenuListAction = { type: number; payload: MenuItem[] };
+type Menu = { name: string; icon: React.FC; path: string; loginShow?: boolean };
+type MenuItem = { title?: string; menus: Menu[] };
+type ItemProps = { menu: Menu; index: [number, number]; plus?: number };
+type MenuListAction = { type: number; payload: MenuItem[] };
 
+const List: React.FC = () => {
   const [selected, setSelected] = useState<number[]>();
-  const history = useHistory();
+  const { push } = useHistory();
   const { pathname } = useLocation();
   const [showLogin, setShowLogin] = useState(false);
   const { profile, cookie } = useSelector((state: RootState) => state.user);
   const playlist = useSelector((state: RootState) => state.userPlaylist.playlist);
   const dispatch = useDispatch<AppDispatch>();
-
   const [menuList, menuListDispatch] = useReducer<Reducer<MenuItem[], MenuListAction>>(
     (state, action) => {
       const newState = state.slice(0, 2);
@@ -70,37 +69,10 @@ const List: React.FC = () => {
     ]
   );
 
-  useEffect(() => {
-    (async () => {
-      const index = findIndex();
-      setSelected(index);
-    })();
-  }, [pathname]);
-
-  useEffect(() => {
-    recoverLoginFromCache();
-  }, []);
-
-  useEffect(() => {
-    const payload: MenuItem[] = [
-      { title: '创建的歌单', menus: [] },
-      { title: '收藏的歌单', menus: [] },
-    ];
-    if (!playlist || playlist.length === 0) return;
-    playlist.forEach(item => {
-      const { name, id, userId } = item;
-      const path = `/list/${id}`;
-      const menu = { name, path, icon: CustomerServiceOutlined };
-      const index = userId === profile.userId ? 0 : 1;
-      payload[index].menus.push(menu);
-    });
-    menuListDispatch({ type: 0, payload });
-  }, [playlist]);
-
-  const handleMenuClick = ({ menu, index }: ItemProps) => {
+  function handleMenuClick({ menu, index }: ItemProps) {
     setSelected(index);
-    history.push(menu.path);
-  };
+    push(menu.path);
+  }
 
   const Item: React.FC<ItemProps> = ({ menu, index }) => {
     const active = judgeSelected(selected, index);
@@ -173,10 +145,41 @@ const List: React.FC = () => {
     );
   }
 
+  function handleAvatarClick() {
+    cookie ? push({ pathname: `/user/${profile.userId}`, state: true }) : setShowLogin(true);
+  }
+
+  useEffect(() => {
+    (async () => {
+      const index = findIndex();
+      setSelected(index);
+    })();
+  }, [pathname]);
+
+  useEffect(() => {
+    recoverLoginFromCache();
+  }, []);
+
+  useEffect(() => {
+    const payload: MenuItem[] = [
+      { title: '创建的歌单', menus: [] },
+      { title: '收藏的歌单', menus: [] },
+    ];
+    if (!playlist || playlist.length === 0) return;
+    playlist.forEach(item => {
+      const { name, id, userId } = item;
+      const path = `/list/${id}`;
+      const menu = { name, path, icon: CustomerServiceOutlined };
+      const index = userId === profile.userId ? 0 : 1;
+      payload[index].menus.push(menu);
+    });
+    menuListDispatch({ type: 0, payload });
+  }, [playlist]);
+
   return (
     <aside className={styles.sidebar}>
       <header className={styles.sidebar__header}>
-        <img src={resizeImg(profile.avatarUrl, 100)} alt="icon" />
+        <img src={resizeImg(profile.avatarUrl, 100)} alt="icon" onClick={handleAvatarClick} />
         <strong onClick={login}>{profile.nickname}</strong>
         <CaretRightOutlined onClick={login} />
       </header>

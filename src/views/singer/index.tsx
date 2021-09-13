@@ -7,7 +7,7 @@ import ButtonGroup from '@/views/user/button-group';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getArtistDetail, getArtistAlbum } from '@/api';
 import { Album as AlbumType, Artist, UserProfile } from '@/types';
-import { PageMode } from './album';
+import { PageMode } from '@/views/user/music-present';
 import { resizeImg } from '@/utils';
 
 const { TabPane } = Tabs;

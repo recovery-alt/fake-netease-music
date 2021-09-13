@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './official.module.less';
-import { RightOutlined } from '@ant-design/icons';
 import { UserPlaylist, Track } from '@/types';
 import Img from '@/components/img';
 import { resizeImg } from '@/utils';
@@ -45,7 +44,7 @@ const Official: React.FC<Props> = ({ data, onItemClick, onViewAll }) => {
           ))}
         </ul>
         <div className={styles.official__all} onClick={() => onViewAll(data.id)}>
-          查看全部 <RightOutlined />
+          查看全部 &gt;
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './button-group.module.less';
 import { UngroupOutlined, AlignCenterOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
-import { PageMode } from '@/views/singer/album';
+import { PageMode } from '@/views/user/music-present';
 
 type Props = { activeButton: PageMode; setActiveButton: (button: PageMode) => void };
 

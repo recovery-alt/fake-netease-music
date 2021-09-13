@@ -93,7 +93,7 @@ const Table: React.FC<Props> = ({
             : null}
         </tbody>
       </table>
-      {data.length > 0 ? null : <NoData subTitle="还没有下载的音乐哦，快去下载吧～" />}
+      {data.length > 0 ? null : <NoData subTitle="暂无数据" />}
     </>
   );
 };

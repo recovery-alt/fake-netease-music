@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from '../music-present.module.less';
-import { getAlbum, getArtistTopSong } from '@/api';
+import { getAlbum, getArtistTopSong, getPlaylistDetail } from '@/api';
 import { Track } from '@/types';
 import OverviewItem from './overview-item';
 import { Props as PresentProps, DataType } from '../';
 
 type Props = Omit<PresentProps, 'type'>;
 
-const Overview: React.FC<Props> = ({ id, data, isAlbum }) => {
+const Overview: React.FC<Props> = ({ id, data, isAlbum, myself }) => {
   const [topSongs, setTopSongs] = useState<Track[]>([]);
   const footerRef = useRef<HTMLElement>(null);
   const [sliceData, setSliceData] = useState<DataType[]>([]);
@@ -19,35 +19,43 @@ const Overview: React.FC<Props> = ({ id, data, isAlbum }) => {
     setTopSongs(topSong.songs);
   }
 
-  async function loadSongs(index: number) {
+  async function loadAlbumSongs(index: number) {
     const current = data[index];
     if (!current?.id) return;
     const res = await getAlbum(current.id);
+    // TODO: 有副作用
     current.songs = res.songs;
+  }
+
+  async function loadPlaylistSongs(index: number) {
+    if (!myself) return;
+    const current = data[index];
+    if (!current?.id) return;
+    const res = await getPlaylistDetail(current.id);
+    // TODO: 有副作用
+    current.songs = res.playlist.tracks;
   }
 
   useEffect(() => {
     if (isAlbum) {
       loadArtistTopSong();
-      loadSongs(index);
+      loadAlbumSongs(index);
+    } else {
+      loadPlaylistSongs(index);
     }
   }, [id]);
 
   useEffect(() => {
-    if (!isAlbum) {
-      setSliceData([...data]);
-      return;
-    }
     if (!footerRef?.current) return;
 
     const io = new IntersectionObserver(entries => {
       if (entries[0].intersectionRatio <= 0) return;
       index++;
       if (index < data.length) {
-        loadSongs(index);
+        isAlbum ? loadAlbumSongs(index) : loadPlaylistSongs(index);
         setSliceData(data.slice(0, index));
       } else {
-        setMore('没有更多了~');
+        setMore('');
       }
     });
 
@@ -69,14 +77,12 @@ const Overview: React.FC<Props> = ({ id, data, isAlbum }) => {
           title={item.name}
           imgUrl={item.picUrl}
           data={item.songs}
-          isAlbum
+          isAlbum={isAlbum}
         />
       ))}
-      {isAlbum && (
-        <footer ref={footerRef} className={styles.overview__more}>
-          {more}
-        </footer>
-      )}
+      <footer ref={footerRef} className={styles.overview__more}>
+        {more}
+      </footer>
     </div>
   );
 };

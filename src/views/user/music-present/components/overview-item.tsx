@@ -52,7 +52,7 @@ const OverviewItem: React.FC<Props> = ({
   }
 
   useEffect(() => {
-    if (data.length < 10 && data.length > 0) setPreviewAll(true);
+    if (data.length <= 10 && data.length > 0) setPreviewAll(true);
   }, [data]);
 
   return (
@@ -74,9 +74,9 @@ const OverviewItem: React.FC<Props> = ({
         </header>
         <div className={styles.overview__table}>
           <Table noHead columns={columns} data={sliceData} onDoubleClick={handlePlay} />
-          {!previewAll && (
+          {!previewAll && data.length > 0 && (
             <footer className={styles.overview__footer} onClick={() => setPreviewAll(true)}>
-              <div>查看全部 &gt;</div>
+              <div>查看全部{data.length}首 &gt;</div>
             </footer>
           )}
         </div>

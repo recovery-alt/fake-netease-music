@@ -11,6 +11,7 @@ export type UserProfile = {
   gender?: number;
   eventCount?: number;
   signature?: string;
+  artistId?: number;
 };
 
 export type Identify = {
@@ -20,7 +21,7 @@ export type Identify = {
 
 export type UserInfo = { cookie: string; profile: UserProfile };
 
-export type UserDetail = { level: number; profile: UserProfile; identify: Identify };
+export type UserDetail = { level: number; profile: UserProfile; identify?: Identify };
 
 export type UserPlaylist = {
   id: number;

@@ -18,6 +18,7 @@ export type Props = {
   type: PageMode;
   id: number;
   isAlbum?: boolean;
+  myself?: boolean;
   data: DataType[];
 };
 
