@@ -2,30 +2,49 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { PlayCircleOutlined, FileAddOutlined } from '@ant-design/icons';
 import Img from '@/components/img';
 import top50 from '@/assets/img/top50.png';
-import styles from '../album.module.less';
+import styles from '../music-present.module.less';
 import Table, { Column } from '@/components/table';
 import { formatMS, resizeImg } from '@/utils';
 import classNames from 'classnames';
 import { Track } from '@/types';
-import { useDispatch } from 'react-redux';
-import { setCurrentTrack } from '@/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, setCurrentTrack } from '@/store';
 import { useHistory } from 'react-router-dom';
+import { message } from 'antd';
 
-export type Props = { id?: number; title?: string; imgUrl?: string; data: Array<Track> };
+export type Props = {
+  id?: number;
+  isAlbum?: boolean;
+  title?: string;
+  imgUrl?: string;
+  data: Array<Track>;
+};
 
-const OverviewItem: React.FC<Props> = ({ id, title = '热门50首', imgUrl = top50, data }) => {
+const OverviewItem: React.FC<Props> = ({
+  id,
+  title = '热门50首',
+  imgUrl = top50,
+  data,
+  isAlbum,
+}) => {
   const dispatch = useDispatch();
   const { push } = useHistory();
   const [previewAll, setPreviewAll] = useState(false);
   const columns: Column[] = [{ key: 'ordinal' }, { key: 'name' }, { key: 'dt', format: formatMS }];
   const sliceData = useMemo(() => (previewAll ? data : data.slice(0, 10)), [previewAll, data]);
+  const isLogin = useSelector((state: RootState) => !!state.user.cookie);
 
   function handlePlay(current = 0) {
     dispatch(setCurrentTrack({ current, tracks: data, fm: [] }));
   }
 
   function handleImgClick() {
-    if (id) push(`/list/${id}/album`);
+    if (!id) return;
+    if (isAlbum) {
+      push(`/list/${id}/album`);
+    } else {
+      isLogin ? push(`/list/${id}`) : message.error('需要登录，才能查看他人歌单信息>_<');
+    }
   }
 
   function handleCollect() {

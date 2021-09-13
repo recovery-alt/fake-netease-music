@@ -7,11 +7,11 @@ import ButtonGroup from '@/views/user/button-group';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getArtistDetail, getArtistAlbum } from '@/api';
 import { Album as AlbumType, Artist, UserProfile } from '@/types';
-import { AlbumPageMode } from './album';
+import { PageMode } from './album';
 import { resizeImg } from '@/utils';
 
 const { TabPane } = Tabs;
-const Album = lazy(() => import('./album'));
+const Album = lazy(() => import('@/views/user/music-present'));
 const MV = lazy(() => import('./mv'));
 const Detail = lazy(() => import('./detail'));
 const Similar = lazy(() => import('./similar'));
@@ -25,7 +25,7 @@ const Singer: React.FC = () => {
   const [artistDetail, setArtistDetail] = useState<Artist>();
   const [user, setUser] = useState<UserProfile>();
   const [albums, setAlbums] = useState<AlbumType[]>([]);
-  const [activeButton, setActiveButton] = useState<AlbumPageMode>('overview');
+  const [activeButton, setActiveButton] = useState<PageMode>('overview');
   const { push } = useHistory();
 
   const extraContent =
@@ -85,7 +85,7 @@ const Singer: React.FC = () => {
       <Tabs destroyInactiveTabPane tabBarExtraContent={extraContent} onChange={setActiveKey}>
         <TabPane tab="专辑" key="album">
           <Suspense fallback="加载中...">
-            <Album type={activeButton} id={id} albums={albums} />
+            <Album type={activeButton} id={id} data={albums} isAlbum />
           </Suspense>
         </TabPane>
         <TabPane tab="MV" key="mv">

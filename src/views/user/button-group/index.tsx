@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './button-group.module.less';
 import { UngroupOutlined, AlignCenterOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
-import { AlbumPageMode } from '@/views/singer/album';
+import { PageMode } from '@/views/singer/album';
 
-type Props = { activeButton: AlbumPageMode; setActiveButton: (button: AlbumPageMode) => void };
+type Props = { activeButton: PageMode; setActiveButton: (button: PageMode) => void };
 
 const Album: React.FC<Props> = ({ activeButton, setActiveButton }) => {
-  const data: Array<{ key: AlbumPageMode; component: React.FC }> = [
+  const data: Array<{ key: PageMode; component: React.FC }> = [
     { key: 'list', component: UngroupOutlined },
     { key: 'card', component: AlignCenterOutlined },
     { key: 'overview', component: UnorderedListOutlined },

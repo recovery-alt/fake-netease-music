@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import List, { ListItem } from '@/views/search-result/list';
 import ButtonGroup from './button-group';
-import Album, { AlbumPageMode } from '@/views/singer/album';
+import MusicPresent, { PageMode, DataType } from './music-present';
 import { getUserDetail, getUserAudio, getUserPlaylist } from '@/api';
 import { useParams } from 'react-router-dom';
 import { UserPlaylist, UserDetail } from '@/types';
@@ -20,10 +20,25 @@ import { resizeImg } from '@/utils';
 const User: React.FC = () => {
   const params = useParams<{ id: string }>();
   const id = useMemo(() => Number(params.id), [params.id]);
-  const [activeButton, setActiveButton] = useState<AlbumPageMode>('overview');
+  const [activeButton, setActiveButton] = useState<PageMode>('overview');
   const [userDetail, setUserDetail] = useState<UserDetail>();
   const [radios, setRadios] = useState<ListItem[]>([]);
   const [playlist, setPlaylist] = useState<UserPlaylist[]>([]);
+  const transPlaylist = useMemo<DataType[]>(() => {
+    return playlist.map(item => {
+      const {
+        id,
+        name,
+        coverImgUrl: picUrl,
+        trackCount: size,
+        copywriter: description,
+        createTime: publishTime,
+        tracks,
+      } = item;
+      const songs = tracks || [];
+      return { id, name, picUrl, size, description, publishTime, songs };
+    });
+  }, [playlist]);
 
   async function loadUserDetail() {
     const res = await getUserDetail(id);
@@ -73,10 +88,14 @@ const User: React.FC = () => {
             <ButtonGroup activeButton={activeButton} setActiveButton={setActiveButton} />
           </h2>
           <div className="user__playlist">
-            {/* <Album type={activeButton} id={0} albums={[]} /> */}
+            <MusicPresent type={activeButton} id={id} data={transPlaylist} />
           </div>
         </>
       );
+  }
+
+  function renderCollection() {
+    // TODO
   }
 
   useEffect(() => {
@@ -148,6 +167,7 @@ const User: React.FC = () => {
       </header>
       {renderRadio()}
       {renderPlaylist()}
+      {renderCollection()}
     </div>
   );
 };

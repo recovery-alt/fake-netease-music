@@ -6,8 +6,8 @@ import { local } from '@/utils';
 import { UserInfo } from '@/types';
 import { noop } from '@/utils';
 
-// 接口请求报错的时候，伪装成正常错误，由业务代码处理
-const apiErrorHandler = (msg?: string) => {
+// 统一处理接口异常
+const apiErrorHandler = (msg = '接口异常，请稍后重试～') => {
   message.error(msg);
   // 错误抛到业务代码
   return Promise.reject();

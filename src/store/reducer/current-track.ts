@@ -66,13 +66,13 @@ export const insertSong = createAsyncThunk<{ songs: Track[] }, number>(
   }
 );
 
-type ActionParams = number | { id: number; isAlbum: boolean };
+type ActionParams = number | { id: number; isAlbum?: boolean };
 
 export const fetchAndSetCurrentTrack = createAsyncThunk<void, ActionParams>(
   prefix('fetchAndSetCurrentTrack'),
   async (params, { rejectWithValue, dispatch }) => {
     let id: number;
-    let isAlbum = false;
+    let isAlbum;
     if (typeof params === 'number') {
       id = params;
     } else {
