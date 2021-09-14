@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './table.module.less';
 import { Data } from '@/types';
 import NoData from '../no-data';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import classNames from 'classnames';
 import { message } from 'antd';
 

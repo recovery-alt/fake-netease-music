@@ -11,7 +11,7 @@ import { Artist, UserPlaylist, SearchSuggest, Song, SimpleAlbum, SuggestOrderTyp
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { useHistory } from 'react-router-dom';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 
 type Props = { setVisible: (visible: boolean) => void };
 

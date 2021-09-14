@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import routes from '@/router';
 import { Provider } from 'react-redux';
 import store from '@/store';
 
 const App: React.FC = () => (
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Redirect from="/" to="/find-music" exact />
         {routes.map(route => (
@@ -15,7 +15,7 @@ const App: React.FC = () => (
           </Route>
         ))}
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   </Provider>
 );
 

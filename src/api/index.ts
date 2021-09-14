@@ -174,6 +174,3 @@ export const getCommentAlbum = (id: number | string, offset = 0) =>
   get<CommentData>('/comment/album', { id, offset });
 
 export const getUserDetail = (uid: number) => get<UserDetail>('/user/detail', { uid });
-
-export const getUserPlaylist = (uid: number) =>
-  get<{ playlist: UserPlaylist[] }>('/user/playlist', { uid });

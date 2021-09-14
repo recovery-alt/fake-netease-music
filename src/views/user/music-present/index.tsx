@@ -24,7 +24,12 @@ export type Props = {
 
 const MusicPresent: React.FC<Props> = props => {
   const { type, ...rest } = props;
-  const Component = lazy(() => import(/* @vite-ignore */ `./components/${type}`));
+  const strategy = {
+    card: lazy(() => import('./components/card')),
+    list: lazy(() => import('./components/list')),
+    overview: lazy(() => import('./components/overview')),
+  };
+  const Component = strategy[type];
 
   return (
     <div className={styles['music-present']}>

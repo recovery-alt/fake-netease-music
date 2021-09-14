@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
-import viteEslint from '@ehutch79/vite-eslint';
+import eslintPlugin from 'vite-plugin-eslint';
 import styleImport from 'vite-plugin-style-import';
+import { resolve } from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
+  base: '',
   css: {
     preprocessorOptions: {
       less: {
@@ -15,10 +16,31 @@ export default defineConfig({
       },
     },
   },
-  resolve: { alias: { '@': '/src' } },
+  build: {
+    outDir: resolve(__dirname, 'dist'),
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('lodash')) {
+            return 'lodash';
+          } else if (id.includes('react-router-dom')) {
+            return 'react-router-dom';
+          } else if (id.includes('react-redux')) {
+            return 'react-redux';
+          } else if (id.includes('react')) {
+            return 'react';
+          } else if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        },
+      },
+    },
+  },
+  resolve: { alias: { '@': resolve(__dirname, 'src') } },
   plugins: [
     reactRefresh(),
-    viteEslint(),
+    eslintPlugin(),
     styleImport({
       libs: [
         {
