@@ -39,6 +39,7 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
   };
 
   function handleItemClick(id: number, key: SuggestOrderType) {
+    console.log(id, key);
     // TODO
   }
 

@@ -36,7 +36,6 @@ import {
   ArtistDesc,
   AlbumDetailDynamic,
   UserProfile,
-  Identify,
   UserDetail,
 } from '@/types';
 import { get } from './api';

@@ -1,8 +1,4 @@
-const config = {
-  directories: {
-    output: 'build',
-  },
+module.exports = {
   files: ['main.js', 'dist/**/*'],
+  directories: { output: 'build', buildResources: 'buildResources' },
 };
-
-module.exports = config;

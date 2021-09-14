@@ -15,5 +15,6 @@
         "ignorePseudoClasses": ["global"]
       }
     ]
-  }
+  },
+  "ignoreFiles": ["dist/**/*"]
 }

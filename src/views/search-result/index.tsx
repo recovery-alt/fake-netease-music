@@ -10,7 +10,7 @@ import Lyric from './views/lyric';
 import Radio from './views/radio';
 import UserProfile from './views/user';
 import { useLocation } from 'react-router-dom';
-import { Data, SearchSuggest } from '@/types';
+import { SearchSuggest } from '@/types';
 import { SearchType } from '@/enum';
 import { getSearchMultimatch } from '@/api';
 

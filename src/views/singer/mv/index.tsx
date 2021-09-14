@@ -20,7 +20,7 @@ const MV: React.FC<Props> = ({ id }) => {
   }, [id]);
   return (
     <div className={styles.mv}>
-      {mvs.map((item, i) => (
+      {mvs.map(item => (
         <div key={item.id} className={styles.mv__item}>
           <Img src={resizeImg(item.imgurl, 230, 130)} className={styles.mv__img} />
           <div className={styles.mv__description}>{item.name}</div>
