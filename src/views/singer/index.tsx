@@ -9,6 +9,7 @@ import { getArtistDetail, getArtistAlbum } from '@/api';
 import { Album as AlbumType, Artist, UserProfile } from '@/types';
 import { PageMode } from '@/views/user/music-present';
 import { resizeImg } from '@/utils';
+import Button from '@/components/button';
 
 const { TabPane } = Tabs;
 const Album = lazy(() => import('@/views/user/music-present'));
@@ -59,14 +60,14 @@ const Singer: React.FC = () => {
           <h2>{artistDetail?.name}</h2>
           <h3>{artistDetail?.alias?.join(' ')}</h3>
           <div>
-            <button className="singer__button">
+            <Button className="singer__button">
               <FileAddOutlined />
               收藏
-            </button>
-            <button className="singer__button" onClick={() => push(`/user/${user?.userId}`)}>
+            </Button>
+            <Button className="singer__button" onClick={() => push(`/user/${user?.userId}`)}>
               <UserOutlined />
               个人主页
-            </button>
+            </Button>
           </div>
           <div className="singer__description">
             <span>

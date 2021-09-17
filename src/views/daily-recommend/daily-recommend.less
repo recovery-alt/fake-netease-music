@@ -1,0 +1,55 @@
+.daily-recommend {
+  &__header {
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    height: 165px;
+    justify-content: space-between;
+    padding: 15px 30px 10px;
+  }
+
+  &__top {
+    display: flex;
+  }
+
+  &__bottom {
+    display: flex;
+  }
+
+  &__title {
+    margin-left: 30px;
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__button {
+    margin-left: 10px;
+  }
+
+  &__calendar {
+    color: var(--primary-color);
+    font-weight: normal;
+    height: 90px;
+    line-height: 1;
+    position: relative;
+    width: 90px;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+
+    strong {
+      font-size: 36px;
+      font-weight: normal;
+      left: 50%;
+      letter-spacing: -2px;
+      position: absolute;
+      top: 65%;
+      transform: translate(-50%, -65%);
+    }
+  }
+}

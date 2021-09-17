@@ -36,6 +36,10 @@ const routes: Array<RouteConfig> = [
         component: lazy(() => import('@/views/user')),
       },
       {
+        path: '/daily-recommend',
+        component: lazy(() => import('@/views/daily-recommend')),
+      },
+      {
         component: lazy(() => import('@/views/find-music/views/newest')),
         path: '/find-music/newest/:type?',
       },

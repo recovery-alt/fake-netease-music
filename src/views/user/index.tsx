@@ -18,6 +18,7 @@ import { UserPlaylist, UserDetail } from '@/types';
 import { resizeImg } from '@/utils';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import Button from '@/components/button';
 
 const User: React.FC = () => {
   const params = useParams<{ id: string }>();
@@ -138,21 +139,21 @@ const User: React.FC = () => {
             </div>
             {userDetail?.identify && (
               <div className="user__title-right">
-                <button onClick={() => push(`/singer/${userDetail.profile.artistId}`)}>
+                <Button onClick={() => push(`/singer/${userDetail.profile.artistId}`)}>
                   <AudioOutlined />
                   歌手页
-                </button>
-                <button>
+                </Button>
+                <Button>
                   <MailOutlined />
                   发私信
-                </button>
-                <button>
+                </Button>
+                <Button>
                   <PlusOutlined />
                   关注
-                </button>
-                <button className="--circle">
+                </Button>
+                <Button className="--circle">
                   <EllipsisOutlined />
-                </button>
+                </Button>
               </div>
             )}
           </div>

@@ -3,6 +3,7 @@ import './pedding.less';
 import { DownloadOutlined, PauseOutlined, DeleteOutlined } from '@ant-design/icons';
 import Table, { Column } from '@/components/table';
 import { Data } from '@/types';
+import Button from '@/components/button';
 
 const Pedding: React.FC = () => {
   const columns: Column[] = [
@@ -13,18 +14,18 @@ const Pedding: React.FC = () => {
   return (
     <div>
       <header className="pedding__header">
-        <button className="pedding__button">
+        <Button className="pedding__button">
           <DownloadOutlined />
           全部开始
-        </button>
-        <button className="pedding__button">
+        </Button>
+        <Button className="pedding__button">
           <PauseOutlined />
           全部暂停
-        </button>
-        <button className="pedding__button">
+        </Button>
+        <Button className="pedding__button">
           <DeleteOutlined />
           清空全部
-        </button>
+        </Button>
         <div className="pedding__directory">打开目录</div>
       </header>
       <Table columns={columns} data={data} />

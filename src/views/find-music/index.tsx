@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactEventHandler, useEffect, useState } from 'react';
 import Title from '@/components/title';
 import Card, { CardData } from '@/components/card';
 import List, { ListData, ListParams } from './list';
@@ -11,21 +11,30 @@ import {
   getPersonalized,
   getPersonalizedMV,
   getPPList,
+  getRecommendSongs,
 } from '@/api';
-import { BannerType, Personalized } from '@/types';
-import { useDispatch } from 'react-redux';
-import { insertSong, fetchAndSetCurrentTrack } from '@/store';
+import { BannerType, Personalized, Track } from '@/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { insertSong, fetchAndSetCurrentTrack, RootState, setCurrentTrack } from '@/store';
 import { useHistory } from 'react-router-dom';
+import Img, { IconOptions } from '@/components/img';
+import { resizeImg } from '@/utils';
+import recommend from '@/assets/img/recommend.jpg';
+import dayjs from 'dayjs';
 
 const FindMusic: React.FC = () => {
+  const isLogin = useSelector((state: RootState) => !!state.user.cookie);
   const [banner, setBanner] = useState<BannerType[]>([]);
   const [personalized, setPersonalized] = useState<CardData[]>([]);
+  const [recommendSongs, setRecommendSongs] = useState<Track[]>([]);
   const [privateList, setPrivateList] = useState<CardData[]>([]);
   const [personalizedMV, setPersonalizedMV] = useState<CardData[]>([]);
   const [albumNewest, setAlbumNewest] = useState<ListData[]>([]);
   const [djToplist, setDJToplist] = useState<ListData[]>([]);
   const dispatch = useDispatch();
   const { push } = useHistory();
+  const iconConfig: IconOptions = { size: 'medium', hoverDisplay: true, placement: 'bottom' };
+  const today = dayjs(Date.now()).format('DD');
 
   function CardDataAdapter(personalizedList: Personalized[]) {
     return personalizedList.map(item => {
@@ -37,39 +46,6 @@ const FindMusic: React.FC = () => {
   function handleSongInserted(id: number) {
     dispatch(insertSong(id));
   }
-
-  useEffect(() => {
-    getBanner().then(res => {
-      setBanner(res.banners);
-    });
-    getPersonalized({ limit: 10 }).then(res => {
-      setPersonalized(CardDataAdapter(res.result));
-    });
-    getPPList({ limit: 4 }).then(res => {
-      setPrivateList(CardDataAdapter(res.result));
-    });
-    getPersonalizedMV().then(res => {
-      setPersonalizedMV(CardDataAdapter(res.result));
-    });
-    getAlbumNewest().then(res => {
-      const result = res.albums.map(item => ({
-        id: item.id,
-        name: item.name,
-        imgUrl: item.picUrl,
-        extra: { artistName: item.artist.name },
-      }));
-      setAlbumNewest(result);
-    });
-    getDJToplist().then(res => {
-      const result = res.toplist.map(item => ({
-        id: item.id,
-        name: item.name,
-        imgUrl: item.picUrl,
-        extra: { description: item.rcmdtext },
-      }));
-      setDJToplist(result);
-    });
-  }, []);
 
   function renderAlbumNewest({ i, j, len, item }: ListParams) {
     return (
@@ -92,16 +68,104 @@ const FindMusic: React.FC = () => {
     );
   }
 
+  async function loadBanner() {
+    const res = await getBanner();
+    setBanner(res.banners);
+  }
+
+  async function loadPersonalized() {
+    const limit = isLogin ? 9 : 10;
+    const res = await getPersonalized({ limit });
+    setPersonalized(CardDataAdapter(res.result));
+  }
+
+  async function loadRecommendSongs() {
+    if (!isLogin) return;
+    const res = await getRecommendSongs();
+    setRecommendSongs(res.data.dailySongs);
+  }
+
+  async function loadPPList() {
+    const res = await getPPList({ limit: 4 });
+    setPrivateList(CardDataAdapter(res.result));
+  }
+
+  async function loadPersonalizedMV() {
+    const res = await getPersonalizedMV();
+    setPersonalizedMV(CardDataAdapter(res.result));
+  }
+
+  async function loadAlbumNewest() {
+    const res = await getAlbumNewest();
+    const result = res.albums.map(item => ({
+      id: item.id,
+      name: item.name,
+      imgUrl: item.picUrl,
+      extra: { artistName: item.artist.name },
+    }));
+    setAlbumNewest(result);
+  }
+
+  async function loadDJToplist() {
+    const res = await getDJToplist();
+    const result = res.toplist.map(item => ({
+      id: item.id,
+      name: item.name,
+      imgUrl: item.picUrl,
+      extra: { description: item.rcmdtext },
+    }));
+    setDJToplist(result);
+  }
+
+  const handleDailyRecommendPlay: ReactEventHandler<HTMLSpanElement> = e => {
+    e.stopPropagation();
+    dispatch(setCurrentTrack({ tracks: recommendSongs, current: 0, fm: [] }));
+  };
+
+  useEffect(() => {
+    loadBanner();
+    loadPersonalized();
+    loadRecommendSongs();
+    loadPPList();
+    loadPersonalizedMV();
+    loadAlbumNewest();
+    loadDJToplist();
+  }, []);
+
   return (
     <div className="find-music">
       <Banner data={banner} onBannerClick={handleSongInserted} />
       <Title name="推荐歌单" />
-      <Card
-        data={personalized}
-        icon={{ size: 'medium', hoverDisplay: true, placement: 'bottom' }}
-        onItemClick={id => push(`/list/${id}`)}
-        onItemIconClick={id => dispatch(fetchAndSetCurrentTrack(id))}
-      />
+      <div className="find-music__card">
+        {isLogin && (
+          <div className="find-music__card-item">
+            <div className="find-music__card-wrapper" onClick={() => push('/daily-recommend')}>
+              <header>根据您的音乐口味生成每日更新</header>
+              <strong>{today}</strong>
+              <Img
+                className="find-music__card-img"
+                icon={iconConfig}
+                src={recommend}
+                alt="每日推荐"
+                onIconClick={handleDailyRecommendPlay}
+              />
+            </div>
+            <p>每日歌曲推荐</p>
+          </div>
+        )}
+        {personalized.map(item => (
+          <div key={item.id} className="find-music__card-item">
+            <Img
+              className="find-music__card-img"
+              src={resizeImg(item.imgUrl, 135)}
+              icon={iconConfig}
+              onClick={() => push(`/list/${item.id}`)}
+              onIconClick={() => dispatch(fetchAndSetCurrentTrack(item.id))}
+            />
+            <p>{item.name}</p>
+          </div>
+        ))}
+      </div>
       <Title name="独家放送" welt />
       <Card type="rectangle" data={privateList} />
       <Title name="最新音乐" />

@@ -18,7 +18,7 @@ const Recent: React.FC = () => {
       <header className="recent__header">
         <div className="recent__total">共100首</div>
         <div className="recent__control">
-          <Button />
+          <Button compose />
           <span className="recent__control-clear">清空列表</span>
         </div>
       </header>

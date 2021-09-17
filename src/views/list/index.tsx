@@ -20,6 +20,7 @@ import CommentsList from './comments-list';
 import AlbumDetail from './album-detail';
 import Img from '@/components/img';
 import classNames from 'classnames';
+import { CommonColumns } from '@/config';
 
 type CurrentInfo = Partial<UserPlaylist & { artistName: string }>;
 
@@ -32,23 +33,7 @@ const List: React.FC = () => {
   const id = useMemo(() => Number(params.id), [params.id]);
   // 判断是否为专辑
   const isAlbum = useMemo(() => !!params.type, [params.type]);
-  const columns: Column<Track>[] = [
-    { title: '', key: 'ordinal' },
-    { title: '', key: 'action' },
-    { title: '音乐标题', key: 'name' },
-    {
-      title: '歌手',
-      render(track) {
-        return track.ar.map(item => <span key={item.id}>{item.name}</span>);
-      },
-    },
-    { title: '专辑', key: 'al.name' },
-    {
-      title: '时长',
-      key: 'dt',
-      format: formatMS,
-    },
-  ];
+
   const profile = useSelector((state: RootState) => state.user.profile);
 
   function handleTableDoubleClick(current: number) {
@@ -161,19 +146,19 @@ const List: React.FC = () => {
             </div>
           )}
           <div className="list__control">
-            <Button />
-            <button>
+            <Button compose />
+            <Button>
               <FolderAddOutlined />
               收藏({wrapNumber(current?.subscribedCount)})
-            </button>
-            <button>
+            </Button>
+            <Button>
               <ShareAltOutlined />
               分享({wrapNumber(current?.shareCount || 0)})
-            </button>
-            <button>
+            </Button>
+            <Button>
               <DownloadOutlined />
               下载全部
-            </button>
+            </Button>
           </div>
           {isAlbum ? renderAlbumDescrition() : renderPlaylistDescription()}
         </div>
@@ -181,7 +166,7 @@ const List: React.FC = () => {
       <section className="list__tabs">
         <Tabs>
           <Tabs.TabPane tab="歌曲列表" key="1">
-            <Table columns={columns} data={tracks} onDoubleClick={handleTableDoubleClick} />
+            <Table columns={CommonColumns} data={tracks} onDoubleClick={handleTableDoubleClick} />
           </Tabs.TabPane>
           <Tabs.TabPane tab={`评论(${current?.commentCount || 0})`} key="2">
             <CommentsList id={id} isAlbum={isAlbum} />

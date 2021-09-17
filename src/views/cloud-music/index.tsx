@@ -29,7 +29,7 @@ const CloudMusic: React.FC = () => {
           <span className="cloud-music__capacity-description">歌曲永久保存，随时随地多端畅听</span>
         </div>
         <div className="cloud-music__control">
-          <Button />
+          <Button compose />
           <Input />
         </div>
       </header>

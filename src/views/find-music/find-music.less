@@ -27,4 +27,71 @@
       margin-top: 10px;
     }
   }
+
+  &__card {
+    column-gap: 18px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    p {
+      cursor: pointer;
+      margin-top: 8px;
+
+      &:hover {
+        color: #000;
+      }
+    }
+
+    &-item {
+      height: 215px;
+      width: 135px;
+    }
+
+    &-wrapper {
+      cursor: pointer;
+      height: 135px;
+      position: relative;
+      width: 135px;
+
+      header {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        color: #fff;
+        height: 50px;
+        left: 0;
+        line-height: 21px;
+        opacity: 0;
+        padding: 8px;
+        position: absolute;
+        top: 0;
+        transition: opacity 0.3s ease-in-out;
+        width: 100%;
+        z-index: 1;
+      }
+
+      strong {
+        color: #fff;
+        font-size: 36px;
+        font-weight: normal;
+        left: 50%;
+        letter-spacing: -2px;
+        position: absolute;
+        top: 65%;
+        transform: translate(-50%, -65%);
+        z-index: 1;
+      }
+
+      &:hover header {
+        opacity: 1;
+      }
+    }
+
+    &-img {
+      border-radius: 4px;
+      cursor: pointer;
+      height: 135px;
+      width: 135px;
+    }
+  }
 }
