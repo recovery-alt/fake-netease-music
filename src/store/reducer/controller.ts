@@ -4,7 +4,6 @@ import json from 'json5';
 type Controller = { pause: boolean; currentTime: number; showDetail: boolean; keywords: string };
 
 const controllerStr = localStorage.getItem('controller');
-console.log(controllerStr);
 const initialState: Controller = controllerStr
   ? json.parse<Controller>(controllerStr)
   : { pause: true, currentTime: 0, showDetail: false, keywords: '' };
