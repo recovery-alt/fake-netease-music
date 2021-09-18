@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './banner.module.less';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import type { BannerType } from '@/types';
@@ -10,16 +10,21 @@ type Props = {
   onBannerClick?: (id: number) => void;
 };
 
+let timer: number;
+let syncCurrent = 0;
+
 const Banner: React.FC<Props> = ({ data, onBannerClick }) => {
   const [current, setCurrent] = useState<number>(0);
-  const len = data.length;
 
-  const handleArrayClick = (plus = false) => {
-    const cur = plus ? current + 1 : current - 1;
-    setCurrent(cur < 0 ? cur + len : cur % len);
-  };
+  async function handleArrayClick(plus = false) {
+    const len = data.length;
+    const cur = plus ? syncCurrent + 1 : syncCurrent - 1;
+    syncCurrent = cur < 0 ? cur + len : cur % len;
+    setCurrent(syncCurrent);
+  }
 
-  const getState = (index: number) => {
+  function getState(index: number) {
+    const len = data.length;
     return index === current - 1 || (current === 0 && index === len - 1)
       ? styles['--left']
       : index === (current + 1) % len
@@ -27,7 +32,30 @@ const Banner: React.FC<Props> = ({ data, onBannerClick }) => {
       : index === current
       ? ''
       : styles['--hidden'];
-  };
+  }
+
+  function autoPlay() {
+    requestAnimationFrame(() => {
+      timer = setInterval(() => {
+        handleArrayClick(true);
+      }, 5000);
+    });
+  }
+
+  function handleMouseOver(index: number) {
+    clearInterval(timer);
+    syncCurrent = index;
+    setCurrent(syncCurrent);
+  }
+
+  useEffect(() => {
+    if (data.length === 0) return;
+    autoPlay();
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [data]);
 
   return (
     <div className={styles.banner}>
@@ -44,7 +72,8 @@ const Banner: React.FC<Props> = ({ data, onBannerClick }) => {
         {data.map((item, i) => (
           <div
             key={item.imageUrl}
-            onMouseMove={() => setCurrent(i)}
+            onMouseOver={() => handleMouseOver(i)}
+            onMouseOut={autoPlay}
             className={classNames(styles.banner__dot, { [styles['--active']]: i === current })}
           ></div>
         ))}
