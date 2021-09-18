@@ -17,11 +17,16 @@ import { formatMS, noop, resizeImg } from '@/utils';
 import { usePagination, Props } from '../hook';
 import { SearchType } from '@/enum';
 import dayjs from 'dayjs';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { insertSong } from '@/store';
 
 const Song: React.FC<Props> = props => {
   const { bestMatch, ...restProps } = props;
   const params = { ...restProps, currentType: SearchType.SONG, limit: 100 };
   const { wrapEmpty } = usePagination<SearchSong>(params);
+  const { push } = useHistory();
+  const dispatch = useDispatch();
   const columns: Column<SongType>[] = [
     { title: '', key: 'ordinal' },
     { title: '', key: 'action' },
@@ -40,43 +45,60 @@ const Song: React.FC<Props> = props => {
     },
   ];
 
-  function renderBestmatch(item: SearchMultimatchOrderType, i: number) {
+  function renderBestmatch(type: SearchMultimatchOrderType, i: number) {
     if (!bestMatch) return;
-    type DataType = { name: string; imgUrl: string; subtitle?: string };
+    type DataType = { id: number; name: string; imgUrl: string; subtitle?: string };
     const strategy: Data<() => DataType> = {
       album: () => {
-        const { name, picUrl: imgUrl, artist } = bestMatch[item][0] as SimpleAlbum;
+        const { id, name, picUrl: imgUrl, artist } = bestMatch[type][0] as SimpleAlbum;
         const subtitle = artist.name;
-        return { name, imgUrl, subtitle };
+        return { id, name, imgUrl, subtitle };
       },
       artist: () => {
-        const { name, picUrl: imgUrl } = bestMatch[item][0] as Artist;
-        return { name, imgUrl };
+        const { id, name, picUrl: imgUrl } = bestMatch[type][0] as Artist;
+        return { id, name, imgUrl };
       },
       playlist: () => {
-        const { name, coverImgUrl: imgUrl } = bestMatch[item][0] as UserPlaylist;
-        return { name, imgUrl };
+        const { id, name, coverImgUrl: imgUrl } = bestMatch[type][0] as UserPlaylist;
+        return { id, name, imgUrl };
       },
       song: () => {
-        const { name, album } = bestMatch[item] as SongType;
+        const { id, name, album } = bestMatch[type] as SongType;
         const imgUrl = album.picUrl;
-        return { name, imgUrl };
+        return { id, name, imgUrl };
       },
       concert: () => {
-        const { cover: imgUrl, title: name, time } = bestMatch[item][0] as Concert;
+        const { id, cover: imgUrl, title: name, time } = bestMatch[type][0] as Concert;
         const subtitle = time
           .reduce((acc, val) => `${acc}-${dayjs(val).format('M月D日')}`, '')
           .slice(1);
-        return { name, imgUrl, subtitle };
+        return { id, name, imgUrl, subtitle };
       },
     };
 
-    const execute = strategy[item] || noop;
+    const execute = strategy[type] || noop;
 
     const data: DataType = execute();
 
+    function handleItemClick(type: SearchMultimatchOrderType, id: number) {
+      const strategy = {
+        album: () => push(`/list/${id}/album`),
+        artist: () => push(`/singer/${id}`),
+        playlist: () => push(`/list/${id}`),
+        song: noop,
+        concert: noop,
+        orpheus: noop,
+      };
+
+      strategy[type]();
+    }
+
     return data ? (
-      <div key={i} className={styles['song__best-match']}>
+      <div
+        key={i}
+        className={styles['song__best-match']}
+        onClick={() => handleItemClick(type, data.id)}
+      >
         <div className={styles['song__left']}>
           <Img src={resizeImg(data.imgUrl, 100)} className={styles['song__img']} />
           <div>
@@ -99,7 +121,11 @@ const Song: React.FC<Props> = props => {
           </div>
         </header>
       )}
-      <Table columns={columns} data={data.songs} />
+      <Table
+        columns={columns}
+        data={data.songs}
+        onDoubleClick={index => dispatch(insertSong(data.songs[index].id))}
+      />
     </div>
   ));
 };

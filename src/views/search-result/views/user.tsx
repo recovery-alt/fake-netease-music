@@ -3,10 +3,12 @@ import React from 'react';
 import List from '../list';
 import { usePagination, Props } from '../hook';
 import { SearchType } from '@/enum';
+import { useHistory } from 'react-router-dom';
 
 const UserProfile: React.FC<Props> = props => {
   const params = { ...props, currentType: SearchType.USER, limit: 20 };
   const { wrapEmpty } = usePagination<SearchUser>(params);
+  const { push } = useHistory();
 
   function listDataAdapter(users: UserType[]) {
     return users.map(user => {
@@ -17,7 +19,13 @@ const UserProfile: React.FC<Props> = props => {
     });
   }
 
-  return wrapEmpty(data => <List imgType="circle" data={listDataAdapter(data.userprofiles)} />);
+  return wrapEmpty(data => (
+    <List
+      imgType="circle"
+      data={listDataAdapter(data.userprofiles)}
+      onItemClick={({ id }) => push(`/user/${id}`)}
+    />
+  ));
 };
 
 export default UserProfile;

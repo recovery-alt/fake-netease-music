@@ -8,10 +8,11 @@ import {
   PlayCircleOutlined,
 } from '@ant-design/icons';
 import { Artist, UserPlaylist, SearchSuggest, Song, SimpleAlbum, SuggestOrderType } from '@/types';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { insertSong, RootState } from '@/store';
 import { useHistory } from 'react-router-dom';
 import debounce from 'lodash/debounce';
+import { stringify } from 'qs';
 
 type Props = { setVisible: (visible: boolean) => void };
 
@@ -19,6 +20,7 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
   const keywords = useSelector((state: RootState) => state.controller.keywords);
   const [data, setData] = useState<SearchSuggest>({});
   const { push } = useHistory();
+  const dispatch = useDispatch();
   const map = {
     albums: {
       label: '专辑',
@@ -39,13 +41,21 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
   };
 
   function handleItemClick(id: number, key: SuggestOrderType) {
-    console.log(id, key);
-    // TODO
+    const strategy = {
+      artists: () => push(`/singer/${id}`),
+      songs: () => dispatch(insertSong(id)),
+      albums: () => push(`/list/${id}/album`),
+      playlists: () => push(`/list/${id}`),
+    };
+
+    strategy[key]();
+    setVisible(false);
   }
 
   function handleTitleClick() {
     setVisible(false);
-    push({ pathname: '/search-result', state: { keywords } });
+    const query = stringify({ keywords });
+    push(`/search-result?${query}`);
   }
 
   function renderOrder(key: SuggestOrderType) {

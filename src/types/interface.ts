@@ -242,7 +242,13 @@ export type Subscriber = {
 
 export type PlaylistSubscriberParams = { id: number; offset: number; limit?: number };
 
-export type Concert = { cover: string; title: string; url: string; time: [number, number] };
+export type Concert = {
+  id: number;
+  cover: string;
+  title: string;
+  url: string;
+  time: [number, number];
+};
 
 export type Orpheus = any;
 

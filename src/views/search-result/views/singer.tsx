@@ -3,10 +3,12 @@ import List from '../list';
 import { Artist, SearchSinger } from '@/types';
 import { usePagination, Props } from '../hook';
 import { SearchType } from '@/enum';
+import { useHistory } from 'react-router-dom';
 
 const Singer: React.FC<Props> = props => {
   const params = { ...props, currentType: SearchType.SINGER };
   const { wrapEmpty } = usePagination<SearchSinger>(params);
+  const { push } = useHistory();
 
   function listDataAdapter(artists: Artist[]) {
     return artists.map(artist => {
@@ -15,7 +17,9 @@ const Singer: React.FC<Props> = props => {
     });
   }
 
-  return wrapEmpty(data => <List data={listDataAdapter(data.artists)} />);
+  return wrapEmpty(data => (
+    <List data={listDataAdapter(data.artists)} onItemClick={({ id }) => push(`/singer/${id}`)} />
+  ));
 };
 
 export default Singer;

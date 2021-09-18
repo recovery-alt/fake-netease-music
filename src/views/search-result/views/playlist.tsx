@@ -2,11 +2,13 @@ import { UserPlaylist as UserPlaylist, SearchPlaylist } from '@/types';
 import React from 'react';
 import List from '../list';
 import { usePagination, Props } from '../hook';
+import { useHistory } from 'react-router-dom';
 import { SearchType } from '@/enum';
 
 const Playlist: React.FC<Props> = props => {
   const params = { ...props, currentType: SearchType.PLAYLIST };
   const { wrapEmpty } = usePagination<SearchPlaylist>(params);
+  const { push } = useHistory();
 
   function listDataAdapter(playlists: UserPlaylist[]) {
     return playlists.map(playlist => {
@@ -17,7 +19,9 @@ const Playlist: React.FC<Props> = props => {
     });
   }
 
-  return wrapEmpty(data => <List data={listDataAdapter(data.playlists)} />);
+  return wrapEmpty(data => (
+    <List data={listDataAdapter(data.playlists)} onItemClick={({ id }) => push(`/list/${id}`)} />
+  ));
 };
 
 export default Playlist;

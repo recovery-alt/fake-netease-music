@@ -9,8 +9,8 @@ import NotFound from './not-found';
 import Scrollbar from '@/components/scrollbar';
 import { Spin } from 'antd';
 import { clearRequests } from '@/api/api';
-import store, { RootState, setPause, setShowDetail } from '@/store';
-import { useDispatch, useSelector } from 'react-redux';
+import store, { setPause, setShowDetail } from '@/store';
+import { useDispatch } from 'react-redux';
 import json from 'json5';
 
 type Props = { routes?: Array<RouteConfig> };

@@ -13,6 +13,7 @@ import { useLocation } from 'react-router-dom';
 import { SearchSuggest } from '@/types';
 import { SearchType } from '@/enum';
 import { getSearchMultimatch } from '@/api';
+import { parse } from 'qs';
 
 const { TabPane } = Tabs;
 
@@ -20,8 +21,11 @@ const SearchResult: React.FC = () => {
   const [total, setTotal] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [bestMatch, setBestMatch] = useState<SearchSuggest>();
-  const { state } = useLocation<{ keywords: string }>();
-  const keywords = state.keywords;
+  const { search } = useLocation();
+  const keywords = useMemo(
+    () => parse(search.slice(1), { charset: 'utf-8' }).keywords as string,
+    [search]
+  );
   const tabs = [
     {
       type: SearchType.SONG,

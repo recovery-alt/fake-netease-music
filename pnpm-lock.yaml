@@ -7,6 +7,7 @@ specifiers:
   '@ls-lint/ls-lint': ^1.10.0
   '@reduxjs/toolkit': ^1.6.1
   '@types/lodash': ^4.14.173
+  '@types/qs': ^6.9.7
   '@types/react': ^17.0.21
   '@types/react-dom': ^17.0.9
   '@types/react-lazyload': ^3.1.1
@@ -37,6 +38,7 @@ specifiers:
   postcss: ^8.3.6
   postcss-px-to-viewport: ^1.1.1
   prettier: ^2.4.1
+  qs: ^6.10.1
   react: ^17.0.2
   react-dom: ^17.0.2
   react-redux: ^7.2.5
@@ -66,6 +68,7 @@ dependencies:
   json5: registry.nlark.com/json5/2.2.0
   lodash: registry.nlark.com/lodash/4.17.21
   normalize.css: registry.nlark.com/normalize.css/8.0.1
+  qs: registry.nlark.com/qs/6.10.1
   react: registry.nlark.com/react/17.0.2
   react-dom: registry.nlark.com/react-dom/17.0.2_react@17.0.2
   react-redux: registry.nlark.com/react-redux/7.2.5_react-dom@17.0.2+react@17.0.2
@@ -77,6 +80,7 @@ devDependencies:
   '@commitlint/config-conventional': registry.nlark.com/@commitlint/config-conventional/12.1.4
   '@ls-lint/ls-lint': registry.nlark.com/@ls-lint/ls-lint/1.10.0
   '@types/lodash': registry.nlark.com/@types/lodash/4.14.173
+  '@types/qs': registry.nlark.com/@types/qs/6.9.7
   '@types/react': registry.nlark.com/@types/react/17.0.21
   '@types/react-dom': registry.nlark.com/@types/react-dom/17.0.9
   '@types/react-lazyload': registry.nlark.com/@types/react-lazyload/3.1.1
@@ -306,6 +310,8 @@ packages:
       '@babel/template': registry.nlark.com/@babel/template/7.15.4
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.15.4
       '@babel/types': registry.nlark.com/@babel/types/7.15.6
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/helper-optimise-call-expression/7.15.4:
@@ -334,6 +340,8 @@ packages:
       '@babel/helper-optimise-call-expression': registry.nlark.com/@babel/helper-optimise-call-expression/7.15.4
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.15.4
       '@babel/types': registry.nlark.com/@babel/types/7.15.6
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/helper-simple-access/7.15.4:
@@ -377,6 +385,8 @@ packages:
       '@babel/template': registry.nlark.com/@babel/template/7.15.4
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.15.4
       '@babel/types': registry.nlark.com/@babel/types/7.15.6
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/highlight/7.14.5:
@@ -458,6 +468,8 @@ packages:
       '@babel/types': registry.nlark.com/@babel/types/7.15.6
       debug: registry.nlark.com/debug/4.3.2
       globals: registry.nlark.com/globals/11.12.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/types/7.15.6:
@@ -703,6 +715,8 @@ packages:
       js-yaml: registry.nlark.com/js-yaml/3.14.1
       minimatch: registry.nlark.com/minimatch/3.0.4
       strip-json-comments: registry.nlark.com/strip-json-comments/3.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@hapi/hoek/9.2.0:
@@ -728,6 +742,8 @@ packages:
       '@humanwhocodes/object-schema': registry.nlark.com/@humanwhocodes/object-schema/1.2.0
       debug: registry.nlark.com/debug/4.3.2
       minimatch: registry.nlark.com/minimatch/3.0.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@humanwhocodes/object-schema/1.2.0:
@@ -1021,6 +1037,12 @@ packages:
     resolution: {integrity: sha1-/PcgXCXf95Xuea8eMNosl5CAjxE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/prop-types/download/@types/prop-types-15.7.4.tgz}
     name: '@types/prop-types'
     version: 15.7.4
+
+  registry.nlark.com/@types/qs/6.9.7:
+    resolution: {integrity: sha1-Y7t9Bn2xB8weRXwwO8JdUR/r9ss=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/qs/download/@types/qs-6.9.7.tgz}
+    name: '@types/qs'
+    version: 6.9.7
+    dev: true
 
   registry.nlark.com/@types/react-dom/17.0.9:
     resolution: {integrity: sha1-RBqYHanXvhFwQuGm/T2sSzD1Wt0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/react-dom/download/@types/react-dom-17.0.9.tgz}
@@ -1814,7 +1836,6 @@ packages:
     dependencies:
       function-bind: registry.nlark.com/function-bind/1.1.1
       get-intrinsic: registry.nlark.com/get-intrinsic/1.1.1
-    dev: true
 
   registry.nlark.com/callsites/3.1.0:
     resolution: {integrity: sha1-s2MKvYlDQy9Us/BRkjjjPNffL3M=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/callsites/download/callsites-3.1.0.tgz}
@@ -3212,6 +3233,8 @@ packages:
       table: registry.nlark.com/table/6.7.1
       text-table: registry.nlark.com/text-table/0.2.0
       v8-compile-cache: registry.nlark.com/v8-compile-cache/2.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/espree/7.3.1:
@@ -3556,7 +3579,6 @@ packages:
     resolution: {integrity: sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/function-bind/download/function-bind-1.1.1.tgz}
     name: function-bind
     version: 1.1.1
-    dev: true
 
   registry.nlark.com/functional-red-black-tree/1.0.1:
     resolution: {integrity: sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/functional-red-black-tree/download/functional-red-black-tree-1.0.1.tgz}
@@ -3586,7 +3608,6 @@ packages:
       function-bind: registry.nlark.com/function-bind/1.1.1
       has: registry.nlark.com/has/1.0.3
       has-symbols: registry.nlark.com/has-symbols/1.0.2
-    dev: true
 
   registry.nlark.com/get-own-enumerable-property-symbols/3.0.2:
     resolution: {integrity: sha1-tf3nfyLL4185C04ImSLFC85u9mQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/get-own-enumerable-property-symbols/download/get-own-enumerable-property-symbols-3.0.2.tgz}
@@ -3915,7 +3936,6 @@ packages:
     name: has-symbols
     version: 1.0.2
     engines: {node: '>= 0.4'}
-    dev: true
 
   registry.nlark.com/has-tostringtag/1.0.0:
     resolution: {integrity: sha1-fhM4GKfTlHNPlB5zw9P5KR5liyU=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/has-tostringtag/download/has-tostringtag-1.0.0.tgz}
@@ -3940,7 +3960,6 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: registry.nlark.com/function-bind/1.1.1
-    dev: true
 
   registry.nlark.com/header-case/2.0.4:
     resolution: {integrity: sha1-WkLmO1UXc0nPQFvrjXdayruSwGM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/header-case/download/header-case-2.0.4.tgz}
@@ -5380,7 +5399,6 @@ packages:
     resolution: {integrity: sha1-nc6xRs7dQUig2eUauI00z1CZIrE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/object-inspect/download/object-inspect-1.11.0.tgz}
     name: object-inspect
     version: 1.11.0
-    dev: true
 
   registry.nlark.com/object-keys/1.1.1:
     resolution: {integrity: sha1-HEfyct8nfzsdrwYWd9nILiMixg4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/object-keys/download/object-keys-1.1.1.tgz}
@@ -5989,6 +6007,15 @@ packages:
     version: 1.5.1
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     dev: true
+
+  registry.nlark.com/qs/6.10.1:
+    resolution: {integrity: sha1-STFIL6jWR6Wqt5nFJx0hM7mB+2o=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/qs/download/qs-6.10.1.tgz}
+    name: qs
+    version: 6.10.1
+    engines: {node: '>=0.6'}
+    dependencies:
+      side-channel: registry.nlark.com/side-channel/1.0.4
+    dev: false
 
   registry.nlark.com/queue-microtask/1.2.3:
     resolution: {integrity: sha1-SSkii7xyTfrEPg77BYyve2z7YkM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/queue-microtask/download/queue-microtask-1.2.3.tgz}
@@ -7244,7 +7271,6 @@ packages:
       call-bind: registry.nlark.com/call-bind/1.0.2
       get-intrinsic: registry.nlark.com/get-intrinsic/1.1.1
       object-inspect: registry.nlark.com/object-inspect/1.11.0
-    dev: true
 
   registry.nlark.com/signal-exit/3.0.4:
     resolution: {integrity: sha1-NmpGhNF1ucqyCB42gf2jdHtsUdc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/signal-exit/download/signal-exit-3.0.4.tgz}
@@ -8393,6 +8419,8 @@ packages:
       eslint: registry.nlark.com/eslint/7.32.0
       rollup: registry.nlark.com/rollup/2.56.3
       vite: registry.nlark.com/vite/2.5.8
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/vite-plugin-style-import/1.1.1_vite@2.5.8:

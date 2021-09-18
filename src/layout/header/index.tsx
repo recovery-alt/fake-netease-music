@@ -15,6 +15,7 @@ import Input from '@/components/input';
 import SearchList from '@/layout/search-list';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setKeywords } from '@/store';
+import { stringify } from 'qs';
 
 const List: React.FC = () => {
   const [active, setActive] = useState('');
@@ -40,7 +41,8 @@ const List: React.FC = () => {
   const handleMouseup: KeyboardEventHandler = e => {
     if (e.key === 'Enter' && keywords) {
       setShowSearch(false);
-      push({ pathname: '/search-result', state: { keywords } });
+      const query = stringify({ keywords });
+      push(`/search-result?${query}`);
     }
   };
 

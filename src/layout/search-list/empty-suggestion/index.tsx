@@ -7,6 +7,7 @@ import json from 'json5';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setKeywords } from '@/store';
+import { stringify } from 'qs';
 
 type Props = { visible: boolean; setVisible: (visible: boolean) => void };
 
@@ -23,7 +24,8 @@ const EmptySuggestion: React.FC<Props> = ({ visible, setVisible }) => {
   function handleSearch(keywords: string) {
     dispatch(setKeywords(keywords));
     setVisible(false);
-    push({ pathname: '/search-result', state: { keywords } });
+    const query = stringify({ keywords });
+    push(`/search-result?${query}`);
   }
 
   useEffect(() => {
