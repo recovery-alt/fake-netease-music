@@ -9,8 +9,9 @@ import NotFound from './not-found';
 import Scrollbar from '@/components/scrollbar';
 import { Spin } from 'antd';
 import { clearRequests } from '@/api/api';
-import { setShowDetail } from '@/store';
+import store, { setShowDetail } from '@/store';
 import { useDispatch } from 'react-redux';
+import json from 'json5';
 
 type Props = { routes?: Array<RouteConfig> };
 
@@ -18,10 +19,26 @@ const Layout: React.FC<Props> = ({ routes }) => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
 
+  function interceptor() {
+    const state = store.getState();
+    console.log(state.currentTrack);
+    console.log(state.controller);
+    localStorage.setItem('currentTrack', json.stringify(state.currentTrack));
+    localStorage.setItem('controller', json.stringify({ ...state.controller, pause: true }));
+  }
+
   useEffect(() => {
     dispatch(setShowDetail(false));
     clearRequests();
   }, [pathname]);
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', interceptor);
+
+    return () => {
+      window.removeEventListener('beforeunload', interceptor);
+    };
+  }, []);
 
   return (
     <>

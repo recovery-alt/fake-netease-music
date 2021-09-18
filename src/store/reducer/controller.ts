@@ -1,8 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import json from 'json5';
 
 type Controller = { pause: boolean; currentTime: number; showDetail: boolean; keywords: string };
 
-const initialState: Controller = { pause: true, currentTime: 0, showDetail: false, keywords: '' };
+const controllerStr = localStorage.getItem('controller');
+console.log(controllerStr);
+const initialState: Controller = controllerStr
+  ? json.parse<Controller>(controllerStr)
+  : { pause: true, currentTime: 0, showDetail: false, keywords: '' };
 
 const { reducer: controllerReducer, actions } = createSlice({
   name: 'controller',
@@ -28,8 +33,12 @@ const { reducer: controllerReducer, actions } = createSlice({
       newState.keywords = action.payload;
       return newState;
     },
+    setController(state, action: PayloadAction<Controller>) {
+      const newState = { ...state, ...action.payload };
+      return newState;
+    },
   },
 });
 
-export const { setPause, setCurrentTime, setShowDetail, setKeywords } = actions;
+export const { setPause, setCurrentTime, setShowDetail, setKeywords, setController } = actions;
 export { controllerReducer };

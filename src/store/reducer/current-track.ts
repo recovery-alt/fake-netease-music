@@ -5,11 +5,14 @@ import { PlayMode } from '@/enum';
 import { message } from 'antd';
 import { Music, Track, Song } from '@/types';
 import { RootState } from '..';
+import json from 'json5';
 
 type CurrentTrack = { current: number; tracks: Track[]; song?: Song; fm: Music[] };
-
 const prefix = (name: string) => `currentTrack/${name}`;
-const initialState: CurrentTrack = { current: -1, tracks: [], fm: [] };
+const currentTrackStr = localStorage.getItem('currentTrack');
+const initialState: CurrentTrack = currentTrackStr
+  ? json.parse<CurrentTrack>(currentTrackStr)
+  : { current: -1, tracks: [], fm: [] };
 
 export const setSong = createAsyncThunk<Song, number>(
   prefix('setSong'),
