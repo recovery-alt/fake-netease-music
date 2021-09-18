@@ -13,6 +13,7 @@ import { insertSong, RootState } from '@/store';
 import { useHistory } from 'react-router-dom';
 import debounce from 'lodash/debounce';
 import { stringify } from 'qs';
+import { DynamicPage, Page } from '@/router';
 
 type Props = { setVisible: (visible: boolean) => void };
 
@@ -42,10 +43,10 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
 
   function handleItemClick(id: number, key: SuggestOrderType) {
     const strategy = {
-      artists: () => push(`/singer/${id}`),
+      artists: () => push(DynamicPage.singer(id)),
       songs: () => dispatch(insertSong(id)),
-      albums: () => push(`/list/${id}/album`),
-      playlists: () => push(`/list/${id}`),
+      albums: () => push(DynamicPage.list(id, 'album')),
+      playlists: () => push(DynamicPage.list(id)),
     };
 
     strategy[key]();
@@ -55,7 +56,7 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
   function handleTitleClick() {
     setVisible(false);
     const query = stringify({ keywords });
-    push(`/search-result?${query}`);
+    push(`${Page.searchResult}?${query}`);
   }
 
   function renderOrder(key: SuggestOrderType) {

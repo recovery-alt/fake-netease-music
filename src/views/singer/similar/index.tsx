@@ -4,6 +4,7 @@ import Img from '@/components/img';
 import { getSimiArtist } from '@/api';
 import { Artist } from '@/types';
 import { useHistory } from 'react-router-dom';
+import { DynamicPage } from '@/router';
 
 type Props = { id: number };
 
@@ -26,7 +27,7 @@ const Similar: React.FC<Props> = ({ id }) => {
         <div
           key={item.id}
           className={styles.similar__item}
-          onClick={() => push(`/singer/${item.id}`)}
+          onClick={() => push(DynamicPage.singer(item.id))}
         >
           <Img src={item.picUrl} className={styles.similar__img} />
           <div className={styles.similar__description}>{item.name}</div>

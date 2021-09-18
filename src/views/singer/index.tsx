@@ -10,6 +10,7 @@ import { Album as AlbumType, Artist, UserProfile } from '@/types';
 import { PageMode } from '@/views/user/music-present';
 import { resizeImg } from '@/utils';
 import Button from '@/components/button';
+import { DynamicPage } from '@/router';
 
 const { TabPane } = Tabs;
 const Album = lazy(() => import('@/views/user/music-present'));
@@ -64,7 +65,7 @@ const Singer: React.FC = () => {
               <FileAddOutlined />
               收藏
             </Button>
-            <Button className="singer__button" onClick={() => push(`/user/${user?.userId}`)}>
+            <Button className="singer__button" onClick={() => push(DynamicPage.user(user?.userId))}>
               <UserOutlined />
               个人主页
             </Button>

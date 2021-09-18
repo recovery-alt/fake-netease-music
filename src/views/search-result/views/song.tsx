@@ -20,6 +20,7 @@ import dayjs from 'dayjs';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { insertSong } from '@/store';
+import { DynamicPage } from '@/router';
 
 const Song: React.FC<Props> = props => {
   const { bestMatch, ...restProps } = props;
@@ -82,9 +83,9 @@ const Song: React.FC<Props> = props => {
 
     function handleItemClick(type: SearchMultimatchOrderType, id: number) {
       const strategy = {
-        album: () => push(`/list/${id}/album`),
-        artist: () => push(`/singer/${id}`),
-        playlist: () => push(`/list/${id}`),
+        album: () => push(DynamicPage.list(id, 'album')),
+        artist: () => push(DynamicPage.singer(id)),
+        playlist: () => push(DynamicPage.list(id)),
         song: noop,
         concert: noop,
         orpheus: noop,

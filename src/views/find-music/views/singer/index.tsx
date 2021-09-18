@@ -7,6 +7,7 @@ import { categoryList } from '@/config';
 import Img from '@/components/img';
 import { resizeImg } from '@/utils';
 import { useHistory } from 'react-router-dom';
+import { DynamicPage } from '@/router';
 
 const Singer: React.FC = () => {
   type ActionType = 'add' | 'reset';
@@ -69,7 +70,7 @@ const Singer: React.FC = () => {
   }
 
   function handleSingerClick(item: Artist) {
-    push({ pathname: `/singer/${item.id}`, state: item.alias });
+    push({ pathname: DynamicPage.singer(item.id), state: item.alias });
   }
 
   useEffect(() => {

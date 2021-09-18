@@ -7,6 +7,7 @@ import { fetchAndSetCurrentTrack } from '@/store';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getTopAlbum } from '@/api';
+import { DynamicPage } from '@/router';
 
 const AlbumList: React.FC<TopAlbumParams> = ({ type, area }) => {
   const [data, setData] = useState<TopAlbum>();
@@ -35,7 +36,7 @@ const AlbumList: React.FC<TopAlbumParams> = ({ type, area }) => {
                 className={styles['album-list__img']}
                 src={resizeImg(item.picUrl, 100)}
                 icon={{ size: 'large', hoverDisplay: true }}
-                onClick={() => push(`/list/${item.id}`)}
+                onClick={() => push(DynamicPage.list(item.id))}
                 onIconClick={() => dispatch(fetchAndSetCurrentTrack(item.id))}
               />
             </div>

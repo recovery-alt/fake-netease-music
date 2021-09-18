@@ -8,7 +8,6 @@ import {
   SkinOutlined,
   CompressOutlined,
 } from '@ant-design/icons';
-import { topMenuMap, MenuConfig } from '@/config';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 import Input from '@/components/input';
@@ -16,6 +15,7 @@ import SearchList from '@/layout/search-list';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setKeywords } from '@/store';
 import { stringify } from 'qs';
+import { Page, topMenuMap, MenuConfig } from '@/router';
 
 const List: React.FC = () => {
   const [active, setActive] = useState('');
@@ -30,7 +30,7 @@ const List: React.FC = () => {
     {
       icon: SettingOutlined,
       event: () => {
-        push('/setting');
+        push(Page.setting);
       },
     },
     { icon: MailOutlined },
@@ -42,16 +42,16 @@ const List: React.FC = () => {
     if (e.key === 'Enter' && keywords) {
       setShowSearch(false);
       const query = stringify({ keywords });
-      push(`/search-result?${query}`);
+      push(`${Page.searchResult}?${query}`);
     }
   };
 
   useEffect(() => {
     if (!pathname) return;
-    const match = pathname.match(/(?<=\/)[\w-\d]+\b/);
+    const match = pathname.match(/(?<=home\/)[\w-\d]+\b/);
     if (match?.[0]) setTopMenu(topMenuMap[match[0]] || []);
     let pathArr = pathname.split('/');
-    if (pathArr.length > 3) pathArr = pathArr.slice(0, 3);
+    if (pathArr.length > 4) pathArr = pathArr.slice(0, 4);
 
     // 前两位相等 即选中
     setActive(pathArr.join('/'));

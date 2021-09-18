@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { fetchAndSetCurrentTrack, RootState } from '@/store';
 import { message } from 'antd';
+import { DynamicPage } from '@/router';
 
 type Props = Omit<PresentProps, 'type'>;
 
@@ -19,9 +20,9 @@ const Card: React.FC<Props> = ({ data, isAlbum }) => {
   function handleCardClick(id: number) {
     if (!id) return;
     if (isAlbum) {
-      push(`/list/${id}/album`);
+      push(DynamicPage.list(id, 'album'));
     } else {
-      isLogin ? push(`/list/${id}`) : message.error('需要登录，才能查看他人歌单信息>_<');
+      isLogin ? push(DynamicPage.list(id)) : message.error('需要登录，才能查看他人歌单信息>_<');
     }
   }
 

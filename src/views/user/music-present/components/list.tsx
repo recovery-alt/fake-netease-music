@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { message } from 'antd';
+import { DynamicPage } from '@/router';
 
 type Props = Omit<PresentProps, 'type'>;
 
@@ -23,9 +24,11 @@ const List: React.FC<Props> = ({ data, isAlbum }) => {
   function handleItemClick(item: ListItem) {
     if (!item.id) return;
     if (isAlbum) {
-      push(`/list/${item.id}/album`);
+      push(DynamicPage.list(item.id, 'album'));
     } else {
-      isLogin ? push(`/list/${item.id}`) : message.error('需要登录，才能查看他人歌单信息>_<');
+      isLogin
+        ? push(DynamicPage.list(item.id))
+        : message.error('需要登录，才能查看他人歌单信息>_<');
     }
   }
 

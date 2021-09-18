@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { setCurrentTrack, fetchAndSetCurrentTrack } from '@/store';
 import { useHistory } from 'react-router-dom';
 import { resizeImg } from '@/utils';
+import { DynamicPage } from '@/router';
 
 const Rank: React.FC = () => {
   const [toplist, setToplist] = useState<Toplist[]>([]);
@@ -43,7 +44,7 @@ const Rank: React.FC = () => {
             key={item.id}
             data={item}
             onItemClick={handleItemClick}
-            onViewAll={id => push(`/list/${id}`)}
+            onViewAll={id => push(DynamicPage.list(id))}
           />
         ))}
       </div>
@@ -56,11 +57,11 @@ const Rank: React.FC = () => {
                 className="rank__img"
                 src={resizeImg(item.coverImgUrl)}
                 icon={{ size: 'large', hoverDisplay: true }}
-                onClick={() => push(`/list/${item.id}`)}
+                onClick={() => push(DynamicPage.list(item.id))}
                 onIconClick={() => dispatch(fetchAndSetCurrentTrack(item.id))}
               />
             </div>
-            <div className="rank__detail" onClick={() => push(`/list/${item.id}`)}>
+            <div className="rank__detail" onClick={() => push(DynamicPage.list(item.id))}>
               {item.name}
             </div>
           </div>

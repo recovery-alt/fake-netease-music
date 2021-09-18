@@ -19,6 +19,7 @@ import { PlayMode } from '@/enum';
 import MusicDetail from '../music-detail';
 import MusicList from '../music-list';
 import { useHistory } from 'react-router-dom';
+import { Page } from '@/router';
 
 const List: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -79,7 +80,7 @@ const List: React.FC = () => {
   }
 
   function handleCoverClick() {
-    if (isFMMode) push('/fm');
+    if (isFMMode) push(Page.fm);
 
     dispatch(setShowDetail(!showDetail));
   }

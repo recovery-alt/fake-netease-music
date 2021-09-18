@@ -11,6 +11,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setCurrentTrack } from '@/store';
 import { transformSong2Track } from '@/utils';
+import { DynamicPage } from '@/router';
 
 const Newest: React.FC = () => {
   const [isAlbum, setIsAlbum] = useState(0);
@@ -23,8 +24,8 @@ const Newest: React.FC = () => {
   const [albumType, setAlbumType] = useState<AlbumCategory>('hot');
 
   const switchItems = [
-    { path: '/find-music/newest', label: '新歌速递' },
-    { path: '/find-music/newest/album', label: '新碟上架' },
+    { path: DynamicPage.findMusicNewest(''), label: '新歌速递' },
+    { path: DynamicPage.findMusicNewest('album'), label: '新碟上架' },
   ];
 
   function handleCollectAll() {

@@ -4,6 +4,7 @@ import List from '../list';
 import { usePagination, Props } from '../hook';
 import { useHistory } from 'react-router-dom';
 import { SearchType } from '@/enum';
+import { DynamicPage } from '@/router';
 
 const Playlist: React.FC<Props> = props => {
   const params = { ...props, currentType: SearchType.PLAYLIST };
@@ -20,7 +21,10 @@ const Playlist: React.FC<Props> = props => {
   }
 
   return wrapEmpty(data => (
-    <List data={listDataAdapter(data.playlists)} onItemClick={({ id }) => push(`/list/${id}`)} />
+    <List
+      data={listDataAdapter(data.playlists)}
+      onItemClick={({ id }) => push(DynamicPage.list(id))}
+    />
   ));
 };
 

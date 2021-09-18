@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setKeywords } from '@/store';
 import { stringify } from 'qs';
+import { Page } from '@/router';
 
 type Props = { visible: boolean; setVisible: (visible: boolean) => void };
 
@@ -25,7 +26,7 @@ const EmptySuggestion: React.FC<Props> = ({ visible, setVisible }) => {
     dispatch(setKeywords(keywords));
     setVisible(false);
     const query = stringify({ keywords });
-    push(`/search-result?${query}`);
+    push(`${Page.searchResult}?${query}`);
   }
 
   useEffect(() => {

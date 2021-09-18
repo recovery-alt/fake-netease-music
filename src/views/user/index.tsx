@@ -19,6 +19,7 @@ import { resizeImg } from '@/utils';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import Button from '@/components/button';
+import { DynamicPage } from '@/router';
 
 const User: React.FC = () => {
   const params = useParams<{ id: string }>();
@@ -139,7 +140,7 @@ const User: React.FC = () => {
             </div>
             {userDetail?.identify && (
               <div className="user__title-right">
-                <Button onClick={() => push(`/singer/${userDetail.profile.artistId}`)}>
+                <Button onClick={() => push(DynamicPage.singer(userDetail.profile.artistId))}>
                   <AudioOutlined />
                   歌手页
                 </Button>

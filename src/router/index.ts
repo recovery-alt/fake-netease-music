@@ -1,6 +1,9 @@
 import Layout from '@/layout';
-import { topMenuMap } from '@/config';
+import { topMenuMap, MenuConfig } from './menu';
 import React, { lazy } from 'react';
+import { Page, DynamicPage } from './page';
+
+console.log(DynamicPage.findMusicNewest());
 
 export type RouteConfig = {
   path: string;
@@ -11,41 +14,49 @@ export type RouteConfig = {
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/',
+    path: Page.home,
     exact: true,
     component: Layout,
     routes: [
       {
-        path: '/fm',
+        path: Page.fm,
         component: lazy(() => import('@/views/fm')),
       },
       {
-        path: '/list/:id?/:type?',
+        path: DynamicPage.list(),
         component: lazy(() => import('@/views/list')),
       },
       {
-        path: '/singer/:id?',
+        path: DynamicPage.singer(),
         component: lazy(() => import('@/views/singer')),
       },
       {
-        path: '/search-result',
+        path: Page.searchResult,
         component: lazy(() => import('@/views/search-result')),
       },
       {
-        path: '/user/:id',
+        path: DynamicPage.user(),
         component: lazy(() => import('@/views/user')),
       },
       {
-        path: '/daily-recommend',
+        path: Page.dailyRecommend,
         component: lazy(() => import('@/views/daily-recommend')),
       },
       {
+        path: DynamicPage.findMusicNewest(),
         component: lazy(() => import('@/views/find-music/views/newest')),
-        path: '/find-music/newest/:type?',
       },
       ...Object.values(topMenuMap).flat(),
     ],
   },
+  {
+    path: DynamicPage.playVideo(),
+    component: lazy(() => import('@/views/play-video')),
+  },
 ];
 
 export default routes;
+
+export { Page, DynamicPage, topMenuMap };
+
+export type { MenuConfig };

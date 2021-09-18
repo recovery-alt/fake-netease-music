@@ -4,12 +4,19 @@ import { RightOutlined } from '@ant-design/icons';
 import { getVideoCategoryList, getVideoGroup } from '@/api';
 import Nav, { NavItem } from '@/components/nav';
 import List, { ListItem } from './list';
+import { useHistory } from 'react-router-dom';
+import { DynamicPage } from '@/router';
 
 const Video: React.FC = () => {
   const [videoCategory, setVideoCategory] = useState<NavItem[]>([]);
   const [selected] = useState<number>(0);
   const [videoList, setVideoList] = useState<ListItem[]>([]);
   const current = useMemo(() => videoCategory[selected] || null, [selected, videoCategory]);
+  const { push } = useHistory();
+
+  function handleItemClick(id: number | string) {
+    push(DynamicPage.playVideo(id));
+  }
 
   useEffect(() => {
     (async () => {
@@ -39,7 +46,7 @@ const Video: React.FC = () => {
         </button>
         <Nav data={videoCategory} />
       </header>
-      <List data={videoList} />
+      <List data={videoList} onItemClick={handleItemClick} />
     </div>
   );
 };

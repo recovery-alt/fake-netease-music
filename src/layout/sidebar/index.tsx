@@ -23,6 +23,7 @@ import { local, resizeImg } from '@/utils';
 import { UserInfo } from '@/types';
 import json from 'json5';
 import classNames from 'classnames';
+import { DynamicPage, Page } from '@/router';
 
 type Menu = { name: string; icon: React.FC; path: string; loginShow?: boolean };
 type MenuItem = { title?: string; menus: Menu[] };
@@ -45,26 +46,26 @@ const List: React.FC = () => {
     [
       {
         menus: [
-          { name: '发现音乐', icon: CustomerServiceOutlined, path: '/find-music' },
-          { name: '私人FM', icon: TeamOutlined, path: '/fm' },
-          { name: '视频', icon: PlaySquareOutlined, path: '/video', loginShow: true },
-          { name: '朋友', icon: TeamOutlined, path: '/friend' },
+          { name: '发现音乐', icon: CustomerServiceOutlined, path: Page.findMusic },
+          { name: '私人FM', icon: TeamOutlined, path: Page.fm },
+          { name: '视频', icon: PlaySquareOutlined, path: Page.video, loginShow: true },
+          { name: '朋友', icon: TeamOutlined, path: Page.friend },
         ],
       },
       {
         title: '我的音乐',
         menus: [
-          { name: 'iTunes音乐', icon: CustomerServiceOutlined, path: '/i-tunes' },
-          { name: '下载管理', icon: DownloadOutlined, path: '/download' },
-          { name: '最近播放', icon: FieldTimeOutlined, path: '/recent' },
-          { name: '我的音乐云盘', icon: CloudOutlined, path: '/cloud-music', loginShow: true },
-          { name: '我的电台', icon: NotificationOutlined, path: '/radio', loginShow: true },
-          { name: '我的收藏', icon: StarOutlined, path: '/collection', loginShow: true },
+          { name: 'iTunes音乐', icon: CustomerServiceOutlined, path: Page.iTunes },
+          { name: '下载管理', icon: DownloadOutlined, path: Page.download },
+          { name: '最近播放', icon: FieldTimeOutlined, path: Page.recent },
+          { name: '我的音乐云盘', icon: CloudOutlined, path: Page.cloudMusic, loginShow: true },
+          { name: '我的电台', icon: NotificationOutlined, path: Page.radio, loginShow: true },
+          { name: '我的收藏', icon: StarOutlined, path: Page.collection, loginShow: true },
         ],
       },
       {
         title: '创建的歌单',
-        menus: [{ name: '我喜欢的音乐', icon: HeartOutlined, path: '/list' }],
+        menus: [{ name: '我喜欢的音乐', icon: HeartOutlined, path: DynamicPage.list('') }],
       },
     ]
   );
@@ -146,7 +147,7 @@ const List: React.FC = () => {
   }
 
   function handleAvatarClick() {
-    cookie ? push({ pathname: `/user/${profile.userId}`, state: true }) : setShowLogin(true);
+    cookie ? push({ pathname: DynamicPage.user(profile.userId), state: true }) : setShowLogin(true);
   }
 
   useEffect(() => {

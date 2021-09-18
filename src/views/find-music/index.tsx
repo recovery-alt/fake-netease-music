@@ -21,6 +21,7 @@ import Img, { IconOptions } from '@/components/img';
 import { resizeImg } from '@/utils';
 import recommend from '@/assets/img/recommend.jpg';
 import dayjs from 'dayjs';
+import { DynamicPage, Page } from '@/router';
 
 const FindMusic: React.FC = () => {
   const isLogin = useSelector((state: RootState) => !!state.user.cookie);
@@ -139,7 +140,7 @@ const FindMusic: React.FC = () => {
       <div className="find-music__card">
         {isLogin && (
           <div className="find-music__card-item">
-            <div className="find-music__card-wrapper" onClick={() => push('/daily-recommend')}>
+            <div className="find-music__card-wrapper" onClick={() => push(Page.dailyRecommend)}>
               <header>根据您的音乐口味生成每日更新</header>
               <strong>{today}</strong>
               <Img
@@ -159,7 +160,7 @@ const FindMusic: React.FC = () => {
               className="find-music__card-img"
               src={resizeImg(item.imgUrl, 135)}
               icon={iconConfig}
-              onClick={() => push(`/list/${item.id}`)}
+              onClick={() => push(DynamicPage.list(item.id))}
               onIconClick={() => dispatch(fetchAndSetCurrentTrack(item.id))}
             />
             <p>{item.name}</p>

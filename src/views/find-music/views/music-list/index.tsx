@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import { resizeImg } from '@/utils';
 import { fetchAndSetCurrentTrack } from '@/store';
 import { useDispatch } from 'react-redux';
+import { DynamicPage } from '@/router';
 
 const MusicList: React.FC = () => {
   const [musicCategory, setMusicCategory] = useState<UserPlaylist[]>([]);
@@ -38,7 +39,7 @@ const MusicList: React.FC = () => {
   }, []);
 
   function handleListItemClick(id: number) {
-    push(`/list/${id}`);
+    push(DynamicPage.list(id));
   }
 
   function handleListItemIconClick(id: number) {
