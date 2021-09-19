@@ -8,15 +8,62 @@
     margin-bottom: 24px;
   }
 
-  &__button {
-    background-color: #fff;
-    border: 1px solid #d9d9da;
-    border-radius: 15px;
-    height: 30px;
-    width: 90px;
+  &__popover {
+    height: 500px;
+    width: 720px;
 
-    &:hover {
-      background-color: #f2f3f2;
+    &-header {
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      height: 56px;
+      padding-left: 20px;
+      padding-top: 12px;
+
+      button {
+        background-color: transparent;
+        border: 0;
+        border-radius: 15px;
+        cursor: pointer;
+        height: 30px;
+        padding: 0 12px;
+
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+
+      .--active {
+        background-color: #fdf6f5;
+        color: var(--primary-color);
+      }
     }
+
+    &-main {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      height: calc(100% - 57px);
+      overflow: auto;
+      padding-top: 12px;
+
+      > div {
+        height: 50px;
+      }
+
+      span {
+        cursor: pointer;
+
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+
+      .--active {
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  &__footer {
+    text-align: center;
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import './mv.less';
 import { RightOutlined } from '@ant-design/icons';
-import Nav from '@/components/nav';
+import Nav from '../../nav';
 import { areaCategory } from '@/config';
 import List, { ListItem } from '../../list';
 import { getMVFirst, getMVAll, getMVExclusiveRcmd, getTopMV } from '@/api';

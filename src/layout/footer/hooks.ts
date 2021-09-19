@@ -96,7 +96,7 @@ export const useLyric = () => {
 };
 
 export const useVolume = (audioRef: RefObject<HTMLAudioElement>) => {
-  const [volume, setVolume] = useState(100);
+  const [volume, setVolume] = useState(60);
 
   const handleVolumeChange: ReactEventHandler<HTMLAudioElement> = e => {
     setVolume(e.currentTarget.volume * 100);

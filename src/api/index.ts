@@ -20,7 +20,6 @@ import {
   Toplist,
   TopPlaylist,
   VideoCategogy,
-  VideoSingleCreator,
   Track,
   ArtistListParams,
   TopPlaylistParams,
@@ -40,6 +39,7 @@ import {
   VideoDetail,
   VideoUrl,
   VideoMultiCreator,
+  VideoList,
 } from '@/types';
 import { get } from './api';
 
@@ -110,8 +110,8 @@ export const getTopAlbum = (params: TopAlbumParams) => get<TopAlbum>('/top/album
 
 export const getVideoCategoryList = () => get<{ data: VideoCategogy[] }>('/video/category/list');
 
-export const getVideoGroup = (id: number, offset = 0) =>
-  get<{ datas: { data: VideoSingleCreator }[] }>('/video/group', { id, offset });
+export const getVideoGroup = (id?: number | string, offset = 0) =>
+  get<VideoList>('/video/group', { id, offset });
 
 export const getMVFirst = (area: string, limit = 6) =>
   get<{ data: MV[] }>('/mv/first', { area, limit });
@@ -188,3 +188,8 @@ export const getVideoUrl = (id: string) => get<VideoUrl>('/video/url', { id });
 
 export const getRelatedAllvideo = (id: string) =>
   get<{ data: VideoMultiCreator[] }>('/related/allvideo', { id });
+
+export const getVideoGroupList = () => get<{ data: VideoCategogy[] }>('/video/group/list');
+
+export const getVideoTimelineAll = (offset = 0) =>
+  get<VideoList>('/video/timeline/all', { offset });

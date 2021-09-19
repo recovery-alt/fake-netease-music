@@ -201,6 +201,8 @@ export interface VideoMultiCreator extends Video {
   creator: Array<{ userName: string }>;
 }
 
+export type VideoList = { hasmore: boolean; datas: Array<{ data: VideoSingleCreator }> };
+
 export type VideoDetail = {
   playTime: number;
   title: string;
