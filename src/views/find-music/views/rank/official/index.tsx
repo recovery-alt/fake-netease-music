@@ -17,7 +17,7 @@ const Official: React.FC<Props> = ({ data, onItemClick, onViewAll }) => {
         <Img
           className={styles.official__img}
           src={resizeImg(data.coverImgUrl)}
-          icon={{ size: 'large', hoverDisplay: true }}
+          icon={{ size: 'big', hoverDisplay: true }}
           onClick={() => onItemClick(data.tracks, 0)}
           onIconClick={() => onItemClick(data.tracks, 0)}
         />

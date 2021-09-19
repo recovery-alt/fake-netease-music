@@ -201,6 +201,23 @@ export interface VideoMultiCreator extends Video {
   creator: Array<{ userName: string }>;
 }
 
+export type VideoDetail = {
+  playTime: number;
+  title: string;
+  vid: string;
+  publishTime: number;
+  praisedCount: number;
+  shareCount: number;
+  commentCount: number;
+  subscribeCount: number;
+  videoGroup: Array<{ id: number; name: string }>;
+  creator: UserProfile;
+};
+
+export type VideoUrl = {
+  urls: Array<{ id: string; needPay: boolean; url: string }>;
+};
+
 export type MV = {
   id: number;
   artistName: string;

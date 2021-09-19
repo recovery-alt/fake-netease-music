@@ -1,0 +1,54 @@
+.icon {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  color: var(--primary-color);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+
+  &__play {
+    border-bottom: 0.7em solid transparent;
+    border-left: 1em solid var(--primary-color);
+    border-right: 1em solid transparent;
+    border-top: 0.7em solid transparent;
+    left: 0.6em;
+    position: relative;
+  }
+
+  &__pause {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &.--small {
+    font-size: 10px;
+    height: 24px;
+    width: 24px;
+  }
+
+  &.--medium {
+    font-size: 12px;
+    height: 30px;
+    width: 30px;
+  }
+
+  &.--big {
+    font-size: 14px;
+    height: 40px;
+    width: 40px;
+  }
+
+  &.--large {
+    font-size: 16px;
+    height: 50px;
+    width: 50px;
+  }
+
+  &.--giant {
+    font-size: 20px;
+    height: 70px;
+    width: 70px;
+  }
+}

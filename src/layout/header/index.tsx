@@ -75,16 +75,17 @@ const List: React.FC = () => {
       </div>
       <div className={styles.header__right}>
         <ul className={styles['header__right-menu']}>
-          {topMenu.map(item => (
-            <li
-              key={item.path}
-              className={classNames({ [styles['--active']]: item.path === active })}
-            >
-              <Link to={item.path} onClick={() => setActive(item.path)}>
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {pathname.includes('/home') &&
+            topMenu.map(item => (
+              <li
+                key={item.path}
+                className={classNames({ [styles['--active']]: item.path === active })}
+              >
+                <Link to={item.path} onClick={() => setActive(item.path)}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
         </ul>
         <div className={styles['header__right-wrapper']}>
           <Input

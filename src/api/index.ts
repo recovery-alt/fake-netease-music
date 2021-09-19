@@ -37,6 +37,9 @@ import {
   AlbumDetailDynamic,
   UserProfile,
   UserDetail,
+  VideoDetail,
+  VideoUrl,
+  VideoMultiCreator,
 } from '@/types';
 import { get } from './api';
 
@@ -175,3 +178,13 @@ export const getCommentAlbum = (id: number | string, offset = 0) =>
 export const getUserDetail = (uid: number) => get<UserDetail>('/user/detail', { uid });
 
 export const getRecommendSongs = () => get<{ data: { dailySongs: Track[] } }>('/recommend/songs');
+
+export const getCommentVideo = (id: string | number, offset = 0) =>
+  get<CommentData>('/comment/video', { id, offset });
+
+export const getVideoDetail = (id: string) => get<{ data: VideoDetail }>('/video/detail', { id });
+
+export const getVideoUrl = (id: string) => get<VideoUrl>('/video/url', { id });
+
+export const getRelatedAllvideo = (id: string) =>
+  get<{ data: VideoMultiCreator[] }>('/related/allvideo', { id });

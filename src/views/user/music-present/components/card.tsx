@@ -34,7 +34,7 @@ const Card: React.FC<Props> = ({ data, isAlbum }) => {
             <Img
               src={resizeImg(item.picUrl, 150)}
               className={styles.card__img}
-              icon={{ size: 'large', hoverDisplay: true }}
+              icon={{ size: 'big', hoverDisplay: true }}
               onClick={() => handleCardClick(item.id)}
               onIconClick={() => dispatch(fetchAndSetCurrentTrack({ id: item.id, isAlbum }))}
             />

@@ -9,7 +9,7 @@ type Data = CommentData & {
 };
 
 type Props = {
-  id?: number;
+  id?: number | string;
   children?: React.ReactNode;
   api: (id: number | string, offset?: number) => Promise<Data>;
 };
@@ -20,7 +20,7 @@ const CommentGroup: React.FC<Props> = ({ id, children, api }) => {
   const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  async function loadData(id?: number, current = 1, pageSize = 20) {
+  async function loadData(id?: number | string, current = 1, pageSize = 20) {
     if (!id) return;
     const offset = (current - 1) * pageSize;
     const res = await api(id, offset);

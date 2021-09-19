@@ -35,7 +35,7 @@ const AlbumList: React.FC<TopAlbumParams> = ({ type, area }) => {
               <Img
                 className={styles['album-list__img']}
                 src={resizeImg(item.picUrl, 100)}
-                icon={{ size: 'large', hoverDisplay: true }}
+                icon={{ size: 'big', hoverDisplay: true }}
                 onClick={() => push(DynamicPage.list(item.id))}
                 onIconClick={() => dispatch(fetchAndSetCurrentTrack(item.id))}
               />

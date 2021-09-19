@@ -56,7 +56,7 @@ const Rank: React.FC = () => {
               <Img
                 className="rank__img"
                 src={resizeImg(item.coverImgUrl)}
-                icon={{ size: 'large', hoverDisplay: true }}
+                icon={{ size: 'big', hoverDisplay: true }}
                 onClick={() => push(DynamicPage.list(item.id))}
                 onIconClick={() => dispatch(fetchAndSetCurrentTrack(item.id))}
               />

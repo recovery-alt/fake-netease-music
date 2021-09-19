@@ -91,7 +91,7 @@ const MusicList: React.FC = () => {
             <Img
               className="music-list__img"
               src={resizeImg(item.imgUrl)}
-              icon={{ size: 'large', hoverDisplay: true, placement: 'bottom' }}
+              icon={{ size: 'big', hoverDisplay: true, placement: 'bottom' }}
               onClick={() => handleListItemClick(item.id)}
               onIconClick={() => handleListItemIconClick(item.id)}
             />

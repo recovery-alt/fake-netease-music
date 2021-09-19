@@ -2,10 +2,11 @@ import React, { useRef, useEffect, useState, ReactEventHandler, useMemo } from '
 import styles from './img.module.less';
 import classNames from 'classnames';
 import { AppProps } from '@/types';
-import { PlayCircleFilled, LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined } from '@ant-design/icons';
+import Icon, { IconSize } from '@/components/icon';
 
 export type IconOptions = {
-  size?: 'small' | 'medium' | 'large';
+  size?: IconSize;
   placement?: 'center' | 'bottom';
   hoverDisplay?: boolean;
 };
@@ -35,7 +36,7 @@ const Img: React.FC<Props> = ({
   const [showIcon, setShowIcon] = useState(false);
 
   const iconConfig = useMemo(() => {
-    const defaultOptions = { size: 'small', placement: 'center', hoverDisplay: false };
+    const defaultOptions: IconOptions = { size: 'small', placement: 'center', hoverDisplay: false };
     if (icon === false) return false;
     if (icon === true) return defaultOptions;
     return { ...defaultOptions, ...icon };
@@ -76,7 +77,8 @@ const Img: React.FC<Props> = ({
       )}
       {!banLoading && loading && <LoadingOutlined className={styles.img__loading} />}
       {!loading && iconConfig && (
-        <PlayCircleFilled
+        <Icon
+          size={iconConfig.size}
           className={classNames(
             styles.img__play,
             styles[`--${iconConfig.size}`],

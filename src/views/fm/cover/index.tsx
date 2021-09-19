@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './cover.module.less';
-import { PlayCircleFilled, PauseCircleFilled } from '@ant-design/icons';
 import { Music } from '@/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch, setPause } from '@/store';
 import classNames from 'classnames';
 import { resizeImg } from '@/utils';
+import Icon from '@/components/icon';
 
 type Props = { current?: Music; next?: Music };
 
@@ -34,7 +34,7 @@ const Cover: React.FC<Props> = ({ current, next }) => {
               className={classNames(styles.cover__play, { [styles['--pause']]: !pause })}
               onClick={handlePauseClick}
             >
-              {pause ? <PlayCircleFilled /> : <PauseCircleFilled />}
+              <Icon type={pause ? 'play' : 'pause'} size="large" />
             </div>
           </div>
         )}
