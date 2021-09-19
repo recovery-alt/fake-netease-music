@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "concurrently \"vite --host\" \"wait-on tcp:3000 -l && electron main.js\"",
     "build": "vite build && electron-builder --config electron-builder.config.js --config.asar=false",
+    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
     "release:patch": "standard-version -r patch",
     "release:minor": "standard-version -r minor",
     "release:major": "standard-version -r major",
-    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
     "postinstall": "husky install"
   },
   "main": "main.js",

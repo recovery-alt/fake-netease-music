@@ -20,15 +20,34 @@ const Layout: React.FC<Props> = ({ routes }) => {
 
   function interceptor() {
     const state = store.getState();
-    localStorage.setItem('currentTrack', json.stringify(state.currentTrack));
+    const { cacheCurrent, current: RawCurrent } = state.currentTrack;
+    let current = RawCurrent;
+    // 缓存过值，就需要读取
+    if (cacheCurrent !== undefined) current = cacheCurrent;
+    localStorage.setItem(
+      'currentTrack',
+      json.stringify({ ...state.currentTrack, current, fm: [] })
+    );
     localStorage.setItem('controller', json.stringify({ ...state.controller, pause: true }));
   }
 
-  function handleKeyup(e: KeyboardEvent) {
+  function preventKeyDefault(e: KeyboardEvent, cb?: () => void) {
     if (e.code === 'Space') {
+      const focusDom = document.activeElement;
+      // 当前不存在聚焦元素或聚焦元素为body
+      if (!focusDom || focusDom === document.body) {
+        e.stopPropagation();
+        e.preventDefault();
+        cb?.();
+      }
+    }
+  }
+
+  function handleKeyup(e: KeyboardEvent) {
+    preventKeyDefault(e, () => {
       const state = store.getState();
       dispatch(setPause(!state.controller.pause));
-    }
+    });
   }
 
   useEffect(() => {
@@ -39,10 +58,12 @@ const Layout: React.FC<Props> = ({ routes }) => {
   useEffect(() => {
     window.addEventListener('beforeunload', interceptor);
     document.addEventListener('keyup', handleKeyup);
+    document.addEventListener('keydown', preventKeyDefault);
 
     return () => {
       window.removeEventListener('beforeunload', interceptor);
       document.removeEventListener('keyup', handleKeyup);
+      document.removeEventListener('keydown', preventKeyDefault);
     };
   }, []);
 

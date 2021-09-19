@@ -7,12 +7,19 @@ import { Music, Track, Song } from '@/types';
 import { RootState } from '..';
 import json from 'json5';
 
-type CurrentTrack = { current: number; tracks: Track[]; song?: Song; fm: Music[] };
+type CurrentTrack = {
+  current: number;
+  tracks: Track[];
+  song?: Song;
+  fm: Music[];
+  autoPlay?: boolean;
+  cacheCurrent?: number;
+};
 const prefix = (name: string) => `currentTrack/${name}`;
 const currentTrackStr = localStorage.getItem('currentTrack');
 const initialState: CurrentTrack = currentTrackStr
   ? json.parse<CurrentTrack>(currentTrackStr)
-  : { current: -1, tracks: [], fm: [] };
+  : { current: -1, tracks: [], fm: [], autoPlay: true };
 
 export const setSong = createAsyncThunk<Song, number>(
   prefix('setSong'),
@@ -33,13 +40,16 @@ export const setSong = createAsyncThunk<Song, number>(
   }
 );
 
-export const setFM = createAsyncThunk(prefix('setFM'), async (id, { rejectWithValue }) => {
-  const [err, res] = await to(getPersonalFM());
-  if (err || !res) return rejectWithValue(null);
-  const { code, data } = res;
+export const setFM = createAsyncThunk(
+  prefix('setFM'),
+  async (init: boolean, { rejectWithValue }) => {
+    const [err, res] = await to(getPersonalFM());
+    if (err || !res) return rejectWithValue(null);
+    const { code, data } = res;
 
-  return code === 200 && data.length ? data : rejectWithValue(null);
-});
+    return code === 200 && data.length ? { init, data } : rejectWithValue(null);
+  }
+);
 
 export const nextFM = createAsyncThunk<CurrentTrack, void, { state: RootState }>(
   prefix('nextFM'),
@@ -50,7 +60,7 @@ export const nextFM = createAsyncThunk<CurrentTrack, void, { state: RootState }>
     const newCurrentTrack = { ...currentTrack };
     const len = fm.length;
     if (len === current + 1) {
-      const [err] = await to(dispatch(setFM()));
+      const [err] = await to(dispatch(setFM(false)));
       if (err) return rejectWithValue(null);
     }
     newCurrentTrack.current++;
@@ -103,11 +113,17 @@ const { reducer, actions } = createSlice({
   name: 'currentTrack',
   initialState,
   reducers: {
+    setAutoPlay(state, action: PayloadAction<boolean>) {
+      const newState = { ...state };
+      newState.autoPlay = action.payload;
+      return newState;
+    },
     setCurrentTrack(state, action: PayloadAction<CurrentTrack>) {
+      const { cacheCurrent, ...restState } = state;
       const { current, tracks, fm } = action.payload;
       // 重置fm里面的歌
       fm.length = 0;
-      return { ...state, current, tracks, fm };
+      return { ...restState, current, tracks, fm, autoPlay: true };
     },
     changeSong(state, action: PayloadAction<{ next: boolean; mode: PlayMode }>) {
       const { tracks, current } = state;
@@ -139,11 +155,13 @@ const { reducer, actions } = createSlice({
 
       const newState = { ...state };
       newState.current = index;
+      newState.autoPlay = true;
       return newState;
     },
     changeCurrent(state, action: PayloadAction<number>) {
       const newState = { ...state };
       newState.current = action.payload;
+      newState.autoPlay = true;
       return newState;
     },
   },
@@ -161,8 +179,12 @@ const { reducer, actions } = createSlice({
 
     builder.addCase(setFM.fulfilled, (state, action) => {
       const newState = { ...state };
-      newState.fm = action.payload;
+      const { init, data } = action.payload;
+      newState.fm = data;
+      // 是初始化fm，就需要缓存当前播放的索引
+      if (init) newState.cacheCurrent = newState.current;
       newState.current = 0;
+      newState.autoPlay = true;
       return newState;
     });
 
@@ -190,12 +212,17 @@ const { reducer, actions } = createSlice({
       });
 
       if (needSetCurrent) newState.current = newState.tracks.length - 1;
+      newState.autoPlay = true;
       return newState;
     });
 
     builder.addCase(insertSong.rejected, defaultHandler);
 
-    builder.addCase(fetchAndSetCurrentTrack.fulfilled, defaultHandler);
+    builder.addCase(fetchAndSetCurrentTrack.fulfilled, state => {
+      const newState = { ...state };
+      newState.autoPlay = true;
+      return newState;
+    });
     builder.addCase(fetchAndSetCurrentTrack.rejected, defaultHandler);
   },
 });

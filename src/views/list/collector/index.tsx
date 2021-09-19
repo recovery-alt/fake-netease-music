@@ -22,7 +22,7 @@ const Collector: React.FC<Props> = ({ id }) => {
   }
 
   useEffect(() => {
-    loadPlaylistSubscribers();
+    if (id) loadPlaylistSubscribers();
   }, [id]);
 
   return subscribers.length > 0 ? (

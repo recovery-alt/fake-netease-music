@@ -41,7 +41,7 @@ export const DynamicPage = {
     const prefix = '/home/list';
     if (id === undefined) return `${prefix}/:id?/:type?`;
 
-    return `${prefix}/${wrapperSlash(id)}${wrapperSlash(type)}`;
+    return `${prefix}${wrapperSlash(id)}${wrapperSlash(type)}`;
   },
   singer: (id?: string | number) => handleSuffix('home/singer', id),
   user: (id?: string | number) => handleSuffix('home/user', id),

@@ -169,7 +169,7 @@ const List: React.FC = () => {
     if (!playlist || playlist.length === 0) return;
     playlist.forEach(item => {
       const { name, id, userId } = item;
-      const path = `/list/${id}`;
+      const path = DynamicPage.list(id);
       const menu = { name, path, icon: CustomerServiceOutlined };
       const index = userId === profile.userId ? 0 : 1;
       payload[index].menus.push(menu);

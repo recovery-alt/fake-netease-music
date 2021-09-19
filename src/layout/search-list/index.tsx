@@ -23,7 +23,7 @@ const SearchList: React.FC<Props> = ({ visible, setVisible, inputRef }) => {
 
   return createPortal(
     <div ref={ref} className={classNames(styles['search-list'], { [styles['--show']]: visible })}>
-      {keywords ? (
+      {keywords && keywords.trim() ? (
         <KeywordSuggestion setVisible={setVisible} />
       ) : (
         <EmptySuggestion {...{ visible, setVisible }} />

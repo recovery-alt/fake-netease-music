@@ -3,8 +3,6 @@ import { topMenuMap, MenuConfig } from './menu';
 import React, { lazy } from 'react';
 import { Page, DynamicPage } from './page';
 
-console.log(DynamicPage.findMusicNewest());
-
 export type RouteConfig = {
   path: string;
   component: React.FC<any>;

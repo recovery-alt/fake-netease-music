@@ -27,6 +27,7 @@ const List: React.FC = () => {
   const dispatch = useDispatch();
   const { push } = useHistory();
   const showDetail = useSelector((state: RootState) => state.controller.showDetail);
+  const autoPlay = useSelector((state: RootState) => state.currentTrack.autoPlay || false);
   const { listButtonRef, showList, setShowList } = useMusicList();
   const isFMMode = useSelector((state: RootState) => state.currentTrack.fm.length);
   const { lyricActive, setLyricActive } = useLyric();
@@ -108,8 +109,8 @@ const List: React.FC = () => {
               ref={audioRef}
               src={song.url}
               controls
+              autoPlay={autoPlay}
               loop={playMode === PlayMode.SOLO}
-              autoPlay
               onTimeUpdate={handleTimeUpdate}
               onPlay={() => handlePause(false)}
               onPause={() => handlePause(true)}
