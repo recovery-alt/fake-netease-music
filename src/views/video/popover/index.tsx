@@ -11,7 +11,7 @@ type Props = {
 const Popover: React.FC<Props> = ({ functionChildren, children, context }) => {
   const getClass = (name?: string) => styles[`popover${name ? '__' + name : ''}`];
   const container = useRef<HTMLDivElement>(null);
-  const button = useRef<HTMLButtonElement>(null);
+  const button = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
 
   function handleButtonClick() {
@@ -23,14 +23,14 @@ const Popover: React.FC<Props> = ({ functionChildren, children, context }) => {
   });
 
   return (
-    <button ref={button} className={getClass('button')} onClickCapture={handleButtonClick}>
+    <div ref={button} className={getClass('button')} onClickCapture={handleButtonClick}>
       {context}
       {show && (
         <div ref={container} className={getClass()}>
           {functionChildren ? functionChildren(setShow) : children}
         </div>
       )}
-    </button>
+    </div>
   );
 };
 

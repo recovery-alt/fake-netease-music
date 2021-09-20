@@ -51,7 +51,12 @@ const Video: React.FC = () => {
         <div className={getClass('popover-main')}>
           {videoGroupList.map(item => (
             <div key={item.id}>
-              <span onClick={() => handleTagClick(item.id)}>{item.name}</span>
+              <span
+                className={classNames({ '--active': item.id === categoryId })}
+                onClick={() => handleTagClick(item.id)}
+              >
+                {item.name}
+              </span>
             </div>
           ))}
         </div>

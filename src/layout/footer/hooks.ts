@@ -14,10 +14,9 @@ import {
   RollbackOutlined,
   EnterOutlined,
 } from '@ant-design/icons';
-import { PlayMode } from '@/enum';
 import { Track } from '@/types';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState, setPause, setCurrentTime } from '@/store';
+import { AppDispatch, RootState, setPause, setCurrentTime, setPlayMode } from '@/store';
 
 export const usePause = (audio?: RefObject<HTMLAudioElement>, currentTrack?: Track) => {
   const pause = useSelector((state: RootState) => state.controller.pause);
@@ -43,7 +42,7 @@ export const useCurrentTime = (
   duration?: number
 ) => {
   const currentTime = useSelector((state: RootState) => state.controller.currentTime);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
 
   const handleTimeUpdate = () => {
     if (!audioRef?.current) return;
@@ -64,7 +63,9 @@ export const useCurrentTime = (
 };
 
 export const usePlayMode = () => {
-  const [playMode, setPlayMode] = useState<PlayMode>(0);
+  const playMode = useSelector((state: RootState) => state.controller.playMode);
+  const dispatch = useDispatch();
+
   const playModeList = [
     { key: 'inTurn', tip: '顺序播放', icon: DoubleRightOutlined },
     { key: 'loop', tip: '循环播放', icon: RetweetOutlined },
@@ -76,7 +77,7 @@ export const usePlayMode = () => {
 
   const handleIconClick = () => {
     const result = playMode === 3 ? 0 : playMode + 1;
-    setPlayMode(result);
+    dispatch(setPlayMode(result));
   };
 
   return { playMode, handleIconClick, currentPlayMode };
@@ -96,7 +97,7 @@ export const useLyric = () => {
 };
 
 export const useVolume = (audioRef: RefObject<HTMLAudioElement>) => {
-  const [volume, setVolume] = useState(60);
+  const [volume, setVolume] = useState(100);
 
   const handleVolumeChange: ReactEventHandler<HTMLAudioElement> = e => {
     setVolume(e.currentTarget.volume * 100);

@@ -31,29 +31,25 @@ const List: React.FC = () => {
   const { listButtonRef, showList, setShowList } = useMusicList();
   const isFMMode = useSelector((state: RootState) => state.currentTrack.fm.length);
   const { lyricActive, setLyricActive } = useLyric();
-
   const currentTrack = useSelector((state: RootState) => {
     const { current, tracks, fm } = state.currentTrack;
     if (current < 0) return;
     if (!isFMMode) return tracks[current];
     if (fm[current]) return transformMusic2Track(fm[current]);
   });
-
   const isLastSong = useSelector((state: RootState) => {
     const { current, tracks } = state.currentTrack;
     return current + 1 === tracks.length;
   });
-
   const song = useSelector((state: RootState) => state.currentTrack.song);
+
   const { PlayIcon, pause, handlePause } = usePause(audioRef, currentTrack);
   const { currentTime, handleTimeUpdate, handleProgressClick } = useCurrentTime(
     audioRef,
     progressRef,
     currentTrack?.dt
   );
-
   const { playMode, handleIconClick, currentPlayMode } = usePlayMode();
-
   const { volume, handleSliderChange, handleVolumeChange } = useVolume(audioRef);
 
   function handlePlayEnded() {
@@ -87,8 +83,7 @@ const List: React.FC = () => {
   }
 
   useEffect(() => {
-    if (!currentTrack?.id) return;
-    dispatch(setSong(currentTrack.id));
+    if (currentTrack?.id) dispatch(setSong(currentTrack.id));
   }, [currentTrack?.id]);
 
   return (

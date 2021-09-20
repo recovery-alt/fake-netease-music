@@ -1,17 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import json from 'json5';
+import { PlayMode } from '@/enum';
 
-type Controller = { pause: boolean; currentTime: number; showDetail: boolean; keywords: string };
+type Controller = {
+  pause: boolean;
+  currentTime: number;
+  playMode: PlayMode;
+  showDetail: boolean;
+  keywords: string;
+};
 
 const controllerStr = localStorage.getItem('controller');
 const initialState: Controller = controllerStr
   ? json.parse<Controller>(controllerStr)
-  : { pause: true, currentTime: 0, showDetail: false, keywords: '' };
+  : { playMode: PlayMode.IN_TURN, pause: true, currentTime: 0, showDetail: false, keywords: '' };
 
 const { reducer: controllerReducer, actions } = createSlice({
   name: 'controller',
   initialState,
   reducers: {
+    setPlayMode(state, action: PayloadAction<PlayMode>) {
+      const newState = { ...state };
+      newState.playMode = action.payload;
+      return newState;
+    },
     setPause(state, action: PayloadAction<boolean>) {
       const newState = { ...state };
       newState.pause = action.payload;
@@ -39,5 +51,6 @@ const { reducer: controllerReducer, actions } = createSlice({
   },
 });
 
-export const { setPause, setCurrentTime, setShowDetail, setKeywords, setController } = actions;
+export const { setPlayMode, setPause, setCurrentTime, setShowDetail, setKeywords, setController } =
+  actions;
 export { controllerReducer };

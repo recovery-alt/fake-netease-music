@@ -50,6 +50,7 @@ const Lyric: React.FC<Props> = ({ music }) => {
 
   useEffect(() => {
     if (!music?.id) return;
+    containerRef.current?.scrollTo({ top: 0 });
     setCurrentIndex(0);
     getLyric(music.id).then(res => {
       const { lrc, nolyric } = res;
