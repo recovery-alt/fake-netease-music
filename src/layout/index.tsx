@@ -20,13 +20,13 @@ const Layout: React.FC<Props> = ({ routes }) => {
 
   function interceptor() {
     const state = store.getState();
-    const { cacheCurrent, current: RawCurrent } = state.currentTrack;
-    let current = RawCurrent;
+    const { cacheCurrent, current: rawCurrent } = state.currentTrack;
+    let current = rawCurrent;
     // 缓存过值，就需要读取
     if (cacheCurrent !== undefined) current = cacheCurrent;
     localStorage.setItem(
       'currentTrack',
-      json.stringify({ ...state.currentTrack, current, fm: [] })
+      json.stringify({ ...state.currentTrack, current, autoPlay: false, fm: [] })
     );
     localStorage.setItem('controller', json.stringify({ ...state.controller, pause: true }));
   }

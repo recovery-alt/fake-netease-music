@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://gitee.com/cq360/fake-netease-music/compare/v1.0.1...v1.0.2) (2021-09-20)
+
+### Features
+
+- 查询页面跳转 ([e09ae9b](https://gitee.com/cq360/fake-netease-music/commit/e09ae9b7a044942445b924a5992180298e9ddbec))
+- 后台播放功能 ([74134e3](https://gitee.com/cq360/fake-netease-music/commit/74134e38c785a517854bdeff1de2b382afce035b))
+- 全局播放模式缓存 ([903f5c4](https://gitee.com/cq360/fake-netease-music/commit/903f5c4371d14a4811a4aea4e52efc5c63cea7a2))
+- 视频播放功能 ([1d76179](https://gitee.com/cq360/fake-netease-music/commit/1d7617927ff288ffe09488b7a524f288a5ad961e))
+- 视频列表页逻辑 ([c3285fa](https://gitee.com/cq360/fake-netease-music/commit/c3285fa57303cac012495f095f02c663fef798ac))
+- 整理所有路由页面 ([60d1819](https://gitee.com/cq360/fake-netease-music/commit/60d1819ce3d4a1b3868ba80a5022e3e663b5d098))
+- space 按键控制 ([e712198](https://gitee.com/cq360/fake-netease-music/commit/e712198ef557fccdf33898c89e385d901fb25e63))
+
+### Bug Fixes
+
+- 优化交互细节 & 修复自动播放问题 ([63ee1b5](https://gitee.com/cq360/fake-netease-music/commit/63ee1b5f476107b1a7d08b0c856c3df48d247278))
+
 ### 1.0.1 (2021-09-18)
 
 ### Features
