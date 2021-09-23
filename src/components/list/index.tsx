@@ -4,13 +4,13 @@ import Img from '@/components/img';
 
 export type ListData = { id: number; imgUrl: string; col2: string; col3?: string; col4?: string };
 
-type Props = { data: ListData[] };
+type Props = { data: ListData[]; onItemClick?: (id: number) => void };
 
-const List: React.FC<Props> = ({ data }) => {
+const List: React.FC<Props> = ({ data, onItemClick }) => {
   return (
     <section className={styles.list}>
       {data.map(item => (
-        <div key={item.id} className={styles.list__item}>
+        <div key={item.id} className={styles.list__item} onClick={() => onItemClick?.(item.id)}>
           <div className={styles.list__left}>
             <Img className={styles.list__img} src={item.imgUrl} />
             <span>{item.col2}</span>

@@ -2,10 +2,17 @@ import React, { useEffect, useState } from 'react';
 import './radio.less';
 import { getDJSublist } from '@/api';
 import List, { ListData } from '@/components/list';
+import { useHistory } from 'react-router-dom';
+import { DynamicPage } from '@/router';
 
 const Radio: React.FC = () => {
   const [total, setTotal] = useState(0);
   const [data, setData] = useState<ListData[]>([]);
+  const { push } = useHistory();
+
+  function handleItemClick(id: number) {
+    push(DynamicPage.radioList(id));
+  }
 
   useEffect(() => {
     (async () => {
@@ -29,7 +36,7 @@ const Radio: React.FC = () => {
         <strong>我订阅的电台</strong>
         <span>（{total}）</span>
       </header>
-      <List data={data} />
+      <List data={data} onItemClick={handleItemClick} />
     </div>
   );
 };

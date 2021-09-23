@@ -1,3 +1,4 @@
+import { classGenerator } from '@/utils';
 import React, { useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
 import styles from './popover.module.less';
@@ -9,7 +10,7 @@ type Props = {
 };
 
 const Popover: React.FC<Props> = ({ functionChildren, children, context }) => {
-  const getClass = (name?: string) => styles[`popover${name ? '__' + name : ''}`];
+  const getClass = classGenerator('popover', styles);
   const container = useRef<HTMLDivElement>(null);
   const button = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);

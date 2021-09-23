@@ -8,9 +8,10 @@ import { DynamicPage } from '@/router';
 import Popover from './popover';
 import { useMore, usePopover } from './hook';
 import classNames from 'classnames';
+import { classGenerator } from '@/utils';
 
 const Video: React.FC = () => {
-  const getClass = (name?: string) => `video${name ? '__' + name : ''}`;
+  const getClass = classGenerator('video');
   const [videoCategory, setVideoCategory] = useState<NavItem[]>([]);
   const [categoryId, setCategoryId] = useState<number | string>(0);
   const { push } = useHistory();

@@ -73,3 +73,10 @@ export const transformSong2Track = (song: Song) => {
   const { id, name, duration: dt, album: al, artists: ar } = song;
   return { id, name, dt, al, ar };
 };
+
+export function classGenerator(suffix: string, styles?: Data<string>) {
+  return function (name?: string) {
+    const value = suffix + (name ? '__' + name : '');
+    return styles ? styles[value] : value;
+  };
+}

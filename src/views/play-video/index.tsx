@@ -6,7 +6,7 @@ import Button from '@/components/button';
 import { getRelatedAllvideo, getVideoDetail, getVideoUrl, getCommentVideo } from '@/api';
 import { useParams } from 'react-router-dom';
 import { VideoDetail, VideoUrl, VideoMultiCreator } from '@/types';
-import { resizeImg, wrapNumber } from '@/utils';
+import { classGenerator, resizeImg, wrapNumber } from '@/utils';
 import dayjs from 'dayjs';
 import { LikeOutlined, FolderAddOutlined, ShareAltOutlined } from '@ant-design/icons';
 import WriteComment from '@/views/list/comments-list/write-comment';
@@ -15,7 +15,7 @@ import Video from './video';
 import { useHistory } from 'react-router-dom';
 
 const PlayVideo: React.FC = () => {
-  const getClass = (name?: string) => `play-video${name ? '__' + name : ''}`;
+  const getClass = classGenerator('play-video');
   const params = useParams<{ id: string }>();
   const id = params.id;
   const [videoDetail, setVideoDetail] = useState<VideoDetail>();

@@ -47,4 +47,5 @@ export const DynamicPage = {
   user: (id?: string | number) => handleSuffix('home/user', id),
   findMusicNewest: (type?: string) => handleSuffix('home/find-music/newest', type, 'type'),
   playVideo: (id?: string | number) => handleSuffix('play-video', id),
+  radioList: (id?: string | number) => handleSuffix('home/radio-list', id),
 };

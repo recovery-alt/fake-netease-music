@@ -9,9 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentTrack, RootState } from '@/store';
 import { getRecommendSongs } from '@/api';
 import { Track } from '@/types';
+import { classGenerator } from '@/utils';
 
 const DailyRecommend: React.FC = () => {
-  const getClass = (name?: string) => `daily-recommend${name ? '__' + name : ''}`;
+  const getClass = classGenerator('daily-recommend');
   const [recommendSongs, setRecommendSongs] = useState<Track[]>([]);
   const isLogin = useSelector((state: RootState) => !!state.user.cookie);
   const dispatch = useDispatch();

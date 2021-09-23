@@ -44,6 +44,10 @@ const routes: Array<RouteConfig> = [
         path: DynamicPage.findMusicNewest(),
         component: lazy(() => import('@/views/find-music/views/newest')),
       },
+      {
+        path: DynamicPage.radioList(),
+        component: lazy(() => import('@/views/radio-list')),
+      },
       ...Object.values(topMenuMap).flat(),
     ],
   },

@@ -1,0 +1,32 @@
+.radio-list {
+  .img() {
+    background-color: #a5a5a5;
+    border-radius: 4px;
+    height: 200px;
+    width: 200px;
+  }
+
+  &__header {
+    align-items: center;
+    display: flex;
+    padding: 15px 30px;
+  }
+
+  &__img {
+    .img();
+
+    &-default {
+      align-items: center;
+      color: #fff;
+      display: flex;
+      font-size: 80px;
+      justify-content: center;
+      .img();
+    }
+  }
+
+  &__right {
+    height: 200px;
+    margin-left: 30px;
+  }
+}
