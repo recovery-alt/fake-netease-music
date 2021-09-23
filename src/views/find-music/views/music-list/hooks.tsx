@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { getTopPlaylist, getTopPlaylistHighquality } from '@/api';
-import { UserPlaylist, TopPlaylist } from '@/types';
+import React, { useState, useEffect } from 'react';
+import { getTopPlaylist, getTopPlaylistHighquality, getAllMusicCategory } from '@/api';
+import { UserPlaylist, TopPlaylist, Subcategory } from '@/types';
 import { CardData } from '@/components/card';
+import { RightOutlined } from '@ant-design/icons';
 
 export const useTopPlaylist = () => {
   const [topPlaylist, setTopPlaylist] = useState<CardData[]>([]);
@@ -46,3 +47,34 @@ export const useTopPlaylist = () => {
     setCat,
   };
 };
+
+export function usePopover(cat: string) {
+  type MusicCategoryType = { name: string; data: Subcategory[] };
+  const [allMusicCategory, setAllMusicCategory] = useState<MusicCategoryType[]>([]);
+  const buttonContext = (
+    <>
+      {cat === '全部' ? '全部歌单' : cat}
+      <RightOutlined />
+    </>
+  );
+
+  useEffect(() => {
+    (async () => {
+      const res = await getAllMusicCategory();
+      const allMusicCategory = Object.keys(res.categories).map(key => {
+        const item = res.categories[key];
+        const data: Subcategory[] = [];
+        const index = Number(key);
+        const category: MusicCategoryType = { data, name: item };
+        res.sub.forEach(sub => {
+          if (sub.category === index) category.data.push(sub);
+        });
+
+        return category;
+      });
+      setAllMusicCategory(allMusicCategory);
+    })();
+  }, []);
+
+  return { buttonContext, allMusicCategory };
+}

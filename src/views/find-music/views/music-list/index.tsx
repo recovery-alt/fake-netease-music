@@ -1,18 +1,19 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import './music-list.less';
-import { CrownOutlined, RightOutlined } from '@ant-design/icons';
+import { CrownOutlined, GlobalOutlined } from '@ant-design/icons';
 import { getMusicCategory } from '@/api';
 import { UserPlaylist } from '@/types';
-import { useTopPlaylist } from './hooks';
+import { usePopover, useTopPlaylist } from './hooks';
 import { Pagination } from 'antd';
 import Img from '@/components/img';
 import { useHistory } from 'react-router-dom';
-import Popover from './popover';
+import Popover from '@/views/video/popover';
 import classNames from 'classnames';
 import { resizeImg } from '@/utils';
 import { fetchAndSetCurrentTrack } from '@/store';
 import { useDispatch } from 'react-redux';
 import { DynamicPage } from '@/router';
+import styles from './popover.module.less';
 
 const MusicList: React.FC = () => {
   const [musicCategory, setMusicCategory] = useState<UserPlaylist[]>([]);
@@ -26,10 +27,10 @@ const MusicList: React.FC = () => {
     cat,
     setCat,
   } = useTopPlaylist();
-  const [showPopover, setShowPopover] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
   const { push } = useHistory();
   const dispatch = useDispatch();
+
+  const { buttonContext, allMusicCategory } = usePopover(cat);
 
   useEffect(() => {
     (async () => {
@@ -44,6 +45,48 @@ const MusicList: React.FC = () => {
 
   function handleListItemIconClick(id: number) {
     dispatch(fetchAndSetCurrentTrack(id));
+  }
+
+  function renderPopover(setShow: (show: boolean) => void) {
+    function handleItemClick(cat: string) {
+      setCat(cat);
+      setShow(false);
+    }
+
+    return (
+      <div className={styles.popover}>
+        <header className={styles.popover__header}>
+          <button
+            className={classNames({ [styles['--active']]: cat === '全部' })}
+            onClick={() => handleItemClick('全部')}
+          >
+            全部歌单
+          </button>
+        </header>
+        {allMusicCategory.map(item => (
+          <section key={item.name} className={styles.popover__item}>
+            <div className={styles.popover__left}>
+              <GlobalOutlined />
+              <span>{item.name}</span>
+            </div>
+            <div className={styles.popover__right}>
+              {item.data.map(sub => (
+                <div
+                  key={sub.name}
+                  className={classNames(styles.popover__label, {
+                    [styles['--active']]: sub.name === cat,
+                  })}
+                  onClick={() => handleItemClick(sub.name)}
+                >
+                  <span>{sub.name}</span>
+                  {sub.hot && <strong>HOT</strong>}
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    );
   }
 
   return (
@@ -61,18 +104,7 @@ const MusicList: React.FC = () => {
         </div>
       </header>
       <section className="music-list__guide">
-        {showPopover && (
-          <Popover
-            cat={cat}
-            setCat={setCat}
-            button={buttonRef.current}
-            setShowPopover={setShowPopover}
-          />
-        )}
-        <button ref={buttonRef} onClick={() => setShowPopover(!showPopover)}>
-          {cat === '全部' ? '全部歌单' : cat}
-          <RightOutlined />
-        </button>
+        <Popover context={buttonContext} functionChildren={renderPopover} />
         <ul>
           {musicCategory.map(item => (
             <li
