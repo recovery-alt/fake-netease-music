@@ -2,7 +2,7 @@ import React, { useState, useEffect, useImperativeHandle } from 'react';
 import { PlaySquareOutlined } from '@ant-design/icons';
 import styles from './list.module.less';
 import { Song } from '@/types';
-import { formatMS, resizeImg } from '@/utils';
+import { classGenerator, formatMS, resizeImg } from '@/utils';
 import Img from '@/components/img';
 import { getTopSong } from '@/api';
 import { useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ import { insertSong } from '@/store';
 type Props = { type: number };
 
 const SongList = React.forwardRef<Song[], Props>(({ type }, ref) => {
+  const getClass = classGenerator('song-list', styles);
   const [songs, setSongs] = useState<Song[]>([]);
   const dispatch = useDispatch();
 
@@ -29,31 +30,31 @@ const SongList = React.forwardRef<Song[], Props>(({ type }, ref) => {
   useImperativeHandle(ref, () => songs, [songs]);
 
   return (
-    <div className={styles['song-list']}>
+    <div className={getClass()}>
       {songs.map((item, i) => (
-        <div key={item.id} className={styles['song-list__item']}>
-          <div className={styles['song-list__left']}>
-            <div className={styles['song-list__ordinal']}>{i + 1}</div>
-            <div className={styles['song-list__img-wrapper']}>
+        <div key={item.id} className={getClass('item')}>
+          <div className={getClass('left')}>
+            <div className={getClass('ordinal')}>{i + 1}</div>
+            <div className={getClass('img-wrapper')}>
               <Img
-                className={styles['song-list__img']}
+                className={getClass('img')}
                 src={resizeImg(item.album.picUrl, 100)}
                 icon
                 onClick={() => handleItemClick(item.id)}
               />
             </div>
-            <div className={styles['song-list__song']}>
+            <div className={getClass('song')}>
               <p>{item.name}</p>
               <small>SQ</small>
               <PlaySquareOutlined />
             </div>
           </div>
-          <div className={styles['song-list__right']}>
-            <div className={styles['song-list__author']}>
+          <div className={getClass('right')}>
+            <div className={getClass('author')}>
               {item.album.artists.reduce((acc, val) => `${acc}/${val.name}`, '').slice(1)}
             </div>
-            <div className={styles['song-list__album']}>{item.album.name}</div>
-            <div className={styles['song-list__duration']}>{formatMS(item.duration)}</div>
+            <div className={getClass('album')}>{item.album.name}</div>
+            <div className={getClass('duration')}>{formatMS(item.duration)}</div>
           </div>
         </div>
       ))}

@@ -5,25 +5,23 @@ import { LikeOutlined, ExportOutlined, CommentOutlined } from '@ant-design/icons
 import { Comment } from '@/types';
 import dayjs from 'dayjs';
 import Img from '@/components/img';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 
 type Props = { comment: Comment };
 
 const Comments: React.FC<Props> = ({ comment }) => {
+  const getClass = classGenerator('comments', styles);
   const data = [
     { icon: LikeOutlined, value: comment.likedCount },
     { icon: ExportOutlined },
     { icon: CommentOutlined },
   ];
   return (
-    <div className={styles.comments}>
-      <div className={styles.comments__left}>
-        <Img
-          className={styles.comments__img}
-          src={resizeImg(comment?.user.avatarUrl || avatar, 100)}
-        />
+    <div className={getClass()}>
+      <div className={getClass('left')}>
+        <Img className={getClass('img')} src={resizeImg(comment?.user.avatarUrl || avatar, 100)} />
       </div>
-      <div className={styles.comments__right}>
+      <div className={getClass('right')}>
         <p>
           <a>{comment.user.nickname}：</a>
           {comment.content}
@@ -38,11 +36,11 @@ const Comments: React.FC<Props> = ({ comment }) => {
             ))}
           </p>
         )}
-        <div className={styles.comments__info}>
+        <div className={getClass('info')}>
           <span>{dayjs(comment.time).format('YYYY年M月D日 HH:mm')}</span>
-          <div className={styles.comments__icons}>
+          <div className={getClass('icons')}>
             {data.map((item, i) => (
-              <div key={i} className={styles['comments__icon']}>
+              <div key={i} className={getClass('icon')}>
                 <item.icon />
                 {item.value && item.value > 0 ? <strong>{item.value}</strong> : null}
               </div>

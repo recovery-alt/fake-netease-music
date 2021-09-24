@@ -3,7 +3,7 @@ import styles from './list.module.less';
 import { Data } from '@/types';
 import Img, { IconOptions } from '@/components/img';
 import classNames from 'classnames';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 
 export type ListData = { id: number; name: string; imgUrl: string; extra?: Data<string> };
 export type ListParams = { item: ListData; i: number; j: number; len: number };
@@ -17,18 +17,19 @@ type Props = {
 };
 
 const List: React.FC<Props> = ({ icon, data, functionChildren, size = 'default', onItemClick }) => {
+  const getClass = classGenerator('list', styles);
   const len = data.length;
   const newData = [data.slice(0, len / 2), data.slice(len / 2, len)];
 
   return (
-    <div className={styles.list}>
+    <div className={getClass()}>
       {newData.map((val, i) => (
-        <div key={i} className={styles.list__col}>
+        <div key={i} className={getClass('col')}>
           {val.map((item, j) => (
-            <div key={j} className={styles.list__item} onDoubleClick={() => onItemClick?.(item.id)}>
-              <div className={classNames(styles['list__img-wrapper'], styles[`--${size}`])}>
+            <div key={j} className={getClass('item')} onDoubleClick={() => onItemClick?.(item.id)}>
+              <div className={classNames(getClass('img-wrapper'), styles[`--${size}`])}>
                 <Img
-                  className={styles.list__img}
+                  className={getClass('img')}
                   src={resizeImg(item.imgUrl)}
                   icon={icon}
                   onClick={() => onItemClick?.(item.id)}

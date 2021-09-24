@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import styles from './album-list.module.less';
 import { TopAlbumParams, TopAlbum } from '@/types';
 import Img from '@/components/img';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 import { fetchAndSetCurrentTrack } from '@/store';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { getTopAlbum } from '@/api';
 import { DynamicPage } from '@/router';
 
 const AlbumList: React.FC<TopAlbumParams> = ({ type, area }) => {
+  const getClass = classGenerator('album-list', styles);
   const [data, setData] = useState<TopAlbum>();
   const dispatch = useDispatch();
   const { push } = useHistory();
@@ -24,25 +25,25 @@ const AlbumList: React.FC<TopAlbumParams> = ({ type, area }) => {
   }, [area, type]);
 
   return (
-    <div className={styles['album-list']}>
-      <div className={styles['album-list__left']}>
+    <div className={getClass()}>
+      <div className={getClass('left')}>
         <h2>本{isWeek ? '周' : '月'}新碟</h2>
       </div>
-      <div className={styles['album-list__right']}>
+      <div className={getClass('right')}>
         {albums?.map(item => (
-          <div key={item.id} className={styles['album-list__item']}>
-            <div className={styles['album-list__img-wrapper']}>
+          <div key={item.id} className={getClass('item')}>
+            <div className={getClass('img-wrapper')}>
               <Img
-                className={styles['album-list__img']}
+                className={getClass('img')}
                 src={resizeImg(item.picUrl, 100)}
                 icon={{ size: 'big', hoverDisplay: true }}
                 onClick={() => push(DynamicPage.list(item.id))}
                 onIconClick={() => dispatch(fetchAndSetCurrentTrack(item.id))}
               />
             </div>
-            <div className={styles['album-list__description']}>
-              <div className={styles['album-list__name']}>{item.name}</div>
-              <div className={styles['album-list__author']}>{item.artist.name}</div>
+            <div className={getClass('description')}>
+              <div className={getClass('name')}>{item.name}</div>
+              <div className={getClass('author')}>{item.artist.name}</div>
             </div>
           </div>
         ))}

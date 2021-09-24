@@ -9,13 +9,14 @@ import Img from '@/components/img';
 import { useHistory } from 'react-router-dom';
 import Popover from '@/views/video/popover';
 import classNames from 'classnames';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 import { fetchAndSetCurrentTrack } from '@/store';
 import { useDispatch } from 'react-redux';
 import { DynamicPage } from '@/router';
 import styles from './popover.module.less';
 
 const MusicList: React.FC = () => {
+  const getClass = classGenerator('music-list');
   const [musicCategory, setMusicCategory] = useState<UserPlaylist[]>([]);
   const {
     topPlaylist,
@@ -48,14 +49,15 @@ const MusicList: React.FC = () => {
   }
 
   function renderPopover(setShow: (show: boolean) => void) {
+    const getClass = classGenerator('popover', styles);
     function handleItemClick(cat: string) {
       setCat(cat);
       setShow(false);
     }
 
     return (
-      <div className={styles.popover}>
-        <header className={styles.popover__header}>
+      <div className={getClass()}>
+        <header className={getClass('header')}>
           <button
             className={classNames({ [styles['--active']]: cat === '全部' })}
             onClick={() => handleItemClick('全部')}
@@ -64,16 +66,16 @@ const MusicList: React.FC = () => {
           </button>
         </header>
         {allMusicCategory.map(item => (
-          <section key={item.name} className={styles.popover__item}>
-            <div className={styles.popover__left}>
+          <section key={item.name} className={getClass('item')}>
+            <div className={getClass('left')}>
               <GlobalOutlined />
               <span>{item.name}</span>
             </div>
-            <div className={styles.popover__right}>
+            <div className={getClass('right')}>
               {item.data.map(sub => (
                 <div
                   key={sub.name}
-                  className={classNames(styles.popover__label, {
+                  className={classNames(getClass('label'), {
                     [styles['--active']]: sub.name === cat,
                   })}
                   onClick={() => handleItemClick(sub.name)}
@@ -90,12 +92,12 @@ const MusicList: React.FC = () => {
   }
 
   return (
-    <div className="music-list">
-      <header className="music-list__banner">
+    <div className={getClass()}>
+      <header className={getClass('banner')}>
         {topPlaylistHighquality?.coverImgUrl && (
           <img src={resizeImg(topPlaylistHighquality.coverImgUrl, 300)} alt="banner" />
         )}
-        <div className="music-list__banner-right">
+        <div className={getClass('banner-right')}>
           <button>
             <CrownOutlined /> 精品歌单
           </button>
@@ -103,7 +105,7 @@ const MusicList: React.FC = () => {
           <h3>{topPlaylistHighquality?.copywriter}</h3>
         </div>
       </header>
-      <section className="music-list__guide">
+      <section className={getClass('guide')}>
         <Popover context={buttonContext} functionChildren={renderPopover} />
         <ul>
           {musicCategory.map(item => (
@@ -117,11 +119,11 @@ const MusicList: React.FC = () => {
           ))}
         </ul>
       </section>
-      <section className="music-list__card">
+      <section className={getClass('card')}>
         {topPlaylist.map(item => (
-          <div key={item.id} className="music-list__item">
+          <div key={item.id} className={getClass('item')}>
             <Img
-              className="music-list__img"
+              className={getClass('img')}
               src={resizeImg(item.imgUrl)}
               icon={{ size: 'big', hoverDisplay: true, placement: 'bottom' }}
               onClick={() => handleListItemClick(item.id)}
@@ -131,7 +133,7 @@ const MusicList: React.FC = () => {
           </div>
         ))}
       </section>
-      <footer className="music-list__footer">
+      <footer className={getClass('footer')}>
         {total > 0 ? (
           <Pagination
             {...{ current, total }}

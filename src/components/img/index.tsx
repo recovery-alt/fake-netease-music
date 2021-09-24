@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { AppProps } from '@/types';
 import { LoadingOutlined } from '@ant-design/icons';
 import Icon, { IconSize } from '@/components/icon';
+import { classGenerator } from '@/utils';
 
 export type IconOptions = {
   size?: IconSize;
@@ -30,6 +31,7 @@ const Img: React.FC<Props> = ({
   onClick,
   onIconClick,
 }) => {
+  const getClass = classGenerator('img', styles);
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -64,7 +66,7 @@ const Img: React.FC<Props> = ({
   }, []);
 
   return (
-    <div ref={ref} className={classNames(styles.img, className)} style={style}>
+    <div ref={ref} className={classNames(getClass(), className)} style={style}>
       {visible && (
         <img
           src={src}
@@ -75,12 +77,12 @@ const Img: React.FC<Props> = ({
           onClick={onClick}
         />
       )}
-      {!banLoading && loading && <LoadingOutlined className={styles.img__loading} />}
+      {!banLoading && loading && <LoadingOutlined className={getClass('loading')} />}
       {!loading && iconConfig && (
         <Icon
           size={iconConfig.size}
           className={classNames(
-            styles.img__play,
+            getClass('play'),
             styles[`--${iconConfig.size}`],
             styles[`--${iconConfig.placement}`],
             { [styles['--show']]: !iconConfig.hoverDisplay || showIcon }

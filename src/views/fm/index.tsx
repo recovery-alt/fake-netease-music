@@ -14,8 +14,10 @@ import {
 } from '@ant-design/icons';
 import { getCommentMusic } from '@/api';
 import WriteComment from '@/layout/music-detail/write-comment';
+import { classGenerator } from '@/utils';
 
 const FM: React.FC = () => {
+  const getClass = classGenerator('fm');
   const dispatch = useDispatch<AppDispatch>();
   const [currentMusic, preMusic] = useSelector((state: RootState) => {
     const { fm, current } = state.currentTrack;
@@ -41,8 +43,8 @@ const FM: React.FC = () => {
 
   return (
     <div className="fm">
-      <section className="fm__player">
-        <div className="fm__cover-wrapper">
+      <section className={getClass('player')}>
+        <div className={getClass('cover-wrapper')}>
           <Cover current={currentMusic} next={preMusic} />
           <ButtonGroup data={data} />
         </div>

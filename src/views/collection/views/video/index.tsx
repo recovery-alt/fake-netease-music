@@ -3,8 +3,10 @@ import Header from '../../header';
 import './video.less';
 import List, { ListItem } from '@/views/video/list';
 import { getMVSublist } from '@/api';
+import { classGenerator } from '@/utils';
 
 const Video: React.FC = () => {
+  const getClass = classGenerator('collection-video');
   const [data, setData] = useState<ListItem[]>([]);
 
   useEffect(() => {
@@ -22,9 +24,9 @@ const Video: React.FC = () => {
   }, []);
 
   return (
-    <div className="collection-video">
+    <div className={getClass()}>
       <Header title="收藏的视频" count={8} />
-      <div className="collection-video__list">
+      <div className={getClass('list')}>
         <List data={data} />
       </div>
     </div>

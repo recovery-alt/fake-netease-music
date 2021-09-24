@@ -19,7 +19,7 @@ import Scrollbar from '@/components/scrollbar';
 import Login from '../login';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState, setUserInfoFromCache, setUserPlaylist } from '@/store';
-import { local, resizeImg } from '@/utils';
+import { classGenerator, local, resizeImg } from '@/utils';
 import { UserInfo } from '@/types';
 import json from 'json5';
 import classNames from 'classnames';
@@ -31,6 +31,7 @@ type ItemProps = { menu: Menu; index: [number, number]; plus?: number };
 type MenuListAction = { type: number; payload: MenuItem[] };
 
 const List: React.FC = () => {
+  const getClass = classGenerator('sidebar', styles);
   const [selected, setSelected] = useState<number[]>();
   const { push } = useHistory();
   const { pathname } = useLocation();
@@ -80,7 +81,7 @@ const List: React.FC = () => {
     return (
       <div
         key={menu.path}
-        className={classNames(styles.sidebar__item, {
+        className={classNames(getClass('item'), {
           [styles['--active']]: active,
         })}
         onClick={() => handleMenuClick({ menu, index })}
@@ -128,18 +129,16 @@ const List: React.FC = () => {
   function renderTitle(item: MenuItem, i: number) {
     if (!item.title) return;
     return (
-      <div className={styles.sidebar__title}>
+      <div className={getClass('title')}>
         {i < 2 ? (
           item.title
         ) : (
           <>
-            <div className={styles['sidebar__title-left']}>
+            <div className={getClass('title-left')}>
               <CaretDownOutlined />
               <strong>{item.title}</strong>
             </div>
-            {item.title === '创建的歌单' && (
-              <PlusOutlined className={styles['sidebar__title-right']} />
-            )}
+            {item.title === '创建的歌单' && <PlusOutlined className={getClass('title-right')} />}
           </>
         )}
       </div>
@@ -178,13 +177,13 @@ const List: React.FC = () => {
   }, [playlist]);
 
   return (
-    <aside className={styles.sidebar}>
-      <header className={styles.sidebar__header}>
+    <aside className={getClass()}>
+      <header className={getClass('header')}>
         <img src={resizeImg(profile.avatarUrl, 100)} alt="icon" onClick={handleAvatarClick} />
         <strong onClick={login}>{profile.nickname}</strong>
         <CaretRightOutlined onClick={login} />
       </header>
-      <Scrollbar className={styles.sidebar__main}>
+      <Scrollbar className={getClass('main')}>
         {menuList.map((item, i) => {
           return (
             <div key={i}>

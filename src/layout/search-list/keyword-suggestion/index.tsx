@@ -14,10 +14,12 @@ import { useHistory } from 'react-router-dom';
 import debounce from 'lodash/debounce';
 import { stringify } from 'qs';
 import { DynamicPage, Page } from '@/router';
+import { classGenerator } from '@/utils';
 
 type Props = { setVisible: (visible: boolean) => void };
 
 const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
+  const getClass = classGenerator('keyword-suggestion', styles);
   const keywords = useSelector((state: RootState) => state.controller.keywords);
   const [data, setData] = useState<SearchSuggest>({});
   const { push } = useHistory();
@@ -65,7 +67,7 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
 
     return (
       <>
-        <div key={item.label} className={styles['keyword-suggestion__title']}>
+        <div key={item.label} className={getClass('title')}>
           <item.icon />
           {item.label}
         </div>
@@ -105,7 +107,7 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
     return (
       <div
         key={dataItem.id}
-        className={styles['keyword-suggestion__item']}
+        className={getClass('item')}
         onClick={() => handleItemClick(dataItem.id, key)}
       >
         {execute()}
@@ -124,8 +126,8 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
   );
 
   return data.order?.length ? (
-    <div className={styles['keyword-suggestion']}>
-      <header className={styles['keyword-suggestion__header']}>
+    <div className={getClass()}>
+      <header className={getClass('header')}>
         <span onClick={handleTitleClick}>
           搜“<strong>{keywords}</strong>”相关的结果 &gt;
         </span>

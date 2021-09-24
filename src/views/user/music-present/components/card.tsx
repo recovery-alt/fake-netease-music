@@ -3,7 +3,7 @@ import styles from '../music-present.module.less';
 import Img from '@/components/img';
 import { Props as PresentProps } from '../';
 import dayjs from 'dayjs';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { fetchAndSetCurrentTrack, RootState } from '@/store';
@@ -13,6 +13,7 @@ import { DynamicPage } from '@/router';
 type Props = Omit<PresentProps, 'type'>;
 
 const Card: React.FC<Props> = ({ data, isAlbum }) => {
+  const getClass = classGenerator('card', styles);
   const dispatch = useDispatch();
   const { push } = useHistory();
   const isLogin = useSelector((state: RootState) => !!state.user.cookie);
@@ -27,21 +28,21 @@ const Card: React.FC<Props> = ({ data, isAlbum }) => {
   }
 
   return (
-    <div className={styles.card}>
+    <div className={getClass()}>
       {data.map(item => (
-        <div key={item.id} className={styles.card__item}>
-          <div className={styles['card__img-wrapper']}>
+        <div key={item.id} className={getClass('item')}>
+          <div className={getClass('img-wrapper')}>
             <Img
               src={resizeImg(item.picUrl, 150)}
-              className={styles.card__img}
+              className={getClass('img')}
               icon={{ size: 'big', hoverDisplay: true }}
               onClick={() => handleCardClick(item.id)}
               onIconClick={() => dispatch(fetchAndSetCurrentTrack({ id: item.id, isAlbum }))}
             />
           </div>
-          <div className={styles.card__description}>
-            <div className={styles.card__title}>{item.name}</div>
-            <div className={styles.card__subtitle}>
+          <div className={getClass('description')}>
+            <div className={getClass('title')}>{item.name}</div>
+            <div className={getClass('subtitle')}>
               {dayjs(item.publishTime).format('YYYY-MM-DD')}
             </div>
           </div>

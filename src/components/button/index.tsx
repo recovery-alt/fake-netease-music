@@ -2,21 +2,23 @@ import React from 'react';
 import styles from './button.module.less';
 import { PlayCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
+import { classGenerator } from '@/utils';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   compose?: boolean;
 }
 
 const Button: React.FC<Props> = props => {
+  const getClass = classGenerator('button', styles);
   const { compose, children, className, ...restProps } = props;
 
   const composeNode = (
     <>
-      <div className={styles.button__left}>
+      <div className={getClass('left')}>
         <PlayCircleOutlined />
         播放全部
       </div>
-      <div className={styles.button__right}>
+      <div className={getClass('right')}>
         <PlusOutlined />
       </div>
     </>

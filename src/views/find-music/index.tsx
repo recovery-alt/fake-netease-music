@@ -18,12 +18,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { insertSong, fetchAndSetCurrentTrack, RootState, setCurrentTrack } from '@/store';
 import { useHistory } from 'react-router-dom';
 import Img, { IconOptions } from '@/components/img';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 import recommend from '@/assets/img/recommend.jpg';
 import dayjs from 'dayjs';
 import { DynamicPage, Page } from '@/router';
 
 const FindMusic: React.FC = () => {
+  const getClass = classGenerator('find-music');
   const isLogin = useSelector((state: RootState) => !!state.user.cookie);
   const [banner, setBanner] = useState<BannerType[]>([]);
   const [personalized, setPersonalized] = useState<CardData[]>([]);
@@ -51,10 +52,10 @@ const FindMusic: React.FC = () => {
   function renderAlbumNewest({ i, j, len, item }: ListParams) {
     return (
       <>
-        <strong className="find-music__ordinal">{(i * len) / 2 + j + 1}</strong>
+        <strong className={getClass('ordinal')}>{(i * len) / 2 + j + 1}</strong>
         <div>
           <div>{item.name}</div>
-          {<div className="find-music__artist">{item.extra?.artistName}</div>}
+          {<div className={getClass('artist')}>{item.extra?.artistName}</div>}
         </div>
       </>
     );
@@ -62,9 +63,9 @@ const FindMusic: React.FC = () => {
 
   function renderDJToplist({ item }: ListParams) {
     return (
-      <div className="find-music__list">
-        <div className="find-music__list-name">{item.name}</div>
-        <div className="find-music__list-detail">{item.extra?.description}</div>
+      <div className={getClass('list')}>
+        <div className={getClass('list-name')}>{item.name}</div>
+        <div className={getClass('list-detail')}>{item.extra?.description}</div>
       </div>
     );
   }
@@ -134,17 +135,17 @@ const FindMusic: React.FC = () => {
   }, []);
 
   return (
-    <div className="find-music">
+    <div className={getClass()}>
       <Banner data={banner} onBannerClick={handleSongInserted} />
       <Title name="推荐歌单" />
-      <div className="find-music__card">
+      <div className={getClass('card')}>
         {isLogin && (
-          <div className="find-music__card-item">
-            <div className="find-music__card-wrapper" onClick={() => push(Page.dailyRecommend)}>
+          <div className={getClass('card-item')}>
+            <div className={getClass('card-wrapper')} onClick={() => push(Page.dailyRecommend)}>
               <header>根据您的音乐口味生成每日更新</header>
               <strong>{today}</strong>
               <Img
-                className="find-music__card-img"
+                className={getClass('card-img')}
                 icon={iconConfig}
                 src={recommend}
                 alt="每日推荐"
@@ -155,9 +156,9 @@ const FindMusic: React.FC = () => {
           </div>
         )}
         {personalized.map(item => (
-          <div key={item.id} className="find-music__card-item">
+          <div key={item.id} className={getClass('card-item')}>
             <Img
-              className="find-music__card-img"
+              className={getClass('card-img')}
               src={resizeImg(item.imgUrl, 135)}
               icon={iconConfig}
               onClick={() => push(DynamicPage.list(item.id))}

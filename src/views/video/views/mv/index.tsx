@@ -7,8 +7,10 @@ import List, { ListItem } from '../../list';
 import { getMVFirst, getMVAll, getMVExclusiveRcmd, getTopMV } from '@/api';
 import { MV as MVType } from '@/types';
 import Img from '@/components/img';
+import { classGenerator } from '@/utils';
 
 const MV: React.FC = () => {
+  const getClass = classGenerator('mv');
   const initAreaCategory = areaCategory.map(item => ({ name: item, id: item }));
   const [mvFirst, setMVFirst] = useState<ListItem[]>([]);
   const [selected] = useState(0);
@@ -49,47 +51,47 @@ const MV: React.FC = () => {
   }, []);
 
   return (
-    <div className="mv">
-      <header className="mv__header">
+    <div className={getClass()}>
+      <header className={getClass('header')}>
         <strong>
           最新MV
           <RightOutlined />
         </strong>
-        <Nav data={initAreaCategory} />
+        <Nav data={initAreaCategory} id="" />
       </header>
       <List data={mvFirst} />
-      <header className="mv__header --margin">
+      <header className={getClass('header --margin')}>
         <strong>
           热播MV
           <RightOutlined />
         </strong>
       </header>
       <List data={mvHot} />
-      <header className="mv__header --margin">
+      <header className={getClass('header --margin')}>
         <strong>
           网易出品
           <RightOutlined />
         </strong>
       </header>
       <List data={mvExclusiveRcmd} />
-      <header className="mv__header --margin">
+      <header className={getClass('header --margin')}>
         <strong>
           MV排行榜
           <RightOutlined />
         </strong>
-        <Nav data={initAreaCategory} />
+        <Nav data={initAreaCategory} id="" />
       </header>
-      <section className="mv__rank">
+      <section className={getClass('rank')}>
         {topMV.map((item, i) => (
-          <div key={item.id} className="mv__rank-item">
-            <div className="mv__rank-ordinal">
+          <div key={item.id} className={getClass('rank-item')}>
+            <div className={getClass('rank-ordinal')}>
               <h3>{i + 1}</h3>
               <h4>-</h4>
             </div>
-            <div className="mv__rank-img-wrapper">
-              <Img className="mv__rank-img" src={item.cover} />
+            <div className={getClass('rank-img-wrapper')}>
+              <Img className={getClass('rank-img')} src={item.cover} />
             </div>
-            <div className="mv__rank-description">
+            <div className={getClass('rank-description')}>
               <h3>{item.name}</h3>
               <h4>{item.artistName}</h4>
             </div>

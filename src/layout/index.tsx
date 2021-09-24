@@ -11,8 +11,11 @@ import { clearRequests } from '@/api/api';
 import store, { setPause, setShowDetail } from '@/store';
 import { useDispatch } from 'react-redux';
 import json from 'json5';
+import { classGenerator } from '@/utils';
 
 type Props = { routes?: Array<RouteConfig> };
+
+export const getClass = classGenerator('main');
 
 const Layout: React.FC<Props> = ({ routes }) => {
   const { pathname } = useLocation();
@@ -71,8 +74,10 @@ const Layout: React.FC<Props> = ({ routes }) => {
     <>
       <section className="container">
         <Sidebar />
-        <Scrollbar className="main">
-          <Suspense fallback={<Spin className="main__loading" style={{ position: 'absolute' }} />}>
+        <Scrollbar className={getClass()}>
+          <Suspense
+            fallback={<Spin className={getClass('loading')} style={{ position: 'absolute' }} />}
+          >
             <Switch>
               {routes && routes.map(route => <Route key={route.path} {...route} />)}
               <NotFound />

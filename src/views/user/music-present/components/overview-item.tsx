@@ -12,6 +12,7 @@ import { RootState, setCurrentTrack } from '@/store';
 import { useHistory } from 'react-router-dom';
 import { message } from 'antd';
 import { DynamicPage } from '@/router';
+import { getClass } from './overview';
 
 export type Props = {
   id?: number;
@@ -57,26 +58,26 @@ const OverviewItem: React.FC<Props> = ({
   }, [data]);
 
   return (
-    <section className={styles.overview__item}>
+    <section className={getClass('item')}>
       <Img
         src={resizeImg(imgUrl, 150)}
-        className={classNames(styles.overview__img, {
+        className={classNames(getClass('img'), {
           [styles['--top50']]: title === '热门50首',
         })}
         onClick={handleImgClick}
       />
-      <div className={styles.overview__right}>
-        <header className={styles.overview__header}>
+      <div className={getClass('right')}>
+        <header className={getClass('header')}>
           <h2>{title}</h2>
-          <div className={styles.overview__icon}>
+          <div className={getClass('icon')}>
             <PlayCircleOutlined onClick={() => handlePlay()} />
             <FileAddOutlined onClick={handleCollect} />
           </div>
         </header>
-        <div className={styles.overview__table}>
+        <div className={getClass('table')}>
           <Table noHead columns={columns} data={sliceData} onDoubleClick={handlePlay} />
           {!previewAll && data.length > 0 && (
-            <footer className={styles.overview__footer} onClick={() => setPreviewAll(true)}>
+            <footer className={getClass('footer')} onClick={() => setPreviewAll(true)}>
               <div>查看全部{data.length}首 &gt;</div>
             </footer>
           )}

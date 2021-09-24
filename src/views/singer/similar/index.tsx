@@ -5,10 +5,12 @@ import { getSimiArtist } from '@/api';
 import { Artist } from '@/types';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
+import { classGenerator } from '@/utils';
 
 type Props = { id: number };
 
 const Similar: React.FC<Props> = ({ id }) => {
+  const getClass = classGenerator('similar', styles);
   const [simiArtist, setSimiArtist] = useState<Artist[]>([]);
   const { push } = useHistory();
 
@@ -22,15 +24,15 @@ const Similar: React.FC<Props> = ({ id }) => {
   }, [id]);
 
   return (
-    <div className={styles.similar}>
+    <div className={getClass()}>
       {simiArtist.map(item => (
         <div
           key={item.id}
-          className={styles.similar__item}
+          className={getClass('item')}
           onClick={() => push(DynamicPage.singer(item.id))}
         >
-          <Img src={item.picUrl} className={styles.similar__img} />
-          <div className={styles.similar__description}>{item.name}</div>
+          <Img src={item.picUrl} className={getClass('img')} />
+          <div className={getClass('description')}>{item.name}</div>
         </div>
       ))}
     </div>

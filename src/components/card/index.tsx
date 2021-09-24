@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './card.module.less';
 import Img, { IconOptions } from '@/components/img';
 import classNames from 'classnames';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 
 export type CardData = { id: number; name: string; imgUrl: string };
 
@@ -15,12 +15,13 @@ type Props = {
 };
 
 const Card: React.FC<Props> = ({ type = 'square', data, icon, onItemClick, onItemIconClick }) => {
+  const getClass = classGenerator('card', styles);
   return (
-    <div className={styles.card}>
+    <div className={getClass()}>
       {data.map(item => (
-        <div key={item.id} className={classNames(styles.card__item, styles[`--${type}`])}>
+        <div key={item.id} className={classNames(getClass('item'), styles[`--${type}`])}>
           <Img
-            className={styles.card__img}
+            className={getClass('img')}
             src={type === 'rectangle' ? item.imgUrl : resizeImg(item.imgUrl)}
             icon={icon}
             onClick={() => onItemClick?.(item.id)}

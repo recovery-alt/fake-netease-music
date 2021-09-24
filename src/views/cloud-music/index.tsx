@@ -4,8 +4,10 @@ import Button from '@/components/button';
 import Input from '@/components/input';
 import Table, { Column } from '@/components/table';
 import { Data } from '@/types';
+import { classGenerator } from '@/utils';
 
 const CloudMusic: React.FC = () => {
+  const getClass = classGenerator('cloud-music');
   const columns: Column[] = [
     { key: 'ordinal' },
     { key: 'title', title: '音乐标题' },
@@ -19,16 +21,16 @@ const CloudMusic: React.FC = () => {
 
   return (
     <div>
-      <header className="cloud-music__header">
-        <div className="cloud-music__capacity">
-          <span className="cloud-music__capacity-title">云盘容量</span>
-          <div className="cloud-music__ruler">
+      <header className={getClass('header')}>
+        <div className={getClass('capacity')}>
+          <span className={getClass('capacity-title')}>云盘容量</span>
+          <div className={getClass('ruler')}>
             <div></div>
           </div>
-          <span className="cloud-music__capacity-ratio">4.8G/60G</span>
-          <span className="cloud-music__capacity-description">歌曲永久保存，随时随地多端畅听</span>
+          <span className={getClass('capacity-ratio')}>4.8G/60G</span>
+          <span className={getClass('capacity-description')}>歌曲永久保存，随时随地多端畅听</span>
         </div>
-        <div className="cloud-music__control">
+        <div className={getClass('control')}>
           <Button compose />
           <Input />
         </div>

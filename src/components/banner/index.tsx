@@ -4,6 +4,7 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import type { BannerType } from '@/types';
 import classNames from 'classnames';
 import Img from '@/components/img';
+import { classGenerator } from '@/utils';
 
 type Props = {
   data: BannerType[];
@@ -14,6 +15,7 @@ let timer: number;
 let syncCurrent = 0;
 
 const Banner: React.FC<Props> = ({ data, onBannerClick }) => {
+  const getClass = classGenerator('banner', styles);
   const [current, setCurrent] = useState<number>(0);
 
   async function handleArrayClick(plus = false) {
@@ -58,32 +60,32 @@ const Banner: React.FC<Props> = ({ data, onBannerClick }) => {
   }, [data]);
 
   return (
-    <div className={styles.banner}>
+    <div className={getClass()}>
       {data.map((item, i) => (
         <Img
           src={item.imageUrl}
           key={item.imageUrl}
           banLoading
-          className={classNames(styles.banner__item, getState(i))}
+          className={classNames(getClass('item'), getState(i))}
           onClick={() => onBannerClick?.(item.targetId)}
         />
       ))}
-      <div className={styles['banner__dot-wrapper']}>
+      <div className={getClass('dot-wrapper')}>
         {data.map((item, i) => (
           <div
             key={item.imageUrl}
             onMouseOver={() => handleMouseOver(i)}
             onMouseOut={autoPlay}
-            className={classNames(styles.banner__dot, { [styles['--active']]: i === current })}
+            className={classNames(getClass('dot'), { [styles['--active']]: i === current })}
           ></div>
         ))}
       </div>
       <LeftOutlined
-        className={classNames(styles.banner__array, styles['--left'])}
+        className={classNames(getClass('array'), styles['--left'])}
         onClick={() => handleArrayClick()}
       />
       <RightOutlined
-        className={classNames(styles.banner__array, styles['--right'])}
+        className={classNames(getClass('array'), styles['--right'])}
         onClick={() => handleArrayClick(true)}
       />
     </div>

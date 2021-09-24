@@ -5,6 +5,7 @@ import NoData from '../no-data';
 import get from 'lodash/get';
 import classNames from 'classnames';
 import { message } from 'antd';
+import { classGenerator } from '@/utils';
 
 export type Column<T = Data> = {
   width?: number;
@@ -31,9 +32,10 @@ const Table: React.FC<Props> = ({
   selectedRow,
   onDoubleClick,
 }) => {
+  const getClass = classGenerator('table', styles);
   const [selected, setSelected] = useState(-1);
 
-  const handleDoubleClick = (index: number) => {
+  function handleDoubleClick(index: number) {
     if (!onDoubleClick) return;
     if (data[index][disableColumn]) {
       message.error('应合作方要求，该资源暂时下架>_<');
@@ -41,7 +43,7 @@ const Table: React.FC<Props> = ({
     }
     // setSelected(index);
     onDoubleClick(index);
-  };
+  }
 
   useEffect(() => {
     if (selectedRow !== undefined) setSelected(selectedRow);
@@ -49,14 +51,14 @@ const Table: React.FC<Props> = ({
 
   return (
     <>
-      <table className={styles.table}>
+      <table className={getClass()}>
         <colgroup></colgroup>
         {!noHead && (
           <thead>
             <tr>
               {columns.map((item, i) => (
                 <th key={i}>
-                  <div className={styles.table__cell}>{item.title}</div>
+                  <div className={getClass('cell')}>{item.title}</div>
                 </th>
               ))}
             </tr>
@@ -84,7 +86,7 @@ const Table: React.FC<Props> = ({
 
                     return (
                       <td key={j}>
-                        <div className={styles.table__cell}>{text}</div>
+                        <div className={getClass('cell')}>{text}</div>
                       </td>
                     );
                   })}

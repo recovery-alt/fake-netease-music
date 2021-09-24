@@ -7,6 +7,7 @@ import KeywordSuggestion from './keyword-suggestion';
 import { useClickAway } from 'react-use';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import { classGenerator } from '@/utils';
 
 type Props = {
   visible: boolean;
@@ -15,6 +16,7 @@ type Props = {
 };
 
 const SearchList: React.FC<Props> = ({ visible, setVisible, inputRef }) => {
+  const getClass = classGenerator('search-list', styles);
   const ref = useRef<HTMLDivElement>(null);
   const keywords = useSelector((state: RootState) => state.controller.keywords);
   useClickAway(ref, e => {
@@ -22,7 +24,7 @@ const SearchList: React.FC<Props> = ({ visible, setVisible, inputRef }) => {
   });
 
   return createPortal(
-    <div ref={ref} className={classNames(styles['search-list'], { [styles['--show']]: visible })}>
+    <div ref={ref} className={classNames(getClass(), { [styles['--show']]: visible })}>
       {keywords && keywords.trim() ? (
         <KeywordSuggestion setVisible={setVisible} />
       ) : (

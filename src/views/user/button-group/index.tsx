@@ -3,10 +3,12 @@ import styles from './button-group.module.less';
 import { UngroupOutlined, AlignCenterOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { PageMode } from '@/views/user/music-present';
+import { classGenerator } from '@/utils';
 
 type Props = { activeButton: PageMode; setActiveButton: (button: PageMode) => void };
 
 const Album: React.FC<Props> = ({ activeButton, setActiveButton }) => {
+  const getClass = classGenerator('button-group', styles);
   const data: Array<{ key: PageMode; component: React.FC }> = [
     { key: 'list', component: UngroupOutlined },
     { key: 'card', component: AlignCenterOutlined },
@@ -14,11 +16,11 @@ const Album: React.FC<Props> = ({ activeButton, setActiveButton }) => {
   ];
 
   return (
-    <div className={styles['button-group']}>
+    <div className={getClass()}>
       {data.map(item => (
         <button
           key={item.key}
-          className={classNames(styles['button-group__item'], {
+          className={classNames(getClass('item'), {
             [styles['--active']]: item.key === activeButton,
           })}
           onClick={() => setActiveButton(item.key)}

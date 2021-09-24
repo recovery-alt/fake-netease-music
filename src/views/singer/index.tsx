@@ -8,7 +8,7 @@ import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getArtistDetail, getArtistAlbum } from '@/api';
 import { Album as AlbumType, Artist, UserProfile } from '@/types';
 import { PageMode } from '@/views/user/music-present';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 import Button from '@/components/button';
 import { DynamicPage } from '@/router';
 
@@ -19,6 +19,7 @@ const Detail = lazy(() => import('./detail'));
 const Similar = lazy(() => import('./similar'));
 
 const Singer: React.FC = () => {
+  const getClass = classGenerator('singer');
   const params = useParams<{ id: string }>();
   const id = useMemo(() => Number(params.id), [params.id]);
   const location = useLocation<string[]>();
@@ -54,23 +55,29 @@ const Singer: React.FC = () => {
   }, [id]);
 
   return (
-    <div className="singer">
-      <header className="singer__header">
-        <Img src={artistDetail?.cover && resizeImg(artistDetail.cover)} className="singer__img" />
-        <section className="singer__right">
+    <div className={getClass()}>
+      <header className={getClass('header')}>
+        <Img
+          src={artistDetail?.cover && resizeImg(artistDetail.cover)}
+          className={getClass('img')}
+        />
+        <section className={getClass('right')}>
           <h2>{artistDetail?.name}</h2>
           <h3>{artistDetail?.alias?.join(' ')}</h3>
           <div>
-            <Button className="singer__button">
+            <Button className={getClass('button')}>
               <FileAddOutlined />
               收藏
             </Button>
-            <Button className="singer__button" onClick={() => push(DynamicPage.user(user?.userId))}>
+            <Button
+              className={getClass('button')}
+              onClick={() => push(DynamicPage.user(user?.userId))}
+            >
               <UserOutlined />
               个人主页
             </Button>
           </div>
-          <div className="singer__description">
+          <div className={getClass('description')}>
             <span>
               单曲数:<strong>{artistDetail?.musicSize}</strong>
             </span>

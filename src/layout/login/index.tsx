@@ -4,15 +4,15 @@ import { createPortal } from 'react-dom';
 import { CloseOutlined } from '@ant-design/icons';
 import login from '@/assets/img/login.svg';
 import { message } from 'antd';
-import { local } from '@/utils';
+import { classGenerator, local } from '@/utils';
 import { useDispatch } from 'react-redux';
 import { setUserInfo, setUserPlaylist, AppDispatch } from '@/store';
 
 type Props = { setShowLogin: (show: boolean) => void };
 
 const Login: React.FC<Props> = ({ setShowLogin }) => {
+  const getClass = classGenerator('login', styles);
   const dom = document.getElementById('portal')!;
-
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch<AppDispatch>();
@@ -35,12 +35,12 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
   };
 
   return createPortal(
-    <div className={styles.login__mask}>
-      <div className={styles.login}>
+    <div className={getClass('mask')}>
+      <div className={getClass()}>
         <CloseOutlined onClick={hideLogin} />
-        <img className={styles.login__img} src={login} alt="login" />
-        <div className={styles.login__form}>
-          <div className={styles['login__form-item']}>
+        <img className={getClass('img')} src={login} alt="login" />
+        <div className={getClass('form')}>
+          <div className={getClass('form-item')}>
             <input
               type="text"
               placeholder="请输入手机号"
@@ -48,7 +48,7 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
               onChange={e => setPhone(e.target.value)}
             />
           </div>
-          <div className={styles['login__form-item']}>
+          <div className={getClass('form-item')}>
             <input
               type="password"
               placeholder="请输入密码"
@@ -57,10 +57,10 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
             />
           </div>
         </div>
-        <button className={styles.login__btn} onClick={submitLogin}>
+        <button className={getClass('btn')} onClick={submitLogin}>
           登录
         </button>
-        {/* <div className={styles.login__register}>
+        {/* <div className={getClass('register')}>
           <a>注册</a>
         </div> */}
       </div>

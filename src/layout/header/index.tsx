@@ -16,8 +16,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setKeywords } from '@/store';
 import { stringify } from 'qs';
 import { Page, topMenuMap, MenuConfig } from '@/router';
+import { classGenerator } from '@/utils';
 
 const List: React.FC = () => {
+  const getClass = classGenerator('header', styles);
   const [active, setActive] = useState('');
   const [topMenu, setTopMenu] = useState<Array<MenuConfig>>([]);
   const { pathname } = useLocation();
@@ -62,19 +64,16 @@ const List: React.FC = () => {
   }
 
   return (
-    <header className={styles.header}>
-      <div className={styles.header__left}>
-        <LeftOutlined
-          className={styles['header__left-icon']}
-          onClick={() => handleHistoryChange()}
-        />
+    <header className={getClass()}>
+      <div className={getClass('left')}>
+        <LeftOutlined className={getClass('left-icon')} onClick={() => handleHistoryChange()} />
         <RightOutlined
-          className={styles['header__left-icon']}
+          className={getClass('left-icon')}
           onClick={() => handleHistoryChange(true)}
         />
       </div>
-      <div className={styles.header__right}>
-        <ul className={styles['header__right-menu']}>
+      <div className={getClass('right')}>
+        <ul className={getClass('right-menu')}>
           {pathname.includes('/home') &&
             topMenu.map(item => (
               <li
@@ -87,7 +86,7 @@ const List: React.FC = () => {
               </li>
             ))}
         </ul>
-        <div className={styles['header__right-wrapper']}>
+        <div className={getClass('right-wrapper')}>
           <Input
             ref={inputRef}
             type="normal"
@@ -97,7 +96,7 @@ const List: React.FC = () => {
             onFocus={() => setShowSearch(true)}
             onKeyUp={handleMouseup}
           />
-          <div className={styles['header__right-icons']}>
+          <div className={getClass('right-icons')}>
             {buttonList.map((item, i) => (
               <item.icon key={i} onClick={item.event} />
             ))}

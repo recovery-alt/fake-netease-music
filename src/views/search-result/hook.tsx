@@ -3,6 +3,7 @@ import { SearchResult, SearchMultimatch } from '@/types';
 import { getSearch } from '@/api';
 import { SearchType } from '@/enum';
 import { Pagination } from 'antd';
+import { getClass } from '.';
 
 export type Props = {
   type: SearchType;
@@ -59,7 +60,7 @@ export const usePagination = <T,>({
 
   function wrapEmpty(renderSlot: (data: T) => React.ReactElement<any, any> | null) {
     const empty = (
-      <div className="search-result__empty">
+      <div className={getClass('empty')}>
         很抱歉，未能找到与“<span>{keywords}</span>”相关的任何信息。
       </div>
     );
@@ -67,7 +68,7 @@ export const usePagination = <T,>({
       <>
         {renderSlot(data)}
         {total > limit && (
-          <footer className="search-result__footer">
+          <footer className={getClass('footer')}>
             <Pagination
               total={total}
               showSizeChanger={false}

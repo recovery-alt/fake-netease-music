@@ -1,20 +1,22 @@
 import React from 'react';
 import styles from './list.module.less';
 import Img from '@/components/img';
+import { classGenerator } from '@/utils';
 
 export type ListItem = { id: number | string; imgUrl: string; description: string; author: string };
 
 type Props = { data: ListItem[]; onItemClick?: (id: number | string) => void };
 
 const List: React.FC<Props> = ({ data, onItemClick }) => {
+  const getClass = classGenerator('list', styles);
   return (
-    <section className={styles.list}>
+    <section className={getClass()}>
       {data.map(item => (
-        <div key={item.id} className={styles.list__item} onClick={() => onItemClick?.(item.id)}>
-          <div className={styles['list__img-wrapper']}>
-            <Img className={styles.list__img} src={item.imgUrl} />
+        <div key={item.id} className={getClass('item')} onClick={() => onItemClick?.(item.id)}>
+          <div className={getClass('img-wrapper')}>
+            <Img className={getClass('img')} src={item.imgUrl} />
           </div>
-          <div className={styles.list__description}>
+          <div className={getClass('description')}>
             <h3>{item.description}</h3>
             <h4>by {item.author}</h4>
           </div>

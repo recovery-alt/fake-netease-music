@@ -4,12 +4,13 @@ import { Music } from '@/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch, setPause } from '@/store';
 import classNames from 'classnames';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 import Icon from '@/components/icon';
 
 type Props = { current?: Music; next?: Music };
 
 const Cover: React.FC<Props> = ({ current, next }) => {
+  const getClass = classGenerator('cover', styles);
   const pause = useSelector((state: RootState) => state.controller.pause);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -19,19 +20,19 @@ const Cover: React.FC<Props> = ({ current, next }) => {
 
   return (
     <>
-      <div className={styles.cover}>
+      <div className={getClass()}>
         {next?.album?.picUrl && (
           <img
-            className={styles['cover__pre-img']}
+            className={getClass('pre-img')}
             src={resizeImg(next.album.picUrl, 300)}
             alt="pre-cover"
           />
         )}
         {current?.album.picUrl && (
-          <div className={styles['cover__img']}>
+          <div className={getClass('img')}>
             <img src={resizeImg(current.album.picUrl, 300)} alt="cover" />
             <div
-              className={classNames(styles.cover__play, { [styles['--pause']]: !pause })}
+              className={classNames(getClass('play'), { [styles['--pause']]: !pause })}
               onClick={handlePauseClick}
             >
               <Icon type={pause ? 'play' : 'pause'} size="large" />

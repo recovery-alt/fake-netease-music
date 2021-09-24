@@ -2,15 +2,19 @@ import React from 'react';
 import styles from './header.module.less';
 import Button from '@/components/button';
 import Input from '@/components/input';
+import { classGenerator } from '@/utils';
 
-const Header: React.FC = () => (
-  <header className={styles.header}>
-    <div className={styles.header__left}>
-      <Button compose />
-      <div className={styles['header__directory']}>打开目录</div>
-    </div>
-    <Input />
-  </header>
-);
+const Header: React.FC = () => {
+  const getClass = classGenerator('header', styles);
+  return (
+    <header className={getClass()}>
+      <div className={getClass('left')}>
+        <Button compose />
+        <div className={getClass('directory')}>打开目录</div>
+      </div>
+      <Input />
+    </header>
+  );
+};
 
 export default Header;

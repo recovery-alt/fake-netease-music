@@ -33,7 +33,7 @@ const DailyRecommend: React.FC = () => {
   }, []);
 
   return (
-    <div className="daily-recommend">
+    <div className={getClass()}>
       <header className={getClass('header')}>
         <div className={getClass('top')}>
           <div className={getClass('calendar')}>

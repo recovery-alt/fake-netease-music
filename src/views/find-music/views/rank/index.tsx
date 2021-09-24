@@ -7,10 +7,11 @@ import Img from '@/components/img';
 import { useDispatch } from 'react-redux';
 import { setCurrentTrack, fetchAndSetCurrentTrack } from '@/store';
 import { useHistory } from 'react-router-dom';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 import { DynamicPage } from '@/router';
 
 const Rank: React.FC = () => {
+  const getClass = classGenerator('rank');
   const [toplist, setToplist] = useState<Toplist[]>([]);
   const [playlistDetail, SetPlaylistDetail] = useState<UserPlaylist[]>([]);
   const dispatch = useDispatch();
@@ -36,9 +37,9 @@ const Rank: React.FC = () => {
   }, []);
 
   return (
-    <div className="rank">
-      <header className="rank__header">官方榜</header>
-      <div className="rank__official">
+    <div className={getClass()}>
+      <header className={getClass('header')}>官方榜</header>
+      <div className={getClass('official')}>
         {playlistDetail.map(item => (
           <Official
             key={item.id}
@@ -48,20 +49,20 @@ const Rank: React.FC = () => {
           />
         ))}
       </div>
-      <header className="rank__header">全球榜</header>
-      <div className="rank__global">
+      <header className={getClass('header')}>全球榜</header>
+      <div className={getClass('global')}>
         {toplist.map(item => (
-          <div key={item.id} className="rank__item">
-            <div className="rank__img-wrapper">
+          <div key={item.id} className={getClass('item')}>
+            <div className={getClass('img-wrapper')}>
               <Img
-                className="rank__img"
+                className={getClass('img')}
                 src={resizeImg(item.coverImgUrl)}
                 icon={{ size: 'big', hoverDisplay: true }}
                 onClick={() => push(DynamicPage.list(item.id))}
                 onIconClick={() => dispatch(fetchAndSetCurrentTrack(item.id))}
               />
             </div>
-            <div className="rank__detail" onClick={() => push(DynamicPage.list(item.id))}>
+            <div className={getClass('detail')} onClick={() => push(DynamicPage.list(item.id))}>
               {item.name}
             </div>
           </div>

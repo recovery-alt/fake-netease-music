@@ -1,4 +1,5 @@
 import { Track } from '@/types';
+import { classGenerator } from '@/utils';
 import React, { Suspense, lazy } from 'react';
 import styles from './music-present.module.less';
 
@@ -23,6 +24,7 @@ export type Props = {
 };
 
 const MusicPresent: React.FC<Props> = props => {
+  const getClass = classGenerator('music-present', styles);
   const { type, ...rest } = props;
   const strategy = {
     card: lazy(() => import('./components/card')),
@@ -32,7 +34,7 @@ const MusicPresent: React.FC<Props> = props => {
   const Component = strategy[type];
 
   return (
-    <div className={styles['music-present']}>
+    <div className={getClass()}>
       <Suspense fallback="加载中...">
         <Component {...rest} />
       </Suspense>

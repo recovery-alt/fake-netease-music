@@ -5,11 +5,12 @@ import { getArtistList } from '@/api';
 import { Artist, Data } from '@/types';
 import { categoryList } from '@/config';
 import Img from '@/components/img';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 
 const Singer: React.FC = () => {
+  const getClass = classGenerator('music-singer');
   type ActionType = 'add' | 'reset';
   type Action = { type: ActionType; payload: Artist[] };
   const [data, dataDispatch] = useReducer<Reducer<Artist[], Action>>((state, action) => {
@@ -100,15 +101,15 @@ const Singer: React.FC = () => {
   }, []);
 
   return (
-    <div className="music-singer">
+    <div className={getClass()}>
       {searchData.map((item, i) => (
-        <header key={item.label} className="music-singer__header">
-          <div className="music-singer__label">{item.label}：</div>
-          <div className="music-singer__category">
+        <header key={item.label} className={getClass('header')}>
+          <div className={getClass('label')}>{item.label}：</div>
+          <div className={getClass('category')}>
             {item.list.map(val => (
               <div
                 key={val.name}
-                className="music-singer__category-item"
+                className={getClass('category-item')}
                 onClick={() => handleCatClick(i, val[item.key])}
               >
                 <span className={classNames({ ['--active']: val[item.key] === selected[i] })}>
@@ -119,15 +120,15 @@ const Singer: React.FC = () => {
           </div>
         </header>
       ))}
-      <div className="music-singer__list">
+      <div className={getClass('list')}>
         {data.map(item => (
-          <div key={item.id} className="music-singer__item" onClick={() => handleSingerClick(item)}>
-            <Img className="music-singer__img" src={resizeImg(item.picUrl)} />
-            <div className="music-singer__description">{item.name}</div>
+          <div key={item.id} className={getClass('item')} onClick={() => handleSingerClick(item)}>
+            <Img className={getClass('img')} src={resizeImg(item.picUrl)} />
+            <div className={getClass('description')}>{item.name}</div>
           </div>
         ))}
       </div>
-      <footer className="music-singer__footer" ref={footerRef}>
+      <footer className={getClass('footer')} ref={footerRef}>
         {moreText}
       </footer>
     </div>

@@ -9,10 +9,12 @@ import { useDispatch } from 'react-redux';
 import { setKeywords } from '@/store';
 import { stringify } from 'qs';
 import { Page } from '@/router';
+import { classGenerator } from '@/utils';
 
 type Props = { visible: boolean; setVisible: (visible: boolean) => void };
 
 const EmptySuggestion: React.FC<Props> = ({ visible, setVisible }) => {
+  const getClass = classGenerator('empty-suggestion', styles);
   const [searchHot, setSearchHot] = useState<SearchHot[]>([]);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const { push } = useHistory();
@@ -43,17 +45,13 @@ const EmptySuggestion: React.FC<Props> = ({ visible, setVisible }) => {
   return (
     <>
       {searchHistory.length > 0 && (
-        <header className={styles['empty-suggestion__header']}>
+        <header className={getClass('header')}>
           <h2>
-            搜索历史 <DeleteOutlined className={styles['empty-suggestion__header-delete']} />
+            搜索历史 <DeleteOutlined className={getClass('header-delete')} />
           </h2>
-          <div className={styles['empty-suggestion__history']}>
+          <div className={getClass('history')}>
             {searchHistory.map((item, i) => (
-              <div
-                key={i}
-                className={styles['empty-suggestion__history-item']}
-                onClick={() => handleSearch(item)}
-              >
+              <div key={i} className={getClass('history-item')} onClick={() => handleSearch(item)}>
                 {item}
                 <CloseOutlined onClick={handleCloseClick} />
               </div>
@@ -61,23 +59,21 @@ const EmptySuggestion: React.FC<Props> = ({ visible, setVisible }) => {
           </div>
         </header>
       )}
-      <h3 className={styles['empty-suggestion__title']}>热搜榜</h3>
+      <h3 className={getClass('title')}>热搜榜</h3>
       {searchHot.map((item, i) => (
         <div
           key={item.searchWord}
-          className={styles['empty-suggestion__item']}
+          className={getClass('item')}
           onClick={() => handleSearch(item.searchWord)}
         >
           <p>{i + 1}</p>
-          <div className={styles['empty-suggestion__item-right']}>
-            <div className={styles['empty-suggestion__item-top']}>
+          <div className={getClass('item-right')}>
+            <div className={getClass('item-top')}>
               <strong>{item.searchWord}</strong>
               {item.iconUrl ? <mark>HOT</mark> : null}
               <span>{item.score}</span>
             </div>
-            {item.content && (
-              <div className={styles['empty-suggestion__item-bottom']}>{item.content}</div>
-            )}
+            {item.content && <div className={getClass('item-bottom')}>{item.content}</div>}
           </div>
         </div>
       ))}

@@ -15,13 +15,14 @@ import MusicPresent, { PageMode, DataType } from './music-present';
 import { getUserDetail, getUserAudio, getUserPlaylist } from '@/api';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { UserPlaylist, UserDetail } from '@/types';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import Button from '@/components/button';
 import { DynamicPage } from '@/router';
 
 const User: React.FC = () => {
+  const getClass = classGenerator('user');
   const params = useParams<{ id: string }>();
   const { push } = useHistory();
   const userId = useSelector((state: RootState) => state.user.profile.userId);
@@ -80,12 +81,12 @@ const User: React.FC = () => {
     if (radios.length > 0)
       return (
         <>
-          <h2 className="user__tag">
+          <h2 className={getClass('tag')}>
             <div>
               Ta创建的电台<strong>（{radios.length}）</strong>
             </div>
           </h2>
-          <div className="user__radio">
+          <div className={getClass('radio')}>
             <List data={radios} />
           </div>
         </>
@@ -97,14 +98,14 @@ const User: React.FC = () => {
 
     return playlist.length > 0 ? (
       <>
-        <h2 className="user__tag">
+        <h2 className={getClass('tag')}>
           <div>
             {title}
             <strong>（{playlist.length}）</strong>
           </div>
           <ButtonGroup activeButton={activeButton} setActiveButton={setActiveButton} />
         </h2>
-        <div className="user__playlist">
+        <div className={getClass('playlist')}>
           <MusicPresent type={activeButton} id={id} data={playlist} myself={myself} />
         </div>
       </>
@@ -120,17 +121,17 @@ const User: React.FC = () => {
 
   return (
     <div>
-      <header className="user__header">
+      <header className={getClass('header')}>
         <Img
           src={userDetail && resizeImg(userDetail.profile.avatarUrl, 200)}
-          className="user__cover"
+          className={getClass('cover')}
         />
-        <div className="user__introduction">
+        <div className={getClass('introduction')}>
           <h2>{userDetail?.profile.nickname}</h2>
-          <div className="user__title">
-            <div className="user__title-left">
+          <div className={getClass('title')}>
+            <div className={getClass('title-left')}>
               {userDetail?.identify && (
-                <div className="user__title-auth">
+                <div className={getClass('title-auth')}>
                   <img src={userDetail.identify.imageUrl} />
                   <strong>{userDetail.identify.imageDesc}</strong>
                 </div>
@@ -139,7 +140,7 @@ const User: React.FC = () => {
               {userDetail?.profile.gender ? <ManOutlined /> : <WomanOutlined />}
             </div>
             {userDetail?.identify && (
-              <div className="user__title-right">
+              <div className={getClass('title-right')}>
                 <Button onClick={() => push(DynamicPage.singer(userDetail.profile.artistId))}>
                   <AudioOutlined />
                   歌手页
@@ -158,21 +159,21 @@ const User: React.FC = () => {
               </div>
             )}
           </div>
-          <div className="user__statistic">
-            <div className="user__statistic-item">
+          <div className={getClass('statistic')}>
+            <div className={getClass('statistic-item')}>
               <h3>{userDetail?.profile.eventCount}</h3>
               <div>动态</div>
             </div>
-            <div className="user__statistic-item">
+            <div className={getClass('statistic-item')}>
               <h3>{userDetail?.profile.follows}</h3>
               <div>关注</div>
             </div>
-            <div className="user__statistic-item">
+            <div className={getClass('statistic-item')}>
               <h3>{userDetail?.profile.followeds}</h3>
               <div>粉丝</div>
             </div>
           </div>
-          <div className="user__social">
+          <div className={getClass('social')}>
             <div>
               社交网络: <span>未绑定</span>
             </div>

@@ -14,8 +14,11 @@ import { SearchSuggest } from '@/types';
 import { SearchType } from '@/enum';
 import { getSearchMultimatch } from '@/api';
 import { parse } from 'qs';
+import { classGenerator } from '@/utils';
 
 const { TabPane } = Tabs;
+
+export const getClass = classGenerator('search-result');
 
 const SearchResult: React.FC = () => {
   const [total, setTotal] = useState(0);
@@ -100,7 +103,7 @@ const SearchResult: React.FC = () => {
 
   return (
     <div className="search-result">
-      <header className="search-result__header">
+      <header className={getClass('header')}>
         <strong>{keywords} </strong>
         {`找到${total}${current.unit}${current.tab === '主播电台' ? '电台' : current.tab}`}
       </header>

@@ -1,3 +1,4 @@
+import { classGenerator } from '@/utils';
 import classNames from 'classnames';
 import React from 'react';
 import styles from './icon.module.less';
@@ -10,17 +11,18 @@ interface Props extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 const Icon: React.FC<Props> = props => {
+  const getClass = classGenerator('icon', styles);
   const { type = 'play', size, className, ...restProps } = props;
   return (
     <span
-      className={classNames(styles[`--${size}`], className, styles.icon)}
+      className={classNames(styles[`--${size}`], className, getClass())}
       tabIndex={-1}
       {...restProps}
     >
       {type === 'play' ? (
-        <span className={styles.icon__play}></span>
+        <span className={getClass('play')}></span>
       ) : (
-        <span className={styles.icon__pause}>| |</span>
+        <span className={getClass('pause')}>| |</span>
       )}
     </span>
   );

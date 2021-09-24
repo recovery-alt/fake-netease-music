@@ -4,8 +4,10 @@ import { getDJSublist } from '@/api';
 import List, { ListData } from '@/components/list';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
+import { classGenerator } from '@/utils';
 
 const Radio: React.FC = () => {
+  const getClass = classGenerator('radio');
   const [total, setTotal] = useState(0);
   const [data, setData] = useState<ListData[]>([]);
   const { push } = useHistory();
@@ -31,8 +33,8 @@ const Radio: React.FC = () => {
   }, []);
 
   return (
-    <div className="radio">
-      <header className="radio__header">
+    <div className={getClass()}>
+      <header className={getClass('header')}>
         <strong>我订阅的电台</strong>
         <span>（{total}）</span>
       </header>

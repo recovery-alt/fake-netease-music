@@ -5,12 +5,15 @@ import { Provider } from 'react-redux';
 import store from '@/store';
 import { Spin } from 'antd';
 import Header from '@/layout/header';
+import { getClass } from '@/layout';
 
 const App: React.FC = () => (
   <Provider store={store}>
     <HashRouter>
       <Header />
-      <Suspense fallback={<Spin className="main__loading" style={{ position: 'absolute' }} />}>
+      <Suspense
+        fallback={<Spin className={getClass('loading')} style={{ position: 'absolute' }} />}
+      >
         <Switch>
           <Redirect from={Page.root} to={Page.findMusic} exact />
           {routes.map(route => (

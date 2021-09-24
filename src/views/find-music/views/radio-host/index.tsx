@@ -14,8 +14,10 @@ import Title from '@/components/title';
 import Card, { CardData } from '@/components/card';
 import List, { ListParams } from '../../list';
 import Img from '@/components/img';
+import { classGenerator } from '@/utils';
 
 const RadioHost: React.FC = () => {
+  const getClass = classGenerator('radio-host');
   const [banner, setBanner] = useState<BannerType[]>([]);
   const [djCatelist, setDJCatelist] = useState<DJCatelist[]>([]);
   const [current, setCurrent] = useState(0);
@@ -85,7 +87,7 @@ const RadioHost: React.FC = () => {
 
   function renderDJPaygift({ item }: ListParams) {
     return (
-      <div className="radio-host__list">
+      <div className={getClass('list')}>
         <h2>{item.name}</h2>
         <h4>{item.extra?.rcmdText}</h4>
         <h4>{item.extra?.lastProgramName}</h4>
@@ -95,31 +97,31 @@ const RadioHost: React.FC = () => {
   }
 
   return (
-    <div className="radio-host">
+    <div className={getClass()}>
       <Banner data={banner} />
-      <div className="radio-host__category">
+      <div className={getClass('category')}>
         {current > 0 ? (
           <LeftOutlined
-            className="radio-host__category-arrow --left"
+            className={getClass('category-arrow --left')}
             onClick={() => handleCurrentChange()}
           />
         ) : null}
         {length - current > 1 ? (
           <RightOutlined
-            className="radio-host__category-arrow --right"
+            className={getClass('category-arrow --right')}
             onClick={() => handleCurrentChange(true)}
           />
         ) : null}
         <div
-          className="radio-host__category-wrapper"
+          className={getClass('category-wrapper')}
           style={{ transform: `translateX(${2 - current * 72}vw)` }}
         >
           {djCatelist.map(item => (
-            <div key={item.id} className="radio-host__category-item">
-              <div className="radio-host__category-img-wrapper">
-                <Img className="radio-host__category-img" src={item.pic56x56Url} />
+            <div key={item.id} className={getClass('category-item')}>
+              <div className={getClass('category-img-wrapper')}>
+                <Img className={getClass('category-img')} src={item.pic56x56Url} />
               </div>
-              <div className="radio-host__category-text">{item.name}</div>
+              <div className={getClass('category-text')}>{item.name}</div>
             </div>
           ))}
         </div>

@@ -3,12 +3,13 @@ import { getPlaylistSubscribers } from '@/api';
 import { Subscriber } from '@/types';
 import styles from './collector.module.less';
 import Img from '@/components/img';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 import { Pagination } from 'antd';
 
 type Props = { id: number };
 
 const Collector: React.FC<Props> = ({ id }) => {
+  const getClass = classGenerator('collector', styles);
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [total, setTotal] = useState(0);
   const [current, setCurrent] = useState(1);
@@ -27,18 +28,18 @@ const Collector: React.FC<Props> = ({ id }) => {
 
   return subscribers.length > 0 ? (
     <>
-      <div className={styles.collector}>
+      <div className={getClass()}>
         {subscribers.map(item => (
-          <div key={item.userId} className={styles.collector__item}>
-            <Img className={styles.collector__img} src={resizeImg(item.avatarUrl, 100)} />
+          <div key={item.userId} className={getClass('item')}>
+            <Img className={getClass('img')} src={resizeImg(item.avatarUrl, 100)} />
             <div>
-              <div className={styles.collector__title}>{item.nickname}</div>
-              {item.signature && <div className={styles.collector__subtitle}>{item.signature}</div>}
+              <div className={getClass('title')}>{item.nickname}</div>
+              {item.signature && <div className={getClass('subtitle')}>{item.signature}</div>}
             </div>
           </div>
         ))}
       </div>
-      <footer className={styles.collector__footer}>
+      <footer className={getClass('footer')}>
         <Pagination
           {...{ current, total }}
           onChange={(page, pageSize) => {
@@ -51,7 +52,7 @@ const Collector: React.FC<Props> = ({ id }) => {
       </footer>
     </>
   ) : (
-    <div className={styles.collector__empty}>暂无收藏者</div>
+    <div className={getClass('empty')}>暂无收藏者</div>
   );
 };
 

@@ -7,7 +7,7 @@ import Table, { Column } from '@/components/table';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, changeCurrent } from '@/store';
 import { Track } from '@/types';
-import { formatMS } from '@/utils';
+import { classGenerator, formatMS } from '@/utils';
 import { useClickAway } from 'react-use';
 
 type Props = {
@@ -17,6 +17,7 @@ type Props = {
 };
 
 const MusicList: React.FC<Props> = ({ visible, setVisible, target }) => {
+  const getClass = classGenerator('music-list', styles);
   const dispatch = useDispatch();
   const currentTrack = useSelector((state: RootState) => state.currentTrack);
   const ref = useRef<HTMLDivElement>(null);
@@ -45,21 +46,21 @@ const MusicList: React.FC<Props> = ({ visible, setVisible, target }) => {
   });
 
   return createPortal(
-    <div ref={ref} className={classNames(styles['music-list'], { [styles['--show']]: visible })}>
-      <header className={styles['music-list__header']}>
+    <div ref={ref} className={classNames(getClass(), { [styles['--show']]: visible })}>
+      <header className={getClass('header')}>
         <h2>当前播放</h2>
-        <div className={styles['music-list__subtitle']}>
-          <div className={styles['music-list__total']}>总{currentTrack.tracks.length}首</div>
-          <div className={styles['music-list__subtitle-right']}>
-            <span className={styles['music-list__subtitle-all']}>
+        <div className={getClass('subtitle')}>
+          <div className={getClass('total')}>总{currentTrack.tracks.length}首</div>
+          <div className={getClass('subtitle-right')}>
+            <span className={getClass('subtitle-all')}>
               <FolderAddOutlined />
               收藏全部
             </span>
-            <span className={styles['music-list__subtitle-clear']}>清空列表</span>
+            <span className={getClass('subtitle-clear')}>清空列表</span>
           </div>
         </div>
       </header>
-      <section className={styles['music-list__subtitle-table']}>
+      <section className={getClass('subtitle-table')}>
         <Table
           noHead
           selectedRow={currentTrack.current}

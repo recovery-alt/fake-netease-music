@@ -12,7 +12,7 @@ import {
 import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, changeSong, setSong, nextFM, setCurrentTime, setShowDetail } from '@/store';
-import { formatMS, resizeImg, transformMusic2Track } from '@/utils';
+import { classGenerator, formatMS, resizeImg, transformMusic2Track } from '@/utils';
 import { useCurrentTime, useMusicList, usePause, usePlayMode, useLyric, useVolume } from './hooks';
 import { Tooltip, Slider } from 'antd';
 import { PlayMode } from '@/enum';
@@ -22,6 +22,7 @@ import { useHistory } from 'react-router-dom';
 import { Page } from '@/router';
 
 const List: React.FC = () => {
+  const getClass = classGenerator('footer', styles);
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLProgressElement>(null);
   const dispatch = useDispatch();
@@ -87,17 +88,17 @@ const List: React.FC = () => {
   }, [currentTrack?.id]);
 
   return (
-    <footer className={styles.footer}>
+    <footer className={getClass()}>
       {currentTrack?.dt && (
         <progress
           ref={progressRef}
-          className={styles['footer__progress-bar']}
+          className={getClass('progress-bar')}
           value={currentTime}
           max={currentTrack.dt}
           onClick={handleProgressClick}
         />
       )}
-      <div className={styles.footer__left}>
+      <div className={getClass('left')}>
         {currentTrack && song && (
           <>
             <audio
@@ -117,7 +118,7 @@ const List: React.FC = () => {
               alt="music"
               onClick={handleCoverClick}
             />
-            <div className={styles['footer__left-name']}>
+            <div className={getClass('left-name')}>
               <div>
                 {currentTrack.name} -{' '}
                 {currentTrack.ar.reduce((acc, val) => `${acc}/${val.name}`, '').slice(1)}
@@ -129,7 +130,7 @@ const List: React.FC = () => {
           </>
         )}
       </div>
-      <div className={styles.footer__mid}>
+      <div className={getClass('mid')}>
         <HeartOutlined />
         <StepBackwardOutlined
           className={classNames(styles['--medium'], styles['--red'], {
@@ -147,7 +148,7 @@ const List: React.FC = () => {
         />
         <DeleteOutlined />
       </div>
-      <div className={styles.footer__right}>
+      <div className={getClass('right')}>
         {!isFMMode && <ControlOutlined />}
         <Tooltip title={currentPlayMode.tip}>
           <currentPlayMode.icon onClick={handleIconClick} />
@@ -156,7 +157,7 @@ const List: React.FC = () => {
           <UnorderedListOutlined ref={listButtonRef} onClick={() => setShowList(!showList)} />
         )}
         <span
-          className={classNames(styles['footer__lyric'], { [styles['--active']]: lyricActive })}
+          className={classNames(getClass('lyric'), { [styles['--active']]: lyricActive })}
           onClick={() => setLyricActive(!lyricActive)}
         >
           词
@@ -164,7 +165,7 @@ const List: React.FC = () => {
         {currentTrack && (
           <Tooltip
             title={() => (
-              <div className={styles['footer__volume']}>
+              <div className={getClass('volume')}>
                 <Slider vertical value={volume} onChange={handleSliderChange} />
               </div>
             )}

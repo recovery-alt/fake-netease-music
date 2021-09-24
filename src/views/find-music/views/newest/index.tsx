@@ -10,10 +10,11 @@ import { AlbumCategory, Song } from '@/types';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setCurrentTrack } from '@/store';
-import { transformSong2Track } from '@/utils';
+import { classGenerator, transformSong2Track } from '@/utils';
 import { DynamicPage } from '@/router';
 
 const Newest: React.FC = () => {
+  const getClass = classGenerator('newest');
   const [isAlbum, setIsAlbum] = useState(0);
   const [areaIndex, setAreaIndex] = useState(0);
   const currentArea = useMemo(() => categoryList[areaIndex], [areaIndex]);
@@ -45,8 +46,8 @@ const Newest: React.FC = () => {
   }, [pathname]);
 
   return (
-    <div className="newest">
-      <header className="newest__switch">
+    <div className={getClass()}>
+      <header className={getClass('switch')}>
         {switchItems.map((item, i) => (
           <div
             key={i}
@@ -60,7 +61,7 @@ const Newest: React.FC = () => {
           </div>
         ))}
       </header>
-      <div className="newest__control">
+      <div className={getClass('control')}>
         <div>
           {categoryList.slice(0, -1).map((item, i) => (
             <span

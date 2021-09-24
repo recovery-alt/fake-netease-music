@@ -3,11 +3,12 @@ import styles from './mv.module.less';
 import Img from '@/components/img';
 import { getArtistMV } from '@/api';
 import { MV as MVType } from '@/types';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 
 type Props = { id: number };
 
 const MV: React.FC<Props> = ({ id }) => {
+  const getClass = classGenerator('mv', styles);
   const [mvs, setMVs] = useState<MVType[]>([]);
 
   async function loadArtistMV() {
@@ -19,11 +20,11 @@ const MV: React.FC<Props> = ({ id }) => {
     loadArtistMV();
   }, [id]);
   return (
-    <div className={styles.mv}>
+    <div className={getClass()}>
       {mvs.map(item => (
-        <div key={item.id} className={styles.mv__item}>
-          <Img src={resizeImg(item.imgurl, 230, 130)} className={styles.mv__img} />
-          <div className={styles.mv__description}>{item.name}</div>
+        <div key={item.id} className={getClass('item')}>
+          <Img src={resizeImg(item.imgurl, 230, 130)} className={getClass('img')} />
+          <div className={getClass('description')}>{item.name}</div>
         </div>
       ))}
     </div>

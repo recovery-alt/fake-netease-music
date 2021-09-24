@@ -1,9 +1,9 @@
 import React from 'react';
-import './radio-list.module.less';
+import './radio-list.less';
 import Img from '@/components/img';
 import { classGenerator } from '@/utils';
 
-const Radiolist: React.FC = () => {
+const RadioList: React.FC = () => {
   const getClass = classGenerator('radio-list');
 
   return (
@@ -15,4 +15,4 @@ const Radiolist: React.FC = () => {
   );
 };
 
-export default Radiolist;
+export default RadioList;

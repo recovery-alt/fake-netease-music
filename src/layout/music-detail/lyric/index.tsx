@@ -4,7 +4,7 @@ import Scrollbar from '@/components/scrollbar';
 import { QuestionOutlined } from '@ant-design/icons';
 import { Music } from '@/types';
 import { getLyric } from '@/api';
-import { resolveLyricTime } from '@/utils';
+import { classGenerator, resolveLyricTime } from '@/utils';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import classNames from 'classnames';
@@ -12,6 +12,7 @@ import classNames from 'classnames';
 type Props = { music: Music };
 
 const Lyric: React.FC<Props> = ({ music }) => {
+  const getClass = classGenerator('lyric', styles);
   type LyricItem = { timestamp: number[]; value: string };
   const [lyrics, setLyrics] = useState<LyricItem[]>([]);
   const currentTime = useSelector((state: RootState) => state.controller.currentTime);
@@ -63,12 +64,12 @@ const Lyric: React.FC<Props> = ({ music }) => {
   }, [currentTime, lyrics]);
 
   return (
-    <div className={styles.lyric}>
+    <div className={getClass()}>
       <h2>
-        <span className={styles['lyric__music-name']}>{music?.name}</span>
-        <span className={styles.lyric__quality}>标准音质</span>
+        <span className={getClass('music-name')}>{music?.name}</span>
+        <span className={getClass('quality')}>标准音质</span>
       </h2>
-      <div className={styles.lyric__info}>
+      <div className={getClass('info')}>
         <p>
           <span>专辑：</span>
           <a>{music?.album.name}</a>
@@ -76,15 +77,15 @@ const Lyric: React.FC<Props> = ({ music }) => {
         <p>
           <span>歌手：</span>
           {music?.artists.map(artist => (
-            <a className={styles.lyric__anchor} key={artist.name}>
+            <a className={getClass('anchor')} key={artist.name}>
               {artist.name}
             </a>
           ))}
         </p>
       </div>
-      <div className={styles.lyric__container}>
+      <div className={getClass('container')}>
         {lyrics.length > 0 ? (
-          <Scrollbar ref={containerRef} className={styles.lyric__wrapper}>
+          <Scrollbar ref={containerRef} className={getClass('wrapper')}>
             {lyrics.map((lyric, i) => (
               <p key={i} className={classNames({ [styles['--selected']]: i === currentIndex })}>
                 {lyric.value}
@@ -96,7 +97,7 @@ const Lyric: React.FC<Props> = ({ music }) => {
         )}
       </div>
 
-      <QuestionOutlined className={styles.lyric__question} />
+      <QuestionOutlined className={getClass('question')} />
     </div>
   );
 };

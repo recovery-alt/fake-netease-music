@@ -9,7 +9,7 @@ import { HeartFilled } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import dayjs from 'dayjs';
-import { wrapNumber, resizeImg } from '@/utils';
+import { wrapNumber, resizeImg, classGenerator } from '@/utils';
 import { getAlbum, getPlaylistDetail, getAlbumDetailDynamic } from '@/api';
 import { UserPlaylist, Track } from '@/types';
 import { useDispatch } from 'react-redux';
@@ -25,6 +25,7 @@ import { CommonColumns } from '@/config';
 type CurrentInfo = Partial<UserPlaylist & { artistName: string }>;
 
 const List: React.FC = () => {
+  const getClass = classGenerator('list');
   const params = useParams<{ id?: string; type?: 'album' }>();
   const [tracks, setTracks] = useState<Track[]>([]);
   const dispatch = useDispatch<AppDispatch>();
@@ -75,12 +76,12 @@ const List: React.FC = () => {
   }
   function renderPlaylistDescription() {
     return (
-      <div className="list__description">
-        <div className="list__tag">
+      <div className={getClass('description')}>
+        <div className={getClass('tag')}>
           <span className="--title">标签: </span>
           <span>{current?.tags?.join('/')}</span>
         </div>
-        <div className="list__count">
+        <div className={getClass('count')}>
           <span>
             <span className="--title">歌曲数: </span>
             {wrapNumber(current?.trackCount)}
@@ -90,7 +91,7 @@ const List: React.FC = () => {
             {wrapNumber(current?.playCount)}
           </span>
         </div>
-        <div className="list__introduction">
+        <div className={getClass('introduction')}>
           <span className="--title">简介: </span>
           <div>{current?.description}</div>
         </div>
@@ -100,12 +101,12 @@ const List: React.FC = () => {
 
   function renderAlbumDescrition() {
     return (
-      <div className="list__description">
-        <div className="list__singer">
+      <div className={getClass('description')}>
+        <div className={getClass('singer')}>
           <span className="--title">歌手: </span>
           <span>{current?.artistName}</span>
         </div>
-        <div className="list__publish-time">
+        <div className={getClass('publish-time')}>
           <span className="--title">时间: </span>
           <span>{dayjs(current?.createTime).format('YYYY-MM-DD')}</span>
         </div>
@@ -119,8 +120,8 @@ const List: React.FC = () => {
   }, [id, isAlbum]);
 
   return (
-    <div className="list">
-      <header className="list__header">
+    <div className={getClass()}>
+      <header className={getClass('header')}>
         {id && current?.coverImgUrl ? (
           <Img
             className={classNames('list__img', { '--album': isAlbum })}
@@ -128,24 +129,24 @@ const List: React.FC = () => {
             alt="avatar"
           />
         ) : (
-          <div className="list__img-default">
+          <div className={getClass('img-default')}>
             <HeartFilled />
           </div>
         )}
 
-        <div className="list__right">
-          <div className="list__title">
+        <div className={getClass('right')}>
+          <div className={getClass('title')}>
             <span>{isAlbum ? '专辑' : '歌单'}</span>
             <strong>{current?.name || '我喜欢的音乐'}</strong>
           </div>
           {!isAlbum && (
-            <div className="list__user-info">
+            <div className={getClass('user-info')}>
               <img src={resizeImg(profile.avatarUrl || avatar, 100)} alt="avatar" />
               <a>{profile.nickname}</a>
               <span>{dayjs(current?.createTime).format('YYYY-MM-DD')}创建</span>
             </div>
           )}
-          <div className="list__control">
+          <div className={getClass('control')}>
             <Button compose />
             <Button>
               <FolderAddOutlined />
@@ -163,7 +164,7 @@ const List: React.FC = () => {
           {isAlbum ? renderAlbumDescrition() : renderPlaylistDescription()}
         </div>
       </header>
-      <section className="list__tabs">
+      <section className={getClass('tabs')}>
         <Tabs>
           <Tabs.TabPane tab="歌曲列表" key="1">
             <Table columns={CommonColumns} data={tracks} onDoubleClick={handleTableDoubleClick} />

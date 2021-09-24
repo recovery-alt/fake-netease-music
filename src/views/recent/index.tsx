@@ -3,8 +3,10 @@ import './recent.less';
 import Button from '@/components/button';
 import Table, { Column } from '@/components/table';
 import { Data } from '@/types';
+import { classGenerator } from '@/utils';
 
 const Recent: React.FC = () => {
+  const getClass = classGenerator('recent');
   const columns: Column[] = [
     { key: 'ordinal', title: '' },
     { key: 'title', title: '音乐标题' },
@@ -15,11 +17,11 @@ const Recent: React.FC = () => {
 
   return (
     <div>
-      <header className="recent__header">
-        <div className="recent__total">共100首</div>
-        <div className="recent__control">
+      <header className={getClass('header')}>
+        <div className={getClass('total')}>共100首</div>
+        <div className={getClass('control')}>
           <Button compose />
-          <span className="recent__control-clear">清空列表</span>
+          <span className={getClass('control-clear')}>清空列表</span>
         </div>
       </header>
       <Table columns={columns} data={data} />

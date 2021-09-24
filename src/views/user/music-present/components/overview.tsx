@@ -4,8 +4,11 @@ import { getAlbum, getArtistTopSong, getPlaylistDetail } from '@/api';
 import { Track } from '@/types';
 import OverviewItem from './overview-item';
 import { Props as PresentProps, DataType } from '../';
+import { classGenerator } from '@/utils';
 
 type Props = Omit<PresentProps, 'type'>;
+
+export const getClass = classGenerator('overview', styles);
 
 const Overview: React.FC<Props> = ({ id, data, isAlbum, myself }) => {
   const [topSongs, setTopSongs] = useState<Track[]>([]);
@@ -68,7 +71,7 @@ const Overview: React.FC<Props> = ({ id, data, isAlbum, myself }) => {
   }, []);
 
   return (
-    <div className={styles.overview}>
+    <div className={getClass()}>
       {isAlbum && <OverviewItem data={topSongs} isAlbum />}
       {sliceData.map(item => (
         <OverviewItem
@@ -80,7 +83,7 @@ const Overview: React.FC<Props> = ({ id, data, isAlbum, myself }) => {
           isAlbum={isAlbum}
         />
       ))}
-      <footer ref={footerRef} className={styles.overview__more}>
+      <footer ref={footerRef} className={getClass('more')}>
         {more}
       </footer>
     </div>

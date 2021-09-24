@@ -13,7 +13,7 @@ import {
   Concert,
   Data,
 } from '@/types';
-import { formatMS, noop, resizeImg } from '@/utils';
+import { classGenerator, formatMS, noop, resizeImg } from '@/utils';
 import { usePagination, Props } from '../hook';
 import { SearchType } from '@/enum';
 import dayjs from 'dayjs';
@@ -23,6 +23,7 @@ import { insertSong } from '@/store';
 import { DynamicPage } from '@/router';
 
 const Song: React.FC<Props> = props => {
+  const getClass = classGenerator('song', styles);
   const { bestMatch, ...restProps } = props;
   const params = { ...restProps, currentType: SearchType.SONG, limit: 100 };
   const { wrapEmpty } = usePagination<SearchSong>(params);
@@ -97,14 +98,14 @@ const Song: React.FC<Props> = props => {
     return data ? (
       <div
         key={i}
-        className={styles['song__best-match']}
+        className={getClass('best-match')}
         onClick={() => handleItemClick(type, data.id)}
       >
-        <div className={styles['song__left']}>
-          <Img src={resizeImg(data.imgUrl, 100)} className={styles['song__img']} />
+        <div className={getClass('left')}>
+          <Img src={resizeImg(data.imgUrl, 100)} className={getClass('img')} />
           <div>
             <div>{data.name}</div>
-            <div className={styles.song__subtitle}>{data.subtitle}</div>
+            <div className={getClass('subtitle')}>{data.subtitle}</div>
           </div>
         </div>
         <RightOutlined />
@@ -113,11 +114,11 @@ const Song: React.FC<Props> = props => {
   }
 
   return wrapEmpty(data => (
-    <div className={styles.song}>
+    <div className={getClass()}>
       {bestMatch?.orders && (
-        <header className={styles.song__header}>
-          <div className={styles.song__title}>最佳匹配</div>
-          <div className={styles['song__wrapper']}>
+        <header className={getClass('header')}>
+          <div className={getClass('title')}>最佳匹配</div>
+          <div className={getClass('wrapper')}>
             {bestMatch.orders.filter(item => item !== 'orpheus').map(renderBestmatch)}
           </div>
         </header>

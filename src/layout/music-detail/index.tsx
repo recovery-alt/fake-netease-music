@@ -20,10 +20,12 @@ import {
 import { setShowDetail } from '@/store';
 import WriteComment from './write-comment';
 import { getCommentMusic } from '@/api';
+import { classGenerator } from '@/utils';
 
 type Props = { visible: boolean };
 
 const MusicDetail: React.FC<Props> = ({ visible }) => {
+  const getClass = classGenerator('music-detail', styles);
   const pause = useSelector((state: RootState) => state.controller.pause);
   const dispatch = useDispatch();
   const currentMusic = useSelector((state: RootState) => {
@@ -46,20 +48,20 @@ const MusicDetail: React.FC<Props> = ({ visible }) => {
   return createPortal(
     <>
       {visible && currentMusic && (
-        <div className={styles['music-detail__shim']}>
+        <div className={getClass('shim')}>
           <VerticalAlignMiddleOutlined onClick={() => dispatch(setShowDetail(false))} />
         </div>
       )}
       {currentMusic && (
-        <div className={classNames(styles['music-detail'], { [styles['--show']]: visible })}>
-          <section className={styles['music-detail__player']}>
+        <div className={classNames(getClass(), { [styles['--show']]: visible })}>
+          <section className={getClass('player')}>
             <div>
               <Cover img={currentMusic.album.picUrl} pause={pause} />
               <ButtonGroup data={data} />
             </div>
             <Lyric music={currentMusic} />
           </section>
-          <div className={styles['music-detail__info']}>
+          <div className={getClass('info')}>
             <CommentGroup id={currentMusic?.id} api={getCommentMusic}>
               <WriteComment />
             </CommentGroup>

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './official.module.less';
 import { UserPlaylist, Track } from '@/types';
 import Img from '@/components/img';
-import { resizeImg } from '@/utils';
+import { classGenerator, resizeImg } from '@/utils';
 
 type Props = {
   data: UserPlaylist;
@@ -11,39 +11,41 @@ type Props = {
 };
 
 const Official: React.FC<Props> = ({ data, onItemClick, onViewAll }) => {
+  const getClass = classGenerator('official', styles);
+
   return (
-    <div className={styles.official}>
-      <div className={styles.official__left}>
+    <div className={getClass()}>
+      <div className={getClass('left')}>
         <Img
-          className={styles.official__img}
+          className={getClass('img')}
           src={resizeImg(data.coverImgUrl)}
           icon={{ size: 'big', hoverDisplay: true }}
           onClick={() => onItemClick(data.tracks, 0)}
           onIconClick={() => onItemClick(data.tracks, 0)}
         />
       </div>
-      <div className={styles.official__right}>
+      <div className={getClass('right')}>
         <ul>
           {data.tracks.map((item, i) => (
             <li
               key={item.id}
-              className={styles.official__item}
+              className={getClass('item')}
               onClick={() => onItemClick(data.tracks, i)}
             >
-              <div className={styles['official__item-left']}>
+              <div className={getClass('item-left')}>
                 <strong>{i + 1}</strong>
                 <div>
                   <span>-</span>
                 </div>
                 <span>{item.name}</span>
               </div>
-              <div className={styles['official__item-right']}>
+              <div className={getClass('item-right')}>
                 {item.ar.reduce((acc, val) => `${acc}/${val.name}`, '').slice(1)}
               </div>
             </li>
           ))}
         </ul>
-        <div className={styles.official__all} onClick={() => onViewAll(data.id)}>
+        <div className={getClass('all')} onClick={() => onViewAll(data.id)}>
           查看全部 &gt;
         </div>
       </div>

@@ -3,6 +3,7 @@ import Comments from './comments';
 import { Pagination } from 'antd';
 import styles from './comment-group.module.less';
 import { Comment, CommentData } from '@/types';
+import { classGenerator } from '@/utils';
 
 type Data = CommentData & {
   code: number;
@@ -15,6 +16,7 @@ type Props = {
 };
 
 const CommentGroup: React.FC<Props> = ({ id, children, api }) => {
+  const getClass = classGenerator('comment-group', styles);
   const [comments, setComments] = useState<Comment[]>([]);
   const [hotComments, setHotComments] = useState<Comment[]>([]);
   const [total, setTotal] = useState(0);
@@ -34,19 +36,19 @@ const CommentGroup: React.FC<Props> = ({ id, children, api }) => {
   }, [id]);
 
   return (
-    <div className={styles['comment-group']}>
+    <div className={getClass()}>
       {total > 0 ? (
         <>
           {children}
-          <h2 className={styles['comment-group__title']}>精彩评论</h2>
+          <h2 className={getClass('title')}>精彩评论</h2>
           {hotComments.map(comment => (
             <Comments key={comment.commentId} comment={comment} />
           ))}
-          <h2 className={styles['comment-group__title']}>最新评论（{total}）</h2>
+          <h2 className={getClass('title')}>最新评论（{total}）</h2>
           {comments.map(comment => (
             <Comments key={comment.commentId} comment={comment} />
           ))}
-          <footer className={styles['comment-group__footer']}>
+          <footer className={getClass('footer')}>
             <Pagination
               total={total}
               showSizeChanger={false}
@@ -59,7 +61,7 @@ const CommentGroup: React.FC<Props> = ({ id, children, api }) => {
           </footer>
         </>
       ) : (
-        <div className={styles['comment-group__empty']}>还没有评论，快来抢沙发～</div>
+        <div className={getClass('empty')}>还没有评论，快来抢沙发～</div>
       )}
     </div>
   );
