@@ -116,6 +116,82 @@ export type DJRadio = {
   dj: { nickname: string };
 };
 
+export type DJDetail = {
+  category: string;
+  categoryId: number;
+  commentCount: number;
+  commentDatas: [];
+  createTime: number;
+  desc: string;
+  disableShare: boolean;
+  dj: UserProfile;
+  feeScope: number;
+  id: number;
+  lastProgramCreateTime: number;
+  lastProgramId: number;
+  likedCount: number;
+  name: string;
+  original: boolean;
+  picId: number;
+  picUrl: string;
+  playCount: number;
+  privacy: boolean;
+  programCount: number;
+  radioFeeType: number;
+  rcmdText: string;
+  secondCategory: string;
+  secondCategoryId: number;
+  shareCount: number;
+  subCount: number;
+  subed: boolean;
+};
+
+export type DJProgram = {
+  auditDisPlayStatus: number;
+  auditStatus: number;
+  bdAuditStatus: number;
+  blurCoverUrl: string;
+  buyed: boolean;
+  canReward: boolean;
+  categoryId: number;
+  channels: string[];
+  commentCount: number;
+  commentThreadId: string;
+  coverUrl: string;
+  createEventId: number;
+  createTime: number;
+  description: string;
+  dj: { defaultAvatar: boolean; province: number; authStatus: number; followed: boolean };
+  duration: number;
+  feeScope: number;
+  id: number;
+  isPublish: boolean;
+  likedCount: number;
+  listenerCount: number;
+  copyrightId: number;
+  mainTrackId: number;
+  name: string;
+  privacy: boolean;
+  programFeeType: number;
+  pubStatus: number;
+  radio: {
+    category: string;
+    buyed: boolean;
+    price: number;
+    originalPrice: number;
+  };
+  reward: boolean;
+  scheduledPublishTime: number;
+  score: number;
+  secondCategoryId: number;
+  serialNum: number;
+  shareCount: number;
+  smallLanguageAuditStatus: number;
+  subscribed: boolean;
+  subscribedCount: number;
+  trackCount: number;
+};
+
 export type DJToplistPay = { name: string; creatorName: string; picUrl: string };
 
 export type Toplist = { name: string; coverImgUrl: string; id: number };
@@ -259,7 +335,11 @@ export type Subscriber = {
   gender: number;
 };
 
-export type PlaylistSubscriberParams = { id: number; offset: number; limit?: number };
+export type Subscribers = { subscribers: Subscriber[]; total: number };
+
+export type DJSubscriber = { subscribers: Subscriber[]; hasMore: boolean; time: number };
+
+export type PlaylistSubscriberParams = { id: number; offset?: number; limit?: number };
 
 export type Concert = {
   id: number;

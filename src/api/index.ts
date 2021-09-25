@@ -40,6 +40,10 @@ import {
   VideoUrl,
   VideoMultiCreator,
   VideoList,
+  DJDetail,
+  DJProgram,
+  Subscribers,
+  DJSubscriber,
 } from '@/types';
 import { get } from './api';
 
@@ -144,7 +148,7 @@ export const getSongDetail = (ids: string | number) =>
 export const getSearchHotDetail = () => get<{ data: SearchHot[] }>('/search/hot/detail');
 
 export const getPlaylistSubscribers = ({ id, offset, limit = 20 }: PlaylistSubscriberParams) =>
-  get<{ subscribers: Subscriber[]; total: number }>('/playlist/subscribers', { id, offset, limit });
+  get<Subscribers>('/playlist/subscribers', { id, offset, limit });
 
 export const getSearchSuggest = (keywords: string) =>
   get<{ result: SearchSuggest }>('/search/suggest', { keywords });
@@ -193,3 +197,9 @@ export const getVideoGroupList = () => get<{ data: VideoCategogy[] }>('/video/gr
 
 export const getVideoTimelineAll = (offset = 0) =>
   get<VideoList>('/video/timeline/all', { offset });
+
+export const getDJDetail = (rid: number) => get<{ data: DJDetail }>('/dj/detail', { rid });
+
+export const getDJProgram = (rid: number) => get<{ programs: DJProgram[] }>('/dj/program', { rid });
+
+export const getDJSubscriber = (id: number) => get<DJSubscriber>('/dj/subscriber', { id });

@@ -12,7 +12,6 @@ import { classGenerator, resizeImg } from '@/utils';
 import Button from '@/components/button';
 import { DynamicPage } from '@/router';
 
-const { TabPane } = Tabs;
 const Album = lazy(() => import('@/views/user/music-present'));
 const MV = lazy(() => import('./mv'));
 const Detail = lazy(() => import('./detail'));
@@ -92,24 +91,24 @@ const Singer: React.FC = () => {
       </header>
 
       <Tabs destroyInactiveTabPane tabBarExtraContent={extraContent} onChange={setActiveKey}>
-        <TabPane tab="专辑" key="album">
+        <Tabs.TabPane tab="专辑" key="album">
           <Suspense fallback="加载中...">
             <Album type={activeButton} id={id} data={albums} isAlbum />
           </Suspense>
-        </TabPane>
-        <TabPane tab="MV" key="mv">
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="MV" key="mv">
           <Suspense fallback="加载中...">
             <MV id={id} />
           </Suspense>
-        </TabPane>
-        <TabPane tab="歌手详情" key="detail">
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="歌手详情" key="detail">
           <Suspense fallback="加载中...">{artistDetail && <Detail id={id} />}</Suspense>
-        </TabPane>
-        <TabPane tab="相似歌手" key="similar">
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="相似歌手" key="similar">
           <Suspense fallback="加载中...">
             <Similar id={id} />
           </Suspense>
-        </TabPane>
+        </Tabs.TabPane>
       </Tabs>
     </div>
   );

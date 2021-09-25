@@ -16,8 +16,6 @@ import { getSearchMultimatch } from '@/api';
 import { parse } from 'qs';
 import { classGenerator } from '@/utils';
 
-const { TabPane } = Tabs;
-
 export const getClass = classGenerator('search-result');
 
 const SearchResult: React.FC = () => {
@@ -110,14 +108,14 @@ const SearchResult: React.FC = () => {
       <Tabs onChange={handleTabChange}>
         {tabs.map(item => {
           return (
-            <TabPane key={item.key} tab={item.tab}>
+            <Tabs.TabPane key={item.key} tab={item.tab}>
               <item.component
                 type={current.type}
                 keywords={keywords}
                 setTotal={setTotal}
                 bestMatch={item.key === 'song' ? bestMatch : undefined}
               />
-            </TabPane>
+            </Tabs.TabPane>
           );
         })}
       </Tabs>

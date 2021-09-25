@@ -24,6 +24,8 @@ const Lyric: React.FC<Props> = ({ music }) => {
     lyric.replace(/((?:\[\d{2}:\d{2}\.\d{2,3}\])+)([\s\S]*?)(?=\[)/g, ($1, $2, value) => {
       const matcher = $2.match(/(?<=\[)\d{2}:\d{2}\.\d{2,3}(?=\])/g) as [];
       const timestamp = matcher.map(item => resolveLyricTime(item));
+      console.log(value);
+      if (!value || !value.trim()) return '';
       result.push({ timestamp, value });
       return '';
     });

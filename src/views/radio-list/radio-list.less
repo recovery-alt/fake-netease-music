@@ -1,32 +1,125 @@
 .radio-list {
-  .img() {
-    background-color: #a5a5a5;
-    border-radius: 4px;
-    height: 200px;
-    width: 200px;
-  }
-
-  &__header {
+  &__tag {
     align-items: center;
     display: flex;
-    padding: 15px 30px;
-  }
+    margin-top: 24px;
 
-  &__img {
-    .img();
+    span {
+      border: 1px solid var(--primary-color);
+      border-radius: 2px;
+      color: var(--primary-color);
+      display: block;
+      font-size: 8px;
+      height: 14px;
+      line-height: 14px;
+      text-align: center;
+      width: 24px;
+    }
 
-    &-default {
-      align-items: center;
-      color: #fff;
-      display: flex;
-      font-size: 80px;
-      justify-content: center;
-      .img();
+    strong {
+      font-weight: normal;
+      margin-left: 3px;
     }
   }
 
-  &__right {
-    height: 200px;
+  &__control {
+    align-items: center;
+    color: #666;
+    display: flex;
+    font-size: 12px;
+    height: 30px;
+    justify-content: space-between;
+    padding: 0 30px;
+
+    &-right {
+      align-items: center;
+      display: flex;
+    }
+
+    strong {
+      color: #c1c1c1;
+      font-weight: normal;
+      margin-right: 8px;
+    }
+  }
+
+  &__icon {
+    align-items: center;
+    background-color: #f2f2f2;
+    color: #919191;
+    cursor: pointer;
+    display: flex;
+    height: 20px;
+    justify-content: center;
+    line-height: 20px;
+    width: 25px;
+
+    &:nth-child(2) {
+      border-bottom-left-radius: 2px;
+      border-top-left-radius: 2px;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: 2px;
+      border-top-right-radius: 2px;
+      margin-left: 1px;
+    }
+
+    &:not(.--active):hover {
+      background-color: #e8e8e8;
+      color: #5d5d5d;
+    }
+
+    &.--active {
+      background-color: #bfbfbf;
+      color: #fff;
+    }
+
+    > svg {
+      line-height: 20px;
+    }
+  }
+
+  &__item {
+    align-items: center;
+    color: #bbb;
+    display: flex;
+    font-size: 12px;
+    height: 80px;
+
+    &:nth-child(2n) {
+      background-color: #fafafa;
+    }
+
+    &:hover {
+      background-color: #f2f2f3;
+    }
+  }
+
+  &__ordinal {
     margin-left: 30px;
+    width: 50px;
+  }
+
+  &__cover {
+    border-radius: 4px;
+    height: 60px;
+    width: 60px;
+  }
+
+  &__name {
+    color: #333;
+    margin-left: 10px;
+    width: 320px;
+  }
+
+  &__play-count,
+  &__like-count,
+  &__date {
+    width: 80px;
+  }
+
+  &__duration {
+    flex: 1;
   }
 }
