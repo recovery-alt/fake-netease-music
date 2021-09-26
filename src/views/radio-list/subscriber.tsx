@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useReducer } from 'react';
 import styles from '@/views/list/collector/collector.module.less';
 import { classGenerator, resizeImg } from '@/utils';
 import { getDJSubscriber } from '@/api';
@@ -9,17 +9,23 @@ import { useInfinityScroll } from '@/hooks';
 type Props = { id: number };
 
 const Subscriber: React.FC<Props> = ({ id }) => {
+  type Action = { type?: 'reset' | 'add'; payload: SubscriberType[] };
   const getClass = classGenerator('collector', styles);
-  const [subscribers, setSubscribers] = useState<SubscriberType[]>([]);
+  const [subscribers, subscribersDispatch] = useReducer(subscribersReducer, []);
   const ref = useRef(null);
-  const { moreText, setMore } = useInfinityScroll(ref);
-  const [time, setTime] = useState(0);
+  const { moreText, setMore } = useInfinityScroll(ref, loadSubscribers);
+  let time = -1;
 
   async function loadSubscribers() {
-    const res = await getDJSubscriber(id);
-    setSubscribers(res.subscribers);
+    const res = await getDJSubscriber(id, time);
+    const type = time === -1 ? 'reset' : 'add';
+    subscribersDispatch({ type, payload: res.subscribers });
     setMore(res.hasMore);
-    setTime(res.time);
+    time = res.time;
+  }
+
+  function subscribersReducer(state: SubscriberType[], { type = 'reset', payload }: Action) {
+    return type === 'reset' ? payload : [...state, ...payload];
   }
 
   useEffect(() => {

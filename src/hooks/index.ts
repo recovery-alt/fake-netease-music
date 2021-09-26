@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 export function useInfinityScroll(ref: React.RefObject<HTMLElement>, cb?: () => void) {
   const [moreText, setMoreText] = useState('');
-  const [more, setMore] = useState(false);
+  const [more, setMore] = useState(true);
 
   useEffect(() => {
     if (!ref.current) return;

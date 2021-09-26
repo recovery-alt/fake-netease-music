@@ -8,6 +8,7 @@ import Img from '@/components/img';
 import { classGenerator, resizeImg } from '@/utils';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
+import { useInfinityScroll } from '@/hooks';
 
 const Singer: React.FC = () => {
   const getClass = classGenerator('music-singer');
@@ -20,11 +21,10 @@ const Singer: React.FC = () => {
   type Selected = Array<number | string | undefined>;
   const [selected, setSelected] = useState<Selected>([-1, -1, undefined]);
   const footerRef = useRef<HTMLElement>(null);
-  const [more, setMore] = useState(true);
   const { push } = useHistory();
   const limit = 20;
   let offset = 0;
-  const [moreText, setMoreText] = useState('');
+  const { setMore, moreText } = useInfinityScroll(footerRef, loadMoreArtistList);
 
   const searchData: Array<{ label: string; key: string; list: Array<Data<string | number>> }> = [
     {
@@ -74,31 +74,15 @@ const Singer: React.FC = () => {
     push({ pathname: DynamicPage.singer(item.id), state: item.alias });
   }
 
+  function loadMoreArtistList() {
+    offset += limit;
+    loadArtistList('add');
+  }
+
   useEffect(() => {
     offset = 0;
     loadArtistList('reset');
   }, [selected]);
-
-  useEffect(() => {
-    if (!footerRef.current) return;
-    const io = new IntersectionObserver(entries => {
-      if (entries[0].intersectionRatio <= 0) return;
-      if (more) {
-        setMoreText('加载中...');
-        offset += limit;
-        loadArtistList('add');
-      } else {
-        setMoreText('没有更多了~');
-      }
-    });
-
-    io.observe(footerRef.current);
-
-    return () => {
-      if (footerRef.current) io.unobserve(footerRef.current);
-      io.disconnect();
-    };
-  }, []);
 
   return (
     <div className={getClass()}>
