@@ -8,6 +8,8 @@ import {
   ControlOutlined,
   UnorderedListOutlined,
   SoundOutlined,
+  ShareAltOutlined,
+  LikeOutlined,
 } from '@ant-design/icons';
 import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
@@ -131,7 +133,7 @@ const List: React.FC = () => {
         )}
       </div>
       <div className={getClass('mid')}>
-        <HeartOutlined />
+        {isFMMode ? <HeartOutlined /> : <LikeOutlined />}
         <StepBackwardOutlined
           className={classNames(styles['--medium'], styles['--red'], {
             [styles['--disable']]: isFMMode,
@@ -146,7 +148,7 @@ const List: React.FC = () => {
           className={classNames(styles['--medium'], styles['--red'])}
           onClick={() => handleCurrentSongChange(true)}
         />
-        <DeleteOutlined />
+        {isFMMode ? <DeleteOutlined /> : <ShareAltOutlined />}
       </div>
       <div className={getClass('right')}>
         {!isFMMode && <ControlOutlined />}

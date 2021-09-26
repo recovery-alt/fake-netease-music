@@ -4,6 +4,7 @@ import {
   userPlaylistReducer,
   currentTrackReducer,
   controllerReducer,
+  djDetailReducer,
 } from './reducer';
 
 const store = configureStore({
@@ -12,6 +13,7 @@ const store = configureStore({
     userPlaylist: userPlaylistReducer,
     currentTrack: currentTrackReducer,
     controller: controllerReducer,
+    djDetail: djDetailReducer,
   },
 });
 

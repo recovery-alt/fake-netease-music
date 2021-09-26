@@ -19,8 +19,9 @@ import {
 } from '@ant-design/icons';
 import { setShowDetail } from '@/store';
 import WriteComment from './write-comment';
-import { getCommentMusic } from '@/api';
+import { getCommentDJ, getCommentMusic } from '@/api';
 import { classGenerator } from '@/utils';
+import RadioDetail from './radio-detail';
 
 type Props = { visible: boolean };
 
@@ -28,6 +29,7 @@ const MusicDetail: React.FC<Props> = ({ visible }) => {
   const getClass = classGenerator('music-detail', styles);
   const pause = useSelector((state: RootState) => state.controller.pause);
   const dispatch = useDispatch();
+  const isRadio = useSelector((state: RootState) => !state.currentTrack.song?.flag);
   const currentMusic = useSelector((state: RootState) => {
     const { current, tracks, fm } = state.currentTrack;
     if (current < 0 || fm.length > 0) return;
@@ -59,13 +61,13 @@ const MusicDetail: React.FC<Props> = ({ visible }) => {
               <Cover img={currentMusic.album.picUrl} pause={pause} />
               <ButtonGroup data={data} />
             </div>
-            <Lyric music={currentMusic} />
+            {isRadio ? <RadioDetail music={currentMusic} /> : <Lyric music={currentMusic} />}
           </section>
           <div className={getClass('info')}>
-            <CommentGroup id={currentMusic?.id} api={getCommentMusic}>
+            <CommentGroup id={currentMusic?.id} api={isRadio ? getCommentDJ : getCommentMusic}>
               <WriteComment />
             </CommentGroup>
-            <Recommend id={currentMusic?.id} />
+            {!isRadio && <Recommend id={currentMusic?.id} />}
           </div>
         </div>
       )}

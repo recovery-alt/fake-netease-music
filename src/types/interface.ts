@@ -60,6 +60,7 @@ export type Song = {
   duration: number;
   album: Album;
   url: string;
+  flag: number;
   alias?: string[];
   transNames?: string[];
   artists: Array<{ id: number; name: string }>;
@@ -190,6 +191,7 @@ export type DJProgram = {
   subscribed: boolean;
   subscribedCount: number;
   trackCount: number;
+  mainSong: Song;
 };
 
 export type DJToplistPay = { name: string; creatorName: string; picUrl: string };

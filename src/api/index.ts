@@ -204,3 +204,5 @@ export const getDJProgram = (rid: number) => get<{ programs: DJProgram[] }>('/dj
 
 export const getDJSubscriber = (id: number, time: number) =>
   get<DJSubscriber>('/dj/subscriber', { id, time });
+
+export const getCommentDJ = (id: number | string) => get<CommentData>('/comment/dj', { id });
