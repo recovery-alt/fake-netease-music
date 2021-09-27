@@ -27,6 +27,7 @@ const Layout: React.FC<Props> = ({ routes }) => {
     let current = rawCurrent;
     // 缓存过值，就需要读取
     if (cacheCurrent !== undefined) current = cacheCurrent;
+    localStorage.setItem('djDetail', json.stringify({ ...state.djDetail }));
     localStorage.setItem(
       'currentTrack',
       json.stringify({ ...state.currentTrack, current, autoPlay: false, fm: [] })
