@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, ReactEventHandler, useMemo } from '
 import styles from './img.module.less';
 import classNames from 'classnames';
 import { AppProps } from '@/types';
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import Icon, { IconSize } from '@/components/icon';
 import { classGenerator } from '@/utils';
 
@@ -15,6 +15,7 @@ export type IconOptions = {
 interface Props extends AppProps {
   src?: string;
   icon?: boolean | IconOptions;
+  count?: number;
   alt?: string;
   banLoading?: boolean;
   onClick?: ReactEventHandler<HTMLImageElement>;
@@ -28,6 +29,7 @@ const Img: React.FC<Props> = ({
   className,
   src,
   icon = false,
+  count,
   onClick,
   onIconClick,
 }) => {
@@ -90,6 +92,12 @@ const Img: React.FC<Props> = ({
           onMouseMove={() => setShowIcon(true)}
           onClick={onIconClick}
         />
+      )}
+      {count && (
+        <div className={getClass('count')}>
+          <PlayCircleOutlined />
+          {count}
+        </div>
       )}
     </div>
   );

@@ -44,6 +44,8 @@ import {
   DJProgram,
   Subscribers,
   DJSubscriber,
+  MVDetailInfo,
+  MVDetail,
 } from '@/types';
 import { get } from './api';
 
@@ -206,3 +208,12 @@ export const getDJSubscriber = (id: number, time: number) =>
   get<DJSubscriber>('/dj/subscriber', { id, time });
 
 export const getCommentDJ = (id: number | string) => get<CommentData>('/comment/dj', { id });
+
+export const getMVUrl = (id: number) => get<{ data: { url: string } }>('/mv/url', { id });
+
+export const getMVDetail = (mvid: number) => get<{ data: MVDetail }>('/mv/detail', { mvid });
+
+export const getMVDetailInfo = (mvid: number) => get<MVDetailInfo>('/mv/detail/info', { mvid });
+
+export const getCommentMV = (id: string | number, offset = 0) =>
+  get<CommentData>('/comment/mv', { id, offset });

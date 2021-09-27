@@ -281,6 +281,8 @@ export interface VideoMultiCreator extends Video {
 
 export type VideoList = { hasmore: boolean; datas: Array<{ data: VideoSingleCreator }> };
 
+type VideoItem = { id: number; name: string };
+
 export type VideoDetail = {
   playTime: number;
   title: string;
@@ -290,7 +292,7 @@ export type VideoDetail = {
   shareCount: number;
   commentCount: number;
   subscribeCount: number;
-  videoGroup: Array<{ id: number; name: string }>;
+  videoGroup: Array<VideoItem>;
   creator: UserProfile;
 };
 
@@ -425,7 +427,37 @@ export type SearchRadio = {
   djRadioCount: number;
   djRadios: DJRadio[];
 };
+
 export type SearchUser = {
   userprofileCount: number;
   userprofiles: UserProfile[];
+};
+
+export type MVDetailInfo = {
+  likedCount: number;
+  shareCount: number;
+  commentCount: number;
+  liked: boolean;
+};
+
+export type MVDetail = {
+  id: number;
+  name: string;
+  artistId: number;
+  artistName: string;
+  briefDesc: string;
+  desc: string;
+  cover: string;
+  coverId_str: string;
+  coverId: number;
+  playCount: number;
+  subCount: number;
+  shareCount: number;
+  commentCount: number;
+  duration: number;
+  nType: number;
+  publishTime: string;
+  artists: Artist[];
+  commentThreadId: string;
+  videoGroup: VideoItem[];
 };

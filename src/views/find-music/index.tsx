@@ -169,7 +169,13 @@ const FindMusic: React.FC = () => {
         ))}
       </div>
       <Title name="独家放送" welt />
-      <Card type="rectangle" data={privateList} />
+      <Card
+        type="rectangle"
+        data={privateList}
+        onItemClick={id => {
+          console.log(id);
+        }}
+      />
       <Title name="最新音乐" />
       <List
         icon
@@ -178,7 +184,11 @@ const FindMusic: React.FC = () => {
         onItemClick={handleSongInserted}
       />
       <Title name="推荐MV" />
-      <Card type="rectangle" data={personalizedMV} />
+      <Card
+        type="rectangle"
+        data={personalizedMV}
+        onItemClick={id => push(DynamicPage.playVideo(id))}
+      />
       <Title name="主播电台" welt />
       <List size="medium" data={djToplist} functionChildren={renderDJToplist}></List>
     </div>
