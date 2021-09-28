@@ -46,6 +46,7 @@ import {
   DJSubscriber,
   MVDetailInfo,
   MVDetail,
+  UserCloud,
 } from '@/types';
 import { get } from './api';
 
@@ -218,3 +219,5 @@ export const getMVDetailInfo = (mvid: number) => get<MVDetailInfo>('/mv/detail/i
 
 export const getCommentMV = (id: string | number, offset = 0) =>
   get<CommentData>('/comment/mv', { id, offset });
+
+export const getUserCloud = () => get<UserCloud>('/user/cloud');

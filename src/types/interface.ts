@@ -461,3 +461,28 @@ export type MVDetail = {
   commentThreadId: string;
   videoGroup: VideoItem[];
 };
+
+export type UserCloudData = {
+  addTime: number;
+  album: string;
+  artist: string;
+  bitrate: number;
+  cover: number;
+  coverId: string;
+  fileName: string;
+  fileSize: number;
+  lyricId: string;
+  simpleSong: Track;
+  songId: number;
+  songName: string;
+  version: number;
+};
+
+export type UserCloud = {
+  count: number;
+  hasMore: boolean;
+  maxSize: string;
+  size: string;
+  upgradeSign: number;
+  data: UserCloudData[];
+};
