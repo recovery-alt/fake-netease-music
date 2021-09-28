@@ -74,7 +74,8 @@ const List: React.FC = () => {
   async function loadPlaylist() {
     const playlistDetail = await getPlaylistDetail(id);
     const tracksWithPrivilege = playlistDetail.playlist.tracks.map((track, i) => {
-      track.disable = !playlistDetail.privileges[i].cp;
+      // 没有权限并且云盘没有
+      track.disable = !playlistDetail.privileges[i].cp && !track.pc;
       return track;
     });
     setTracks(tracksWithPrivilege);

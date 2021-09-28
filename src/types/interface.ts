@@ -205,6 +205,17 @@ export type Track = {
   al: Album;
   disable?: boolean;
   privilege?: Privilege;
+  pc?: {
+    nickname: string;
+    uid: number;
+    br: number;
+    ar: string;
+    alb: string;
+    fn: string;
+    cid: string;
+    version: number;
+    sn: string;
+  };
   ar: { id: number; name: string }[];
 };
 

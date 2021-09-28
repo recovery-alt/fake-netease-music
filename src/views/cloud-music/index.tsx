@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './cloud-music.less';
 import Button from '@/components/button';
 import Input from '@/components/input';
@@ -13,6 +13,7 @@ const CloudMusic: React.FC = () => {
   const [count, setCount] = useState(0);
   const [maxSize, setMaxSize] = useState(0);
   const [size, setSize] = useState(0);
+  const percent = useMemo(() => (maxSize === 0 ? 0 : (size * 100) / maxSize), [size, maxSize]);
   const columns: Column[] = [
     { key: 'ordinal' },
     { key: 'title', title: '音乐标题' },
@@ -25,17 +26,24 @@ const CloudMusic: React.FC = () => {
 
   async function loadUserCloud() {
     const res = await getUserCloud();
-    const { data, maxSize: maxSizeStr, size: sizeStr, code } = res;
+    const { data, maxSize, size, count } = res;
     setData(data);
-    const maxSize = transUnit(maxSizeStr);
-    const size = transUnit(sizeStr);
+    setMaxSize(transUnit(maxSize));
+    setSize(transUnit(size));
+    setCount(count);
   }
 
   function transUnit(raw: string) {
-    let bigInt = BigInt(raw);
-    const n1024 = BigInt(1024);
-    bigInt /= n1024 ** BigInt(3);
-    return;
+    try {
+      let bigInt = BigInt(raw);
+      const n1024 = BigInt(1024);
+      bigInt *= BigInt(10);
+      bigInt /= n1024 ** BigInt(3);
+      return Number(bigInt) / 10;
+    } catch (error) {
+      console.error(error);
+      return 0;
+    }
   }
 
   useEffect(() => {
@@ -48,14 +56,16 @@ const CloudMusic: React.FC = () => {
         <div className={getClass('capacity')}>
           <span className={getClass('capacity-title')}>云盘容量</span>
           <div className={getClass('ruler')}>
-            <div></div>
+            <div style={{ width: `${percent}%` }}></div>
           </div>
-          <span className={getClass('capacity-ratio')}>4.8G/60G</span>
+          <span className={getClass('capacity-ratio')}>
+            {size}G/{maxSize}G
+          </span>
           <span className={getClass('capacity-description')}>歌曲永久保存，随时随地多端畅听</span>
         </div>
         <div className={getClass('control')}>
           <Button compose />
-          <Input />
+          <Input placeholder="搜索云盘音乐" />
         </div>
       </header>
       <Table columns={columns} data={data} />
