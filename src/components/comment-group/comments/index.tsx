@@ -6,31 +6,45 @@ import { Comment } from '@/types';
 import dayjs from 'dayjs';
 import Img from '@/components/img';
 import { classGenerator, resizeImg } from '@/utils';
+import { useHistory } from 'react-router-dom';
+import { DynamicPage } from '@/router';
 
 type Props = { comment: Comment };
 
 const Comments: React.FC<Props> = ({ comment }) => {
   const getClass = classGenerator('comments', styles);
+  const { push } = useHistory();
   const data = [
     { icon: LikeOutlined, value: comment.likedCount },
     { icon: ExportOutlined },
     { icon: CommentOutlined },
   ];
+
+  function toUserPage() {
+    push(DynamicPage.user(comment.user.userId));
+  }
+
   return (
     <div className={getClass()}>
       <div className={getClass('left')}>
-        <Img className={getClass('img')} src={resizeImg(comment?.user.avatarUrl || avatar, 100)} />
+        <Img
+          className={getClass('img')}
+          src={resizeImg(comment?.user.avatarUrl || avatar, 30)}
+          onClick={toUserPage}
+        />
       </div>
       <div className={getClass('right')}>
         <p>
-          <a>{comment.user.nickname}：</a>
+          <a onClick={toUserPage}>{comment.user.nickname}：</a>
           {comment.content}
         </p>
         {comment.beReplied?.length > 0 && (
           <p className={styles['--mentioned']}>
             {comment.beReplied.map(replied => (
               <span key={replied.beRepliedCommentId}>
-                <a>@{replied.user.nickname}：</a>
+                <a onClick={() => push(DynamicPage.user(replied.user.userId))}>
+                  @{replied.user.nickname}：
+                </a>
                 {replied.content}
               </span>
             ))}

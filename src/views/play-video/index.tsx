@@ -22,6 +22,7 @@ import WriteComment from '@/views/list/comments-list/write-comment';
 import CommentGroup from '@/components/comment-group';
 import Video from './video';
 import { useHistory } from 'react-router-dom';
+import { DynamicPage } from '@/router';
 
 type Detail = Pick<
   VideoDetail,
@@ -32,7 +33,13 @@ type Detail = Pick<
   | 'subscribeCount'
   | 'shareCount'
   | 'commentCount'
-> & { publishTime: string; avatarUrl: string; nickname: string };
+> & {
+  publishTime: string;
+  avatarUrl: string;
+  nickname: string;
+  artistId?: number;
+  userId?: number;
+};
 
 const PlayVideo: React.FC = () => {
   const getClass = classGenerator('play-video');
@@ -43,6 +50,7 @@ const PlayVideo: React.FC = () => {
   const [relatedAllvideo, setRelatedAllvideo] = useState<VideoMultiCreator[]>([]);
   const { goBack } = useHistory();
   const isMV = useMemo(() => !Number.isNaN(Number(id)), [id]);
+  const { push } = useHistory();
 
   async function loadVideoDetail() {
     const res = await getVideoDetail(id);
@@ -59,7 +67,7 @@ const PlayVideo: React.FC = () => {
     } = res.data;
 
     const publishTime = dayjs(publishTimestamp).format('YYYY-MM-DD');
-    const { avatarUrl, nickname } = creator;
+    const { avatarUrl, nickname, userId } = creator;
 
     setDetail({
       title,
@@ -72,6 +80,7 @@ const PlayVideo: React.FC = () => {
       commentCount,
       avatarUrl,
       nickname,
+      userId,
     });
   }
 
@@ -90,6 +99,7 @@ const PlayVideo: React.FC = () => {
       commentCount,
       artistName: nickname,
       cover: avatarUrl,
+      artistId,
     } = mvDetail.data;
 
     const { likedCount: praisedCount } = mvDetailInfo;
@@ -104,6 +114,7 @@ const PlayVideo: React.FC = () => {
       praisedCount,
       nickname,
       avatarUrl,
+      artistId,
     };
 
     setDetail(detail);
@@ -122,6 +133,11 @@ const PlayVideo: React.FC = () => {
   async function loadRelatedAllvideo() {
     const res = await getRelatedAllvideo(id);
     setRelatedAllvideo(res.data);
+  }
+
+  function toUserOrSingerPage() {
+    if (detail?.artistId) push(DynamicPage.singer(detail.artistId));
+    else if (detail?.userId) push(DynamicPage.user(detail.userId));
   }
 
   useEffect(() => {
@@ -149,9 +165,12 @@ const PlayVideo: React.FC = () => {
           <div className={getClass('author-wrapper')}>
             {detail && (
               <div className={getClass('author')}>
-                <Img className={getClass('avatar')} src={resizeImg(detail.avatarUrl, 50)} />
-
-                <strong>{detail.nickname}</strong>
+                <Img
+                  className={getClass('avatar')}
+                  src={resizeImg(detail.avatarUrl, 50)}
+                  onClick={toUserOrSingerPage}
+                />
+                <strong onClick={toUserOrSingerPage}>{detail.nickname}</strong>
               </div>
             )}
             <button className={getClass('follow')}>
@@ -196,7 +215,11 @@ const PlayVideo: React.FC = () => {
           <h2 className={getClass('title')}>相关推荐</h2>
           {relatedAllvideo.map(item => (
             <div key={item.vid} className={getClass('item')}>
-              <Img className={getClass('item-img')} src={item.coverUrl} />
+              <Img
+                className={getClass('item-img')}
+                src={item.coverUrl}
+                onClick={() => push(DynamicPage.playVideo(item.vid))}
+              />
               <div className={getClass('item-description')}>
                 <div className={getClass('item-title')}>{item.title}</div>
                 <div className={getClass('item-author')}>

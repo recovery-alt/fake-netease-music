@@ -15,6 +15,10 @@ import Card, { CardData } from '@/components/card';
 import List, { ListParams } from '../../list';
 import Img from '@/components/img';
 import { classGenerator } from '@/utils';
+import { useDispatch } from 'react-redux';
+import { insertSong } from '@/store';
+import { useHistory } from 'react-router-dom';
+import { DynamicPage } from '@/router';
 
 const RadioHost: React.FC = () => {
   const getClass = classGenerator('radio-host');
@@ -30,6 +34,46 @@ const RadioHost: React.FC = () => {
   const [emotion, setEmotion] = useState<CardData[]>([]);
   const [talkshow, setTalkShow] = useState<CardData[]>([]);
   type Callback = (value: React.SetStateAction<CardData[]>) => void;
+  const dispatch = useDispatch();
+  const { push } = useHistory();
+
+  function loadDJRecommendType(type: number, cb: Callback) {
+    getDJRecommendType(type).then(res => {
+      const result = res.djRadios.map(item => {
+        const { id, name, picUrl: imgUrl } = item;
+        return { id, name, imgUrl };
+      });
+      cb(result.slice(0, 5));
+    });
+  }
+
+  function handleCurrentChange(plus = false) {
+    if (plus && length - current > 1) setCurrent(current + 1);
+    if (!plus && current > 0) setCurrent(current - 1);
+  }
+
+  function renderDJPaygift({ item }: ListParams) {
+    return (
+      <div className={getClass('list')}>
+        <h2>{item.name}</h2>
+        <h4>{item.extra?.rcmdText}</h4>
+        <h4>{item.extra?.lastProgramName}</h4>
+        {<h3>¥{Number(item.extra?.originalPrice) / 100}</h3>}
+      </div>
+    );
+  }
+
+  function handleBannerClick(id: number) {
+    dispatch(insertSong(id));
+  }
+
+  function pushRadioList(id: number) {
+    push(DynamicPage.radioList(id));
+  }
+
+  function handlePayItemClick() {
+    // TODO: 付费精品
+  }
 
   useEffect(() => {
     getDJBanner().then(res => {
@@ -70,35 +114,9 @@ const RadioHost: React.FC = () => {
     recommendTypes.forEach(item => loadDJRecommendType(...item));
   }, []);
 
-  function loadDJRecommendType(type: number, cb: Callback) {
-    getDJRecommendType(type).then(res => {
-      const result = res.djRadios.map(item => {
-        const { id, name, picUrl: imgUrl } = item;
-        return { id, name, imgUrl };
-      });
-      cb(result.slice(0, 5));
-    });
-  }
-
-  function handleCurrentChange(plus = false) {
-    if (plus && length - current > 1) setCurrent(current + 1);
-    if (!plus && current > 0) setCurrent(current - 1);
-  }
-
-  function renderDJPaygift({ item }: ListParams) {
-    return (
-      <div className={getClass('list')}>
-        <h2>{item.name}</h2>
-        <h4>{item.extra?.rcmdText}</h4>
-        <h4>{item.extra?.lastProgramName}</h4>
-        {<h3>¥{Number(item.extra?.originalPrice) / 100}</h3>}
-      </div>
-    );
-  }
-
   return (
     <div className={getClass()}>
-      <Banner data={banner} />
+      <Banner data={banner} onBannerClick={handleBannerClick} />
       <div className={getClass('category')}>
         {current > 0 ? (
           <LeftOutlined
@@ -127,19 +145,24 @@ const RadioHost: React.FC = () => {
         </div>
       </div>
       <Title name="付费精品" />
-      <List size="large" data={djPaygift} functionChildren={renderDJPaygift} />
+      <List
+        size="large"
+        data={djPaygift}
+        functionChildren={renderDJPaygift}
+        onItemClick={handlePayItemClick}
+      />
       <Title name="电台个性推荐" />
-      <Card data={djPersonalizeRecommend} />
+      <Card data={djPersonalizeRecommend} onItemClick={pushRadioList} />
       <Title name="有声书" />
-      <Card data={soundingBook} />
+      <Card data={soundingBook} onItemClick={pushRadioList} />
       <Title name="创作翻唱" />
-      <Card data={djRecommendType} />
+      <Card data={djRecommendType} onItemClick={pushRadioList} />
       <Title name="音乐推荐" />
-      <Card data={musicRecommend} />
+      <Card data={musicRecommend} onItemClick={pushRadioList} />
       <Title name="情感" />
-      <Card data={emotion} />
+      <Card data={emotion} onItemClick={pushRadioList} />
       <Title name="脱口秀" />
-      <Card data={talkshow} />
+      <Card data={talkshow} onItemClick={pushRadioList} />
     </div>
   );
 };

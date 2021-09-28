@@ -119,14 +119,15 @@ export const getVideoCategoryList = () => get<{ data: VideoCategogy[] }>('/video
 export const getVideoGroup = (id?: number | string, offset = 0) =>
   get<VideoList>('/video/group', { id, offset });
 
-export const getMVFirst = (area: string, limit = 6) =>
+export const getMVFirst = (area: string | number, limit = 6) =>
   get<{ data: MV[] }>('/mv/first', { area, limit });
 
 export const getMVAll = (limit = 6) => get<{ data: MV[] }>('/mv/all', { limit });
 export const getMVExclusiveRcmd = (limit = 6) =>
   get<{ data: MV[] }>('/mv/exclusive/rcmd', { limit });
 
-export const getTopMV = (limit = 10) => get<{ data: MV[] }>('/top/mv', { limit });
+export const getTopMV = (area: string | number, limit = 10) =>
+  get<{ data: MV[] }>('/top/mv', { area, limit });
 
 export const getDJSublist = () => get<{ count: number; djRadios: DJRadio[] }>('/dj/sublist');
 
@@ -134,7 +135,7 @@ export const getAlbumSublist = () => get<{ data: Album[] }>('/album/sublist');
 
 export const getArtistSublist = () => get<{ data: Artist[] }>('/artist/sublist');
 
-export const getMVSublist = () => get<{ data: MVSublist[] }>('/mv/sublist');
+export const getMVSublist = () => get<{ count: number; data: MVSublist[] }>('/mv/sublist');
 
 export const getSimiPlaylist = (id: number) =>
   get<{ playlists: UserPlaylist[] }>('/simi/playlist', { id });

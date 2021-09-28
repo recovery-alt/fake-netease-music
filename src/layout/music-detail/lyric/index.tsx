@@ -8,6 +8,8 @@ import { classGenerator, resolveLyricTime } from '@/utils';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import classNames from 'classnames';
+import { useHistory } from 'react-router-dom';
+import { DynamicPage } from '@/router';
 
 type Props = { music: Music };
 
@@ -18,13 +20,13 @@ const Lyric: React.FC<Props> = ({ music }) => {
   const currentTime = useSelector((state: RootState) => state.controller.currentTime);
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { push } = useHistory();
 
   function transLyric2Arr(lyric: string) {
     const result: Array<LyricItem> = [];
     lyric.replace(/((?:\[\d{2}:\d{2}\.\d{2,3}\])+)([\s\S]*?)(?=\[)/g, ($1, $2, value) => {
       const matcher = $2.match(/(?<=\[)\d{2}:\d{2}\.\d{2,3}(?=\])/g) as [];
       const timestamp = matcher.map(item => resolveLyricTime(item));
-      console.log(value);
       if (!value || !value.trim()) return '';
       result.push({ timestamp, value });
       return '';
@@ -74,12 +76,16 @@ const Lyric: React.FC<Props> = ({ music }) => {
       <div className={getClass('info')}>
         <p>
           <span>专辑：</span>
-          <a>{music?.album.name}</a>
+          <a onClick={() => push(DynamicPage.list(music.album.id, 'album'))}>{music?.album.name}</a>
         </p>
         <p>
           <span>歌手：</span>
           {music?.artists.map(artist => (
-            <a className={getClass('anchor')} key={artist.name}>
+            <a
+              className={getClass('anchor')}
+              key={artist.name}
+              onClick={() => push(DynamicPage.singer(artist.id))}
+            >
               {artist.name}
             </a>
           ))}

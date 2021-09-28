@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import './mv.less';
 import { RightOutlined } from '@ant-design/icons';
 import Nav from '../../nav';
@@ -8,16 +8,19 @@ import { getMVFirst, getMVAll, getMVExclusiveRcmd, getTopMV } from '@/api';
 import { MV as MVType } from '@/types';
 import Img from '@/components/img';
 import { classGenerator } from '@/utils';
+import { useHistory } from 'react-router-dom';
+import { DynamicPage, Page } from '@/router';
 
 const MV: React.FC = () => {
   const getClass = classGenerator('mv');
   const initAreaCategory = areaCategory.map(item => ({ name: item, id: item }));
   const [mvFirst, setMVFirst] = useState<ListItem[]>([]);
-  const [selected] = useState(0);
   const [mvHot, setMVHot] = useState<ListItem[]>([]);
   const [mvExclusiveRcmd, setMVExclusiveRcmd] = useState<ListItem[]>([]);
   const [topMV, setTopMV] = useState<MVType[]>([]);
-  const current = useMemo(() => initAreaCategory[selected], [selected]);
+  const [mvFirstId, setMVFirstId] = useState<number | string>(initAreaCategory[0].id);
+  const [topMVId, setRankMVId] = useState<number | string>(initAreaCategory[0].id);
+  const { push } = useHistory();
 
   function mv2ListAdapter(data: MVType[]) {
     return data.map(item => {
@@ -26,29 +29,50 @@ const MV: React.FC = () => {
     });
   }
 
+  async function loadMVFirst() {
+    const res = await getMVFirst(mvFirstId);
+    setMVFirst(mv2ListAdapter(res.data));
+  }
+
+  async function loadMVHot() {
+    const res = await getMVAll();
+    setMVHot(mv2ListAdapter(res.data));
+  }
+
+  async function loadMVExclusiveRcmd() {
+    const res = await getMVExclusiveRcmd();
+    setMVExclusiveRcmd(mv2ListAdapter(res.data));
+  }
+
+  async function loadTopMV() {
+    const res = await getTopMV(topMVId);
+    setTopMV(res.data);
+  }
+
+  function handleNewestMVNavClick(id: string | number) {
+    setMVFirstId(id);
+  }
+
+  function handleTopMVNavClick(id: string | number) {
+    setRankMVId(id);
+  }
+
+  function toPlayVideoPage(id: number | string) {
+    push(DynamicPage.playVideo(id));
+  }
+
   useEffect(() => {
-    (async () => {
-      if (current?.id) {
-        const res = await getMVFirst(current.id);
-        setMVFirst(mv2ListAdapter(res.data));
-      }
-    })();
-
-    (async () => {
-      const res = await getMVAll();
-      setMVHot(mv2ListAdapter(res.data));
-    })();
-
-    (async () => {
-      const res = await getMVExclusiveRcmd();
-      setMVExclusiveRcmd(mv2ListAdapter(res.data));
-    })();
-
-    (async () => {
-      const res = await getTopMV();
-      setTopMV(res.data);
-    })();
+    loadMVHot();
+    loadMVExclusiveRcmd();
   }, []);
+
+  useEffect(() => {
+    loadMVFirst();
+  }, [mvFirstId]);
+
+  useEffect(() => {
+    loadTopMV();
+  }, [topMVId]);
 
   return (
     <div className={getClass()}>
@@ -57,29 +81,29 @@ const MV: React.FC = () => {
           最新MV
           <RightOutlined />
         </strong>
-        <Nav data={initAreaCategory} id="" />
+        <Nav data={initAreaCategory} id={mvFirstId} onNavClick={handleNewestMVNavClick} />
       </header>
-      <List data={mvFirst} />
+      <List data={mvFirst} onItemClick={toPlayVideoPage} />
       <header className={getClass('header --margin')}>
         <strong>
           热播MV
           <RightOutlined />
         </strong>
       </header>
-      <List data={mvHot} />
+      <List data={mvHot} onItemClick={toPlayVideoPage} />
       <header className={getClass('header --margin')}>
         <strong>
           网易出品
           <RightOutlined />
         </strong>
       </header>
-      <List data={mvExclusiveRcmd} />
+      <List data={mvExclusiveRcmd} onItemClick={toPlayVideoPage} />
       <header className={getClass('header --margin')}>
         <strong>
           MV排行榜
           <RightOutlined />
         </strong>
-        <Nav data={initAreaCategory} id="" />
+        <Nav data={initAreaCategory} id={topMVId} onNavClick={handleTopMVNavClick} />
       </header>
       <section className={getClass('rank')}>
         {topMV.map((item, i) => (
@@ -89,7 +113,12 @@ const MV: React.FC = () => {
               <h4>-</h4>
             </div>
             <div className={getClass('rank-img-wrapper')}>
-              <Img className={getClass('rank-img')} src={item.cover} />
+              <Img
+                className={getClass('rank-img')}
+                src={item.cover}
+                icon={{ size: 'medium', hoverDisplay: true }}
+                onClick={() => push(DynamicPage.playVideo(item.id))}
+              />
             </div>
             <div className={getClass('rank-description')}>
               <h3>{item.name}</h3>

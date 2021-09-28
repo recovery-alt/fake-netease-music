@@ -3,7 +3,7 @@ import './list.less';
 import Button from '@/components/button';
 import { FolderAddOutlined, ShareAltOutlined, DownloadOutlined } from '@ant-design/icons';
 import Table from '@/components/table';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import avatar from '@/assets/img/avatar.svg';
 import { HeartFilled } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
@@ -21,6 +21,7 @@ import AlbumDetail from './album-detail';
 import Img from '@/components/img';
 import classNames from 'classnames';
 import { CommonColumns } from '@/config';
+import { DynamicPage } from '@/router';
 
 type CurrentInfo = Partial<UserPlaylist & { artistName: string }>;
 
@@ -32,13 +33,18 @@ const List: React.FC = () => {
   const [albumDescrition, setAlbumDescrition] = useState('');
   const [current, setCurrent] = useState<CurrentInfo>();
   const id = useMemo(() => Number(params.id), [params.id]);
+  const { push } = useHistory();
   // 判断是否为专辑
   const isAlbum = useMemo(() => !!params.type, [params.type]);
 
   const profile = useSelector((state: RootState) => state.user.profile);
 
-  function handleTableDoubleClick(current: number) {
+  function handlePlayTrack(current = 0) {
     dispatch(setCurrentTrack({ current, tracks, fm: [] }));
+  }
+
+  function toUserPage(id: number) {
+    push(DynamicPage.user(id));
   }
 
   async function loadAlbum() {
@@ -74,6 +80,7 @@ const List: React.FC = () => {
     setTracks(tracksWithPrivilege);
     setCurrent(playlistDetail.playlist);
   }
+
   function renderPlaylistDescription() {
     return (
       <div className={getClass('description')}>
@@ -104,7 +111,7 @@ const List: React.FC = () => {
       <div className={getClass('description')}>
         <div className={getClass('singer')}>
           <span className="--title">歌手: </span>
-          <span>{current?.artistName}</span>
+          <span onClick={() => push(DynamicPage.singer(current?.id))}>{current?.artistName}</span>
         </div>
         <div className={getClass('publish-time')}>
           <span className="--title">时间: </span>
@@ -141,13 +148,17 @@ const List: React.FC = () => {
           </div>
           {!isAlbum && (
             <div className={getClass('user-info')}>
-              <img src={resizeImg(profile.avatarUrl || avatar, 100)} alt="avatar" />
-              <a>{profile.nickname}</a>
+              <img
+                src={resizeImg(profile.avatarUrl || avatar, 100)}
+                alt="avatar"
+                onClick={() => toUserPage(profile.userId)}
+              />
+              <a onClick={() => toUserPage(profile.userId)}>{profile.nickname}</a>
               <span>{dayjs(current?.createTime).format('YYYY-MM-DD')}创建</span>
             </div>
           )}
           <div className={getClass('control')}>
-            <Button compose />
+            <Button compose onClick={() => handlePlayTrack()} />
             <Button>
               <FolderAddOutlined />
               收藏({wrapNumber(current?.subscribedCount)})
@@ -167,7 +178,7 @@ const List: React.FC = () => {
       <section className={getClass('tabs')}>
         <Tabs>
           <Tabs.TabPane tab="歌曲列表" key="1">
-            <Table columns={CommonColumns} data={tracks} onDoubleClick={handleTableDoubleClick} />
+            <Table columns={CommonColumns} data={tracks} onDoubleClick={handlePlayTrack} />
           </Tabs.TabPane>
           <Tabs.TabPane tab={`评论(${current?.commentCount || 0})`} key="2">
             <CommentsList id={id} isAlbum={isAlbum} />

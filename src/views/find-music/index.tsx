@@ -119,6 +119,10 @@ const FindMusic: React.FC = () => {
     setDJToplist(result);
   }
 
+  function handleMVTitleClick() {
+    if (isLogin) push(Page.video);
+  }
+
   const handleDailyRecommendPlay: ReactEventHandler<HTMLSpanElement> = e => {
     e.stopPropagation();
     dispatch(setCurrentTrack({ tracks: recommendSongs, current: 0, fm: [] }));
@@ -137,7 +141,7 @@ const FindMusic: React.FC = () => {
   return (
     <div className={getClass()}>
       <Banner data={banner} onBannerClick={handleSongInserted} />
-      <Title name="推荐歌单" />
+      <Title name="推荐歌单" onClick={() => push(Page.findMusicMusicList)} />
       <div className={getClass('card')}>
         {isLogin && (
           <div className={getClass('card-item')}>
@@ -168,29 +172,38 @@ const FindMusic: React.FC = () => {
           </div>
         ))}
       </div>
-      <Title name="独家放送" welt />
+      <Title
+        name="独家放送"
+        welt
+        onClick={() => {
+          // TODO: 独家放送页面
+        }}
+      />
       <Card
         type="rectangle"
         data={privateList}
-        onItemClick={id => {
-          console.log(id);
-        }}
+        onItemClick={id => push(DynamicPage.playVideo(id))}
       />
-      <Title name="最新音乐" />
+      <Title name="最新音乐" onClick={() => push(Page.findMusicNewest)} />
       <List
         icon
         data={albumNewest}
         functionChildren={renderAlbumNewest}
         onItemClick={handleSongInserted}
       />
-      <Title name="推荐MV" />
+      <Title name="推荐MV" onClick={handleMVTitleClick} />
       <Card
         type="rectangle"
         data={personalizedMV}
         onItemClick={id => push(DynamicPage.playVideo(id))}
       />
-      <Title name="主播电台" welt />
-      <List size="medium" data={djToplist} functionChildren={renderDJToplist}></List>
+      <Title name="主播电台" welt onClick={() => push(Page.findMusicRadioHost)} />
+      <List
+        size="medium"
+        data={djToplist}
+        functionChildren={renderDJToplist}
+        onItemClick={id => push(DynamicPage.radioList(id))}
+      />
     </div>
   );
 };

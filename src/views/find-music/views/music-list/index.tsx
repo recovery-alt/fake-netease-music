@@ -30,15 +30,7 @@ const MusicList: React.FC = () => {
   } = useTopPlaylist();
   const { push } = useHistory();
   const dispatch = useDispatch();
-
   const { buttonContext, allMusicCategory } = usePopover(cat);
-
-  useEffect(() => {
-    (async () => {
-      const res = await getMusicCategory();
-      setMusicCategory(res.tags);
-    })();
-  }, []);
 
   function handleListItemClick(id: number) {
     push(DynamicPage.list(id));
@@ -46,6 +38,10 @@ const MusicList: React.FC = () => {
 
   function handleListItemIconClick(id: number) {
     dispatch(fetchAndSetCurrentTrack(id));
+  }
+
+  function handleBoutiqueClick() {
+    // TODO: 精品歌单
   }
 
   function renderPopover(setShow: (show: boolean) => void) {
@@ -91,9 +87,16 @@ const MusicList: React.FC = () => {
     );
   }
 
+  useEffect(() => {
+    (async () => {
+      const res = await getMusicCategory();
+      setMusicCategory(res.tags);
+    })();
+  }, []);
+
   return (
     <div className={getClass()}>
-      <header className={getClass('banner')}>
+      <header className={getClass('banner')} onClick={handleBoutiqueClick}>
         {topPlaylistHighquality?.coverImgUrl && (
           <img src={resizeImg(topPlaylistHighquality.coverImgUrl, 300)} alt="banner" />
         )}

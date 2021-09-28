@@ -30,7 +30,7 @@ const Newest: React.FC = () => {
   ];
 
   function handleCollectAll() {
-    // TODO
+    // TODO: 收藏全部
   }
 
   function handlePlayAll() {

@@ -14,7 +14,11 @@ const List: React.FC<Props> = ({ data, onItemClick }) => {
       {data.map(item => (
         <div key={item.id} className={getClass('item')} onClick={() => onItemClick?.(item.id)}>
           <div className={getClass('img-wrapper')}>
-            <Img className={getClass('img')} src={item.imgUrl} />
+            <Img
+              className={getClass('img')}
+              src={item.imgUrl}
+              icon={{ size: 'big', hoverDisplay: true }}
+            />
           </div>
           <div className={getClass('description')}>
             <h3>{item.description}</h3>

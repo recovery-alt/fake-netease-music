@@ -80,7 +80,18 @@ const Layout: React.FC<Props> = ({ routes }) => {
             fallback={<Spin className={getClass('loading')} style={{ position: 'absolute' }} />}
           >
             <Switch>
-              {routes && routes.map(route => <Route key={route.path} {...route} />)}
+              {routes &&
+                routes.map(route => {
+                  const { component: Component, ...rest } = route;
+
+                  return (
+                    <Route
+                      key={route.path}
+                      {...rest}
+                      render={props => <Component key={props.match.url} />}
+                    />
+                  );
+                })}
               <NotFound />
             </Switch>
           </Suspense>

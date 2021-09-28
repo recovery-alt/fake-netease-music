@@ -5,11 +5,18 @@ import { getAlbumSublist } from '@/api';
 import disk from '@/assets/img/disk.svg';
 import Header from './header';
 import { classGenerator } from '@/utils';
+import { useHistory } from 'react-router-dom';
+import { DynamicPage } from '@/router';
 
 const Collection: React.FC = () => {
   const getClass = classGenerator('collection');
   const myAlbums: ListData[] = [{ id: 0, imgUrl: disk, col2: '我的数字专辑' }];
   const [albumSublist, setAlbumSublist] = useState<ListData[]>([]);
+  const { push } = useHistory();
+
+  function toAlbumPage(id: number) {
+    push(DynamicPage.list(id, 'album'));
+  }
 
   useEffect(() => {
     (async () => {
@@ -28,7 +35,7 @@ const Collection: React.FC = () => {
     <div className={getClass()}>
       <List data={myAlbums} />
       <Header title="收藏的专辑" count={2} style={{ marginTop: '4.5vh' }} />
-      <List data={albumSublist} />
+      <List data={albumSublist} onItemClick={toAlbumPage} />
     </div>
   );
 };

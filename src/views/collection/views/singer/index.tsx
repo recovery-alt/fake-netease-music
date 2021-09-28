@@ -4,10 +4,13 @@ import List, { ListData } from '@/components/list';
 import { getArtistSublist } from '@/api';
 import Header from '../../header';
 import { classGenerator } from '@/utils';
+import { useHistory } from 'react-router-dom';
+import { DynamicPage } from '@/router';
 
 const Singer: React.FC = () => {
   const getClass = classGenerator('collection-singer');
   const [data, setData] = useState<ListData[]>([]);
+  const { push } = useHistory();
 
   useEffect(() => {
     (async () => {
@@ -26,7 +29,7 @@ const Singer: React.FC = () => {
   return (
     <div className={getClass()}>
       <Header title="收藏的歌手" count={26} />
-      <List data={data} />
+      <List data={data} onItemClick={id => push(DynamicPage.singer(id))} />
     </div>
   );
 };

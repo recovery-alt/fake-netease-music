@@ -310,8 +310,8 @@ export type MV = {
 };
 
 export type MVSublist = {
-  id: number;
-  creator: { userId: number; useName: string }[];
+  vid: string;
+  creator: { userId: number; userName: string }[];
   coverUrl: string;
   title: string;
   playTime: number;
