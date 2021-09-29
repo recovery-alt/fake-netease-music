@@ -1,32 +1,35 @@
-import React, { FormEventHandler, forwardRef, useState } from 'react';
+import React, { FormEventHandler, forwardRef, useMemo, useState } from 'react';
 import styles from './input.module.less';
 import { CloseOutlined, SearchOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { classGenerator } from '@/utils';
 
 interface Props
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type'> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type' | 'value'> {
   type?: 'transparent' | 'normal';
   placeholder?: string;
+  defaultValue?: string;
+  onClear?: () => void;
 }
 
 const Input = forwardRef<HTMLInputElement, Props>(
-  ({ type = 'transparent', onInput, ...restProps }, ref) => {
+  ({ type = 'transparent', defaultValue = '', onInput, ...restProps }, ref) => {
     const getClass = classGenerator('input', styles);
-    const [showClear, setShowClear] = useState(false);
+    const [value, setValue] = useState(defaultValue);
+    const showClear = useMemo(() => !!value, [value]);
 
     const handleInput: FormEventHandler<HTMLInputElement> = e => {
-      setShowClear(!!e.currentTarget.value);
+      setValue(e.currentTarget.value);
       onInput?.(e);
     };
 
     function handleClear() {
-      // TODO: 清空输入框
+      setValue('');
     }
 
     return (
       <div className={classNames(styles[`--${type}`], getClass())}>
-        <input {...restProps} ref={ref} type="text" onInput={handleInput} />
+        <input {...restProps} value={value} ref={ref} type="text" onInput={handleInput} />
         <div className={getClass('icon')}>
           <SearchOutlined />
         </div>

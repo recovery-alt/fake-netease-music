@@ -15,7 +15,7 @@ import {
 import { Tabs } from 'antd';
 import { useParams } from 'react-router-dom';
 import { getDJDetail, getDJProgram } from '@/api';
-import { DJDetail, DJProgram } from '@/types';
+import { DJProgram } from '@/types';
 import dayjs from 'dayjs';
 import Subscriber from './subscriber';
 import { useDispatch, useSelector } from 'react-redux';

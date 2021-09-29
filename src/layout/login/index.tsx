@@ -22,7 +22,8 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
     setShowLogin(false);
   };
 
-  const submitLogin = async () => {
+  const submitLogin: MouseEventHandler<HTMLButtonElement> = async e => {
+    e.preventDefault();
     if (!phone || !password) return;
     const res = await dispatch(setUserInfo({ phone, password }));
     if (setUserInfo.fulfilled.match(res)) {
@@ -36,7 +37,7 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
 
   return createPortal(
     <div className={getClass('mask')}>
-      <div className={getClass()}>
+      <form className={getClass()}>
         <CloseOutlined onClick={hideLogin} />
         <img className={getClass('img')} src={login} alt="login" />
         <div className={getClass('form')}>
@@ -57,13 +58,13 @@ const Login: React.FC<Props> = ({ setShowLogin }) => {
             />
           </div>
         </div>
-        <button className={getClass('btn')} onClick={submitLogin}>
+        <button type="submit" className={getClass('btn')} onClick={submitLogin}>
           登录
         </button>
         {/* <div className={getClass('register')}>
           <a>注册</a>
         </div> */}
-      </div>
+      </form>
     </div>,
     dom
   );

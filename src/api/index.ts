@@ -26,7 +26,6 @@ import {
   CommentData,
   TopAlbum,
   SearchHot,
-  Subscriber,
   PlaylistSubscriberParams,
   SearchSuggest,
   SearchParams,
@@ -220,4 +219,5 @@ export const getMVDetailInfo = (mvid: number) => get<MVDetailInfo>('/mv/detail/i
 export const getCommentMV = (id: string | number, offset = 0) =>
   get<CommentData>('/comment/mv', { id, offset });
 
-export const getUserCloud = () => get<UserCloud>('/user/cloud');
+export const getUserCloud = (offset: number, limit: number) =>
+  get<UserCloud>('/user/cloud', { offset, limit });

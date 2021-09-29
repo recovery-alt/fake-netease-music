@@ -17,6 +17,7 @@ const Subscriber: React.FC<Props> = ({ id }) => {
   let time = -1;
 
   async function loadSubscribers() {
+    if (!id) return;
     const res = await getDJSubscriber(id, time);
     const type = time === -1 ? 'reset' : 'add';
     subscribersDispatch({ type, payload: res.subscribers });
@@ -29,7 +30,7 @@ const Subscriber: React.FC<Props> = ({ id }) => {
   }
 
   useEffect(() => {
-    if (id) loadSubscribers();
+    loadSubscribers();
   }, [id]);
 
   return (

@@ -14,4 +14,8 @@ export interface AppProps {
   onChange?: React.FormEventHandler<HTMLInputElement>;
 }
 
+export type DataActionType = 'add' | 'reset';
+
+export type DataAction<T> = { type: DataActionType; payload: T[] };
+
 export * from './interface';

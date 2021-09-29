@@ -40,25 +40,36 @@ const CommentGroup: React.FC<Props> = ({ id, children, api }) => {
       {total > 0 ? (
         <>
           {children}
-          <h2 className={getClass('title')}>精彩评论</h2>
-          {hotComments.map(comment => (
-            <Comments key={comment.commentId} comment={comment} />
-          ))}
-          <h2 className={getClass('title')}>最新评论（{total}）</h2>
-          {comments.map(comment => (
-            <Comments key={comment.commentId} comment={comment} />
-          ))}
-          <footer className={getClass('footer')}>
-            <Pagination
-              total={total}
-              showSizeChanger={false}
-              current={currentPage}
-              onChange={(page, pageSize) => {
-                setCurrentPage(page);
-                loadData(id, page, pageSize);
-              }}
-            />
-          </footer>
+          {hotComments.length > 0 && (
+            <>
+              <h2 className={getClass('title')}>精彩评论</h2>
+              {hotComments.map(comment => (
+                <Comments key={comment.commentId} comment={comment} />
+              ))}
+            </>
+          )}
+          {comments.length > 0 && (
+            <>
+              <h2 className={getClass('title')}>最新评论（{total}）</h2>
+              {comments.map(comment => (
+                <Comments key={comment.commentId} comment={comment} />
+              ))}
+            </>
+          )}
+
+          {total > 20 && (
+            <footer className={getClass('footer')}>
+              <Pagination
+                total={total}
+                showSizeChanger={false}
+                current={currentPage}
+                onChange={(page, pageSize) => {
+                  setCurrentPage(page);
+                  loadData(id, page, pageSize);
+                }}
+              />
+            </footer>
+          )}
         </>
       ) : (
         <div className={getClass('empty')}>还没有评论，快来抢沙发～</div>

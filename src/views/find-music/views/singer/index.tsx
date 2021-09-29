@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useRef, useState, Reducer } from 'react';
 import './singer.less';
 import classNames from 'classnames';
 import { getArtistList } from '@/api';
-import { Artist, Data } from '@/types';
+import { Artist, Data, DataAction, DataActionType } from '@/types';
 import { categoryList } from '@/config';
 import Img from '@/components/img';
 import { classGenerator, resizeImg } from '@/utils';
@@ -12,19 +12,15 @@ import { useInfinityScroll } from '@/hooks';
 
 const Singer: React.FC = () => {
   const getClass = classGenerator('music-singer');
-  type ActionType = 'add' | 'reset';
-  type Action = { type: ActionType; payload: Artist[] };
-  const [data, dataDispatch] = useReducer<Reducer<Artist[], Action>>((state, action) => {
-    if (action.type === 'add') return [...state, ...action.payload];
-    return action.payload;
-  }, []);
+
+  const [data, dataDispatch] = useReducer(dataReducer, []);
   type Selected = Array<number | string | undefined>;
   const [selected, setSelected] = useState<Selected>([-1, -1, undefined]);
   const footerRef = useRef<HTMLElement>(null);
   const { push } = useHistory();
   const limit = 20;
   let offset = 0;
-  const { setMore, moreText } = useInfinityScroll(footerRef, loadMoreArtistList);
+  const { setMore, moreText } = useInfinityScroll(footerRef, loadArtistList);
 
   const searchData: Array<{ label: string; key: string; list: Array<Data<string | number>> }> = [
     {
@@ -57,31 +53,31 @@ const Singer: React.FC = () => {
     return result;
   }
 
+  function dataReducer(state: Artist[], action: DataAction<Artist>) {
+    return action.type === 'add' ? [...state, ...action.payload] : action.payload;
+  }
+
   function handleCatClick(index: number, value: number | string) {
     const newSelected = [...selected];
     newSelected[index] = value;
     setSelected(newSelected);
   }
 
-  async function loadArtistList(actionType: ActionType) {
+  async function loadArtistList() {
     const [area, type, initial] = selected;
     const res = await getArtistList({ area, type, initial, limit, offset });
+    const actionType = offset === 0 ? 'reset' : 'add';
     setMore(res.more);
     dataDispatch({ type: actionType, payload: res.artists });
+    offset += limit;
   }
 
   function handleSingerClick(item: Artist) {
     push({ pathname: DynamicPage.singer(item.id), state: item.alias });
   }
 
-  function loadMoreArtistList() {
-    offset += limit;
-    loadArtistList('add');
-  }
-
   useEffect(() => {
-    offset = 0;
-    loadArtistList('reset');
+    loadArtistList();
   }, [selected]);
 
   return (

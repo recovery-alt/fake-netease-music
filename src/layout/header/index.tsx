@@ -91,7 +91,7 @@ const List: React.FC = () => {
             ref={inputRef}
             type="normal"
             placeholder="搜索"
-            value={keywords}
+            defaultValue={keywords}
             onInput={e => dispatch(setKeywords(e.currentTarget.value))}
             onFocus={() => setShowSearch(true)}
             onKeyUp={handleMouseup}

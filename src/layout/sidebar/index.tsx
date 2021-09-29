@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, Reducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import styles from './sidebar.module.less';
 import {
   CustomerServiceOutlined,
@@ -28,7 +28,6 @@ import { DynamicPage, Page } from '@/router';
 type Menu = { name: string; icon: React.FC; path: string; loginShow?: boolean };
 type MenuItem = { title?: string; menus: Menu[] };
 type ItemProps = { menu: Menu; index: [number, number]; plus?: number };
-type MenuListAction = { type: number; payload: MenuItem[] };
 
 const List: React.FC = () => {
   const getClass = classGenerator('sidebar', styles);
@@ -39,42 +38,32 @@ const List: React.FC = () => {
   const { profile, cookie } = useSelector((state: RootState) => state.user);
   const playlist = useSelector((state: RootState) => state.userPlaylist.playlist);
   const dispatch = useDispatch<AppDispatch>();
-  const [menuList, menuListDispatch] = useReducer<Reducer<MenuItem[], MenuListAction>>(
-    (state, action) => {
-      const newState = state.slice(0, 2);
-      return [...newState, ...action.payload];
+  const initMenuList = [
+    {
+      menus: [
+        { name: '发现音乐', icon: CustomerServiceOutlined, path: Page.findMusic },
+        { name: '私人FM', icon: TeamOutlined, path: Page.fm },
+        { name: '视频', icon: PlaySquareOutlined, path: Page.video, loginShow: true },
+        { name: '朋友', icon: TeamOutlined, path: Page.friend },
+      ],
     },
-    [
-      {
-        menus: [
-          { name: '发现音乐', icon: CustomerServiceOutlined, path: Page.findMusic },
-          { name: '私人FM', icon: TeamOutlined, path: Page.fm },
-          { name: '视频', icon: PlaySquareOutlined, path: Page.video, loginShow: true },
-          { name: '朋友', icon: TeamOutlined, path: Page.friend },
-        ],
-      },
-      {
-        title: '我的音乐',
-        menus: [
-          { name: 'iTunes音乐', icon: CustomerServiceOutlined, path: Page.iTunes },
-          { name: '下载管理', icon: DownloadOutlined, path: Page.download },
-          { name: '最近播放', icon: FieldTimeOutlined, path: Page.recent },
-          { name: '我的音乐云盘', icon: CloudOutlined, path: Page.cloudMusic, loginShow: true },
-          { name: '我的电台', icon: NotificationOutlined, path: Page.radio, loginShow: true },
-          { name: '我的收藏', icon: StarOutlined, path: Page.collection, loginShow: true },
-        ],
-      },
-      {
-        title: '创建的歌单',
-        menus: [{ name: '我喜欢的音乐', icon: HeartOutlined, path: DynamicPage.list('') }],
-      },
-    ]
-  );
-
-  function handleMenuClick({ menu, index }: ItemProps) {
-    setSelected(index);
-    push(menu.path);
-  }
+    {
+      title: '我的音乐',
+      menus: [
+        { name: 'iTunes音乐', icon: CustomerServiceOutlined, path: Page.iTunes },
+        { name: '下载管理', icon: DownloadOutlined, path: Page.download },
+        { name: '最近播放', icon: FieldTimeOutlined, path: Page.recent },
+        { name: '我的音乐云盘', icon: CloudOutlined, path: Page.cloudMusic, loginShow: true },
+        { name: '我的电台', icon: NotificationOutlined, path: Page.radio, loginShow: true },
+        { name: '我的收藏', icon: StarOutlined, path: Page.collection, loginShow: true },
+      ],
+    },
+    {
+      title: '创建的歌单',
+      menus: [{ name: '我喜欢的音乐', icon: HeartOutlined, path: DynamicPage.list('') }],
+    },
+  ];
+  const [menuList, menuListDispatch] = useReducer(menuListReducer, initMenuList);
 
   const Item: React.FC<ItemProps> = ({ menu, index }) => {
     const active = judgeSelected(selected, index);
@@ -91,6 +80,16 @@ const List: React.FC = () => {
       </div>
     );
   };
+
+  function menuListReducer(state: MenuItem[], payload: MenuItem[]) {
+    const newState = state.slice(0, 2);
+    return [...newState, ...payload];
+  }
+
+  function handleMenuClick({ menu, index }: ItemProps) {
+    setSelected(index);
+    push(menu.path);
+  }
 
   function login() {
     setShowLogin(true);
@@ -173,7 +172,7 @@ const List: React.FC = () => {
       const index = userId === profile.userId ? 0 : 1;
       payload[index].menus.push(menu);
     });
-    menuListDispatch({ type: 0, payload });
+    menuListDispatch(payload);
   }, [playlist]);
 
   return (
