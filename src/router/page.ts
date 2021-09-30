@@ -37,19 +37,20 @@ const handleSuffix = (name: string, id?: string | number, suffix = 'id') => {
   return prefix + wrapperSlash(id);
 };
 
-export const DynamicPage = {
-  list(id?: string | number, type?: 'album') {
-    const prefix = '/home/list';
-    if (id === undefined) return `${prefix}/:id?/:type?`;
+const handleListSuffix = (prefix: string, id?: string | number, type?: string) => {
+  if (id === undefined) return `/${prefix}/:id?/:type?`;
 
-    return `${prefix}${wrapperSlash(id)}${wrapperSlash(type)}`;
-  },
+  return `/${prefix}${wrapperSlash(id)}${wrapperSlash(type)}`;
+};
+
+export const DynamicPage = {
+  list: (id?: string | number, type?: 'album') => handleListSuffix('home/list', id, type),
   singer: (id?: string | number) => handleSuffix('home/singer', id),
   user: (id?: string | number) => handleSuffix('home/user', id),
   findMusicNewest: (type?: string) => handleSuffix('home/find-music/newest', type, 'type'),
   playVideo: (id?: string | number) => handleSuffix('play-video', id),
-  radioList: (id?: string | number) => handleSuffix('home/radio-list', id),
+  radioList: (id?: string | number, type?: 'pay') => handleListSuffix('home/radio-list', id, type),
   excellentList: (id?: string | number) => handleSuffix('home/find-music/music-list/excellent', id),
-  RadioZone: (type?: string | number) =>
+  radioZone: (type?: string | number) =>
     handleSuffix('home/find-music/radio-host/zone', type, 'type'),
 };

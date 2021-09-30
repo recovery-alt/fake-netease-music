@@ -53,7 +53,7 @@ const routes: Array<RouteConfig> = [
         component: lazy(() => import('@/views/find-music/views/music-list/excellent')),
       },
       {
-        path: DynamicPage.RadioZone(),
+        path: DynamicPage.radioZone(),
         component: lazy(() => import('@/views/find-music/views/radio-host/zone')),
       },
       {

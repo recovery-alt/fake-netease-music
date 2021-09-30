@@ -120,6 +120,17 @@ export type DJRadio = {
   dj: { nickname: string };
 };
 
+export type DJFeeInfo = {
+  buyed: boolean;
+  discountPrice: number;
+  finished: boolean;
+  originalPrice: number;
+  price: number;
+  purchaseCount: number;
+  slogan: string;
+  undershelf: boolean;
+};
+
 export type DJDetail = {
   category: string;
   categoryId: number;
@@ -148,6 +159,7 @@ export type DJDetail = {
   shareCount: number;
   subCount: number;
   subed: boolean;
+  feeInfo?: DJFeeInfo;
 };
 
 export type DJProgram = {

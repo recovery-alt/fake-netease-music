@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import { classGenerator, resizeImg } from '@/utils';
 import { fetchAndSetCurrentTrack } from '@/store';
 import { useDispatch } from 'react-redux';
-import { DynamicPage, Page } from '@/router';
+import { DynamicPage } from '@/router';
 import styles from './popover.module.less';
 
 const MusicList: React.FC = () => {

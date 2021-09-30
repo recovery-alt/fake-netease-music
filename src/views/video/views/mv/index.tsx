@@ -9,7 +9,7 @@ import { MV as MVType } from '@/types';
 import Img from '@/components/img';
 import { classGenerator } from '@/utils';
 import { useHistory } from 'react-router-dom';
-import { DynamicPage, Page } from '@/router';
+import { DynamicPage } from '@/router';
 
 const MV: React.FC = () => {
   const getClass = classGenerator('mv');

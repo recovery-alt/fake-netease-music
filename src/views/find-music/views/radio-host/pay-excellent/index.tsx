@@ -1,10 +1,12 @@
 import { classGenerator, resizeImg } from '@/utils';
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import './pay-excellent.less';
 import Img from '@/components/img';
 import { getDJPaygift } from '@/api';
 import { DataAction, DJRadio } from '@/types';
 import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
+import { DynamicPage } from '@/router';
+import { useHistory } from 'react-router-dom';
 
 const PayExcellent: React.FC = () => {
   const getClass = classGenerator('pay-excellent');
@@ -12,6 +14,7 @@ const PayExcellent: React.FC = () => {
   const offset = useRef(0);
   const limit = 10;
   const setMore = useRef<SetMore>(null);
+  const { push } = useHistory();
 
   async function loadDJPaygift() {
     const res = await getDJPaygift(offset.current, limit);
@@ -35,7 +38,11 @@ const PayExcellent: React.FC = () => {
       <div className={getClass()}>
         {djPaygift.map(item => (
           <div key={item.id} className={getClass('item')}>
-            <Img className={getClass('img')} src={resizeImg(item.picUrl, 150)} />
+            <Img
+              className={getClass('img')}
+              src={resizeImg(item.picUrl, 150)}
+              onClick={() => push(DynamicPage.radioList(item.id, 'pay'))}
+            />
             <div className={getClass('right')}>
               <h3>{item.name}</h3>
               <p>{item.rcmdText}</p>

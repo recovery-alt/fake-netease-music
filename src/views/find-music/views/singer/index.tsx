@@ -1,8 +1,8 @@
-import React, { useEffect, useReducer, useRef, useState, Reducer } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import './singer.less';
 import classNames from 'classnames';
 import { getArtistList } from '@/api';
-import { Artist, Data, DataAction, DataActionType } from '@/types';
+import { Artist, Data, DataAction } from '@/types';
 import { categoryList } from '@/config';
 import Img from '@/components/img';
 import { classGenerator, resizeImg } from '@/utils';

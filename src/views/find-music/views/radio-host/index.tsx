@@ -71,13 +71,13 @@ const RadioHost: React.FC = () => {
     push(DynamicPage.radioList(id));
   }
 
-  function handlePayItemClick() {
-    // TODO: 付费精品
+  function handlePayItemClick(id: number) {
+    push(DynamicPage.radioList(id, 'pay'));
   }
 
   function toRadioZonePageByName(name: string) {
     const id = djCatelist.find(item => item.name === name)?.id;
-    push(DynamicPage.RadioZone(id));
+    push(DynamicPage.radioZone(id));
   }
 
   async function loadDJBanner() {
@@ -152,7 +152,7 @@ const RadioHost: React.FC = () => {
             <div
               key={item.id}
               className={getClass('category-item')}
-              onClick={() => push(DynamicPage.RadioZone(item.id))}
+              onClick={() => push(DynamicPage.radioZone(item.id))}
             >
               <div className={getClass('category-img-wrapper')}>
                 <Img className={getClass('category-img')} src={item.pic56x56Url} />
