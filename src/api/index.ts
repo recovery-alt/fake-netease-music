@@ -46,6 +46,7 @@ import {
   MVDetailInfo,
   MVDetail,
   UserCloud,
+  PlaylistHighqualityTags,
 } from '@/types';
 import { get } from './api';
 
@@ -142,9 +143,6 @@ export const getSimiPlaylist = (id: number) =>
 
 export const getSimiSong = (id: number) => get<{ songs: Music[] }>('/simi/song', { id });
 
-export const getTopPlaylistHighquality = (cat: string, limit = 1) =>
-  get<{ playlists: UserPlaylist[] }>('/top/playlist/highquality', { cat, limit });
-
 export const getSongDetail = (ids: string | number) =>
   get<{ songs: Track[] }>('/song/detail', { ids });
 
@@ -221,3 +219,13 @@ export const getCommentMV = (id: string | number, offset = 0) =>
 
 export const getUserCloud = (offset: number, limit: number) =>
   get<UserCloud>('/user/cloud', { offset, limit });
+
+export const getPlaylistHighqualityTags = () =>
+  get<{ tags: PlaylistHighqualityTags[] }>('/playlist/highquality/tags');
+
+export const getTopPlaylistHighquality = (cat: string, limit = 1, before?: number) =>
+  get<{ lasttime: number; playlists: UserPlaylist[] }>('/top/playlist/highquality', {
+    cat,
+    limit,
+    before,
+  });

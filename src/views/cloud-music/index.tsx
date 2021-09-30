@@ -7,8 +7,8 @@ import { DataAction, Track } from '@/types';
 import { classGenerator } from '@/utils';
 import { getUserCloud } from '@/api';
 import { CommonColumns } from '@/config';
-import { useInfinityScroll } from '@/hooks';
 import debounce from 'lodash/debounce';
+import InfinityScroll from '@/components/infinity-scroll';
 
 const CloudMusic: React.FC = () => {
   const getClass = classGenerator('cloud-music');
@@ -19,9 +19,9 @@ const CloudMusic: React.FC = () => {
   const [size, setSize] = useState(0);
   const [keyword, setKeyword] = useState('');
   const percent = useMemo(() => (maxSize === 0 ? 0 : (size * 100) / maxSize), [size, maxSize]);
-  const { setMore, moreText } = useInfinityScroll(footerRef, loadUserCloud);
   let offset = 0;
   const limit = 30;
+  const setMore = useRef<(hasMore: boolean) => void>(null);
 
   const handleInput: FormEventHandler<HTMLInputElement> = debounce(e => {
     setKeyword(e.currentTarget.value);
@@ -36,7 +36,7 @@ const CloudMusic: React.FC = () => {
     setMaxSize(transUnit(maxSize));
     setSize(transUnit(size));
     setCount(count);
-    setMore(hasMore);
+    setMore.current?.(hasMore);
     offset += limit;
   }
 
@@ -80,9 +80,7 @@ const CloudMusic: React.FC = () => {
         </div>
       </header>
       <Table columns={CommonColumns} data={data} />
-      <footer ref={footerRef} className={getClass('footer')}>
-        {moreText}
-      </footer>
+      <InfinityScroll ref={setMore} cb={loadUserCloud} />
     </div>
   );
 };

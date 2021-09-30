@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import { classGenerator, resizeImg } from '@/utils';
 import { fetchAndSetCurrentTrack } from '@/store';
 import { useDispatch } from 'react-redux';
-import { DynamicPage } from '@/router';
+import { DynamicPage, Page } from '@/router';
 import styles from './popover.module.less';
 
 const MusicList: React.FC = () => {
@@ -38,10 +38,6 @@ const MusicList: React.FC = () => {
 
   function handleListItemIconClick(id: number) {
     dispatch(fetchAndSetCurrentTrack(id));
-  }
-
-  function handleBoutiqueClick() {
-    // TODO: 精品歌单
   }
 
   function renderPopover(setShow: (show: boolean) => void) {
@@ -96,7 +92,7 @@ const MusicList: React.FC = () => {
 
   return (
     <div className={getClass()}>
-      <header className={getClass('banner')} onClick={handleBoutiqueClick}>
+      <header className={getClass('banner')} onClick={() => push(DynamicPage.excellentList(cat))}>
         {topPlaylistHighquality?.coverImgUrl && (
           <img src={resizeImg(topPlaylistHighquality.coverImgUrl, 300)} alt="banner" />
         )}

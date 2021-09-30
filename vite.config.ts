@@ -43,7 +43,7 @@ export default defineConfig({
   resolve: { alias: { '@': resolve(__dirname, 'src') } },
   plugins: [
     reactRefresh(),
-    eslintPlugin(),
+    // eslintPlugin(),
     styleImport({
       libs: [
         {

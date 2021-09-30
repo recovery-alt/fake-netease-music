@@ -1,11 +1,23 @@
 .popover {
   background-color: #fff;
   box-shadow: var(--shadow);
-  left: -1px;
   padding-bottom: 100px;
   position: absolute;
   top: 40px;
   z-index: 1;
+
+  &.--left {
+    left: -1px;
+    left: 40px;
+  }
+
+  &.--right {
+    right: -1px;
+
+    &::after {
+      right: 40px;
+    }
+  }
 
   &::after {
     border-color: #0000;
@@ -16,7 +28,6 @@
     content: ' ';
     display: block;
     height: 0;
-    left: 40px;
     position: absolute;
     top: -6px;
     width: 0;

@@ -16,6 +16,7 @@ export const topMenuMap: Data<Array<MenuConfig>> = {
       label: '歌单',
       component: lazy(() => import('@/views/find-music/views/music-list')),
       path: Page.findMusicMusicList,
+      exact: true,
     },
     {
       label: '主播电台',

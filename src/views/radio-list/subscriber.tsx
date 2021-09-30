@@ -4,7 +4,7 @@ import { classGenerator, resizeImg } from '@/utils';
 import { getDJSubscriber } from '@/api';
 import type { Subscriber as SubscriberType } from '@/types';
 import Img from '@/components/img';
-import { useInfinityScroll } from '@/hooks';
+import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 
 type Props = { id: number };
 
@@ -12,8 +12,7 @@ const Subscriber: React.FC<Props> = ({ id }) => {
   type Action = { type?: 'reset' | 'add'; payload: SubscriberType[] };
   const getClass = classGenerator('collector', styles);
   const [subscribers, subscribersDispatch] = useReducer(subscribersReducer, []);
-  const ref = useRef(null);
-  const { moreText, setMore } = useInfinityScroll(ref, loadSubscribers);
+  const setMore = useRef<SetMore>(null);
   let time = -1;
 
   async function loadSubscribers() {
@@ -21,7 +20,7 @@ const Subscriber: React.FC<Props> = ({ id }) => {
     const res = await getDJSubscriber(id, time);
     const type = time === -1 ? 'reset' : 'add';
     subscribersDispatch({ type, payload: res.subscribers });
-    setMore(res.hasMore);
+    setMore.current?.(res.hasMore);
     time = res.time;
   }
 
@@ -46,9 +45,7 @@ const Subscriber: React.FC<Props> = ({ id }) => {
           </div>
         ))}
       </div>
-      <footer ref={ref} className={getClass('footer')}>
-        {moreText}
-      </footer>
+      <InfinityScroll ref={setMore} cb={loadSubscribers} />
     </>
   );
 };

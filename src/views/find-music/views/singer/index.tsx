@@ -8,7 +8,7 @@ import Img from '@/components/img';
 import { classGenerator, resizeImg } from '@/utils';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
-import { useInfinityScroll } from '@/hooks';
+import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 
 const Singer: React.FC = () => {
   const getClass = classGenerator('music-singer');
@@ -16,11 +16,10 @@ const Singer: React.FC = () => {
   const [data, dataDispatch] = useReducer(dataReducer, []);
   type Selected = Array<number | string | undefined>;
   const [selected, setSelected] = useState<Selected>([-1, -1, undefined]);
-  const footerRef = useRef<HTMLElement>(null);
+  const setMore = useRef<SetMore>(null);
   const { push } = useHistory();
   const limit = 20;
   let offset = 0;
-  const { setMore, moreText } = useInfinityScroll(footerRef, loadArtistList);
 
   const searchData: Array<{ label: string; key: string; list: Array<Data<string | number>> }> = [
     {
@@ -67,7 +66,7 @@ const Singer: React.FC = () => {
     const [area, type, initial] = selected;
     const res = await getArtistList({ area, type, initial, limit, offset });
     const actionType = offset === 0 ? 'reset' : 'add';
-    setMore(res.more);
+    setMore.current?.(res.more);
     dataDispatch({ type: actionType, payload: res.artists });
     offset += limit;
   }
@@ -108,9 +107,7 @@ const Singer: React.FC = () => {
           </div>
         ))}
       </div>
-      <footer className={getClass('footer')} ref={footerRef}>
-        {moreText}
-      </footer>
+      <InfinityScroll ref={setMore} cb={loadArtistList} />
     </div>
   );
 };

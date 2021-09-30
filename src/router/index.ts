@@ -48,6 +48,10 @@ const routes: Array<RouteConfig> = [
         path: DynamicPage.radioList(),
         component: lazy(() => import('@/views/radio-list')),
       },
+      {
+        path: DynamicPage.excellentList(),
+        component: lazy(() => import('@/views/find-music/views/music-list/excellent')),
+      },
       ...Object.values(topMenuMap).flat(),
     ],
   },

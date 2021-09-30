@@ -497,3 +497,11 @@ export type UserCloud = {
   upgradeSign: number;
   data: UserCloudData[];
 };
+
+export type PlaylistHighqualityTags = {
+  category: number;
+  hot: boolean;
+  id: number;
+  name: string;
+  type: number;
+};
