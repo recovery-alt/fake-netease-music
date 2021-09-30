@@ -7,6 +7,7 @@ export enum Page {
   findMusic = '/home/find-music',
   findMusicMusicList = '/home/find-music/music-list',
   findMusicRadioHost = '/home/find-music/radio-host',
+  findMusicRadioHostPay = '/home/find-music/radio-host/pay',
   findMusicRank = '/home/find-music/rank',
   findMusicSinger = '/home/find-music/singer',
   findMusicNewest = '/home/find-music/newest',

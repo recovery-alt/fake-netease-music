@@ -18,7 +18,7 @@ import { classGenerator } from '@/utils';
 import { useDispatch } from 'react-redux';
 import { insertSong } from '@/store';
 import { useHistory } from 'react-router-dom';
-import { DynamicPage } from '@/router';
+import { DynamicPage, Page } from '@/router';
 
 const RadioHost: React.FC = () => {
   const getClass = classGenerator('radio-host');
@@ -80,33 +80,42 @@ const RadioHost: React.FC = () => {
     push(DynamicPage.RadioZone(id));
   }
 
+  async function loadDJBanner() {
+    const res = await getDJBanner();
+    setBanner(res.data.map(item => ({ targetId: item.targetId, imageUrl: item.pic })));
+  }
+
+  async function loadDJCatelist() {
+    const res = await getDJCatelist();
+    setDJCatelist(res.categories);
+    setLength(Math.ceil(res.categories.length / 8));
+  }
+
+  async function loadDJPersonalizeRecommend() {
+    const res = await getDJPersonalizeRecommend();
+    const result = res.data.map(item => ({
+      id: item.id,
+      name: item.rcmdText,
+      imgUrl: item.picUrl,
+    }));
+    setDJPersonalizeRecommend(result);
+  }
+
+  async function loadDJPaygift() {
+    const res = await getDJPaygift();
+    const result = res.data.list.map(item => {
+      const { id, name, picUrl: imgUrl, ...rest } = item;
+      return { id, name, imgUrl, extra: rest };
+    });
+
+    setDJPaygift(result);
+  }
+
   useEffect(() => {
-    getDJBanner().then(res => {
-      setBanner(res.data.map(item => ({ targetId: item.targetId, imageUrl: item.pic })));
-    });
-
-    getDJCatelist().then(res => {
-      setDJCatelist(res.categories);
-      setLength(Math.ceil(res.categories.length / 8));
-    });
-
-    getDJPersonalizeRecommend().then(res => {
-      const result = res.data.map(item => ({
-        id: item.id,
-        name: item.rcmdText,
-        imgUrl: item.picUrl,
-      }));
-      setDJPersonalizeRecommend(result);
-    });
-
-    getDJPaygift().then(res => {
-      const result = res.data.list.map(item => {
-        const { id, name, picUrl: imgUrl, ...rest } = item;
-        return { id, name, imgUrl, extra: rest };
-      });
-
-      setDJPaygift(result);
-    });
+    loadDJBanner();
+    loadDJCatelist();
+    loadDJPersonalizeRecommend();
+    loadDJPaygift();
 
     const recommendTypes: [number, Callback][] = [
       [10001, setSoundingBook],
@@ -153,7 +162,7 @@ const RadioHost: React.FC = () => {
           ))}
         </div>
       </div>
-      <Title name="付费精品" />
+      <Title name="付费精品" onClick={() => push(Page.findMusicRadioHostPay)} />
       <List
         size="large"
         data={djPaygift}

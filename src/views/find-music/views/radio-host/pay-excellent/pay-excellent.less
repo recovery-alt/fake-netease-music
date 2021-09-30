@@ -1,0 +1,52 @@
+@import '/src/assets/style/common.less';
+
+.pay-excellent {
+  display: grid;
+  grid-gap: 20px 30px;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 20px 30px;
+
+  &__item {
+    display: flex;
+  }
+
+  &__img {
+    border-radius: 4px;
+    flex-shrink: 0;
+    height: 150px;
+    width: 150px;
+  }
+
+  &__right {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1;
+    margin-left: 10px;
+    width: 0;
+
+    h3 {
+      margin-bottom: 23px;
+      .ellipsis();
+    }
+
+    p {
+      color: #bfbfbf;
+      margin-bottom: 10px;
+      .ellipsis();
+    }
+
+    small {
+      color: #bfbfbf;
+      margin-bottom: 25px;
+      .ellipsis();
+    }
+
+    div {
+      color: var(--primary-color);
+      font-size: 16px;
+      .ellipsis();
+    }
+  }
+}

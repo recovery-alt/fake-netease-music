@@ -91,8 +91,8 @@ export const getDJCatelist = () => get<{ categories: DJCatelist[] }>('/dj/cateli
 export const getDJPersonalizeRecommend = (limit = 5) =>
   get<{ data: DJPersonalizeRecommend[] }>('/dj/personalize/recommend', { limit });
 
-export const getDJPaygift = (limit = 4) =>
-  get<{ data: { list: DJRadio[] } }>('/dj/paygift', { limit });
+export const getDJPaygift = (offset = 0, limit = 4) =>
+  get<{ data: { hasMore: boolean; list: DJRadio[] } }>('/dj/paygift', { offset, limit });
 
 export const getUserAudio = (uid: number) => get<{ djRadios: DJRadio[] }>('/user/audio', { uid });
 

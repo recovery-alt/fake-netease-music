@@ -114,7 +114,9 @@ export type DJRadio = {
   lastProgramName: string;
   programCount: number;
   desc: string;
+  radioFeeType: number;
   subCount: number;
+  originalPrice: number;
   dj: { nickname: string };
 };
 
@@ -195,7 +197,15 @@ export type DJProgram = {
   mainSong: Song;
 };
 
-export type DJToplistPay = { name: string; creatorName: string; picUrl: string };
+export type DJToplistPay = {
+  creatorName: string;
+  id: number;
+  lastRank: number;
+  name: string;
+  picUrl: string;
+  rank: number;
+  score: number;
+};
 
 export type Toplist = { name: string; coverImgUrl: string; id: number };
 

@@ -56,6 +56,10 @@ const routes: Array<RouteConfig> = [
         path: DynamicPage.RadioZone(),
         component: lazy(() => import('@/views/find-music/views/radio-host/zone')),
       },
+      {
+        path: Page.findMusicRadioHostPay,
+        component: lazy(() => import('@/views/find-music/views/radio-host/pay-excellent')),
+      },
       ...Object.values(topMenuMap).flat(),
     ],
   },
