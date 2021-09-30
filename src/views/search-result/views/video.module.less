@@ -1,3 +1,5 @@
+@import '/src/assets/style/common.less';
+
 .video {
   display: grid;
   grid-gap: 0 18px;
@@ -23,9 +25,7 @@
 
     h2 {
       color: #333;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      .ellipsis();
     }
 
     h3 {

@@ -22,6 +22,7 @@ export const topMenuMap: Data<Array<MenuConfig>> = {
       label: '主播电台',
       component: lazy(() => import('@/views/find-music/views/radio-host')),
       path: Page.findMusicRadioHost,
+      exact: true,
     },
     {
       label: '排行榜',

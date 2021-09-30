@@ -49,4 +49,6 @@ export const DynamicPage = {
   playVideo: (id?: string | number) => handleSuffix('play-video', id),
   radioList: (id?: string | number) => handleSuffix('home/radio-list', id),
   excellentList: (id?: string | number) => handleSuffix('home/find-music/music-list/excellent', id),
+  RadioZone: (type?: string | number) =>
+    handleSuffix('home/find-music/radio-host/zone', type, 'type'),
 };

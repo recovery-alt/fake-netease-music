@@ -113,6 +113,7 @@ export type DJRadio = {
   rcmdText: string;
   lastProgramName: string;
   programCount: number;
+  desc: string;
   subCount: number;
   dj: { nickname: string };
 };

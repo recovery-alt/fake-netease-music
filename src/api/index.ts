@@ -229,3 +229,6 @@ export const getTopPlaylistHighquality = (cat: string, limit = 1, before?: numbe
     limit,
     before,
   });
+
+export const getDJRadioHot = (cateId: number, offset: number, limit: number) =>
+  get<{ hasMore: boolean; djRadios: DJRadio[] }>('/dj/radio/hot', { cateId, offset, limit });

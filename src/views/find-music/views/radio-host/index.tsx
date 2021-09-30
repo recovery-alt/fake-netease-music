@@ -75,6 +75,11 @@ const RadioHost: React.FC = () => {
     // TODO: 付费精品
   }
 
+  function toRadioZonePageByName(name: string) {
+    const id = djCatelist.find(item => item.name === name)?.id;
+    push(DynamicPage.RadioZone(id));
+  }
+
   useEffect(() => {
     getDJBanner().then(res => {
       setBanner(res.data.map(item => ({ targetId: item.targetId, imageUrl: item.pic })));
@@ -135,7 +140,11 @@ const RadioHost: React.FC = () => {
           style={{ transform: `translateX(${2 - current * 72}vw)` }}
         >
           {djCatelist.map(item => (
-            <div key={item.id} className={getClass('category-item')}>
+            <div
+              key={item.id}
+              className={getClass('category-item')}
+              onClick={() => push(DynamicPage.RadioZone(item.id))}
+            >
               <div className={getClass('category-img-wrapper')}>
                 <Img className={getClass('category-img')} src={item.pic56x56Url} />
               </div>
@@ -153,15 +162,15 @@ const RadioHost: React.FC = () => {
       />
       <Title name="电台个性推荐" />
       <Card data={djPersonalizeRecommend} onItemClick={pushRadioList} />
-      <Title name="有声书" />
+      <Title name="有声书" onClick={() => toRadioZonePageByName('有声书')} />
       <Card data={soundingBook} onItemClick={pushRadioList} />
-      <Title name="创作翻唱" />
+      <Title name="创作翻唱" onClick={() => toRadioZonePageByName('创作翻唱')} />
       <Card data={djRecommendType} onItemClick={pushRadioList} />
-      <Title name="音乐推荐" />
+      <Title name="音乐推荐" onClick={() => toRadioZonePageByName('音乐推荐')} />
       <Card data={musicRecommend} onItemClick={pushRadioList} />
-      <Title name="情感" />
+      <Title name="情感" onClick={() => toRadioZonePageByName('情感')} />
       <Card data={emotion} onItemClick={pushRadioList} />
-      <Title name="脱口秀" />
+      <Title name="脱口秀" onClick={() => toRadioZonePageByName('脱口秀')} />
       <Card data={talkshow} onItemClick={pushRadioList} />
     </div>
   );

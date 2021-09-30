@@ -1,3 +1,5 @@
+@import '/src/assets/style/common.less';
+
 .official {
   display: flex;
   margin-bottom: 30px;
@@ -67,10 +69,8 @@
       color: #979696;
       display: flex;
       justify-content: flex-end;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
       width: 160px;
+      .ellipsis();
     }
   }
 

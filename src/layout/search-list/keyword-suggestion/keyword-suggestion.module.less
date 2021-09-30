@@ -1,3 +1,5 @@
+@import '/src/assets/style/common.less';
+
 .keyword-suggestion {
   padding: 8px 0;
 
@@ -29,10 +31,8 @@
     cursor: pointer;
     height: 30px;
     line-height: 30px;
-    overflow: hidden;
     padding: 0 25px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    .ellipsis();
 
     &:hover {
       background-color: #f2f3f2;

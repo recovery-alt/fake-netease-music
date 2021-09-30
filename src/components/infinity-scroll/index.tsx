@@ -12,10 +12,10 @@ const InfinityScroll = forwardRef<SetMore, Props>(({ cb, className, ...restProps
   const getClass = classGenerator('infinity-scroll', styles);
   const ref = useRef<HTMLElement>(null);
   const [moreText, setMoreText] = useState('');
-  let more = true;
+  const more = useRef(true);
 
   function setMore(hasMore: boolean) {
-    more = hasMore;
+    more.current = hasMore;
   }
 
   useImperativeHandle(exportRef, () => setMore, []);

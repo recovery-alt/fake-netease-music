@@ -1,3 +1,5 @@
+@import '/src/assets/style/common.less';
+
 .recommend {
   margin-left: 40px;
   width: 275px;
@@ -25,9 +27,7 @@
       width: 200px;
 
       div {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        .ellipsis();
       }
     }
   }

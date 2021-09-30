@@ -52,6 +52,10 @@ const routes: Array<RouteConfig> = [
         path: DynamicPage.excellentList(),
         component: lazy(() => import('@/views/find-music/views/music-list/excellent')),
       },
+      {
+        path: DynamicPage.RadioZone(),
+        component: lazy(() => import('@/views/find-music/views/radio-host/zone')),
+      },
       ...Object.values(topMenuMap).flat(),
     ],
   },

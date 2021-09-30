@@ -1,3 +1,5 @@
+@import '/src/assets/style/common.less';
+
 .empty-suggestion {
   &__header {
     padding: 18px 20px;
@@ -77,9 +79,7 @@
       font-size: 13px;
       line-height: 1;
       margin-top: 10px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      .ellipsis();
     }
 
     &:nth-child(-n + 4) {

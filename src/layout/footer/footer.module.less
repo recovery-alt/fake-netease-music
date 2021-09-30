@@ -1,3 +1,5 @@
+@import '/src/assets/style/common.less';
+
 .footer {
   align-items: center;
   -webkit-app-region: drag;
@@ -58,9 +60,7 @@
     &-name {
       height: 100%;
       margin-left: 10px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      .ellipsis();
 
       div {
         height: 20px;

@@ -1,3 +1,5 @@
+@import '/src/assets/style/common.less';
+
 .song-list {
   margin-top: 5px;
 
@@ -57,9 +59,7 @@
       font-size: 14px;
       margin: 0;
       max-width: 210px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      .ellipsis();
     }
 
     small {
@@ -78,16 +78,12 @@
   }
 
   &__author {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     width: 130px;
+    .ellipsis();
   }
 
   &__album {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     width: 175px;
+    .ellipsis();
   }
 }

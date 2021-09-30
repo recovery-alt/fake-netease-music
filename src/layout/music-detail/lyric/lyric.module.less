@@ -1,3 +1,5 @@
+@import '/src/assets/style/common.less';
+
 .lyric {
   display: flex;
   flex-direction: column;
@@ -13,9 +15,7 @@
   &__music-name {
     display: inline-block;
     max-width: 230px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    .ellipsis();
   }
 
   &__quality {
@@ -43,9 +43,7 @@
       color: #4f7eaf;
       cursor: pointer;
       flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      .ellipsis();
     }
   }
 

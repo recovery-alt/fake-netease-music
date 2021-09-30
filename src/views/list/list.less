@@ -1,3 +1,5 @@
+@import '/src/assets/style/common.less';
+
 .list {
   .img() {
     background-color: #a5a5a5;
@@ -111,10 +113,8 @@
     margin-top: 10px;
 
     div {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
       width: 300px;
+      .ellipsis();
     }
   }
 
