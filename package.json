@@ -1,7 +1,7 @@
 {
   "name": "fake-netease-music",
   "author": "ccq",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "scripts": {
     "dev": "concurrently \"vite --host\" \"wait-on tcp:3000 -l && electron main.js\"",
     "build": "vite build && electron-builder --config electron-builder.config.js --config.asar=false",
