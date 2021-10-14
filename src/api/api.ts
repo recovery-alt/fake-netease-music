@@ -77,7 +77,7 @@ service.interceptors.request.use(config => {
 
 // 响应拦截器
 service.interceptors.response.use(
-  async (response: AxiosResponse) => {
+  async (response: AxiosResponse<ResponseData>) => {
     const status = response.status;
     if (status < 200 || status >= 300) {
       // 处理http错误
@@ -98,12 +98,12 @@ const get = <T>(url: string, params?: Data, config?: Data) =>
   service.get<T, ResponseData<T>>(url, { ...config, params });
 
 // post请求
-const post = <T>(url: string, params?: Data | string[], config?: Data) =>
-  service.post<T, ResponseData<T>>(url, params, config);
+const post = <T, P = Data>(url: string, params?: P, config?: Data) =>
+  service.post<P, ResponseData<T>>(url, params, config);
 
 // put请求
-const put = <T>(url: string, params?: Data, config?: Data) =>
-  service.put<T, ResponseData<T>>(url, params, config);
+const put = <T, P = Data>(url: string, params?: P, config?: Data) =>
+  service.put<P, ResponseData<T>>(url, params, config);
 
 // delete请求
 const del = <T>(url: string, params?: Data, config?: Data) =>

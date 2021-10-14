@@ -1,10 +1,11 @@
 export type Data<T = unknown> = Record<string, T>;
 
-export type ResponseData<T> = T extends Data
+export type ResponseData<T = Data> = T extends Data
   ? T & {
       code: number;
+      message: string;
     }
-  : { code: number; result: T };
+  : { code: number; message: string; result: T };
 
 export interface AppProps {
   className?: string;

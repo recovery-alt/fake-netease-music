@@ -40,9 +40,9 @@ export const setSong = createAsyncThunk<Song, number>(
   }
 );
 
-export const setFM = createAsyncThunk(
+export const setFM = createAsyncThunk<{ init: boolean; data: Music[] }, boolean>(
   prefix('setFM'),
-  async (init: boolean, { rejectWithValue }) => {
+  async (init, { rejectWithValue }) => {
     const [err, res] = await to(getPersonalFM());
     if (err || !res) return rejectWithValue(null);
     const { code, data } = res;
@@ -53,7 +53,7 @@ export const setFM = createAsyncThunk(
 
 export const nextFM = createAsyncThunk<CurrentTrack, void, { state: RootState }>(
   prefix('nextFM'),
-  async (id, { getState, dispatch, rejectWithValue }) => {
+  async (_, { getState, dispatch, rejectWithValue }) => {
     const state = getState();
     const { currentTrack } = state;
     const { fm, current } = currentTrack;
