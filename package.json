@@ -4,9 +4,10 @@
   "version": "1.1.0",
   "scripts": {
     "dev": "concurrently \"vite --host\" \"wait-on tcp:3000 -l && electron main.js\"",
-    "build": "vite build",
-    "build:mac": "npm run build && electron-builder --config electron-builder.config.js --config.asar=false",
-    "build:win64": "npm run build && electron-builder --config electron-builder.config.js --config.asar=false --win --x64",
+    "build": "npm run build:fe && npm run build:mac && npm run build:win64",
+    "build:fe": "vite build",
+    "build:mac": "electron-builder --config electron-builder.config.js --config.asar=false",
+    "build:win64": "electron-builder --config electron-builder.config.js --config.asar=false --win --x64",
     "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
     "release:patch": "standard-version -r patch",
     "release:minor": "standard-version -r minor",
