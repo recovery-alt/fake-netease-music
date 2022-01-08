@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-prettier/recommended",
-    "stylelint-config-sass-guidelines"
-  ],
+  "extends": ["stylelint-config-standard", "stylelint-prettier/recommended"],
   "plugins": ["stylelint-order"],
   "rules": {
     "selector-max-id": null,
@@ -16,5 +12,11 @@
       }
     ]
   },
+  "overrides": [
+    {
+      "files": ["**/*.less"],
+      "customSyntax": "postcss-less"
+    }
+  ],
   "ignoreFiles": ["dist/**/*"]
 }
