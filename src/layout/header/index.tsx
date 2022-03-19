@@ -50,8 +50,8 @@ const List: React.FC = () => {
 
   useEffect(() => {
     if (!pathname) return;
-    const match = pathname.match(/(?<=home\/)[\w-\d]+\b/);
-    if (match?.[0]) setTopMenu(topMenuMap[match[0]] || []);
+    const match = pathname.match(/home\/([\w-\d]+)\b/);
+    if (match?.[1]) setTopMenu(topMenuMap[match[1]] || []);
     let pathArr = pathname.split('/');
     if (pathArr.length > 4) pathArr = pathArr.slice(0, 4);
 

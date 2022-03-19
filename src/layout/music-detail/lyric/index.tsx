@@ -24,13 +24,14 @@ const Lyric: React.FC<Props> = ({ music }) => {
 
   function transLyric2Arr(lyric: string) {
     const result: Array<LyricItem> = [];
-    lyric.replace(/((?:\[\d{2}:\d{2}\.\d{2,3}\])+)([\s\S]*?)(?=\[)/g, ($1, $2, value) => {
-      const matcher = $2.match(/(?<=\[)\d{2}:\d{2}\.\d{2,3}(?=\])/g) as [];
-      const timestamp = matcher.map(item => resolveLyricTime(item));
-      if (!value || !value.trim()) return '';
-      result.push({ timestamp, value });
-      return '';
-    });
+    // TODO: 处理歌词
+    // lyric.replace(/((?:\[\d{2}:\d{2}\.\d{2,3}\])+)([\s\S]*?)(?=\[)/g, ($1, $2, value) => {
+    //   const matcher = $2.match(/(?<=\[)\d{2}:\d{2}\.\d{2,3}(?=\])/g) as [];
+    //   const timestamp = matcher.map(item => resolveLyricTime(item));
+    //   if (!value || !value.trim()) return '';
+    //   result.push({ timestamp, value });
+    //   return '';
+    // });
 
     return result;
   }
