@@ -11,11 +11,11 @@ type Data = CommentData & {
 
 type Props = {
   id?: number | string;
-  children?: React.ReactNode;
+  functionChildren?: (count: number) => React.ReactNode;
   api: (id: number | string, offset?: number) => Promise<Data>;
 };
 
-const CommentGroup: React.FC<Props> = ({ id, children, api }) => {
+const CommentGroup: React.FC<Props> = ({ id, functionChildren, api }) => {
   const getClass = classGenerator('comment-group', styles);
   const [comments, setComments] = useState<Comment[]>([]);
   const [hotComments, setHotComments] = useState<Comment[]>([]);
@@ -39,7 +39,7 @@ const CommentGroup: React.FC<Props> = ({ id, children, api }) => {
     <div className={getClass()}>
       {total > 0 ? (
         <>
-          {children}
+          {functionChildren?.(total)}
           {hotComments.length > 0 && (
             <>
               <h2 className={getClass('title')}>精彩评论</h2>

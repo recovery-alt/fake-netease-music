@@ -64,9 +64,12 @@ const MusicDetail: React.FC<Props> = ({ visible }) => {
             {isRadio ? <RadioDetail music={currentMusic} /> : <Lyric music={currentMusic} />}
           </section>
           <div className={getClass('info')}>
-            <CommentGroup id={currentMusic?.id} api={isRadio ? getCommentDJ : getCommentMusic}>
-              <WriteComment />
-            </CommentGroup>
+            <CommentGroup
+              id={currentMusic?.id}
+              api={isRadio ? getCommentDJ : getCommentMusic}
+              functionChildren={(count: number) => <WriteComment count={count} />}
+            />
+
             {!isRadio && <Recommend id={currentMusic?.id} />}
           </div>
         </div>
