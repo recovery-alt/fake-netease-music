@@ -1,4 +1,4 @@
-import React, { useState, useEffect, KeyboardEventHandler, useRef } from 'react';
+import React, { useState, useEffect, KeyboardEventHandler, useRef, FormEventHandler } from 'react';
 import styles from './header.module.less';
 import {
   LeftOutlined,
@@ -17,6 +17,7 @@ import { RootState, setKeywords } from '@/store';
 import { stringify } from 'qs';
 import { Page, topMenuMap, MenuConfig } from '@/router';
 import { classGenerator } from '@/utils';
+import debounce from 'lodash/debounce';
 
 const List: React.FC = () => {
   const getClass = classGenerator('header', styles);
@@ -47,6 +48,10 @@ const List: React.FC = () => {
       push(`${Page.searchResult}?${query}`);
     }
   };
+
+  const handleInput: FormEventHandler<HTMLInputElement> = debounce(e => {
+    dispatch(setKeywords(e.target.value));
+  }, 300);
 
   useEffect(() => {
     if (!pathname) return;
@@ -92,7 +97,7 @@ const List: React.FC = () => {
             type="normal"
             placeholder="搜索"
             defaultValue={keywords}
-            onInput={e => dispatch(setKeywords(e.currentTarget.value))}
+            onInput={handleInput}
             onFocus={() => setShowSearch(true)}
             onKeyUp={handleMouseup}
           />

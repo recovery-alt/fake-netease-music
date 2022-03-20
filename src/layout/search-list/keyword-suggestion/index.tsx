@@ -11,10 +11,10 @@ import { Artist, UserPlaylist, SearchSuggest, Song, SimpleAlbum, SuggestOrderTyp
 import { useDispatch, useSelector } from 'react-redux';
 import { insertSong, RootState } from '@/store';
 import { useHistory } from 'react-router-dom';
-import debounce from 'lodash/debounce';
 import { stringify } from 'qs';
 import { DynamicPage, Page } from '@/router';
 import { classGenerator } from '@/utils';
+import NoData from '@/components/no-data';
 
 type Props = { setVisible: (visible: boolean) => void };
 
@@ -115,15 +115,14 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
     );
   }
 
-  useEffect(
-    debounce(() => {
-      (async () => {
-        const res = await getSearchSuggest(keywords);
-        setData(res.result);
-      })();
-    }, 500),
-    [keywords]
-  );
+  async function setSearchSuggest() {
+    const res = await getSearchSuggest(keywords);
+    setData(res.result);
+  }
+
+  useEffect(() => {
+    setSearchSuggest();
+  }, [keywords]);
 
   return data.order?.length ? (
     <div className={getClass()}>
@@ -134,7 +133,9 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
       </header>
       {data.order.map(renderOrder)}
     </div>
-  ) : null;
+  ) : (
+    <NoData title="暂无数据" />
+  );
 };
 
 export default KeywordSuggestion;

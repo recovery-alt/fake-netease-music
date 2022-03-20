@@ -19,6 +19,7 @@ const SearchList: React.FC<Props> = ({ visible, setVisible, inputRef }) => {
   const getClass = classGenerator('search-list', styles);
   const ref = useRef<HTMLDivElement>(null);
   const keywords = useSelector((state: RootState) => state.controller.keywords);
+
   useClickAway(ref, e => {
     if (e.target !== inputRef) setVisible(false);
   });
