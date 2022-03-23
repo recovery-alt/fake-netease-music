@@ -1,6 +1,6 @@
 {
   "package": {
-    "productName": "fake-netease-music",
+    "productName": "网易云音乐",
     "version": "0.1.0"
   },
   "build": {
@@ -51,10 +51,13 @@
         "title": "网易云音乐",
         "width": 1000,
         "height": 680,
+        "minWidth": 1000,
+        "minHeight": 680,
         "resizable": true,
         "fullscreen": false
       }
     ],
+    "macOSPrivateApi": true,
     "security": {
       "csp": null
     }
