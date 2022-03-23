@@ -1,1 +1,0 @@
-import{R as t}from"./react-bbb89bd4.js";import{as as o}from"./index-fe3ac249.js";import"./vendor-8363c58c.js";import"./lodash-70433db2.js";import"./react-router-dom-ef6aab28.js";import"./react-redux-253ec180.js";const i=()=>t.createElement(o,{subTitle:"\u5F00\u53D1\u4E2D\uFF0C\u656C\u8BF7\u671F\u5F85\uFF5E"});export{i as default};
