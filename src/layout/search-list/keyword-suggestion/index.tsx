@@ -15,6 +15,7 @@ import { stringify } from 'qs';
 import { DynamicPage, Page } from '@/router';
 import { classGenerator } from '@/utils';
 import NoData from '@/components/no-data';
+import { useDebounce } from 'react-use';
 
 type Props = { setVisible: (visible: boolean) => void };
 
@@ -120,9 +121,7 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
     setData(res.result);
   }
 
-  useEffect(() => {
-    setSearchSuggest();
-  }, [keywords]);
+  useDebounce(setSearchSuggest, 300, [keywords]);
 
   return data.order?.length ? (
     <div className={getClass()}>

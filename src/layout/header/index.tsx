@@ -49,9 +49,13 @@ const List: React.FC = () => {
     }
   };
 
-  const handleInput: FormEventHandler<HTMLInputElement> = debounce(e => {
-    dispatch(setKeywords(e.target.value));
-  }, 300);
+  function setValue(value: string) {
+    dispatch(setKeywords(value));
+  }
+
+  function handleHistoryChange(next = false) {
+    go(next ? 1 : -1);
+  }
 
   useEffect(() => {
     if (!pathname) return;
@@ -63,10 +67,6 @@ const List: React.FC = () => {
     // 前两位相等 即选中
     setActive(pathArr.join('/'));
   }, [pathname]);
-
-  function handleHistoryChange(next = false) {
-    go(next ? 1 : -1);
-  }
 
   return (
     <header className={getClass()}>
@@ -96,8 +96,8 @@ const List: React.FC = () => {
             ref={inputRef}
             type="normal"
             placeholder="搜索"
-            defaultValue={keywords}
-            onInput={handleInput}
+            value={keywords}
+            setValue={setValue}
             onFocus={() => setShowSearch(true)}
             onKeyUp={handleMouseup}
           />

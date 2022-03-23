@@ -50,9 +50,11 @@ const FM: React.FC = () => {
         </div>
         <Lyric music={currentMusic} />
       </section>
-      <CommentGroup id={currentMusic?.id} api={getCommentMusic}>
-        <WriteComment />
-      </CommentGroup>
+      <CommentGroup
+        id={currentMusic?.id}
+        api={getCommentMusic}
+        functionChildren={(count: number) => <WriteComment count={count} />}
+      />
     </div>
   );
 };

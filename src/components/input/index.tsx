@@ -8,28 +8,22 @@ interface Props
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type' | 'value'> {
   type?: 'transparent' | 'normal';
   placeholder?: string;
-  defaultValue?: string;
+  value?: string;
+  setValue?: (value: string) => void;
   onClear?: () => void;
 }
 
 const Input = forwardRef<HTMLInputElement, Props>(
-  ({ type = 'transparent', defaultValue = '', onInput, ...restProps }, ref) => {
+  ({ type = 'transparent', value = '', setValue, onInput, ...restProps }, ref) => {
     const getClass = classGenerator('input', styles);
-    const [value, setValue] = useState(defaultValue);
     const showClear = useMemo(() => !!value, [value]);
 
     const handleInput: FormEventHandler<HTMLInputElement> = e => {
-      setValue(e.currentTarget.value);
-      onInput?.(e);
+      setValue?.(e.currentTarget.value);
     };
 
     function handleClear() {
-      setValue('');
-
-      Promise.resolve().then(() => {
-        const dom = (ref as MutableRefObject<HTMLInputElement>).current;
-        dom.dispatchEvent(new Event('input', { bubbles: true }));
-      });
+      setValue?.('');
     }
 
     return (
