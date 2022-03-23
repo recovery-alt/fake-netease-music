@@ -9,7 +9,7 @@ import Img from '@/components/img';
 import { useHistory } from 'react-router-dom';
 import Popover from '@/views/video/popover';
 import classNames from 'classnames';
-import { classGenerator, resizeImg } from '@/utils';
+import { classGenerator, resizeImg, toHttps } from '@/utils';
 import { fetchAndSetCurrentTrack } from '@/store';
 import { useDispatch } from 'react-redux';
 import { DynamicPage } from '@/router';
@@ -94,7 +94,7 @@ const MusicList: React.FC = () => {
     <div className={getClass()}>
       <header className={getClass('banner')} onClick={() => push(DynamicPage.excellentList(cat))}>
         {topPlaylistHighquality?.coverImgUrl && (
-          <img src={resizeImg(topPlaylistHighquality.coverImgUrl, 300)} alt="banner" />
+          <img src={toHttps(resizeImg(topPlaylistHighquality.coverImgUrl, 300))} alt="banner" />
         )}
         <div className={getClass('banner-right')}>
           <button>

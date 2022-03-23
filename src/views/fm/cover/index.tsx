@@ -4,7 +4,7 @@ import { Music } from '@/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch, setPause } from '@/store';
 import classNames from 'classnames';
-import { classGenerator, resizeImg } from '@/utils';
+import { classGenerator, resizeImg, toHttps } from '@/utils';
 import Icon from '@/components/icon';
 
 type Props = { current?: Music; next?: Music };
@@ -24,13 +24,13 @@ const Cover: React.FC<Props> = ({ current, next }) => {
         {next?.album?.picUrl && (
           <img
             className={getClass('pre-img')}
-            src={resizeImg(next.album.picUrl, 300)}
+            src={toHttps(resizeImg(next.album.picUrl, 300))}
             alt="pre-cover"
           />
         )}
         {current?.album.picUrl && (
           <div className={getClass('img')}>
-            <img src={resizeImg(current.album.picUrl, 300)} alt="cover" />
+            <img src={toHttps(resizeImg(current.album.picUrl, 300))} alt="cover" />
             <div
               className={classNames(getClass('play'), { [styles['--pause']]: !pause })}
               onClick={handlePauseClick}

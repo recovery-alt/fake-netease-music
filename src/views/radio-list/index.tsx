@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import '../list/list.less';
 import './radio-list.less';
 import Img from '@/components/img';
-import { classGenerator, resizeImg } from '@/utils';
+import { classGenerator, resizeImg, toHttps } from '@/utils';
 import Button from '@/components/button';
 import {
   ShareAltOutlined,
@@ -59,7 +59,7 @@ const RadioList: React.FC = () => {
     return (
       <>
         <div className={getListClass('user-info')}>
-          <img src={djDetail.dj && resizeImg(djDetail.dj.avatarUrl, 30)} alt="avatar" />
+          <img src={djDetail.dj && toHttps(resizeImg(djDetail.dj.avatarUrl, 30))} alt="avatar" />
           <a>{djDetail.dj?.nickname}</a>
         </div>
         <div className={getListClass('control')}>

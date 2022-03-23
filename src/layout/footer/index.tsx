@@ -14,7 +14,7 @@ import {
 import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, changeSong, setSong, nextFM, setCurrentTime, setShowDetail } from '@/store';
-import { classGenerator, formatMS, resizeImg, transformMusic2Track } from '@/utils';
+import { classGenerator, formatMS, resizeImg, toHttps, transformMusic2Track } from '@/utils';
 import { useCurrentTime, useMusicList, usePause, usePlayMode, useLyric, useVolume } from './hooks';
 import { Tooltip, Slider } from 'antd';
 import { PlayMode } from '@/enum';
@@ -105,7 +105,7 @@ const List: React.FC = () => {
           <>
             <audio
               ref={audioRef}
-              src={song.url}
+              src={toHttps(song.url)}
               controls
               autoPlay={autoPlay}
               loop={playMode === PlayMode.SOLO}
@@ -116,7 +116,7 @@ const List: React.FC = () => {
               onVolumeChange={handleVolumeChange}
             />
             <img
-              src={resizeImg(currentTrack.al.picUrl, 100)}
+              src={toHttps(resizeImg(currentTrack.al.picUrl, 100))}
               alt="music"
               onClick={handleCoverClick}
             />

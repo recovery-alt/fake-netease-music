@@ -15,7 +15,7 @@ import MusicPresent, { PageMode, DataType } from './music-present';
 import { getUserDetail, getUserAudio, getUserPlaylist } from '@/api';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { UserPlaylist, UserDetail } from '@/types';
-import { classGenerator, resizeImg } from '@/utils';
+import { classGenerator, resizeImg, toHttps } from '@/utils';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import Button from '@/components/button';
@@ -132,7 +132,7 @@ const User: React.FC = () => {
             <div className={getClass('title-left')}>
               {userDetail?.identify && (
                 <div className={getClass('title-auth')}>
-                  <img src={userDetail.identify.imageUrl} />
+                  <img src={toHttps(userDetail.identify.imageUrl)} />
                   <strong>{userDetail.identify.imageDesc}</strong>
                 </div>
               )}

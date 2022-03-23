@@ -9,7 +9,7 @@ import { HeartFilled } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import dayjs from 'dayjs';
-import { wrapNumber, resizeImg, classGenerator } from '@/utils';
+import { wrapNumber, resizeImg, classGenerator, toHttps } from '@/utils';
 import { getAlbum, getPlaylistDetail, getAlbumDetailDynamic } from '@/api';
 import { UserPlaylist, Track } from '@/types';
 import { useDispatch } from 'react-redux';
@@ -150,7 +150,7 @@ const List: React.FC = () => {
           {!isAlbum && (
             <div className={getClass('user-info')}>
               <img
-                src={resizeImg(profile.avatarUrl || avatar, 100)}
+                src={toHttps(resizeImg(profile.avatarUrl || avatar, 100))}
                 alt="avatar"
                 onClick={() => toUserPage(profile.userId)}
               />

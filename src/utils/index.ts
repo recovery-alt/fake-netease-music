@@ -80,3 +80,7 @@ export function classGenerator(suffix: string, styles?: Data<string>) {
     return styles ? styles[value] : value;
   };
 }
+
+export function toHttps(url?: string) {
+  return url?.replace(/^http(?!s)/, $0 => `${$0}s`);
+}

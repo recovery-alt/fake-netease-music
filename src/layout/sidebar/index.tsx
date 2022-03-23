@@ -19,7 +19,7 @@ import Scrollbar from '@/components/scrollbar';
 import Login from '../login';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState, setUserInfoFromCache, setUserPlaylist } from '@/store';
-import { classGenerator, local, resizeImg } from '@/utils';
+import { classGenerator, local, resizeImg, toHttps } from '@/utils';
 import { UserInfo } from '@/types';
 import json from 'json5';
 import classNames from 'classnames';
@@ -178,7 +178,11 @@ const List: React.FC = () => {
   return (
     <aside className={getClass()}>
       <header className={getClass('header')}>
-        <img src={resizeImg(profile.avatarUrl, 100)} alt="icon" onClick={handleAvatarClick} />
+        <img
+          src={toHttps(resizeImg(profile.avatarUrl, 100))}
+          alt="icon"
+          onClick={handleAvatarClick}
+        />
         <strong onClick={login}>{profile.nickname}</strong>
         <CaretRightOutlined onClick={login} />
       </header>

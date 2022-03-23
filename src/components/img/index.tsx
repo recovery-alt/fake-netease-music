@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { AppProps } from '@/types';
 import { LoadingOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import Icon, { IconSize } from '@/components/icon';
-import { classGenerator } from '@/utils';
+import { classGenerator, toHttps } from '@/utils';
 
 export type IconOptions = {
   size?: IconSize;
@@ -71,7 +71,7 @@ const Img: React.FC<Props> = ({
     <div ref={ref} className={classNames(getClass(), className)} style={style}>
       {visible && (
         <img
-          src={src}
+          src={toHttps(src)}
           alt={alt}
           onLoad={handleOnload}
           onMouseMove={() => setShowIcon(true)}

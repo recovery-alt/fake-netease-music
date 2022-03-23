@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styles from './video.module.less';
 import Icon from '@/components/icon';
-import { classGenerator } from '@/utils';
+import { classGenerator, toHttps } from '@/utils';
 
 type Props = { src?: string };
 
@@ -14,7 +14,7 @@ const Video: React.FC<Props> = ({ src }) => {
     <div className={getClass()}>
       <video
         ref={videoRef}
-        src={src}
+        src={toHttps(src)}
         autoPlay
         controls
         onPause={() => setPause(true)}
