@@ -66,13 +66,13 @@ const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
     const dataArr = data[key];
 
     return (
-      <>
-        <div key={item.label} className={getClass('title')}>
+      <div key={item.label}>
+        <div className={getClass('title')}>
           <item.icon />
           {item.label}
         </div>
         {dataArr?.map(datItem => renderSuggestionItem(datItem, key))}
-      </>
+      </div>
     );
   }
 

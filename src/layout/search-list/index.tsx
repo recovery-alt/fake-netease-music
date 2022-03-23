@@ -26,11 +26,13 @@ const SearchList: React.FC<Props> = ({ visible, setVisible, inputRef }) => {
 
   return createPortal(
     <div ref={ref} className={classNames(getClass(), { [styles['--show']]: visible })}>
-      {keywords && keywords.trim() ? (
-        <KeywordSuggestion setVisible={setVisible} />
-      ) : (
-        <EmptySuggestion {...{ visible, setVisible }} />
-      )}
+      {visible ? (
+        keywords && keywords.trim() ? (
+          <KeywordSuggestion setVisible={setVisible} />
+        ) : (
+          <EmptySuggestion {...{ visible, setVisible }} />
+        )
+      ) : null}
     </div>,
     document.getElementById('drawer')!
   );

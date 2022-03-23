@@ -1,4 +1,4 @@
-import React, { FormEventHandler, forwardRef, useMemo, useState } from 'react';
+import React, { FormEventHandler, forwardRef, useMemo, useState, MutableRefObject } from 'react';
 import styles from './input.module.less';
 import { CloseOutlined, SearchOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
@@ -25,6 +25,11 @@ const Input = forwardRef<HTMLInputElement, Props>(
 
     function handleClear() {
       setValue('');
+
+      Promise.resolve().then(() => {
+        const dom = (ref as MutableRefObject<HTMLInputElement>).current;
+        dom.dispatchEvent(new Event('input', { bubbles: true }));
+      });
     }
 
     return (
