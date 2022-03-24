@@ -1,10 +1,28 @@
-#![cfg_attr(
-  all(not(debug_assertions), target_os = "windows"),
-  windows_subsystem = "windows"
-)]
+use tauri::Manager;
+
+use crate::ui::app::{handle_run_events, register_shortcut};
+use crate::ui::menu::main_menu_builder;
+use crate::ui::tray::SystemTrayBuilder;
+
+mod ui;
 
 fn main() {
-  tauri::Builder::default()
-    .run(tauri::generate_context!())
+  let builder = tauri::Builder::default();
+  let app = builder
+    .menu(main_menu_builder())
+    .setup(|app| {
+      app.get_window("main").and_then(|win| {
+        let pkg_info = app.package_info();
+        let window_title = format!("{} - v{}", pkg_info.name, pkg_info.version);
+        win.set_title(window_title.as_str()).ok()
+      });
+      Ok(())
+    })
+    .system_tray(SystemTrayBuilder::build())
+    .on_system_tray_event(SystemTrayBuilder::handle_tray_event)
+    .build(tauri::generate_context!())
     .expect("error while running tauri application");
+
+  register_shortcut(&app);
+  app.run(handle_run_events);
 }

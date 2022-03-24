@@ -14,7 +14,7 @@
       "active": true,
       "targets": "all",
       "identifier": "com.tauri.dev",
-      "icon": ["icons/icon.icns"],
+      "icon": ["icons/icon.icns", "icons/icon.png"],
       "resources": [],
       "externalBin": [],
       "copyright": "",
@@ -58,6 +58,10 @@
       }
     ],
     "macOSPrivateApi": true,
+    "systemTray": {
+      "iconAsTemplate": true,
+      "iconPath": "icons/icon.png"
+    },
     "security": {
       "csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
     }
