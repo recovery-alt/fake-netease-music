@@ -1,4 +1,4 @@
-import React, { useState, useEffect, KeyboardEventHandler, useRef, FormEventHandler } from 'react';
+import React, { useState, useEffect, KeyboardEventHandler, useRef } from 'react';
 import styles from './header.module.less';
 import {
   LeftOutlined,
@@ -17,7 +17,6 @@ import { RootState, setKeywords } from '@/store';
 import { stringify } from 'qs';
 import { Page, topMenuMap, MenuConfig } from '@/router';
 import { classGenerator } from '@/utils';
-import debounce from 'lodash/debounce';
 
 const List: React.FC = () => {
   const getClass = classGenerator('header', styles);
@@ -70,14 +69,14 @@ const List: React.FC = () => {
 
   return (
     <header className={getClass()}>
-      <div className={getClass('left')}>
+      <div data-tauri-drag-region className={getClass('left')}>
         <LeftOutlined className={getClass('left-icon')} onClick={() => handleHistoryChange()} />
         <RightOutlined
           className={getClass('left-icon')}
           onClick={() => handleHistoryChange(true)}
         />
       </div>
-      <div className={getClass('right')}>
+      <div data-tauri-drag-region className={getClass('right')}>
         <ul className={getClass('right-menu')}>
           {pathname.includes('/home') &&
             topMenu.map(item => (
