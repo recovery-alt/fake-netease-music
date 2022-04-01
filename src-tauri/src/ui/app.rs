@@ -1,22 +1,15 @@
-use tauri::{App, AppHandle, Manager, RunEvent, Wry};
+use tauri::{App, Wry};
 
-pub fn handle_run_events(app_handle: &AppHandle<Wry>, e: RunEvent) {
-  match e {
-    RunEvent::Exit => {}
-    RunEvent::ExitRequested { .. } => {}
-    RunEvent::CloseRequested { api, .. } => {
-      api.prevent_close();
-      app_handle.get_window("main").map(|win| {
-        win.hide().unwrap();
-      });
-    }
-    RunEvent::WindowClosed(_) => {}
-    RunEvent::Ready => {}
-    RunEvent::Resumed => {}
-    RunEvent::MainEventsCleared => {}
-    _ => {}
-  }
-}
+// pub fn handle_run_events(app_handle: &AppHandle<Wry>, e: RunEvent) {
+//   match e {
+//     RunEvent::Exit => {}
+//     RunEvent::ExitRequested { .. } => {}
+//     RunEvent::Ready => {}
+//     RunEvent::Resumed => {}
+//     RunEvent::MainEventsCleared => {}
+//     _ => {}
+//   }
+// }
 
 pub fn register_shortcut(_app: &App<Wry>) {
   // let mut mgr = app.global_shortcut_manager();

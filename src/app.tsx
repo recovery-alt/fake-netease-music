@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import routes, { Page } from '@/router';
 import { Provider } from 'react-redux';
 import store from '@/store';
@@ -9,7 +9,7 @@ import { getClass } from '@/layout';
 
 const App: React.FC = () => (
   <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter>
       <Header />
       <Suspense
         fallback={<Spin className={getClass('loading')} style={{ position: 'absolute' }} />}
@@ -23,7 +23,7 @@ const App: React.FC = () => (
           ))}
         </Switch>
       </Suspense>
-    </HashRouter>
+    </BrowserRouter>
   </Provider>
 );
 
