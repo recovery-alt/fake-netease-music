@@ -1,9 +1,10 @@
 import { classGenerator } from '@/utils';
 import classNames from 'classnames';
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import styles from './infinity-scroll.module.less';
+import { HTMLAttributes } from 'react';
 
-interface Props extends React.HTMLAttributes<HTMLElement> {
+interface Props extends HTMLAttributes<HTMLElement> {
   cb: () => void;
 }
 export type SetMore = (hasMore: boolean) => void;

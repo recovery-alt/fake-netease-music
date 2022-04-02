@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { Track } from '@/types';
 import { classGenerator } from '@/utils';
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import styles from './music-present.module.less';
 
 export type PageMode = 'card' | 'list' | 'overview';
@@ -23,7 +24,7 @@ export type Props = {
   data: DataType[];
 };
 
-const MusicPresent: React.FC<Props> = props => {
+const MusicPresent: FC<Props> = props => {
   const getClass = classGenerator('music-present', styles);
   const { type, ...rest } = props;
   const strategy = {

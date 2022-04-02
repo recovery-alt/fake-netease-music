@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, FC } from 'react';
 import './search-result.less';
 import { Tabs } from 'antd';
 import Song from './views/song';
@@ -18,7 +18,7 @@ import { classGenerator } from '@/utils';
 
 export const getClass = classGenerator('search-result');
 
-const SearchResult: React.FC = () => {
+const SearchResult: FC = () => {
   const [total, setTotal] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [bestMatch, setBestMatch] = useState<SearchSuggest>();

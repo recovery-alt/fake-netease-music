@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import styles from './similar.module.less';
 import Img from '@/components/img';
 import { getSimiArtist } from '@/api';
@@ -9,7 +9,7 @@ import { classGenerator } from '@/utils';
 
 type Props = { id: number };
 
-const Similar: React.FC<Props> = ({ id }) => {
+const Similar: FC<Props> = ({ id }) => {
   const getClass = classGenerator('similar', styles);
   const [simiArtist, setSimiArtist] = useState<Artist[]>([]);
   const { push } = useHistory();

@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './list.module.less';
 import Img from '@/components/img';
 import classNames from 'classnames';
@@ -12,7 +12,7 @@ type Props = {
   onItemClick?: (item: ListItem) => void;
 };
 
-const List: React.FC<Props> = ({ imgType = 'normal', data, onItemClick }) => {
+const List: FC<Props> = ({ imgType = 'normal', data, onItemClick }) => {
   const getClass = classGenerator('list', styles);
 
   return (

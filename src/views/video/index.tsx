@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import './video.less';
 import { getVideoCategoryList } from '@/api';
 import Nav, { NavItem } from './nav';
@@ -10,7 +10,7 @@ import { useMore, usePopover } from './hook';
 import classNames from 'classnames';
 import { classGenerator } from '@/utils';
 
-const Video: React.FC = () => {
+const Video: FC = () => {
   const getClass = classGenerator('video');
   const [videoCategory, setVideoCategory] = useState<NavItem[]>([]);
   const [categoryId, setCategoryId] = useState<number | string>(0);

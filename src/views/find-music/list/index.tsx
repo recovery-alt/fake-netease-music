@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode, FC } from 'react';
 import styles from './list.module.less';
 import { Data } from '@/types';
 import Img, { IconOptions } from '@/components/img';
@@ -16,7 +16,7 @@ type Props = {
   icon?: IconOptions | boolean;
 };
 
-const List: React.FC<Props> = ({ icon, data, functionChildren, size = 'default', onItemClick }) => {
+const List: FC<Props> = ({ icon, data, functionChildren, size = 'default', onItemClick }) => {
   const getClass = classGenerator('list', styles);
   const len = data.length;
   const newData = [data.slice(0, len / 2), data.slice(len / 2, len)];

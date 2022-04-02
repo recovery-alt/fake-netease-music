@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import classNames from 'classnames';
 import styles from './nav.module.less';
 import { classGenerator } from '@/utils';
@@ -7,7 +7,7 @@ export type NavItem = { id: number | string; name: string };
 
 type Props = { id: number | string; data: NavItem[]; onNavClick?: (id: number | string) => void };
 
-const Nav: React.FC<Props> = ({ id, data, onNavClick }) => {
+const Nav: FC<Props> = ({ id, data, onNavClick }) => {
   const getClass = classGenerator('nav', styles);
   const [active, setActive] = useState<number>();
 

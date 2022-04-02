@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, ReactElement } from 'react';
 import { SearchResult, SearchMultimatch } from '@/types';
 import { getSearch } from '@/api';
 import { SearchType } from '@/enum';
@@ -58,7 +58,7 @@ export const usePagination = <T,>({
     return (data as any)[map[type]] || 0;
   }
 
-  function wrapEmpty(renderSlot: (data: T) => React.ReactElement<any, any> | null) {
+  function wrapEmpty(renderSlot: (data: T) => ReactElement<any, any> | null) {
     const empty = (
       <div className={getClass('empty')}>
         很抱歉，未能找到与“<span>{keywords}</span>”相关的任何信息。

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 import './pedding.less';
 import { DownloadOutlined, PauseOutlined, DeleteOutlined } from '@ant-design/icons';
 import Table, { Column } from '@/components/table';
@@ -6,7 +6,7 @@ import { Data } from '@/types';
 import Button from '@/components/button';
 import { classGenerator } from '@/utils';
 
-const Pedding: React.FC = () => {
+const Pedding: FC = () => {
   const getClass = classGenerator('pedding');
   const columns: Column[] = [
     { key: 'title', title: '音乐标题' },

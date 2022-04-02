@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, Suspense, lazy } from 'react';
+import { useEffect, useMemo, useState, Suspense, lazy, FC } from 'react';
 import './singer.less';
 import Img from '@/components/img';
 import { FileAddOutlined, UserOutlined } from '@ant-design/icons';
@@ -17,7 +17,7 @@ const MV = lazy(() => import('./mv'));
 const Detail = lazy(() => import('./detail'));
 const Similar = lazy(() => import('./similar'));
 
-const Singer: React.FC = () => {
+const Singer: FC = () => {
   const getClass = classGenerator('singer');
   const params = useParams<{ id: string }>();
   const id = useMemo(() => Number(params.id), [params.id]);

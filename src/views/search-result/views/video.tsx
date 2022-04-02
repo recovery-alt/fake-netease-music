@@ -1,5 +1,5 @@
 import { SearchVideo } from '@/types';
-import React from 'react';
+import { FC } from 'react';
 import { usePagination, Props } from '../hook';
 import { SearchType } from '@/enum';
 import styles from './video.module.less';
@@ -11,7 +11,7 @@ import { DynamicPage } from '@/router';
 
 const getClass = classGenerator('video', styles);
 
-const Video: React.FC<Props> = props => {
+const Video: FC<Props> = props => {
   const params = { ...props, currentType: SearchType.VIDEO, limit: 21 };
   const { wrapEmpty } = usePagination<SearchVideo>(params);
   const { push } = useHistory();

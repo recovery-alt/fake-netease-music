@@ -3,7 +3,6 @@ import { PlaylistHighqualityTags } from '@/types';
 import { classGenerator } from '@/utils';
 import { FilterOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
-import React from 'react';
 import { DynamicPage } from '@/router';
 
 export function usePopover(tags: PlaylistHighqualityTags[], cat: string) {

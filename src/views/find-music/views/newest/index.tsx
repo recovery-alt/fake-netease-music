@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo, useRef, FC } from 'react';
 import './newest.less';
 import classNames from 'classnames';
 import { categoryList } from '@/config';
@@ -13,7 +13,7 @@ import { setCurrentTrack } from '@/store';
 import { classGenerator, transformSong2Track } from '@/utils';
 import { DynamicPage } from '@/router';
 
-const Newest: React.FC = () => {
+const Newest: FC = () => {
   const getClass = classGenerator('newest');
   const [isAlbum, setIsAlbum] = useState(0);
   const [areaIndex, setAreaIndex] = useState(0);

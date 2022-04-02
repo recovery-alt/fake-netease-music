@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 import Header from './header';
 import Table, { Column } from '@/components/table';
 import { Data } from '@/types';
 
-const Download: React.FC = () => {
+const Download: FC = () => {
   const columns: Column[] = [
     { key: 'ordinal' },
     { key: 'title', title: '音乐标题' },

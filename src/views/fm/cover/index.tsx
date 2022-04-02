@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './cover.module.less';
 import { Music } from '@/types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,7 +9,7 @@ import Icon from '@/components/icon';
 
 type Props = { current?: Music; next?: Music };
 
-const Cover: React.FC<Props> = ({ current, next }) => {
+const Cover: FC<Props> = ({ current, next }) => {
   const getClass = classGenerator('cover', styles);
   const pause = useSelector((state: RootState) => state.controller.pause);
   const dispatch = useDispatch<AppDispatch>();

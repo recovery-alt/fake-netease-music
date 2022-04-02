@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import './daily-recommend.less';
 import calendar from '@/assets/img/calendar.png';
 import Button from '@/components/button';
@@ -11,7 +11,7 @@ import { getRecommendSongs } from '@/api';
 import { Track } from '@/types';
 import { classGenerator } from '@/utils';
 
-const DailyRecommend: React.FC = () => {
+const DailyRecommend: FC = () => {
   const getClass = classGenerator('daily-recommend');
   const [recommendSongs, setRecommendSongs] = useState<Track[]>([]);
   const isLogin = useSelector((state: RootState) => !!state.user.cookie);

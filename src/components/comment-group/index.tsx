@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode, FC } from 'react';
 import Comments from './comments';
 import { Pagination } from 'antd';
 import styles from './comment-group.module.less';
@@ -11,11 +11,11 @@ type Data = CommentData & {
 
 type Props = {
   id?: number | string;
-  functionChildren?: (count: number) => React.ReactNode;
+  functionChildren?: (count: number) => ReactNode;
   api: (id: number | string, offset?: number) => Promise<Data>;
 };
 
-const CommentGroup: React.FC<Props> = ({ id, functionChildren, api }) => {
+const CommentGroup: FC<Props> = ({ id, functionChildren, api }) => {
   const getClass = classGenerator('comment-group', styles);
   const [comments, setComments] = useState<Comment[]>([]);
   const [hotComments, setHotComments] = useState<Comment[]>([]);

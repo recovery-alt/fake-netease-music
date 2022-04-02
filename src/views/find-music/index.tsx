@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, useEffect, useState } from 'react';
+import { ReactEventHandler, useEffect, useState, FC } from 'react';
 import Title from '@/components/title';
 import Card, { CardData } from '@/components/card';
 import List, { ListData, ListParams } from './list';
@@ -23,7 +23,7 @@ import recommend from '@/assets/img/recommend.jpg';
 import dayjs from 'dayjs';
 import { DynamicPage, Page } from '@/router';
 
-const FindMusic: React.FC = () => {
+const FindMusic: FC = () => {
   const getClass = classGenerator('find-music');
   const isLogin = useSelector((state: RootState) => !!state.user.cookie);
   const [banner, setBanner] = useState<BannerType[]>([]);

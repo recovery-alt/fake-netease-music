@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './comments.module.less';
 import avatar from '@/assets/img/avatar.svg';
 import { LikeOutlined, ExportOutlined, CommentOutlined } from '@ant-design/icons';
@@ -11,7 +11,7 @@ import { DynamicPage } from '@/router';
 
 type Props = { comment: Comment };
 
-const Comments: React.FC<Props> = ({ comment }) => {
+const Comments: FC<Props> = ({ comment }) => {
   const getClass = classGenerator('comments', styles);
   const { push } = useHistory();
   const data = [

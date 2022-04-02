@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import ListBox, { ListItem } from '@/views/search-result/list';
 import { Props as PresentProps } from '../';
 import dayjs from 'dayjs';
@@ -10,7 +10,7 @@ import { DynamicPage } from '@/router';
 
 type Props = Omit<PresentProps, 'type'>;
 
-const List: React.FC<Props> = ({ data, isAlbum }) => {
+const List: FC<Props> = ({ data, isAlbum }) => {
   const { push } = useHistory();
   const transData = data.map(item => ({
     id: item.id,

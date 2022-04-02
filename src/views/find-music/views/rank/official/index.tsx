@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './official.module.less';
 import { UserPlaylist, Track } from '@/types';
 import Img from '@/components/img';
@@ -10,7 +10,7 @@ type Props = {
   onViewAll: (id: number) => void;
 };
 
-const Official: React.FC<Props> = ({ data, onItemClick, onViewAll }) => {
+const Official: FC<Props> = ({ data, onItemClick, onViewAll }) => {
   const getClass = classGenerator('official', styles);
 
   return (

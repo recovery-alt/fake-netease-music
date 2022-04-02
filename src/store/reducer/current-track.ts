@@ -119,6 +119,7 @@ const { reducer, actions } = createSlice({
       return newState;
     },
     setCurrentTrack(state, action: PayloadAction<CurrentTrack>) {
+      /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
       const { cacheCurrent, ...restState } = state;
       const { current, tracks, fm } = action.payload;
       // 重置fm里面的歌

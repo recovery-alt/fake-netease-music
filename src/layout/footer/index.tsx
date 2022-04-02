@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect, FC } from 'react';
 import styles from './footer.module.less';
 import {
   HeartOutlined,
@@ -23,7 +23,7 @@ import MusicList from '../music-list';
 import { useHistory } from 'react-router-dom';
 import { Page } from '@/router';
 
-const List: React.FC = () => {
+const List: FC = () => {
   const getClass = classGenerator('footer', styles);
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLProgressElement>(null);

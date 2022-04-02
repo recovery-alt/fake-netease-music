@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC, MouseEventHandler } from 'react';
 import styles from './empty-suggestion.module.less';
 import { DeleteOutlined, CloseOutlined } from '@ant-design/icons';
 import { getSearchHotDetail } from '@/api';
@@ -13,14 +13,14 @@ import { classGenerator } from '@/utils';
 
 type Props = { visible: boolean; setVisible: (visible: boolean) => void };
 
-const EmptySuggestion: React.FC<Props> = ({ visible, setVisible }) => {
+const EmptySuggestion: FC<Props> = ({ visible, setVisible }) => {
   const getClass = classGenerator('empty-suggestion', styles);
   const [searchHot, setSearchHot] = useState<SearchHot[]>([]);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const { push } = useHistory();
   const dispatch = useDispatch();
 
-  const handleCloseClick: React.MouseEventHandler<HTMLSpanElement> = e => {
+  const handleCloseClick: MouseEventHandler<HTMLSpanElement> = e => {
     e.stopPropagation();
   };
 

@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './show.module.less';
 import Img from '@/components/img';
 import { classGenerator } from '@/utils';
 
-const Show: React.FC = () => {
+const Show: FC = () => {
   const getClass = classGenerator('show', styles);
   return (
     <div className={getClass()}>

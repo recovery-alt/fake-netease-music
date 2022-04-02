@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, FC } from 'react';
 import './list.less';
 import Button from '@/components/button';
 import { FolderAddOutlined, ShareAltOutlined, DownloadOutlined } from '@ant-design/icons';
@@ -25,7 +25,7 @@ import { DynamicPage } from '@/router';
 
 type CurrentInfo = Partial<UserPlaylist & { artistName: string }>;
 
-const List: React.FC = () => {
+const List: FC = () => {
   const getClass = classGenerator('list');
   const params = useParams<{ id?: string; type?: 'album' }>();
   const [tracks, setTracks] = useState<Track[]>([]);

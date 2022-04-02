@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './banner.module.less';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import type { BannerType } from '@/types';
@@ -14,7 +14,7 @@ type Props = {
 let timer: number;
 let syncCurrent = 0;
 
-const Banner: React.FC<Props> = ({ data, onBannerClick }) => {
+const Banner: FC<Props> = ({ data, onBannerClick }) => {
   const getClass = classGenerator('banner', styles);
   const [current, setCurrent] = useState<number>(0);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useReducer } from 'react';
+import { useEffect, useRef, useReducer, FC } from 'react';
 import styles from '@/views/list/collector/collector.module.less';
 import { classGenerator, resizeImg } from '@/utils';
 import { getDJSubscriber } from '@/api';
@@ -8,7 +8,7 @@ import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 
 type Props = { id: number };
 
-const Subscriber: React.FC<Props> = ({ id }) => {
+const Subscriber: FC<Props> = ({ id }) => {
   type Action = { type?: 'reset' | 'add'; payload: SubscriberType[] };
   const getClass = classGenerator('collector', styles);
   const [subscribers, subscribersDispatch] = useReducer(subscribersReducer, []);

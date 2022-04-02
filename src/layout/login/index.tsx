@@ -1,4 +1,4 @@
-import React, { useState, MouseEventHandler } from 'react';
+import { useState, MouseEventHandler, FC } from 'react';
 import styles from './login.module.less';
 import { createPortal } from 'react-dom';
 import { CloseOutlined } from '@ant-design/icons';
@@ -10,7 +10,7 @@ import { setUserInfo, setUserPlaylist, AppDispatch } from '@/store';
 
 type Props = { setShowLogin: (show: boolean) => void };
 
-const Login: React.FC<Props> = ({ setShowLogin }) => {
+const Login: FC<Props> = ({ setShowLogin }) => {
   const getClass = classGenerator('login', styles);
   const dom = document.getElementById('portal')!;
   const [phone, setPhone] = useState('');

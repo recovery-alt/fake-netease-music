@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import './collection.less';
 import List, { ListData } from '@/components/list';
 import { getAlbumSublist } from '@/api';
@@ -8,7 +8,7 @@ import { classGenerator } from '@/utils';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 
-const Collection: React.FC = () => {
+const Collection: FC = () => {
   const getClass = classGenerator('collection');
   const myAlbums: ListData[] = [{ id: 0, imgUrl: disk, col2: '我的数字专辑' }];
   const [albumSublist, setAlbumSublist] = useState<ListData[]>([]);

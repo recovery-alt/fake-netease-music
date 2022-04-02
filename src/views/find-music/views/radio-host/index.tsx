@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC, SetStateAction } from 'react';
 import Banner from '@/components/banner';
 import {
   getDJBanner,
@@ -20,7 +20,7 @@ import { insertSong } from '@/store';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage, Page } from '@/router';
 
-const RadioHost: React.FC = () => {
+const RadioHost: FC = () => {
   const getClass = classGenerator('radio-host');
   const [banner, setBanner] = useState<BannerType[]>([]);
   const [djCatelist, setDJCatelist] = useState<DJCatelist[]>([]);
@@ -33,7 +33,7 @@ const RadioHost: React.FC = () => {
   const [musicRecommend, setMusicRecommend] = useState<CardData[]>([]);
   const [emotion, setEmotion] = useState<CardData[]>([]);
   const [talkshow, setTalkShow] = useState<CardData[]>([]);
-  type Callback = (value: React.SetStateAction<CardData[]>) => void;
+  type Callback = (value: SetStateAction<CardData[]>) => void;
   const dispatch = useDispatch();
   const { push } = useHistory();
 

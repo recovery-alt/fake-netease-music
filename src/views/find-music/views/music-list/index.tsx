@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import './music-list.less';
 import { CrownOutlined, GlobalOutlined } from '@ant-design/icons';
 import { getMusicCategory } from '@/api';
@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { DynamicPage } from '@/router';
 import styles from './popover.module.less';
 
-const MusicList: React.FC = () => {
+const MusicList: FC = () => {
   const getClass = classGenerator('music-list');
   const [musicCategory, setMusicCategory] = useState<UserPlaylist[]>([]);
   const {

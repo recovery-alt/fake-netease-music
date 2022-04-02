@@ -1,4 +1,4 @@
-import React, { useState, useEffect, KeyboardEventHandler, useRef } from 'react';
+import { useState, useEffect, KeyboardEventHandler, useRef, FC } from 'react';
 import styles from './header.module.less';
 import {
   LeftOutlined,
@@ -18,7 +18,7 @@ import { stringify } from 'qs';
 import { Page, topMenuMap, MenuConfig } from '@/router';
 import { classGenerator } from '@/utils';
 
-const List: React.FC = () => {
+const List: FC = () => {
   const getClass = classGenerator('header', styles);
   const [active, setActive] = useState('');
   const [topMenu, setTopMenu] = useState<Array<MenuConfig>>([]);

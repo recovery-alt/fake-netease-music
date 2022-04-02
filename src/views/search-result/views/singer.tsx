@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import List from '../list';
 import { Artist, SearchSinger } from '@/types';
 import { usePagination, Props } from '../hook';
@@ -6,7 +6,7 @@ import { SearchType } from '@/enum';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 
-const Singer: React.FC<Props> = props => {
+const Singer: FC<Props> = props => {
   const params = { ...props, currentType: SearchType.SINGER };
   const { wrapEmpty } = usePagination<SearchSinger>(params);
   const { push } = useHistory();

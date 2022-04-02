@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './music-detail.module.less';
 import classNames from 'classnames';
@@ -25,7 +25,7 @@ import RadioDetail from './radio-detail';
 
 type Props = { visible: boolean };
 
-const MusicDetail: React.FC<Props> = ({ visible }) => {
+const MusicDetail: FC<Props> = ({ visible }) => {
   const getClass = classGenerator('music-detail', styles);
   const pause = useSelector((state: RootState) => state.controller.pause);
   const dispatch = useDispatch();

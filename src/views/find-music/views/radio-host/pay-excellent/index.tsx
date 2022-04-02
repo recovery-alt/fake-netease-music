@@ -1,5 +1,5 @@
 import { classGenerator, resizeImg } from '@/utils';
-import React, { useEffect, useReducer, useRef } from 'react';
+import { FC, useEffect, useReducer, useRef } from 'react';
 import './pay-excellent.less';
 import Img from '@/components/img';
 import { getDJPaygift } from '@/api';
@@ -8,7 +8,7 @@ import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 import { DynamicPage } from '@/router';
 import { useHistory } from 'react-router-dom';
 
-const PayExcellent: React.FC = () => {
+const PayExcellent: FC = () => {
   const getClass = classGenerator('pay-excellent');
   const [djPaygift, setDJPaygift] = useReducer(djPaygiftReducer, []);
   const offset = useRef(0);

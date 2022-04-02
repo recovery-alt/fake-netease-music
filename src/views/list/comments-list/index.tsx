@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './comments-list.module.less';
 import CommentGroup from '@/components/comment-group';
 import { getCommentPlaylist, getCommentAlbum } from '@/api';
@@ -7,7 +7,7 @@ import { classGenerator } from '@/utils';
 
 type Props = { id: number; isAlbum: boolean };
 
-const CommentsList: React.FC<Props> = ({ id, isAlbum }) => {
+const CommentsList: FC<Props> = ({ id, isAlbum }) => {
   const getClass = classGenerator('comments-list', styles);
   return (
     <div className={getClass()}>

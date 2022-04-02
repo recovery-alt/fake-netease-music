@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, FC } from 'react';
 import styles from './sidebar.module.less';
 import {
   CustomerServiceOutlined,
@@ -25,11 +25,11 @@ import json from 'json5';
 import classNames from 'classnames';
 import { DynamicPage, Page } from '@/router';
 
-type Menu = { name: string; icon: React.FC; path: string; loginShow?: boolean };
+type Menu = { name: string; icon: FC; path: string; loginShow?: boolean };
 type MenuItem = { title?: string; menus: Menu[] };
 type ItemProps = { menu: Menu; index: [number, number]; plus?: number };
 
-const List: React.FC = () => {
+const List: FC = () => {
   const getClass = classGenerator('sidebar', styles);
   const [selected, setSelected] = useState<number[]>();
   const { push } = useHistory();
@@ -65,7 +65,7 @@ const List: React.FC = () => {
   ];
   const [menuList, menuListDispatch] = useReducer(menuListReducer, initMenuList);
 
-  const Item: React.FC<ItemProps> = ({ menu, index }) => {
+  const Item: FC<ItemProps> = ({ menu, index }) => {
     const active = judgeSelected(selected, index);
     return (
       <div

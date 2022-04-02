@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import './singer.less';
 import List, { ListData } from '@/components/list';
 import { getArtistSublist } from '@/api';
@@ -7,7 +7,7 @@ import { classGenerator } from '@/utils';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 
-const Singer: React.FC = () => {
+const Singer: FC = () => {
   const getClass = classGenerator('collection-singer');
   const [data, setData] = useState<ListData[]>([]);
   const { push } = useHistory();

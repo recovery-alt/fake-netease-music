@@ -3,7 +3,7 @@ import { DJProgram } from '@/types';
 import { classGenerator, formatMS, resizeImg } from '@/utils';
 import { LikeOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
-import React from 'react';
+import { FC } from 'react';
 
 type CardItem = Pick<
   DJProgram,
@@ -20,7 +20,7 @@ type CardItem = Pick<
 
 type Props = { item: CardItem; onItemClick?: (id: number) => void };
 
-const Card: React.FC<Props> = ({ item, onItemClick }) => {
+const Card: FC<Props> = ({ item, onItemClick }) => {
   const getClass = classGenerator('radio-list');
 
   return (

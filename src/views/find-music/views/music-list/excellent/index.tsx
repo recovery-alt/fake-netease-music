@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import { useEffect, useReducer, useRef, useState, FC } from 'react';
 import { classGenerator, resizeImg } from '@/utils';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import Img from '@/components/img';
@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { fetchAndSetCurrentTrack } from '@/store';
 import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 
-const Excellent: React.FC = () => {
+const Excellent: FC = () => {
   const getClass = classGenerator('excellent');
   const [tags, setTags] = useState<PlaylistHighqualityTags[]>([]);
   const cat = useParams<{ id: string }>().id;

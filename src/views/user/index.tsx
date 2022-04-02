@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, FC } from 'react';
 import './user.less';
 import Img from '@/components/img';
 import {
@@ -21,7 +21,7 @@ import { RootState } from '@/store';
 import Button from '@/components/button';
 import { DynamicPage } from '@/router';
 
-const User: React.FC = () => {
+const User: FC = () => {
   const getClass = classGenerator('user');
   const params = useParams<{ id: string }>();
   const { push } = useHistory();
@@ -93,7 +93,7 @@ const User: React.FC = () => {
       );
   }
 
-  const PlaylistItem: React.FC<{ title: string; playlist: DataType[] }> = ({ title, playlist }) => {
+  const PlaylistItem: FC<{ title: string; playlist: DataType[] }> = ({ title, playlist }) => {
     const [activeButton, setActiveButton] = useState<PageMode>('overview');
 
     return playlist.length > 0 ? (

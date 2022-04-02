@@ -1,5 +1,5 @@
 import { SearchLyric } from '@/types';
-import React from 'react';
+import { FC } from 'react';
 import { usePagination, Props } from '../hook';
 import { SearchType } from '@/enum';
 import { SongWithLyric } from '@/types';
@@ -8,7 +8,7 @@ import { formatMS } from '@/utils';
 import styles from './lyric.module.less';
 import Scrollbar from '@/components/scrollbar';
 
-const Lyric: React.FC<Props> = props => {
+const Lyric: FC<Props> = props => {
   const params = { ...props, currentType: SearchType.LYRIC };
   const { wrapEmpty } = usePagination<SearchLyric>(params);
   const columns: Column<SongWithLyric>[] = [

@@ -1,12 +1,12 @@
 import { UserProfile as UserType, SearchUser } from '@/types';
-import React from 'react';
+import { FC } from 'react';
 import List from '../list';
 import { usePagination, Props } from '../hook';
 import { SearchType } from '@/enum';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 
-const UserProfile: React.FC<Props> = props => {
+const UserProfile: FC<Props> = props => {
   const params = { ...props, currentType: SearchType.USER, limit: 20 };
   const { wrapEmpty } = usePagination<SearchUser>(params);
   const { push } = useHistory();

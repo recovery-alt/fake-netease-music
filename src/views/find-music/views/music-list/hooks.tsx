@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getTopPlaylist, getTopPlaylistHighquality, getAllMusicCategory } from '@/api';
 import { UserPlaylist, TopPlaylist, Subcategory } from '@/types';
 import { CardData } from '@/components/card';

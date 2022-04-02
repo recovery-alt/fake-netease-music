@@ -1,11 +1,11 @@
-import React from 'react';
+import { FC } from 'react';
 import noMusic from '@/assets/img/no-music.svg';
 import styles from './no-data.module.less';
 import { classGenerator } from '@/utils';
 
 type Props = { title?: string; subTitle?: string };
 
-const NoData: React.FC<Props> = ({ title, subTitle }) => {
+const NoData: FC<Props> = ({ title, subTitle }) => {
   const getClass = classGenerator('no-data', styles);
   return (
     <div className={getClass('wrapper')}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import Header from '../../header';
 import './video.less';
 import List, { ListItem } from '@/views/video/list';
@@ -7,7 +7,7 @@ import { classGenerator } from '@/utils';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 
-const Video: React.FC = () => {
+const Video: FC = () => {
   const getClass = classGenerator('collection-video');
   const [data, setData] = useState<ListItem[]>([]);
   const [count, setCount] = useState(0);

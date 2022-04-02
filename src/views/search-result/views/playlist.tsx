@@ -1,12 +1,12 @@
 import { UserPlaylist as UserPlaylist, SearchPlaylist } from '@/types';
-import React from 'react';
+
 import List from '../list';
 import { usePagination, Props } from '../hook';
 import { useHistory } from 'react-router-dom';
 import { SearchType } from '@/enum';
 import { DynamicPage } from '@/router';
 
-const Playlist: React.FC<Props> = props => {
+const Playlist: FC<Props> = props => {
   const params = { ...props, currentType: SearchType.PLAYLIST };
   const { wrapEmpty } = usePagination<SearchPlaylist>(params);
   const { push } = useHistory();

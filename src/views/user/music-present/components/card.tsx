@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from '../music-present.module.less';
 import Img from '@/components/img';
 import { Props as PresentProps } from '../';
@@ -12,7 +12,7 @@ import { DynamicPage } from '@/router';
 
 type Props = Omit<PresentProps, 'type'>;
 
-const Card: React.FC<Props> = ({ data, isAlbum }) => {
+const Card: FC<Props> = ({ data, isAlbum }) => {
   const getClass = classGenerator('card', styles);
   const dispatch = useDispatch();
   const { push } = useHistory();

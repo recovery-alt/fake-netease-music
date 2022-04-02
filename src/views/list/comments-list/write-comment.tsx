@@ -1,8 +1,8 @@
 import { classGenerator } from '@/utils';
-import React from 'react';
+import { FC } from 'react';
 import styles from './comments-list.module.less';
 
-const WriteComment: React.FC = () => {
+const WriteComment: FC = () => {
   const getClass = classGenerator('comments-list', styles);
   return (
     <>

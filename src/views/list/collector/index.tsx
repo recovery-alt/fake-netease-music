@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { getPlaylistSubscribers } from '@/api';
 import { Subscriber } from '@/types';
 import styles from './collector.module.less';
@@ -8,7 +8,7 @@ import { Pagination } from 'antd';
 
 type Props = { id: number };
 
-const Collector: React.FC<Props> = ({ id }) => {
+const Collector: FC<Props> = ({ id }) => {
   const getClass = classGenerator('collector', styles);
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [total, setTotal] = useState(0);

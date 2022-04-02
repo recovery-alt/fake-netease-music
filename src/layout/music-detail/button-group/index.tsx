@@ -1,12 +1,12 @@
 import { classGenerator } from '@/utils';
-import React from 'react';
+import { FC } from 'react';
 import styles from './button-group.module.less';
 
-type ButtonItem = { icon: React.FC; selected?: boolean; event?: () => void };
+type ButtonItem = { icon: FC; selected?: boolean; event?: () => void };
 
 type Props = { data: Array<ButtonItem> };
 
-const ButtonGroup: React.FC<Props> = ({ data }) => {
+const ButtonGroup: FC<Props> = ({ data }) => {
   const getClass = classGenerator('button-group', styles);
   return (
     <ul className={getClass()}>

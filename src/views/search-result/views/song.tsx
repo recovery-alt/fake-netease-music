@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './song.module.less';
 import Img from '@/components/img';
 import { RightOutlined } from '@ant-design/icons';
@@ -22,7 +22,7 @@ import { useDispatch } from 'react-redux';
 import { insertSong } from '@/store';
 import { DynamicPage } from '@/router';
 
-const Song: React.FC<Props> = props => {
+const Song: FC<Props> = props => {
   const getClass = classGenerator('song', styles);
   const { bestMatch, ...restProps } = props;
   const params = { ...restProps, currentType: SearchType.SONG, limit: 100 };

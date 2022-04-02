@@ -1,8 +1,8 @@
 import { Page } from './page';
 import { Data } from '@/types';
-import { lazy } from 'react';
+import { lazy, FC } from 'react';
 
-export type MenuConfig = { label: string; component: React.FC; path: string; exact?: boolean };
+export type MenuConfig = { label: string; component: FC; path: string; exact?: boolean };
 
 export const topMenuMap: Data<Array<MenuConfig>> = {
   'find-music': [

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import './mv.less';
 import { RightOutlined } from '@ant-design/icons';
 import Nav from '../../nav';
@@ -11,7 +11,7 @@ import { classGenerator } from '@/utils';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 
-const MV: React.FC = () => {
+const MV: FC = () => {
   const getClass = classGenerator('mv');
   const initAreaCategory = areaCategory.map(item => ({ name: item, id: item }));
   const [mvFirst, setMVFirst] = useState<ListItem[]>([]);

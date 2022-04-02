@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import styles from './mv.module.less';
 import Img from '@/components/img';
 import { getArtistMV } from '@/api';
@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 
 type Props = { id: number };
 
-const MV: React.FC<Props> = ({ id }) => {
+const MV: FC<Props> = ({ id }) => {
   const getClass = classGenerator('mv', styles);
   const [mvs, setMVs] = useState<MVType[]>([]);
   const { push } = useHistory();

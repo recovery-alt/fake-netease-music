@@ -1,11 +1,12 @@
 import Layout from '@/layout';
 import { topMenuMap, MenuConfig } from './menu';
-import React, { lazy } from 'react';
+import { lazy } from 'react';
 import { Page, DynamicPage } from './page';
+import { FC } from 'react';
 
 export type RouteConfig = {
   path: string;
-  component: React.FC<any>;
+  component: FC<any>;
   exact?: boolean;
   routes?: Array<RouteConfig>;
 };

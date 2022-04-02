@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './cover.module.less';
 import Img from '@/components/img';
 import classNames from 'classnames';
@@ -6,7 +6,7 @@ import { classGenerator, resizeImg } from '@/utils';
 
 type Props = { img: string; pause: boolean };
 
-const Cover: React.FC<Props> = ({ img, pause }) => {
+const Cover: FC<Props> = ({ img, pause }) => {
   const getClass = classGenerator('cover', styles);
   return (
     <>

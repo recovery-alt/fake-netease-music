@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { FC, Suspense } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import routes, { Page } from '@/router';
 import { Provider } from 'react-redux';
@@ -7,7 +7,7 @@ import { Spin } from 'antd';
 import Header from '@/layout/header';
 import { getClass } from '@/layout';
 
-const App: React.FC = () => (
+const App: FC = () => (
   <Provider store={store}>
     <BrowserRouter>
       <Header />

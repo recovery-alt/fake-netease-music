@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import './radio.less';
 import { getDJSublist } from '@/api';
 import List, { ListData } from '@/components/list';
@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 import { classGenerator } from '@/utils';
 
-const Radio: React.FC = () => {
+const Radio: FC = () => {
   const getClass = classGenerator('radio');
   const [total, setTotal] = useState(0);
   const [data, setData] = useState<ListData[]>([]);

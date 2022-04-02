@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import { FC, useEffect, useReducer, useRef, useState } from 'react';
 import './singer.less';
 import classNames from 'classnames';
 import { getArtistList } from '@/api';
@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 
-const Singer: React.FC = () => {
+const Singer: FC = () => {
   const getClass = classGenerator('music-singer');
 
   const [data, dataDispatch] = useReducer(dataReducer, []);

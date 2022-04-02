@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import type { RouteConfig } from '@/router';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import './layout.less';
@@ -12,12 +12,13 @@ import store, { setPause, setShowDetail } from '@/store';
 import { useDispatch } from 'react-redux';
 import json from 'json5';
 import { classGenerator } from '@/utils';
+import { FC } from 'react';
 
 type Props = { routes?: Array<RouteConfig> };
 
 export const getClass = classGenerator('main');
 
-const Layout: React.FC<Props> = ({ routes }) => {
+const Layout: FC<Props> = ({ routes }) => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
 

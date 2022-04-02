@@ -1,10 +1,10 @@
 import { classGenerator } from '@/utils';
-import React from 'react';
+import { FC } from 'react';
 import styles from './album-detail.module.less';
 
 type Props = { description: string };
 
-const AlbumDetail: React.FC<Props> = ({ description }) => {
+const AlbumDetail: FC<Props> = ({ description }) => {
   const getClass = classGenerator('album-detail', styles);
 
   return (

@@ -1,11 +1,12 @@
-import React, { FormEventHandler, forwardRef, useMemo, useState, MutableRefObject } from 'react';
+import { FormEventHandler, forwardRef, useMemo } from 'react';
 import styles from './input.module.less';
 import { CloseOutlined, SearchOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { classGenerator } from '@/utils';
+import { InputHTMLAttributes } from 'react';
 
 interface Props
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type' | 'value'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type' | 'value'> {
   type?: 'transparent' | 'normal';
   placeholder?: string;
   value?: string;
@@ -14,7 +15,7 @@ interface Props
 }
 
 const Input = forwardRef<HTMLInputElement, Props>(
-  ({ type = 'transparent', value = '', setValue, onInput, ...restProps }, ref) => {
+  ({ type = 'transparent', value = '', setValue, ...restProps }, ref) => {
     const getClass = classGenerator('input', styles);
     const showClear = useMemo(() => !!value, [value]);
 

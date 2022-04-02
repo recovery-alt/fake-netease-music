@@ -1,5 +1,5 @@
 import { classGenerator } from '@/utils';
-import React, { useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { FC, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import './zone.less';
 import Img from '@/components/img';
 import { useParams } from 'react-router-dom';
@@ -9,7 +9,7 @@ import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 
-const Zone: React.FC = () => {
+const Zone: FC = () => {
   const getClass = classGenerator('zone');
   const params = useParams<{ type: string }>();
   const type = useMemo(() => Number(params.type), [params.type]);

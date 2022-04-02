@@ -1,5 +1,5 @@
 import './play-video.less';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, FC } from 'react';
 import { LeftOutlined, PlusOutlined } from '@ant-design/icons';
 import Img from '@/components/img';
 import Button from '@/components/button';
@@ -41,7 +41,7 @@ type Detail = Pick<
   userId?: number;
 };
 
-const PlayVideo: React.FC = () => {
+const PlayVideo: FC = () => {
   const getClass = classGenerator('play-video');
   const params = useParams<{ id: string }>();
   const id = params.id;

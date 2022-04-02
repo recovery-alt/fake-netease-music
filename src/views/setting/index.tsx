@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import './setting.less';
 import {
   WechatOutlined,
@@ -11,7 +11,7 @@ import { classGenerator } from '@/utils';
 
 const getClass = classGenerator('setting');
 
-const Setting: React.FC = () => {
+const Setting: FC = () => {
   const bindAccount = [
     { icon: WeiboCircleOutlined, active: false },
     { icon: QqCircleFilled, active: false },

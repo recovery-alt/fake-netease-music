@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef, FC } from 'react';
 import styles from './music-list.module.less';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
@@ -16,7 +16,7 @@ type Props = {
   target: HTMLElement | null;
 };
 
-const MusicList: React.FC<Props> = ({ visible, setVisible, target }) => {
+const MusicList: FC<Props> = ({ visible, setVisible, target }) => {
   const getClass = classGenerator('music-list', styles);
   const dispatch = useDispatch();
   const currentTrack = useSelector((state: RootState) => state.currentTrack);

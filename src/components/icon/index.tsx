@@ -1,16 +1,16 @@
 import { classGenerator } from '@/utils';
 import classNames from 'classnames';
-import React from 'react';
+import { HTMLAttributes, FC } from 'react';
 import styles from './icon.module.less';
 
 export type IconSize = 'small' | 'medium' | 'big' | 'large' | 'giant';
 
-interface Props extends React.HTMLAttributes<HTMLSpanElement> {
+interface Props extends HTMLAttributes<HTMLSpanElement> {
   type?: 'pause' | 'play';
   size?: IconSize;
 }
 
-const Icon: React.FC<Props> = props => {
+const Icon: FC<Props> = props => {
   const getClass = classGenerator('icon', styles);
   const { type = 'play', size, className, ...restProps } = props;
   return (

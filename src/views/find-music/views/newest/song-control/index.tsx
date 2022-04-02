@@ -1,11 +1,11 @@
-import React from 'react';
+import { FC } from 'react';
 import { PlayCircleOutlined, FileAddOutlined } from '@ant-design/icons';
 import styles from './song-control.module.less';
 import { classGenerator } from '@/utils';
 
 type Props = { onPlayAll: () => void; onCollectAll: () => void };
 
-const SongControl: React.FC<Props> = ({ onPlayAll, onCollectAll }) => {
+const SongControl: FC<Props> = ({ onPlayAll, onCollectAll }) => {
   const getClass = classGenerator('song-control', styles);
   const songList = [
     { name: '播放全部', icon: PlayCircleOutlined },

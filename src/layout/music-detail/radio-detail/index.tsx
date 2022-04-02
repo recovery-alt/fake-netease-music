@@ -3,13 +3,13 @@ import { RootState } from '@/store';
 import { Music } from '@/types';
 import { classGenerator } from '@/utils';
 import { StarOutlined } from '@ant-design/icons';
-import React from 'react';
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './radio-detail.module.less';
 
 type Props = { music: Music };
 
-const RadioDetail: React.FC<Props> = ({ music }) => {
+const RadioDetail: FC<Props> = ({ music }) => {
   const getClass = classGenerator('radio-detail', styles);
   const djDetail = useSelector((state: RootState) => state.djDetail);
 

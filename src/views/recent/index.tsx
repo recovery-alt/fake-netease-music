@@ -1,11 +1,11 @@
-import React from 'react';
+import { FC } from 'react';
 import './recent.less';
 import Button from '@/components/button';
 import Table, { Column } from '@/components/table';
 import { Data } from '@/types';
 import { classGenerator } from '@/utils';
 
-const Recent: React.FC = () => {
+const Recent: FC = () => {
   const getClass = classGenerator('recent');
   const columns: Column[] = [
     { key: 'ordinal', title: '' },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, FC } from 'react';
 import styles from './album-list.module.less';
 import { TopAlbumParams, TopAlbum } from '@/types';
 import Img from '@/components/img';
@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 import { getTopAlbum } from '@/api';
 import { DynamicPage } from '@/router';
 
-const AlbumList: React.FC<TopAlbumParams> = ({ type, area }) => {
+const AlbumList: FC<TopAlbumParams> = ({ type, area }) => {
   const getClass = classGenerator('album-list', styles);
   const [data, setData] = useState<TopAlbum>();
   const dispatch = useDispatch();

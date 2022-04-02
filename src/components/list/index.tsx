@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './list.module.less';
 import Img from '@/components/img';
 import { classGenerator, resizeImg } from '@/utils';
@@ -7,7 +7,7 @@ export type ListData = { id: number; imgUrl: string; col2: string; col3?: string
 
 type Props = { data: ListData[]; onItemClick?: (id: number) => void };
 
-const List: React.FC<Props> = ({ data, onItemClick }) => {
+const List: FC<Props> = ({ data, onItemClick }) => {
   const getClass = classGenerator('list', styles);
 
   return (

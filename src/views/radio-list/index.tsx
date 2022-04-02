@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, FC } from 'react';
 import '../list/list.less';
 import './radio-list.less';
 import Img from '@/components/img';
@@ -23,7 +23,7 @@ import { setDJDetail } from '@/store';
 import classNames from 'classnames';
 import Card from './card';
 
-const RadioList: React.FC = () => {
+const RadioList: FC = () => {
   const getListClass = classGenerator('list');
   const getClass = classGenerator('radio-list');
   const params = useParams<{ id: string; type?: 'pay' }>();

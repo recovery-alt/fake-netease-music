@@ -1,12 +1,12 @@
 import { Album as AlbumType, SearchAlbum } from '@/types';
-import React from 'react';
+import { FC } from 'react';
 import List from '../list';
 import { usePagination, Props } from '../hook';
 import { SearchType } from '@/enum';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 
-const Album: React.FC<Props> = props => {
+const Album: FC<Props> = props => {
   const params = { ...props, currentType: SearchType.ALBUM };
   const { wrapEmpty } = usePagination<SearchAlbum>(params);
   const { push } = useHistory();

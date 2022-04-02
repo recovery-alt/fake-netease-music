@@ -1,10 +1,10 @@
 import { DJRadio, SearchRadio } from '@/types';
-import React from 'react';
+import { FC } from 'react';
 import List from '../list';
 import { usePagination, Props } from '../hook';
 import { SearchType } from '@/enum';
 
-const Radio: React.FC<Props> = props => {
+const Radio: FC<Props> = props => {
   const params = { ...props, currentType: SearchType.RADIO };
   const { wrapEmpty } = usePagination<SearchRadio>(params);
 

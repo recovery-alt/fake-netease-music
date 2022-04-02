@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState, useReducer, FormEventHandler } from 'react';
+import { useEffect, useMemo, useRef, useState, useReducer, FormEventHandler, FC } from 'react';
 import './cloud-music.less';
 import Button from '@/components/button';
 import Input from '@/components/input';
@@ -10,14 +10,14 @@ import { CommonColumns } from '@/config';
 import debounce from 'lodash/debounce';
 import InfinityScroll from '@/components/infinity-scroll';
 
-const CloudMusic: React.FC = () => {
+const CloudMusic: FC = () => {
   const getClass = classGenerator('cloud-music');
-  const footerRef = useRef<HTMLElement>(null);
+  // const footerRef = useRef<HTMLElement>(null);
   const [data, dataDispatch] = useReducer(dataReducer, []);
-  const [count, setCount] = useState(0);
+  const [, setCount] = useState(0);
   const [maxSize, setMaxSize] = useState(0);
   const [size, setSize] = useState(0);
-  const [keyword, setKeyword] = useState('');
+  const [, setKeyword] = useState('');
   const percent = useMemo(() => (maxSize === 0 ? 0 : (size * 100) / maxSize), [size, maxSize]);
   let offset = 0;
   const limit = 30;

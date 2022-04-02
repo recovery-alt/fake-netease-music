@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import './rank.less';
 import Official from './official';
 import { getToplist, getPlaylistDetail } from '@/api';
@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { classGenerator, resizeImg } from '@/utils';
 import { DynamicPage } from '@/router';
 
-const Rank: React.FC = () => {
+const Rank: FC = () => {
   const getClass = classGenerator('rank');
   const [toplist, setToplist] = useState<Toplist[]>([]);
   const [playlistDetail, SetPlaylistDetail] = useState<UserPlaylist[]>([]);

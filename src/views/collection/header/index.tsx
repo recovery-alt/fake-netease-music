@@ -1,11 +1,11 @@
-import React from 'react';
+import { FC, CSSProperties } from 'react';
 import Input from '@/components/input';
 import styles from './header.module.less';
 import { classGenerator } from '@/utils';
 
-type Props = { title: string; count: number; style?: React.CSSProperties };
+type Props = { title: string; count: number; style?: CSSProperties };
 
-const Header: React.FC<Props> = ({ title, count, style }) => {
+const Header: FC<Props> = ({ title, count, style }) => {
   const getClass = classGenerator('header', styles);
   return (
     <header className={getClass()} style={style}>

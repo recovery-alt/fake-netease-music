@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import './fm.less';
 import Cover from './cover';
 import Lyric from '@/layout/music-detail/lyric';
@@ -16,7 +16,7 @@ import { getCommentMusic } from '@/api';
 import WriteComment from '@/layout/music-detail/write-comment';
 import { classGenerator } from '@/utils';
 
-const FM: React.FC = () => {
+const FM: FC = () => {
   const getClass = classGenerator('fm');
   const dispatch = useDispatch<AppDispatch>();
   const [currentMusic, preMusic] = useSelector((state: RootState) => {

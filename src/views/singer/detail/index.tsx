@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import styles from './detail.module.less';
 import { getArtistDesc } from '@/api';
 import { ArtistDesc } from '@/types';
@@ -6,7 +6,7 @@ import { classGenerator } from '@/utils';
 
 type Props = { id: number };
 
-const Detail: React.FC<Props> = ({ id }) => {
+const Detail: FC<Props> = ({ id }) => {
   const getClass = classGenerator('detail', styles);
   const [artistDesc, setArtistDesc] = useState<ArtistDesc>();
 

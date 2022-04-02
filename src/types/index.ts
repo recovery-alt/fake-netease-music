@@ -1,3 +1,5 @@
+import type { ReactNode, CSSProperties, FormEventHandler } from 'react';
+
 export type Data<T = unknown> = Record<string, T>;
 
 export type ResponseData<T = Data> = T extends Data
@@ -9,10 +11,10 @@ export type ResponseData<T = Data> = T extends Data
 
 export interface AppProps {
   className?: string;
-  children?: React.ReactNode;
-  functionChildren?: (name: string) => React.ReactNode;
-  style?: React.CSSProperties;
-  onChange?: React.FormEventHandler<HTMLInputElement>;
+  children?: ReactNode;
+  functionChildren?: (name: string) => ReactNode;
+  style?: CSSProperties;
+  onChange?: FormEventHandler<HTMLInputElement>;
 }
 
 export type DataActionType = 'add' | 'reset';

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, FC } from 'react';
 import styles from '../music-present.module.less';
 import { getAlbum, getArtistTopSong, getPlaylistDetail } from '@/api';
 import { Track } from '@/types';
@@ -10,7 +10,7 @@ type Props = Omit<PresentProps, 'type'>;
 
 export const getClass = classGenerator('overview', styles);
 
-const Overview: React.FC<Props> = ({ id, data, isAlbum, myself }) => {
+const Overview: FC<Props> = ({ id, data, isAlbum, myself }) => {
   const [topSongs, setTopSongs] = useState<Track[]>([]);
   const footerRef = useRef<HTMLElement>(null);
   const [sliceData, setSliceData] = useState<DataType[]>([]);

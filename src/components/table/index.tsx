@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './table.module.less';
 import { Data } from '@/types';
 import NoData from '../no-data';
@@ -6,12 +6,13 @@ import get from 'lodash/get';
 import classNames from 'classnames';
 import { message } from 'antd';
 import { classGenerator } from '@/utils';
+import { ReactNode, FC } from 'react';
 
 export type Column<T = Data> = {
   width?: number;
   title?: string;
   key?: string;
-  render?: (item: T) => React.ReactNode;
+  render?: (item: T) => ReactNode;
   format?: (item: string) => string;
 };
 
@@ -24,7 +25,7 @@ type Props = {
   disableColumn?: string;
 };
 
-const Table: React.FC<Props> = ({
+const Table: FC<Props> = ({
   columns,
   data,
   disableColumn = 'disable',

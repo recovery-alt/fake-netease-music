@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import styles from './recommend.module.less';
 import Img from '@/components/img';
 import { getSimiPlaylist, getSimiSong } from '@/api';
@@ -7,7 +7,7 @@ import { classGenerator, resizeImg, wrapNumber } from '@/utils';
 
 type Props = { id: number };
 
-const Recommend: React.FC<Props> = ({ id }) => {
+const Recommend: FC<Props> = ({ id }) => {
   const getClass = classGenerator('recommend', styles);
   const [simiPlaylist, setSimiPlaylist] = useState<UserPlaylist[]>([]);
   const [simiSong, setSimiSong] = useState<Music[]>([]);

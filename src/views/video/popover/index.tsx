@@ -1,18 +1,18 @@
 import { classGenerator } from '@/utils';
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
+import { useRef, useState, ReactNode, FC } from 'react';
 import { useClickAway } from 'react-use';
 import styles from './popover.module.less';
 
 interface Props {
-  functionChildren?: (name: (show: boolean) => void) => React.ReactNode;
-  children?: React.ReactNode;
-  context: React.ReactNode;
+  functionChildren?: (name: (show: boolean) => void) => ReactNode;
+  children?: ReactNode;
+  context: ReactNode;
   placement?: 'left' | 'right';
   className?: string;
 }
 
-const Popover: React.FC<Props> = ({
+const Popover: FC<Props> = ({
   functionChildren,
   children,
   context,

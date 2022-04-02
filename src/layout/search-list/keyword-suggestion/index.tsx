@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import styles from './keyword-suggestion.module.less';
 import { getSearchSuggest } from '@/api';
 import {
@@ -19,7 +19,7 @@ import { useDebounce } from 'react-use';
 
 type Props = { setVisible: (visible: boolean) => void };
 
-const KeywordSuggestion: React.FC<Props> = ({ setVisible }) => {
+const KeywordSuggestion: FC<Props> = ({ setVisible }) => {
   const getClass = classGenerator('keyword-suggestion', styles);
   const keywords = useSelector((state: RootState) => state.controller.keywords);
   const [data, setData] = useState<SearchSuggest>({});

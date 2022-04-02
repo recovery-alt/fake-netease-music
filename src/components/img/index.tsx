@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, ReactEventHandler, useMemo } from 'react';
+import { useRef, useEffect, useState, ReactEventHandler, useMemo, FC } from 'react';
 import styles from './img.module.less';
 import classNames from 'classnames';
 import { AppProps } from '@/types';
@@ -22,7 +22,7 @@ interface Props extends AppProps {
   onIconClick?: ReactEventHandler<HTMLSpanElement>;
 }
 
-const Img: React.FC<Props> = ({
+const Img: FC<Props> = ({
   alt = '',
   banLoading = false,
   style,

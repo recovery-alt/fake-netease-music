@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState, FC } from 'react';
 import styles from './video.module.less';
 import Icon from '@/components/icon';
 import { classGenerator, toHttps } from '@/utils';
 
 type Props = { src?: string };
 
-const Video: React.FC<Props> = ({ src }) => {
+const Video: FC<Props> = ({ src }) => {
   const getClass = classGenerator('video', styles);
   const [pause, setPause] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);

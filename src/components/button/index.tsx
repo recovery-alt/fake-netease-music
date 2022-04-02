@@ -1,14 +1,14 @@
-import React from 'react';
+import { FC, ButtonHTMLAttributes } from 'react';
 import styles from './button.module.less';
 import { PlayCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { classGenerator } from '@/utils';
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   compose?: boolean;
 }
 
-const Button: React.FC<Props> = props => {
+const Button: FC<Props> = props => {
   const getClass = classGenerator('button', styles);
   const { compose, children, className, ...restProps } = props;
 

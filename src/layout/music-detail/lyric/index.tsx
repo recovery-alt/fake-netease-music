@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, FC } from 'react';
 import styles from './lyric.module.less';
 import Scrollbar from '@/components/scrollbar';
 import { QuestionOutlined } from '@ant-design/icons';
@@ -13,7 +13,7 @@ import { DynamicPage } from '@/router';
 
 type Props = { music: Music };
 
-const Lyric: React.FC<Props> = ({ music }) => {
+const Lyric: FC<Props> = ({ music }) => {
   const getClass = classGenerator('lyric', styles);
   type LyricItem = { timestamp: number[]; value: string };
   const [lyrics, setLyrics] = useState<LyricItem[]>([]);

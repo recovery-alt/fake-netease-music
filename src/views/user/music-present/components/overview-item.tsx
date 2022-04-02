@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, FC } from 'react';
 import { PlayCircleOutlined, FileAddOutlined } from '@ant-design/icons';
 import Img from '@/components/img';
 import top50 from '@/assets/img/top50.png';
@@ -22,13 +22,7 @@ export type Props = {
   data: Array<Track>;
 };
 
-const OverviewItem: React.FC<Props> = ({
-  id,
-  title = '热门50首',
-  imgUrl = top50,
-  data,
-  isAlbum,
-}) => {
+const OverviewItem: FC<Props> = ({ id, title = '热门50首', imgUrl = top50, data, isAlbum }) => {
   const dispatch = useDispatch();
   const { push } = useHistory();
   const [previewAll, setPreviewAll] = useState(false);

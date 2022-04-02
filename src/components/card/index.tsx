@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './card.module.less';
 import Img, { IconOptions } from '@/components/img';
 import classNames from 'classnames';
@@ -14,7 +14,7 @@ type Props = {
   onItemIconClick?: (id: number) => void;
 };
 
-const Card: React.FC<Props> = ({ type = 'square', data, icon, onItemClick, onItemIconClick }) => {
+const Card: FC<Props> = ({ type = 'square', data, icon, onItemClick, onItemIconClick }) => {
   const getClass = classGenerator('card', styles);
   return (
     <div className={getClass()}>

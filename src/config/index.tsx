@@ -1,4 +1,3 @@
-import React from 'react';
 import { AlbumArea, Track } from '@/types';
 import { Column } from '@/components/table';
 import { formatMS } from '@/utils';

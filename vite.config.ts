@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
 import eslintPlugin from 'vite-plugin-eslint';
 import styleImport from 'vite-plugin-style-import';
 import { resolve } from 'path';
@@ -42,7 +42,7 @@ export default defineConfig({
   },
   resolve: { alias: { '@': resolve(__dirname, 'src') } },
   plugins: [
-    reactRefresh(),
+    react(),
     eslintPlugin(),
     styleImport({
       libs: [

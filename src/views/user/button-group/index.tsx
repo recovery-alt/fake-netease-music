@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './button-group.module.less';
 import { UngroupOutlined, AlignCenterOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
@@ -7,9 +7,9 @@ import { classGenerator } from '@/utils';
 
 type Props = { activeButton: PageMode; setActiveButton: (button: PageMode) => void };
 
-const Album: React.FC<Props> = ({ activeButton, setActiveButton }) => {
+const Album: FC<Props> = ({ activeButton, setActiveButton }) => {
   const getClass = classGenerator('button-group', styles);
-  const data: Array<{ key: PageMode; component: React.FC }> = [
+  const data: Array<{ key: PageMode; component: FC }> = [
     { key: 'list', component: UngroupOutlined },
     { key: 'card', component: AlignCenterOutlined },
     { key: 'overview', component: UnorderedListOutlined },

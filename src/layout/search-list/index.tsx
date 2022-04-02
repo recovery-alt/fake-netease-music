@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef, FC } from 'react';
 import styles from './search-list.module.less';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
@@ -15,7 +15,7 @@ type Props = {
   inputRef: HTMLInputElement | null;
 };
 
-const SearchList: React.FC<Props> = ({ visible, setVisible, inputRef }) => {
+const SearchList: FC<Props> = ({ visible, setVisible, inputRef }) => {
   const getClass = classGenerator('search-list', styles);
   const ref = useRef<HTMLDivElement>(null);
   const keywords = useSelector((state: RootState) => state.controller.keywords);
