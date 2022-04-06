@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import eslintPlugin from 'vite-plugin-eslint';
-import styleImport from 'vite-plugin-style-import';
+import { createStyleImportPlugin, AntdResolve } from 'vite-plugin-style-import';
 import { resolve } from 'path';
 
 export default defineConfig({
@@ -44,7 +44,8 @@ export default defineConfig({
   plugins: [
     react(),
     eslintPlugin(),
-    styleImport({
+    createStyleImportPlugin({
+      resolves: [AntdResolve()],
       libs: [
         {
           libraryName: 'antd',
