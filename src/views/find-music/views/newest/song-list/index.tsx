@@ -20,11 +20,19 @@ const SongList = forwardRef<Song[], Props>(({ type }, ref) => {
   }
 
   useEffect(() => {
-    (async () => {
-      if (type === undefined) return;
+    if (type === undefined) return;
+    let doCancel = false;
+
+    async function setTopSong() {
       const res = await getTopSong(type);
-      setSongs(res.data);
-    })();
+      doCancel || setSongs(res.data);
+    }
+
+    setTopSong();
+
+    return () => {
+      doCancel = true;
+    };
   }, [type]);
 
   useImperativeHandle(ref, () => songs, [songs]);

@@ -41,19 +41,11 @@ const Zone: FC = () => {
 
   useEffect(() => {
     loadDJCatelist();
-    loadDJRadioHot();
   }, []);
 
   return (
     <div className={getClass()}>
       <h2 className={getClass('title')}>{title}</h2>
-      {/* <nav className={getClass('nav')}>
-        {Array(5)
-          .fill(0)
-          .map(() => (
-            <li className={classNames(getClass('nav-item'), { '--active': true })}>情感</li>
-          ))}
-      </nav> */}
       <section className={getClass('cards')}>
         {djRadioHot.map(item => (
           <div key={item.id} className={getClass('card')}>

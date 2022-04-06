@@ -18,6 +18,7 @@ const Singer: FC = () => {
   const [selected, setSelected] = useState<Selected>([-1, -1, undefined]);
   const setMore = useRef<SetMore>(null);
   const { push } = useHistory();
+  const doCancel = useRef(false);
   const limit = 20;
   let offset = 0;
 
@@ -76,7 +77,11 @@ const Singer: FC = () => {
   }
 
   useEffect(() => {
-    loadArtistList();
+    doCancel.current && loadArtistList();
+
+    return () => {
+      doCancel.current = true;
+    };
   }, [selected]);
 
   return (
