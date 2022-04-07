@@ -1,6 +1,6 @@
 module.exports = {
   plugins: {
-    'postcss-px-to-viewport': {
+    '@tcstory/postcss-px-to-viewport': {
       viewportWidth: 1000,
       viewportHeight: 680,
       unitPrecision: 3,
