@@ -15,6 +15,7 @@ import { SearchType } from '@/enum';
 import { getSearchMultimatch } from '@/api';
 import { parse } from 'qs';
 import { classGenerator } from '@/utils';
+import { clearRequests } from '@/api/api';
 
 export const getClass = classGenerator('search-result');
 
@@ -92,11 +93,15 @@ const SearchResult: FC = () => {
     if (index > -1) setCurrentIndex(index);
   }
 
+  async function loadBestMatch() {
+    const res = await getSearchMultimatch(keywords);
+    setBestMatch(res.result);
+  }
+
   useEffect(() => {
-    (async () => {
-      const res = await getSearchMultimatch(keywords);
-      setBestMatch(res.result);
-    })();
+    loadBestMatch();
+
+    return clearRequests;
   }, [keywords]);
 
   return (

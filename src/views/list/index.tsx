@@ -22,6 +22,7 @@ import Img from '@/components/img';
 import classNames from 'classnames';
 import { CommonColumns } from '@/config';
 import { DynamicPage } from '@/router';
+import { clearRequests } from '@/api/api';
 
 type CurrentInfo = Partial<UserPlaylist & { artistName: string }>;
 
@@ -125,6 +126,7 @@ const List: FC = () => {
   useEffect(() => {
     if (Number.isNaN(id)) return;
     isAlbum ? loadAlbum() : loadPlaylist();
+    return clearRequests;
   }, [id, isAlbum]);
 
   return (

@@ -5,6 +5,7 @@ import styles from './collector.module.less';
 import Img from '@/components/img';
 import { classGenerator, resizeImg } from '@/utils';
 import { Pagination } from 'antd';
+import { clearRequests } from '@/api/api';
 
 type Props = { id: number };
 
@@ -24,6 +25,7 @@ const Collector: FC<Props> = ({ id }) => {
 
   useEffect(() => {
     if (id) loadPlaylistSubscribers();
+    return clearRequests;
   }, [id]);
 
   return subscribers.length > 0 ? (

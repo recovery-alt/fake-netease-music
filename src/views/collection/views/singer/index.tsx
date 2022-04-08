@@ -12,18 +12,20 @@ const Singer: FC = () => {
   const [data, setData] = useState<ListData[]>([]);
   const { push } = useHistory();
 
-  useEffect(() => {
-    (async () => {
-      const res = await getArtistSublist();
-      const result = res.data.map(item => {
-        const { id, picUrl: imgUrl, name: col2, mvSize, albumSize } = item;
-        const col3 = `专辑：${albumSize}`;
-        const col4 = `MV：${mvSize}`;
-        return { id, imgUrl, col2, col3, col4 };
-      });
+  async function loadData() {
+    const res = await getArtistSublist();
+    const result = res.data.map(item => {
+      const { id, picUrl: imgUrl, name: col2, mvSize, albumSize } = item;
+      const col3 = `专辑：${albumSize}`;
+      const col4 = `MV：${mvSize}`;
+      return { id, imgUrl, col2, col3, col4 };
+    });
 
-      setData(result);
-    })();
+    setData(result);
+  }
+
+  useEffect(() => {
+    loadData();
   }, []);
 
   return (

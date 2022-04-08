@@ -11,6 +11,7 @@ import { PageMode } from '@/views/user/music-present';
 import { classGenerator, resizeImg } from '@/utils';
 import Button from '@/components/button';
 import { DynamicPage } from '@/router';
+import { clearRequests } from '@/api/api';
 
 const Album = lazy(() => import('@/views/user/music-present'));
 const MV = lazy(() => import('./mv'));
@@ -51,6 +52,8 @@ const Singer: FC = () => {
     if (Number.isNaN(id)) return;
     loadArtistDetail();
     loadArtistAlbum();
+
+    return clearRequests;
   }, [id]);
 
   return (

@@ -10,6 +10,7 @@ import { setKeywords } from '@/store';
 import { stringify } from 'qs';
 import { Page } from '@/router';
 import { classGenerator } from '@/utils';
+import { clearRequests } from '@/api/api';
 
 type Props = { visible: boolean; setVisible: (visible: boolean) => void };
 
@@ -31,15 +32,18 @@ const EmptySuggestion: FC<Props> = ({ visible, setVisible }) => {
     push(`${Page.searchResult}?${query}`);
   }
 
+  async function loadSearchHot() {
+    const res = await getSearchHotDetail();
+    setSearchHot(res.data);
+  }
+
   useEffect(() => {
     if (!visible) return;
     const searchHistory = localStorage.getItem('search-history');
     if (searchHistory) setSearchHistory(json.parse<string[]>(searchHistory));
+    loadSearchHot();
 
-    (async () => {
-      const res = await getSearchHotDetail();
-      setSearchHot(res.data);
-    })();
+    return clearRequests;
   }, [visible]);
 
   return (

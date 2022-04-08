@@ -18,17 +18,19 @@ const Collection: FC = () => {
     push(DynamicPage.list(id, 'album'));
   }
 
+  async function loadAlbumSublist() {
+    const res = await getAlbumSublist();
+    const result = res.data.map(item => {
+      const { id, picUrl: imgUrl, name: col2, artists, size } = item;
+      const col3 = artists.reduce((acc, val) => `${acc}/${val.name}`, '').slice(1);
+      const col4 = `${size}首`;
+      return { id, imgUrl, col2, col3, col4 };
+    });
+    setAlbumSublist(result);
+  }
+
   useEffect(() => {
-    (async () => {
-      const res = await getAlbumSublist();
-      const result = res.data.map(item => {
-        const { id, picUrl: imgUrl, name: col2, artists, size } = item;
-        const col3 = artists.reduce((acc, val) => `${acc}/${val.name}`, '').slice(1);
-        const col4 = `${size}首`;
-        return { id, imgUrl, col2, col3, col4 };
-      });
-      setAlbumSublist(result);
-    })();
+    loadAlbumSublist();
   }, []);
 
   return (

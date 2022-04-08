@@ -4,6 +4,7 @@ import { Pagination } from 'antd';
 import styles from './comment-group.module.less';
 import { Comment, CommentData } from '@/types';
 import { classGenerator } from '@/utils';
+import { clearRequests } from '@/api/api';
 
 type Data = CommentData & {
   code: number;
@@ -33,6 +34,7 @@ const CommentGroup: FC<Props> = ({ id, functionChildren, api }) => {
 
   useEffect(() => {
     id && loadData(id);
+    return clearRequests;
   }, [id]);
 
   return (

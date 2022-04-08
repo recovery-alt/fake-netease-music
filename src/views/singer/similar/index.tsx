@@ -6,6 +6,7 @@ import { Artist } from '@/types';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 import { classGenerator } from '@/utils';
+import { clearRequests } from '@/api/api';
 
 type Props = { id: number };
 
@@ -21,6 +22,8 @@ const Similar: FC<Props> = ({ id }) => {
 
   useEffect(() => {
     loadSimiArtist();
+
+    return clearRequests;
   }, [id]);
 
   return (

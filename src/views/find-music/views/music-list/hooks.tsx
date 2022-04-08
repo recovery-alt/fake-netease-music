@@ -3,6 +3,7 @@ import { getTopPlaylist, getTopPlaylistHighquality, getAllMusicCategory } from '
 import { UserPlaylist, TopPlaylist, Subcategory } from '@/types';
 import { CardData } from '@/components/card';
 import { RightOutlined } from '@ant-design/icons';
+import { clearRequests } from '@/api/api';
 
 export const useTopPlaylist = () => {
   const [topPlaylist, setTopPlaylist] = useState<CardData[]>([]);
@@ -34,6 +35,8 @@ export const useTopPlaylist = () => {
     setCurrent(1);
     loadTopPlaylist();
     loadTopPlaylistHighquality();
+
+    return clearRequests;
   }, [cat]);
 
   return {
@@ -58,22 +61,24 @@ export function usePopover(cat: string) {
     </>
   );
 
-  useEffect(() => {
-    (async () => {
-      const res = await getAllMusicCategory();
-      const allMusicCategory = Object.keys(res.categories).map(key => {
-        const item = res.categories[key];
-        const data: Subcategory[] = [];
-        const index = Number(key);
-        const category: MusicCategoryType = { data, name: item };
-        res.sub.forEach(sub => {
-          if (sub.category === index) category.data.push(sub);
-        });
-
-        return category;
+  async function loadAllMusicCategory() {
+    const res = await getAllMusicCategory();
+    const allMusicCategory = Object.keys(res.categories).map(key => {
+      const item = res.categories[key];
+      const data: Subcategory[] = [];
+      const index = Number(key);
+      const category: MusicCategoryType = { data, name: item };
+      res.sub.forEach(sub => {
+        if (sub.category === index) category.data.push(sub);
       });
-      setAllMusicCategory(allMusicCategory);
-    })();
+
+      return category;
+    });
+    setAllMusicCategory(allMusicCategory);
+  }
+
+  useEffect(() => {
+    loadAllMusicCategory();
   }, []);
 
   return { buttonContext, allMusicCategory };

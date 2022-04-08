@@ -149,10 +149,8 @@ const List: FC = () => {
   }
 
   useEffect(() => {
-    (async () => {
-      const index = findIndex();
-      setSelected(index);
-    })();
+    const index = findIndex();
+    setSelected(index);
   }, [pathname]);
 
   useEffect(() => {

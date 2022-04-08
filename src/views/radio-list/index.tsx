@@ -22,6 +22,7 @@ import { insertSong, RootState } from '@/store';
 import { setDJDetail } from '@/store';
 import classNames from 'classnames';
 import Card from './card';
+import { clearRequests } from '@/api/api';
 
 const RadioList: FC = () => {
   const getListClass = classGenerator('list');
@@ -109,6 +110,8 @@ const RadioList: FC = () => {
     if (Number.isNaN(id)) return;
     loadDJDetail();
     loadDJProgram();
+
+    return clearRequests;
   }, [id]);
 
   return (

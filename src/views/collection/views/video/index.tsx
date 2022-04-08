@@ -13,19 +13,21 @@ const Video: FC = () => {
   const [count, setCount] = useState(0);
   const { push } = useHistory();
 
+  async function loadData() {
+    const res = await getMVSublist();
+    setCount(res.count);
+    const result = res.data.map(item => {
+      const { vid: id, coverUrl: imgUrl, title: description, creator } = item;
+      const author = creator.reduce((acc, val) => `${acc}/${val.userName}`, '').slice(1);
+
+      return { id, imgUrl, description, author };
+    });
+
+    setData(result);
+  }
+
   useEffect(() => {
-    (async () => {
-      const res = await getMVSublist();
-      setCount(res.count);
-      const result = res.data.map(item => {
-        const { vid: id, coverUrl: imgUrl, title: description, creator } = item;
-        const author = creator.reduce((acc, val) => `${acc}/${val.userName}`, '').slice(1);
-
-        return { id, imgUrl, description, author };
-      });
-
-      setData(result);
-    })();
+    loadData();
   }, []);
 
   return (

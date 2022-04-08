@@ -22,6 +22,7 @@ import MusicDetail from '../music-detail';
 import MusicList from '../music-list';
 import { useHistory } from 'react-router-dom';
 import { Page } from '@/router';
+import { clearRequests } from '@/api/api';
 
 const List: FC = () => {
   const getClass = classGenerator('footer', styles);
@@ -87,6 +88,7 @@ const List: FC = () => {
 
   useEffect(() => {
     if (currentTrack?.id) dispatch(setSong(currentTrack.id));
+    return clearRequests;
   }, [currentTrack?.id]);
 
   return (

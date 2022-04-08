@@ -5,6 +5,7 @@ import { Track } from '@/types';
 import OverviewItem from './overview-item';
 import { Props as PresentProps, DataType } from '../';
 import { classGenerator } from '@/utils';
+import { clearRequests } from '@/api/api';
 
 type Props = Omit<PresentProps, 'type'>;
 
@@ -46,6 +47,8 @@ const Overview: FC<Props> = ({ id, data, isAlbum, myself }) => {
     } else {
       loadPlaylistSongs(index);
     }
+
+    return clearRequests;
   }, [id]);
 
   useEffect(() => {

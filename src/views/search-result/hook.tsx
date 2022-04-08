@@ -4,6 +4,7 @@ import { getSearch } from '@/api';
 import { SearchType } from '@/enum';
 import { Pagination } from 'antd';
 import { getClass } from '.';
+import { clearRequests } from '@/api/api';
 
 export type Props = {
   type: SearchType;
@@ -85,6 +86,7 @@ export const usePagination = <T,>({
 
   useEffect(() => {
     if (type === currentType) loadData();
+    return clearRequests;
   }, [type, keywords]);
 
   return { wrapEmpty };

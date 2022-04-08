@@ -13,7 +13,7 @@ import { DynamicPage } from '@/router';
 const Rank: FC = () => {
   const getClass = classGenerator('rank');
   const [toplist, setToplist] = useState<Toplist[]>([]);
-  const [playlistDetail, SetPlaylistDetail] = useState<UserPlaylist[]>([]);
+  const [playlistDetail, setPlaylistDetail] = useState<UserPlaylist[]>([]);
   const dispatch = useDispatch();
   const { push } = useHistory();
 
@@ -21,19 +21,21 @@ const Rank: FC = () => {
     dispatch(setCurrentTrack({ current, tracks, fm: [] }));
   }
 
+  async function loadPlaylistDetail() {
+    const res = await getToplist();
+    setToplist(res.list);
+    const list = res.list.slice(0, 5);
+    const playlist: UserPlaylist[] = [];
+    for (const item of list) {
+      const playlistDetail = await getPlaylistDetail(item.id);
+      const { tracks, ...rest } = playlistDetail.playlist;
+      playlist.push({ ...rest, tracks: tracks.slice(0, 5) });
+    }
+    setPlaylistDetail(playlist);
+  }
+
   useEffect(() => {
-    (async () => {
-      const res = await getToplist();
-      setToplist(res.list);
-      const list = res.list.slice(0, 5);
-      const playlist: UserPlaylist[] = [];
-      for (const item of list) {
-        const playlistDetail = await getPlaylistDetail(item.id);
-        const { tracks, ...rest } = playlistDetail.playlist;
-        playlist.push({ ...rest, tracks: tracks.slice(0, 5) });
-      }
-      SetPlaylistDetail(playlist);
-    })();
+    loadPlaylistDetail();
   }, []);
 
   return (

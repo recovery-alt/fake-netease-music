@@ -83,11 +83,13 @@ const MusicList: FC = () => {
     );
   }
 
+  async function loadMusicCategory() {
+    const res = await getMusicCategory();
+    setMusicCategory(res.tags);
+  }
+
   useEffect(() => {
-    (async () => {
-      const res = await getMusicCategory();
-      setMusicCategory(res.tags);
-    })();
+    loadMusicCategory();
   }, []);
 
   return (

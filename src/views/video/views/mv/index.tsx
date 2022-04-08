@@ -10,6 +10,7 @@ import Img from '@/components/img';
 import { classGenerator } from '@/utils';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
+import { clearRequests } from '@/api/api';
 
 const MV: FC = () => {
   const getClass = classGenerator('mv');
@@ -68,10 +69,14 @@ const MV: FC = () => {
 
   useEffect(() => {
     loadMVFirst();
+
+    return clearRequests;
   }, [mvFirstId]);
 
   useEffect(() => {
     loadTopMV();
+
+    return clearRequests;
   }, [topMVId]);
 
   return (

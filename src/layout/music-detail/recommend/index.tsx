@@ -4,6 +4,7 @@ import Img from '@/components/img';
 import { getSimiPlaylist, getSimiSong } from '@/api';
 import { Music, UserPlaylist } from '@/types';
 import { classGenerator, resizeImg, wrapNumber } from '@/utils';
+import { clearRequests } from '@/api/api';
 
 type Props = { id: number };
 
@@ -12,16 +13,21 @@ const Recommend: FC<Props> = ({ id }) => {
   const [simiPlaylist, setSimiPlaylist] = useState<UserPlaylist[]>([]);
   const [simiSong, setSimiSong] = useState<Music[]>([]);
 
-  useEffect(() => {
-    (async () => {
-      const res = await getSimiPlaylist(id);
-      setSimiPlaylist(res.playlists);
-    })();
+  async function loadSimiPlaylist() {
+    const res = await getSimiPlaylist(id);
+    setSimiPlaylist(res.playlists);
+  }
 
-    (async () => {
-      const res = await getSimiSong(id);
-      setSimiSong(res.songs);
-    })();
+  async function loadSimiSong() {
+    const res = await getSimiSong(id);
+    setSimiSong(res.songs);
+  }
+
+  useEffect(() => {
+    loadSimiPlaylist();
+    loadSimiSong();
+
+    return clearRequests;
   }, [id]);
   return (
     <div className={getClass()}>

@@ -23,6 +23,7 @@ import CommentGroup from '@/components/comment-group';
 import Video from './video';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
+import { clearRequests } from '@/api/api';
 
 type Detail = Pick<
   VideoDetail,
@@ -150,6 +151,8 @@ const PlayVideo: FC = () => {
     }
 
     loadRelatedAllvideo();
+
+    return clearRequests;
   }, [id]);
 
   return (

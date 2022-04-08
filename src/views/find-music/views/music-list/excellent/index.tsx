@@ -13,6 +13,7 @@ import { DynamicPage } from '@/router';
 import { useDispatch } from 'react-redux';
 import { fetchAndSetCurrentTrack } from '@/store';
 import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
+import { clearRequests } from '@/api/api';
 
 const Excellent: FC = () => {
   const getClass = classGenerator('excellent');
@@ -52,6 +53,7 @@ const Excellent: FC = () => {
   useEffect(() => {
     if (firstUpdate.current) firstUpdate.current = false;
     else loadTopPlaylistHighquality();
+    return clearRequests;
   }, [cat]);
 
   return (

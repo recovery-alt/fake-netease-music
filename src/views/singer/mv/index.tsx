@@ -6,6 +6,7 @@ import { MV as MVType } from '@/types';
 import { classGenerator, resizeImg } from '@/utils';
 import { DynamicPage } from '@/router';
 import { useHistory } from 'react-router-dom';
+import { clearRequests } from '@/api/api';
 
 type Props = { id: number };
 
@@ -25,6 +26,8 @@ const MV: FC<Props> = ({ id }) => {
 
   useEffect(() => {
     loadArtistMV();
+
+    return clearRequests;
   }, [id]);
 
   return (

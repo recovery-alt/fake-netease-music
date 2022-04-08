@@ -5,6 +5,7 @@ import { getDJSubscriber } from '@/api';
 import type { Subscriber as SubscriberType } from '@/types';
 import Img from '@/components/img';
 import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
+import { clearRequests } from '@/api/api';
 
 type Props = { id: number };
 
@@ -30,6 +31,8 @@ const Subscriber: FC<Props> = ({ id }) => {
 
   useEffect(() => {
     loadSubscribers();
+
+    return clearRequests;
   }, [id]);
 
   return (

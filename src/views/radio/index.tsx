@@ -16,20 +16,22 @@ const Radio: FC = () => {
     push(DynamicPage.radioList(id));
   }
 
-  useEffect(() => {
-    (async () => {
-      const res = await getDJSublist();
-      setTotal(res.count);
-      const result = res.djRadios.map(item => {
-        const { id, dj, picUrl: imgUrl, programCount, name: col2 } = item;
-        const { nickname } = dj;
-        const col3 = `by ${nickname}`;
-        const col4 = `节目${programCount}`;
-        return { id, col2, imgUrl, col3, col4 };
-      });
+  async function loadData() {
+    const res = await getDJSublist();
+    setTotal(res.count);
+    const result = res.djRadios.map(item => {
+      const { id, dj, picUrl: imgUrl, programCount, name: col2 } = item;
+      const { nickname } = dj;
+      const col3 = `by ${nickname}`;
+      const col4 = `节目${programCount}`;
+      return { id, col2, imgUrl, col3, col4 };
+    });
 
-      setData(result);
-    })();
+    setData(result);
+  }
+
+  useEffect(() => {
+    loadData();
   }, []);
 
   return (

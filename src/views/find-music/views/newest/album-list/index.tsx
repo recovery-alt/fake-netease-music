@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getTopAlbum } from '@/api';
 import { DynamicPage } from '@/router';
+import { clearRequests } from '@/api/api';
 
 const AlbumList: FC<TopAlbumParams> = ({ type, area }) => {
   const getClass = classGenerator('album-list', styles);
@@ -17,11 +18,15 @@ const AlbumList: FC<TopAlbumParams> = ({ type, area }) => {
   const albums = useMemo(() => data?.weekData || data?.monthData, [data]);
   const isWeek = useMemo(() => !!data?.weekData?.length, [data]);
 
+  async function loadData() {
+    const res = await getTopAlbum({ area, type, limit: 20 });
+    setData(res);
+  }
+
   useEffect(() => {
-    (async () => {
-      const res = await getTopAlbum({ area, type, limit: 20 });
-      setData(res);
-    })();
+    loadData();
+
+    return clearRequests;
   }, [area, type]);
 
   return (

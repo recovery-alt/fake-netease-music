@@ -3,6 +3,7 @@ import styles from './detail.module.less';
 import { getArtistDesc } from '@/api';
 import { ArtistDesc } from '@/types';
 import { classGenerator } from '@/utils';
+import { clearRequests } from '@/api/api';
 
 type Props = { id: number };
 
@@ -17,6 +18,8 @@ const Detail: FC<Props> = ({ id }) => {
 
   useEffect(() => {
     loadArtistDesc();
+
+    return clearRequests;
   }, [id]);
 
   return (

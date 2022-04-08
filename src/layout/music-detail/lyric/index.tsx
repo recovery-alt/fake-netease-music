@@ -10,6 +10,7 @@ import { RootState } from '@/store';
 import classNames from 'classnames';
 import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
+import { clearRequests } from '@/api/api';
 
 type Props = { music: Music };
 
@@ -63,6 +64,8 @@ const Lyric: FC<Props> = ({ music }) => {
       const { lrc, nolyric } = res;
       setLyrics(nolyric ? [] : transLyric2Arr(lrc.lyric));
     });
+
+    return clearRequests;
   }, [music?.id]);
 
   useEffect(() => {
