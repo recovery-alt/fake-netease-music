@@ -52,7 +52,7 @@ const CloudMusic: FC = () => {
       bigInt /= n1024 ** BigInt(3);
       return Number(bigInt) / 10;
     } catch (error) {
-      console.error(error);
+      throw new Error(error as string);
       return 0;
     }
   }
