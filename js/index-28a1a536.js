@@ -1,1 +1,0 @@
-import{au as u}from"./index-d45ba440.js";import{j as o}from"./react-612bda17.js";import"./react-router-dom-7eed272f.js";import"./vendor-7f089e7e.js";import"./lodash-87ac67d6.js";import"./react-redux-aeaeff1e.js";const p=()=>o(u,{subTitle:"\u5F00\u53D1\u4E2D\uFF0C\u656C\u8BF7\u671F\u5F85\uFF5E"});export{p as default};
