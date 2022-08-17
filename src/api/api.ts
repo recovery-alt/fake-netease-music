@@ -13,7 +13,7 @@ const apiErrorHandler = (msg = '接口异常，请稍后重试～') => {
   return Promise.reject();
 };
 
-const baseURL = 'http://47.100.62.108:4000/';
+const baseURL = 'http://localhost:4000/';
 const penddingRequests: Canceler[] = [];
 
 export const clearRequests = () => {

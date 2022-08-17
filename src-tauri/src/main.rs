@@ -22,7 +22,7 @@ fn main() {
 
       win.on_window_event(|e| {
         if let WindowEvent::CloseRequested { api, .. } = e {
-          api.prevent_close();
+          // api.prevent_close();
         }
       })
     }

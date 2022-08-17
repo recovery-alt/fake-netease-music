@@ -1,5 +1,5 @@
 use tauri::CustomMenuItem;
-use tauri::{AppHandle, SystemTray, SystemTrayEvent, TrayIcon, Wry};
+use tauri::{AppHandle, SystemTray, SystemTrayEvent, Wry};
 use tauri::{SystemTrayMenu, SystemTrayMenuItem};
 
 use crate::ui::actions::{
@@ -14,10 +14,10 @@ impl SystemTrayBuilder {
   }
 
   fn new_tray() -> SystemTray {
-    let icon_bytes = include_bytes!("../../icons/icon.png").to_vec();
-    let tray_icon = TrayIcon::Raw(icon_bytes);
+    // let icon_bytes = include_bytes!("../../icons/icon.png").to_vec();
+    // let tray_icon = TrayIcon::Raw(icon_bytes);
     SystemTray::new()
-      .with_icon(tray_icon)
+      // .with_icon(tray_icon)
       .with_menu(Self::build_menu())
   }
 
