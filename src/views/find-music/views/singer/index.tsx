@@ -1,7 +1,7 @@
 import './singer.less';
 
 import classNames from 'classnames';
-import { FC, useEffect, useReducer, useRef, useState } from 'react';
+import { FC, useReducer, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { getArtistList } from '@/api';
@@ -20,7 +20,6 @@ const Singer: FC = () => {
   const [selected, setSelected] = useState<Selected>([-1, -1, undefined]);
   const setMore = useRef<SetMore>(null);
   const { push } = useHistory();
-  const doCancel = useRef(false);
   const limit = 20;
   let offset = 0;
 
@@ -77,14 +76,6 @@ const Singer: FC = () => {
   function handleSingerClick(item: Artist) {
     push({ pathname: DynamicPage.singer(item.id), state: item.alias });
   }
-
-  useEffect(() => {
-    doCancel.current && loadArtistList();
-
-    return () => {
-      doCancel.current = true;
-    };
-  }, [selected]);
 
   return (
     <div className={getClass()}>

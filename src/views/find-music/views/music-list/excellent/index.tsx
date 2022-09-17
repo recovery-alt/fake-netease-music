@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { getPlaylistHighqualityTags, getTopPlaylistHighquality } from '@/api';
-import { clearRequests } from '@/api/api';
 import Img from '@/components/img';
 import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 import { DynamicPage } from '@/router';
@@ -29,7 +28,6 @@ const Excellent: FC = () => {
   const before = useRef<number>();
   const limit = 10;
   const { buttonContext, renderPopover } = usePopover(tags, cat);
-  const firstUpdate = useRef(true);
 
   async function loadPlaylistHighqualityTags() {
     const res = await getPlaylistHighqualityTags();
@@ -52,12 +50,6 @@ const Excellent: FC = () => {
   useEffect(() => {
     loadPlaylistHighqualityTags();
   }, []);
-
-  useEffect(() => {
-    if (firstUpdate.current) firstUpdate.current = false;
-    else loadTopPlaylistHighquality();
-    return clearRequests;
-  }, [cat]);
 
   return (
     <div className={getClass()}>

@@ -1,6 +1,6 @@
 import './pay-excellent.less';
 
-import { FC, useEffect, useReducer, useRef } from 'react';
+import { FC, useReducer, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { getDJPaygift } from '@/api';
@@ -30,10 +30,6 @@ const PayExcellent: FC = () => {
     const { type, payload } = action;
     return type === 'reset' ? payload : [...state, ...payload];
   }
-
-  useEffect(() => {
-    loadDJPaygift();
-  }, []);
 
   return (
     <>

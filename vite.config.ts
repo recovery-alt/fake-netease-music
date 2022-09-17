@@ -1,11 +1,14 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import eslintPlugin from 'vite-plugin-eslint';
-import { createStyleImportPlugin, AntdResolve } from 'vite-plugin-style-import';
 import { resolve } from 'path';
+import { defineConfig } from 'vite';
+import eslintPlugin from 'vite-plugin-eslint';
+import { AntdResolve, createStyleImportPlugin } from 'vite-plugin-style-import';
 
 export default defineConfig({
   base: '',
+  server: {
+    port: 3000,
+  },
   css: {
     preprocessorOptions: {
       less: {

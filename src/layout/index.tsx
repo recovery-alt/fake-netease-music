@@ -19,7 +19,7 @@ import Sidebar from './sidebar';
 
 type Props = { routes?: Array<RouteConfig> };
 
-export const getClass = classGenerator('main');
+const getClass = classGenerator('main');
 
 const Layout: FC<Props> = ({ routes }) => {
   const { pathname } = useLocation();
