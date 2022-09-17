@@ -7,7 +7,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import { categoryList } from '@/config';
 import { DynamicPage } from '@/router';
-import { setCurrentTrack } from '@/store';
+import { AppDispatch, setCurrentTrack } from '@/store';
 import { AlbumCategory, Song } from '@/types';
 import { classGenerator, transformSong2Track } from '@/utils';
 
@@ -23,7 +23,7 @@ const Newest: FC = () => {
   const currentArea = useMemo(() => categoryList[areaIndex], [areaIndex]);
   const { push } = useHistory();
   const { pathname } = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const songs = useRef<Song[]>([]);
   const [albumType, setAlbumType] = useState<AlbumCategory>('hot');
 

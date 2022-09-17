@@ -9,7 +9,7 @@ import top50 from '@/assets/img/top50.png';
 import Img from '@/components/img';
 import Table, { Column } from '@/components/table';
 import { DynamicPage } from '@/router';
-import { RootState, setCurrentTrack } from '@/store';
+import { AppDispatch, RootState, setCurrentTrack } from '@/store';
 import { Track } from '@/types';
 import { formatMS, resizeImg } from '@/utils';
 
@@ -25,7 +25,7 @@ export type Props = {
 };
 
 const OverviewItem: FC<Props> = ({ id, title = '热门50首', imgUrl = top50, data, isAlbum }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { push } = useHistory();
   const [previewAll, setPreviewAll] = useState(false);
   const columns: Column[] = [{ key: 'ordinal' }, { key: 'name' }, { key: 'dt', format: formatMS }];

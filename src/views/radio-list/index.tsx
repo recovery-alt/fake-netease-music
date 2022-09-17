@@ -19,7 +19,7 @@ import { getDJDetail, getDJProgram } from '@/api';
 import { clearRequests } from '@/api/api';
 import Button from '@/components/button';
 import Img from '@/components/img';
-import { insertSong, RootState } from '@/store';
+import { AppDispatch, insertSong, RootState } from '@/store';
 import { setDJDetail } from '@/store';
 import { DJProgram } from '@/types';
 import { classGenerator, resizeImg, toHttps } from '@/utils';
@@ -43,7 +43,7 @@ const RadioList: FC = () => {
     [programs]
   );
   const djDetail = useSelector((state: RootState) => state.djDetail);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   async function loadDJDetail() {
     const res = await getDJDetail(id);

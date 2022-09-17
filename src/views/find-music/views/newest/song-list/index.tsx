@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { getTopSong } from '@/api';
 import Img from '@/components/img';
-import { insertSong } from '@/store';
+import { AppDispatch, insertSong } from '@/store';
 import { Song } from '@/types';
 import { classGenerator, formatMS, resizeImg } from '@/utils';
 
@@ -15,7 +15,7 @@ type Props = { type: number };
 const SongList = forwardRef<Song[], Props>(({ type }, ref) => {
   const getClass = classGenerator('song-list', styles);
   const [songs, setSongs] = useState<Song[]>([]);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   function handleItemClick(id: number) {
     dispatch(insertSong(id));

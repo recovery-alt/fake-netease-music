@@ -6,7 +6,7 @@ import { getTopAlbum } from '@/api';
 import { clearRequests } from '@/api/api';
 import Img from '@/components/img';
 import { DynamicPage } from '@/router';
-import { fetchAndSetCurrentTrack } from '@/store';
+import { AppDispatch, fetchAndSetCurrentTrack } from '@/store';
 import { TopAlbum, TopAlbumParams } from '@/types';
 import { classGenerator, resizeImg } from '@/utils';
 
@@ -15,7 +15,7 @@ import styles from './album-list.module.less';
 const AlbumList: FC<TopAlbumParams> = ({ type, area }) => {
   const getClass = classGenerator('album-list', styles);
   const [data, setData] = useState<TopAlbum>();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { push } = useHistory();
   const albums = useMemo(() => data?.weekData || data?.monthData, [data]);
   const isWeek = useMemo(() => !!data?.weekData?.length, [data]);

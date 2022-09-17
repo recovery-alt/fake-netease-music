@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import Img from '@/components/img';
 import { DynamicPage } from '@/router';
-import { fetchAndSetCurrentTrack, RootState } from '@/store';
+import { AppDispatch, fetchAndSetCurrentTrack, RootState } from '@/store';
 import { classGenerator, resizeImg } from '@/utils';
 
 import { Props as PresentProps } from '../';
@@ -16,7 +16,7 @@ type Props = Omit<PresentProps, 'type'>;
 
 const Card: FC<Props> = ({ data, isAlbum }) => {
   const getClass = classGenerator('card', styles);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { push } = useHistory();
   const isLogin = useSelector((state: RootState) => !!state.user.cookie);
 

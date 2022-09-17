@@ -13,7 +13,7 @@ import { useDebounce } from 'react-use';
 import { getSearchSuggest } from '@/api';
 import NoData from '@/components/no-data';
 import { DynamicPage, Page } from '@/router';
-import { insertSong, RootState } from '@/store';
+import { AppDispatch, insertSong, RootState } from '@/store';
 import { Artist, SearchSuggest, SimpleAlbum, Song, SuggestOrderType, UserPlaylist } from '@/types';
 import { classGenerator } from '@/utils';
 
@@ -26,7 +26,7 @@ const KeywordSuggestion: FC<Props> = ({ setVisible }) => {
   const keywords = useSelector((state: RootState) => state.controller.keywords);
   const [data, setData] = useState<SearchSuggest>({});
   const { push } = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const map = {
     albums: {
       label: '专辑',

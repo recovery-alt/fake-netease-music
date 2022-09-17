@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useClickAway } from 'react-use';
 
 import Table, { Column } from '@/components/table';
-import { changeCurrent, RootState } from '@/store';
+import { AppDispatch, changeCurrent, RootState } from '@/store';
 import { Track } from '@/types';
 import { classGenerator, formatMS } from '@/utils';
 
@@ -20,7 +20,7 @@ type Props = {
 
 const MusicList: FC<Props> = ({ visible, setVisible, target }) => {
   const getClass = classGenerator('music-list', styles);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const currentTrack = useSelector((state: RootState) => state.currentTrack);
   const ref = useRef<HTMLDivElement>(null);
   const columns: Column<Track>[] = [

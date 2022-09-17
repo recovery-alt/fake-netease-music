@@ -10,7 +10,7 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import { clearRequests } from '@/api/api';
 import Scrollbar from '@/components/scrollbar';
 import type { RouteConfig } from '@/router';
-import store, { setPause, setShowDetail } from '@/store';
+import store, { AppDispatch, setPause, setShowDetail } from '@/store';
 import { classGenerator } from '@/utils';
 
 import Footer from './footer';
@@ -23,7 +23,7 @@ const getClass = classGenerator('main');
 
 const Layout: FC<Props> = ({ routes }) => {
   const { pathname } = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   function interceptor() {
     const state = store.getState();

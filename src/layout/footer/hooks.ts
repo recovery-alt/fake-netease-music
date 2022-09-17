@@ -43,7 +43,7 @@ export const useCurrentTime = (
   duration?: number
 ) => {
   const currentTime = useSelector((state: RootState) => state.controller.currentTime);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleTimeUpdate = () => {
     if (!audioRef?.current) return;
@@ -65,7 +65,7 @@ export const useCurrentTime = (
 
 export const usePlayMode = () => {
   const playMode = useSelector((state: RootState) => state.controller.playMode);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const playModeList = [
     { key: 'inTurn', tip: '顺序播放', icon: DoubleRightOutlined },

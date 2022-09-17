@@ -15,7 +15,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import Input from '@/components/input';
 import SearchList from '@/layout/search-list';
 import { MenuConfig, Page, topMenuMap } from '@/router';
-import { RootState, setKeywords } from '@/store';
+import { AppDispatch, RootState, setKeywords } from '@/store';
 import { classGenerator } from '@/utils';
 
 import styles from './header.module.less';
@@ -29,7 +29,7 @@ const List: FC = () => {
   const [showSearch, setShowSearch] = useState(false);
   const keywords = useSelector((state: RootState) => state.controller.keywords);
   const inputRef = useRef<HTMLInputElement>(null);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const buttonList = [
     {
       icon: SettingOutlined,

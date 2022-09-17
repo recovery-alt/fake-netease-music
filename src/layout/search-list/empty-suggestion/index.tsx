@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { getSearchHotDetail } from '@/api';
 import { clearRequests } from '@/api/api';
 import { Page } from '@/router';
-import { setKeywords } from '@/store';
+import { AppDispatch, setKeywords } from '@/store';
 import { SearchHot } from '@/types';
 import { classGenerator } from '@/utils';
 
@@ -21,7 +21,7 @@ const EmptySuggestion: FC<Props> = ({ visible, setVisible }) => {
   const [searchHot, setSearchHot] = useState<SearchHot[]>([]);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const { push } = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleCloseClick: MouseEventHandler<HTMLSpanElement> = e => {
     e.stopPropagation();

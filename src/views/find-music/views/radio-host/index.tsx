@@ -17,7 +17,7 @@ import Card, { CardData } from '@/components/card';
 import Img from '@/components/img';
 import Title from '@/components/title';
 import { DynamicPage, Page } from '@/router';
-import { insertSong } from '@/store';
+import { AppDispatch, insertSong } from '@/store';
 import { BannerType, DJCatelist } from '@/types';
 import { classGenerator } from '@/utils';
 
@@ -37,7 +37,7 @@ const RadioHost: FC = () => {
   const [emotion, setEmotion] = useState<CardData[]>([]);
   const [talkshow, setTalkShow] = useState<CardData[]>([]);
   type Callback = (value: SetStateAction<CardData[]>) => void;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { push } = useHistory();
 
   function loadDJRecommendType(type: number, cb: Callback) {

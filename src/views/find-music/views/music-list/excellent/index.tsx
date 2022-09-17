@@ -10,7 +10,7 @@ import { getPlaylistHighqualityTags, getTopPlaylistHighquality } from '@/api';
 import Img from '@/components/img';
 import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 import { DynamicPage } from '@/router';
-import { fetchAndSetCurrentTrack } from '@/store';
+import { AppDispatch, fetchAndSetCurrentTrack } from '@/store';
 import { DataAction, PlaylistHighqualityTags, UserPlaylist } from '@/types';
 import { classGenerator, resizeImg } from '@/utils';
 import Popover from '@/views/video/popover';
@@ -24,7 +24,7 @@ const Excellent: FC = () => {
   const [playlists, playlistsDispatch] = useReducer(playlistsReducer, []);
   const setMore = useRef<SetMore>(null);
   const { push } = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const before = useRef<number>();
   const limit = 10;
   const { buttonContext, renderPopover } = usePopover(tags, cat);

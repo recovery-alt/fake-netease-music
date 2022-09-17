@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { getPlaylistDetail, getToplist } from '@/api';
 import Img from '@/components/img';
 import { DynamicPage } from '@/router';
-import { fetchAndSetCurrentTrack, setCurrentTrack } from '@/store';
+import { AppDispatch, fetchAndSetCurrentTrack, setCurrentTrack } from '@/store';
 import { Toplist, Track, UserPlaylist } from '@/types';
 import { classGenerator, resizeImg } from '@/utils';
 
@@ -17,7 +17,7 @@ const Rank: FC = () => {
   const getClass = classGenerator('rank');
   const [toplist, setToplist] = useState<Toplist[]>([]);
   const [playlistDetail, setPlaylistDetail] = useState<UserPlaylist[]>([]);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { push } = useHistory();
 
   function handleItemClick(tracks: Track[], current: number) {

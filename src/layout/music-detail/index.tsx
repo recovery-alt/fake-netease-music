@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getCommentDJ, getCommentMusic } from '@/api';
 import CommentGroup from '@/components/comment-group';
-import { RootState } from '@/store';
+import { AppDispatch, RootState } from '@/store';
 import { setShowDetail } from '@/store';
 import { Music, Track } from '@/types';
 import { classGenerator } from '@/utils';
@@ -30,7 +30,7 @@ type Props = { visible: boolean };
 const MusicDetail: FC<Props> = ({ visible }) => {
   const getClass = classGenerator('music-detail', styles);
   const pause = useSelector((state: RootState) => state.controller.pause);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const isRadio = useSelector((state: RootState) => !state.currentTrack.song?.flag);
   const currentMusic = useSelector((state: RootState) => {
     const { current, tracks, fm } = state.currentTrack;

@@ -9,7 +9,7 @@ import calendar from '@/assets/img/calendar.png';
 import Button from '@/components/button';
 import Table from '@/components/table';
 import { CommonColumns } from '@/config';
-import { RootState, setCurrentTrack } from '@/store';
+import { AppDispatch, RootState, setCurrentTrack } from '@/store';
 import { Track } from '@/types';
 import { classGenerator } from '@/utils';
 
@@ -17,7 +17,7 @@ const DailyRecommend: FC = () => {
   const getClass = classGenerator('daily-recommend');
   const [recommendSongs, setRecommendSongs] = useState<Track[]>([]);
   const isLogin = useSelector((state: RootState) => !!state.user.cookie);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   async function loadRecommendSongs() {
     if (!isLogin) return;

@@ -18,7 +18,15 @@ import { useHistory } from 'react-router-dom';
 import { clearRequests } from '@/api/api';
 import { PlayMode } from '@/enum';
 import { Page } from '@/router';
-import { changeSong, nextFM, RootState, setCurrentTime, setShowDetail, setSong } from '@/store';
+import {
+  AppDispatch,
+  changeSong,
+  nextFM,
+  RootState,
+  setCurrentTime,
+  setShowDetail,
+  setSong,
+} from '@/store';
 import { classGenerator, formatMS, resizeImg, toHttps, transformMusic2Track } from '@/utils';
 
 import MusicDetail from '../music-detail';
@@ -30,7 +38,7 @@ const List: FC = () => {
   const getClass = classGenerator('footer', styles);
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLProgressElement>(null);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { push } = useHistory();
   const showDetail = useSelector((state: RootState) => state.controller.showDetail);
   const autoPlay = useSelector((state: RootState) => state.currentTrack.autoPlay || false);

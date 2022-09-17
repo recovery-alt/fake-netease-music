@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { getMusicCategory } from '@/api';
 import Img from '@/components/img';
 import { DynamicPage } from '@/router';
-import { fetchAndSetCurrentTrack } from '@/store';
+import { AppDispatch, fetchAndSetCurrentTrack } from '@/store';
 import { UserPlaylist } from '@/types';
 import { classGenerator, resizeImg, toHttps } from '@/utils';
 import Popover from '@/views/video/popover';
@@ -32,7 +32,7 @@ const MusicList: FC = () => {
     setCat,
   } = useTopPlaylist();
   const { push } = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { buttonContext, allMusicCategory } = usePopover(cat);
 
   function handleListItemClick(id: number) {

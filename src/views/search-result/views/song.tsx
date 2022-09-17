@@ -8,7 +8,7 @@ import Img from '@/components/img';
 import Table, { Column } from '@/components/table';
 import { SearchType } from '@/enum';
 import { DynamicPage } from '@/router';
-import { insertSong } from '@/store';
+import { AppDispatch, insertSong } from '@/store';
 import {
   Artist,
   Concert,
@@ -30,7 +30,7 @@ const Song: FC<Props> = props => {
   const params = { ...restProps, currentType: SearchType.SONG, limit: 100 };
   const { wrapEmpty } = usePagination<SearchSong>(params);
   const { push } = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const columns: Column<SongType>[] = [
     { title: '', key: 'ordinal' },
     { title: '', key: 'action' },

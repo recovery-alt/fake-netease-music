@@ -20,7 +20,13 @@ import Card, { CardData } from '@/components/card';
 import Img, { IconOptions } from '@/components/img';
 import Title from '@/components/title';
 import { DynamicPage, Page } from '@/router';
-import { fetchAndSetCurrentTrack, insertSong, RootState, setCurrentTrack } from '@/store';
+import {
+  AppDispatch,
+  fetchAndSetCurrentTrack,
+  insertSong,
+  RootState,
+  setCurrentTrack,
+} from '@/store';
 import { BannerType, Personalized, Track } from '@/types';
 import { classGenerator, resizeImg } from '@/utils';
 
@@ -36,7 +42,7 @@ const FindMusic: FC = () => {
   const [personalizedMV, setPersonalizedMV] = useState<CardData[]>([]);
   const [albumNewest, setAlbumNewest] = useState<ListData[]>([]);
   const [djToplist, setDJToplist] = useState<ListData[]>([]);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { push } = useHistory();
   const iconConfig: IconOptions = { size: 'medium', hoverDisplay: true, placement: 'bottom' };
   const today = dayjs(Date.now()).format('DD');

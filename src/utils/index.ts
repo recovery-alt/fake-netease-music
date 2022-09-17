@@ -30,13 +30,14 @@ export const local = {
 // 包裹async/await错误处理
 export function to<T, U = Error>(
   promise: Promise<T>,
-  errorExt?: Data
+  errorExt?: object
 ): Promise<[U, undefined] | [null, T]> {
   return promise
     .then<[null, T]>((data: T) => [null, data])
     .catch<[U, undefined]>((err: U) => {
       if (errorExt) {
-        Object.assign(err, errorExt);
+        const parsedError = Object.assign({}, err, errorExt);
+        return [parsedError, undefined];
       }
 
       return [err, undefined];
@@ -49,7 +50,7 @@ export const wrapNumber = (num?: number) => {
 };
 
 // eslint-disable-next-line
-export const noop = () => {};
+export const noop = () => { };
 
 export const formatMS = (timestamp: number | string) => dayjs(timestamp).format('mm:ss');
 
