@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DJDetail } from '@/types';
 import json from 'json5';
+
+import { DJDetail } from '@/types';
 
 const currentTrackStr = localStorage.getItem('currentTrack');
 const initialState: Partial<DJDetail> = currentTrackStr

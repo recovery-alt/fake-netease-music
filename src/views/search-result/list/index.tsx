@@ -1,8 +1,10 @@
-import { FC } from 'react';
-import styles from './list.module.less';
-import Img from '@/components/img';
 import classNames from 'classnames';
+import { FC } from 'react';
+
+import Img from '@/components/img';
 import { classGenerator, resizeImg } from '@/utils';
+
+import styles from './list.module.less';
 
 export type ListItem = { id: number; imgUrl: string; name: string; col2?: string; col3?: string };
 

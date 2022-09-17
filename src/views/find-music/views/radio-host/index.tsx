@@ -1,24 +1,27 @@
-import { useEffect, useState, FC, SetStateAction } from 'react';
-import Banner from '@/components/banner';
+import './radio-host.less';
+
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { FC, SetStateAction, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 import {
   getDJBanner,
   getDJCatelist,
-  getDJPersonalizeRecommend,
   getDJPaygift,
+  getDJPersonalizeRecommend,
   getDJRecommendType,
 } from '@/api';
-import { BannerType, DJCatelist } from '@/types';
-import './radio-host.less';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import Title from '@/components/title';
+import Banner from '@/components/banner';
 import Card, { CardData } from '@/components/card';
-import List, { ListParams } from '../../list';
 import Img from '@/components/img';
-import { classGenerator } from '@/utils';
-import { useDispatch } from 'react-redux';
-import { insertSong } from '@/store';
-import { useHistory } from 'react-router-dom';
+import Title from '@/components/title';
 import { DynamicPage, Page } from '@/router';
+import { insertSong } from '@/store';
+import { BannerType, DJCatelist } from '@/types';
+import { classGenerator } from '@/utils';
+
+import List, { ListParams } from '../../list';
 
 const RadioHost: FC = () => {
   const getClass = classGenerator('radio-host');

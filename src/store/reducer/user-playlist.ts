@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { message } from 'antd';
+
 import { getUserPlaylist } from '@/api';
 import { UserPlaylist } from '@/types';
 import { to } from '@/utils';
-import { message } from 'antd';
 
 const prefix = (name?: string) => ('userPlaylist' + name ? `/${name}` : '');
 const initialState: { playlist: UserPlaylist[] } = { playlist: [] };

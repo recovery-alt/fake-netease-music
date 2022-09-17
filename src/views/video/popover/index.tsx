@@ -1,7 +1,9 @@
-import { classGenerator } from '@/utils';
 import classNames from 'classnames';
-import { useRef, useState, ReactNode, FC } from 'react';
+import { FC, ReactNode, useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
+
+import { classGenerator } from '@/utils';
+
 import styles from './popover.module.less';
 
 interface Props {

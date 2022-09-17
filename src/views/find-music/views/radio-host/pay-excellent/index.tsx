@@ -1,12 +1,14 @@
-import { classGenerator, resizeImg } from '@/utils';
-import { FC, useEffect, useReducer, useRef } from 'react';
 import './pay-excellent.less';
-import Img from '@/components/img';
+
+import { FC, useEffect, useReducer, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { getDJPaygift } from '@/api';
-import { DataAction, DJRadio } from '@/types';
+import Img from '@/components/img';
 import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 import { DynamicPage } from '@/router';
-import { useHistory } from 'react-router-dom';
+import { DataAction, DJRadio } from '@/types';
+import { classGenerator, resizeImg } from '@/utils';
 
 const PayExcellent: FC = () => {
   const getClass = classGenerator('pay-excellent');

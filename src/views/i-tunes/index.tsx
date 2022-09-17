@@ -1,5 +1,7 @@
-import { FC } from 'react';
 import './i-tunes.less';
+
+import { FC } from 'react';
+
 import NoData from '@/components/no-data';
 
 const ITunes: FC = () => (

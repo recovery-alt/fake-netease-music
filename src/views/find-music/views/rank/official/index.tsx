@@ -1,8 +1,10 @@
 import { FC } from 'react';
-import styles from './official.module.less';
-import { UserPlaylist, Track } from '@/types';
+
 import Img from '@/components/img';
+import { Track, UserPlaylist } from '@/types';
 import { classGenerator, resizeImg } from '@/utils';
+
+import styles from './official.module.less';
 
 type Props = {
   data: UserPlaylist;

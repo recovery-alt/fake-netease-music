@@ -1,8 +1,10 @@
-import { FC } from 'react';
-import styles from './cover.module.less';
-import Img from '@/components/img';
 import classNames from 'classnames';
+import { FC } from 'react';
+
+import Img from '@/components/img';
 import { classGenerator, resizeImg } from '@/utils';
+
+import styles from './cover.module.less';
 
 type Props = { img: string; pause: boolean };
 

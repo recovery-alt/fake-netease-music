@@ -1,14 +1,16 @@
-import { FC } from 'react';
-import styles from '../music-present.module.less';
-import Img from '@/components/img';
-import { Props as PresentProps } from '../';
+import { message } from 'antd';
 import dayjs from 'dayjs';
-import { classGenerator, resizeImg } from '@/utils';
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { fetchAndSetCurrentTrack, RootState } from '@/store';
-import { message } from 'antd';
+
+import Img from '@/components/img';
 import { DynamicPage } from '@/router';
+import { fetchAndSetCurrentTrack, RootState } from '@/store';
+import { classGenerator, resizeImg } from '@/utils';
+
+import { Props as PresentProps } from '../';
+import styles from '../music-present.module.less';
 
 type Props = Omit<PresentProps, 'type'>;
 

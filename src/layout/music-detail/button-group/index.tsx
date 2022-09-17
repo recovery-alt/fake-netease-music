@@ -1,5 +1,7 @@
-import { classGenerator } from '@/utils';
 import { FC } from 'react';
+
+import { classGenerator } from '@/utils';
+
 import styles from './button-group.module.less';
 
 type ButtonItem = { icon: FC; selected?: boolean; event?: () => void };

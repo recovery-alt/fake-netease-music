@@ -1,29 +1,31 @@
-import { useState, useEffect, useReducer, FC } from 'react';
-import styles from './sidebar.module.less';
 import {
-  CustomerServiceOutlined,
-  TeamOutlined,
-  PlaySquareOutlined,
-  DownloadOutlined,
-  FieldTimeOutlined,
   CaretDownOutlined,
-  PlusOutlined,
-  HeartOutlined,
   CaretRightOutlined,
   CloudOutlined,
+  CustomerServiceOutlined,
+  DownloadOutlined,
+  FieldTimeOutlined,
+  HeartOutlined,
   NotificationOutlined,
+  PlaySquareOutlined,
+  PlusOutlined,
   StarOutlined,
+  TeamOutlined,
 } from '@ant-design/icons';
-import { useHistory, useLocation } from 'react-router-dom';
-import Scrollbar from '@/components/scrollbar';
-import Login from '../login';
-import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState, setUserInfoFromCache, setUserPlaylist } from '@/store';
-import { classGenerator, local, resizeImg, toHttps } from '@/utils';
-import { UserInfo } from '@/types';
-import json from 'json5';
 import classNames from 'classnames';
+import json from 'json5';
+import { FC, useEffect, useReducer, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
+
+import Scrollbar from '@/components/scrollbar';
 import { DynamicPage, Page } from '@/router';
+import { AppDispatch, RootState, setUserInfoFromCache, setUserPlaylist } from '@/store';
+import { UserInfo } from '@/types';
+import { classGenerator, local, resizeImg, toHttps } from '@/utils';
+
+import Login from '../login';
+import styles from './sidebar.module.less';
 
 type Menu = { name: string; icon: FC; path: string; loginShow?: boolean };
 type MenuItem = { title?: string; menus: Menu[] };

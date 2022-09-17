@@ -1,5 +1,7 @@
-import { FC } from 'react';
 import './recent.less';
+
+import { FC } from 'react';
+
 import Button from '@/components/button';
 import Table, { Column } from '@/components/table';
 import { Data } from '@/types';

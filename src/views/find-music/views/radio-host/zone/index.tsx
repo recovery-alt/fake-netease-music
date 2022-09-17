@@ -1,13 +1,15 @@
-import { classGenerator } from '@/utils';
-import { FC, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import './zone.less';
-import Img from '@/components/img';
+
+import { FC, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getDJRadioHot, getDJCatelist } from '@/api';
-import { DataAction, DJCatelist, DJRadio } from '@/types';
-import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 import { useHistory } from 'react-router-dom';
+
+import { getDJCatelist, getDJRadioHot } from '@/api';
+import Img from '@/components/img';
+import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
 import { DynamicPage } from '@/router';
+import { DataAction, DJCatelist, DJRadio } from '@/types';
+import { classGenerator } from '@/utils';
 
 const Zone: FC = () => {
   const getClass = classGenerator('zone');

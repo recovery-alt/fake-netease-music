@@ -1,8 +1,11 @@
-import { FC } from 'react';
-import Header from '../../header';
 import './column.less';
+
+import { FC } from 'react';
+
 import NoData from '@/components/no-data';
 import { classGenerator } from '@/utils';
+
+import Header from '../../header';
 
 const Column: FC = () => {
   const getClass = classGenerator('column');

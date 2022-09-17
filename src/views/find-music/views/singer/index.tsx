@@ -1,14 +1,16 @@
-import { FC, useEffect, useReducer, useRef, useState } from 'react';
 import './singer.less';
+
 import classNames from 'classnames';
-import { getArtistList } from '@/api';
-import { Artist, Data, DataAction } from '@/types';
-import { categoryList } from '@/config';
-import Img from '@/components/img';
-import { classGenerator, resizeImg } from '@/utils';
+import { FC, useEffect, useReducer, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { DynamicPage } from '@/router';
+
+import { getArtistList } from '@/api';
+import Img from '@/components/img';
 import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
+import { categoryList } from '@/config';
+import { DynamicPage } from '@/router';
+import { Artist, Data, DataAction } from '@/types';
+import { classGenerator, resizeImg } from '@/utils';
 
 const Singer: FC = () => {
   const getClass = classGenerator('music-singer');

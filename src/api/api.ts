@@ -1,9 +1,10 @@
-import type { ResponseData, Data } from '@/types';
+import { message } from 'antd';
 import axios, { AxiosResponse, Canceler } from 'axios';
 import json from 'json5';
-import { message } from 'antd';
-import { local } from '@/utils';
+
+import type { Data, ResponseData } from '@/types';
 import { UserInfo } from '@/types';
+import { local } from '@/utils';
 import { noop } from '@/utils';
 
 // 统一处理接口异常
@@ -109,4 +110,4 @@ const put = <T, P = Data>(url: string, params?: P, config?: Data) =>
 const del = <T>(url: string, params?: Data, config?: Data) =>
   service.delete<T, ResponseData<T>>(url, { ...config, params });
 
-export { get, post, put, del };
+export { del, get, post, put };

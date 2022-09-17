@@ -1,12 +1,14 @@
-import { useState, MouseEventHandler, FC } from 'react';
-import styles from './login.module.less';
-import { createPortal } from 'react-dom';
 import { CloseOutlined } from '@ant-design/icons';
-import login from '@/assets/img/login.svg';
 import { message } from 'antd';
-import { classGenerator, local } from '@/utils';
+import { FC, MouseEventHandler, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
-import { setUserInfo, setUserPlaylist, AppDispatch } from '@/store';
+
+import login from '@/assets/img/login.svg';
+import { AppDispatch, setUserInfo, setUserPlaylist } from '@/store';
+import { classGenerator, local } from '@/utils';
+
+import styles from './login.module.less';
 
 type Props = { setShowLogin: (show: boolean) => void };
 

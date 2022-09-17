@@ -1,17 +1,19 @@
-import { useEffect, useMemo, useState, FC } from 'react';
-import { PlayCircleOutlined, FileAddOutlined } from '@ant-design/icons';
-import Img from '@/components/img';
-import top50 from '@/assets/img/top50.png';
-import styles from '../music-present.module.less';
-import Table, { Column } from '@/components/table';
-import { formatMS, resizeImg } from '@/utils';
-import classNames from 'classnames';
-import { Track } from '@/types';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setCurrentTrack } from '@/store';
-import { useHistory } from 'react-router-dom';
+import { FileAddOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import { message } from 'antd';
+import classNames from 'classnames';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import top50 from '@/assets/img/top50.png';
+import Img from '@/components/img';
+import Table, { Column } from '@/components/table';
 import { DynamicPage } from '@/router';
+import { RootState, setCurrentTrack } from '@/store';
+import { Track } from '@/types';
+import { formatMS, resizeImg } from '@/utils';
+
+import styles from '../music-present.module.less';
 import { getClass } from './overview';
 
 export type Props = {

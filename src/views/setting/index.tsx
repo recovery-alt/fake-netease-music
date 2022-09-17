@@ -1,12 +1,14 @@
-import { FC } from 'react';
 import './setting.less';
+
 import {
-  WechatOutlined,
-  QqCircleFilled,
-  WeiboCircleOutlined,
   AppleOutlined,
+  QqCircleFilled,
+  WechatOutlined,
+  WeiboCircleOutlined,
 } from '@ant-design/icons';
-import { Checkbox, Radio, Space, Slider } from 'antd';
+import { Checkbox, Radio, Slider, Space } from 'antd';
+import { FC } from 'react';
+
 import { classGenerator } from '@/utils';
 
 const getClass = classGenerator('setting');

@@ -1,9 +1,11 @@
-import { ReactNode, FC } from 'react';
-import styles from './list.module.less';
-import { Data } from '@/types';
-import Img, { IconOptions } from '@/components/img';
 import classNames from 'classnames';
+import { FC, ReactNode } from 'react';
+
+import Img, { IconOptions } from '@/components/img';
+import { Data } from '@/types';
 import { classGenerator, resizeImg } from '@/utils';
+
+import styles from './list.module.less';
 
 export type ListData = { id: number; name: string; imgUrl: string; extra?: Data<string> };
 export type ListParams = { item: ListData; i: number; j: number; len: number };

@@ -1,12 +1,14 @@
-import { FC } from 'react';
-import ListBox, { ListItem } from '@/views/search-result/list';
-import { Props as PresentProps } from '../';
-import dayjs from 'dayjs';
-import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
 import { message } from 'antd';
+import dayjs from 'dayjs';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 import { DynamicPage } from '@/router';
+import { RootState } from '@/store';
+import ListBox, { ListItem } from '@/views/search-result/list';
+
+import { Props as PresentProps } from '../';
 
 type Props = Omit<PresentProps, 'type'>;
 

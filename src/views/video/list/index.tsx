@@ -1,7 +1,9 @@
 import { FC } from 'react';
-import styles from './list.module.less';
+
 import Img from '@/components/img';
 import { classGenerator } from '@/utils';
+
+import styles from './list.module.less';
 
 export type ListItem = { id: number | string; imgUrl: string; description: string; author: string };
 

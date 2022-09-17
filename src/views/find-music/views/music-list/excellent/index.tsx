@@ -1,19 +1,22 @@
-import { useEffect, useReducer, useRef, useState, FC } from 'react';
-import { classGenerator, resizeImg } from '@/utils';
-import { QuestionCircleOutlined } from '@ant-design/icons';
-import Img from '@/components/img';
-import { getPlaylistHighqualityTags, getTopPlaylistHighquality } from '@/api';
-import { DataAction, PlaylistHighqualityTags, UserPlaylist } from '@/types';
-import Popover from '@/views/video/popover';
 // 在Popover之后引入，覆盖样式
 import './excellent.less';
-import { usePopover } from './hooks';
-import { useParams, useHistory } from 'react-router-dom';
-import { DynamicPage } from '@/router';
+
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import { FC, useEffect, useReducer, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchAndSetCurrentTrack } from '@/store';
-import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
+import { useHistory, useParams } from 'react-router-dom';
+
+import { getPlaylistHighqualityTags, getTopPlaylistHighquality } from '@/api';
 import { clearRequests } from '@/api/api';
+import Img from '@/components/img';
+import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
+import { DynamicPage } from '@/router';
+import { fetchAndSetCurrentTrack } from '@/store';
+import { DataAction, PlaylistHighqualityTags, UserPlaylist } from '@/types';
+import { classGenerator, resizeImg } from '@/utils';
+import Popover from '@/views/video/popover';
+
+import { usePopover } from './hooks';
 
 const Excellent: FC = () => {
   const getClass = classGenerator('excellent');

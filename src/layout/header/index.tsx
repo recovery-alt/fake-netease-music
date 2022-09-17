@@ -1,22 +1,24 @@
-import { useState, useEffect, KeyboardEventHandler, useRef, FC } from 'react';
-import styles from './header.module.less';
 import {
+  CompressOutlined,
   LeftOutlined,
+  MailOutlined,
   RightOutlined,
   SettingOutlined,
-  MailOutlined,
   SkinOutlined,
-  CompressOutlined,
 } from '@ant-design/icons';
-import { Link, useLocation, useHistory } from 'react-router-dom';
 import classNames from 'classnames';
+import { stringify } from 'qs';
+import { FC, KeyboardEventHandler, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+
 import Input from '@/components/input';
 import SearchList from '@/layout/search-list';
-import { useDispatch, useSelector } from 'react-redux';
+import { MenuConfig, Page, topMenuMap } from '@/router';
 import { RootState, setKeywords } from '@/store';
-import { stringify } from 'qs';
-import { Page, topMenuMap, MenuConfig } from '@/router';
 import { classGenerator } from '@/utils';
+
+import styles from './header.module.less';
 
 const List: FC = () => {
   const getClass = classGenerator('header', styles);

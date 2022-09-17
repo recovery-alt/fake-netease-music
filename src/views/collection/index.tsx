@@ -1,12 +1,15 @@
-import { useState, useEffect, FC } from 'react';
 import './collection.less';
-import List, { ListData } from '@/components/list';
+
+import { FC, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { getAlbumSublist } from '@/api';
 import disk from '@/assets/img/disk.svg';
-import Header from './header';
-import { classGenerator } from '@/utils';
-import { useHistory } from 'react-router-dom';
+import List, { ListData } from '@/components/list';
 import { DynamicPage } from '@/router';
+import { classGenerator } from '@/utils';
+
+import Header from './header';
 
 const Collection: FC = () => {
   const getClass = classGenerator('collection');

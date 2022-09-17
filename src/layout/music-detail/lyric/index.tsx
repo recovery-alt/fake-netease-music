@@ -1,16 +1,18 @@
-import { useEffect, useRef, useState, FC } from 'react';
-import styles from './lyric.module.less';
-import Scrollbar from '@/components/scrollbar';
 import { QuestionOutlined } from '@ant-design/icons';
-import { Music } from '@/types';
-import { getLyric } from '@/api';
-import { classGenerator, resolveLyricTime } from '@/utils';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
 import classNames from 'classnames';
+import { FC, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { DynamicPage } from '@/router';
+
+import { getLyric } from '@/api';
 import { clearRequests } from '@/api/api';
+import Scrollbar from '@/components/scrollbar';
+import { DynamicPage } from '@/router';
+import { RootState } from '@/store';
+import { Music } from '@/types';
+import { classGenerator, resolveLyricTime } from '@/utils';
+
+import styles from './lyric.module.less';
 
 type Props = { music: Music };
 

@@ -1,7 +1,9 @@
 import { FC } from 'react';
+import { lazy, Suspense } from 'react';
+
 import { Track } from '@/types';
 import { classGenerator } from '@/utils';
-import { Suspense, lazy } from 'react';
+
 import styles from './music-present.module.less';
 
 export type PageMode = 'card' | 'list' | 'overview';

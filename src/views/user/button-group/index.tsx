@@ -1,9 +1,11 @@
-import { FC } from 'react';
-import styles from './button-group.module.less';
-import { UngroupOutlined, AlignCenterOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { AlignCenterOutlined, UngroupOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
-import { PageMode } from '@/views/user/music-present';
+import { FC } from 'react';
+
 import { classGenerator } from '@/utils';
+import { PageMode } from '@/views/user/music-present';
+
+import styles from './button-group.module.less';
 
 type Props = { activeButton: PageMode; setActiveButton: (button: PageMode) => void };
 

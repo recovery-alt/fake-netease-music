@@ -1,28 +1,30 @@
-import { useRef, useEffect, FC } from 'react';
-import styles from './footer.module.less';
 import {
+  ControlOutlined,
+  DeleteOutlined,
   HeartOutlined,
+  LikeOutlined,
+  ShareAltOutlined,
+  SoundOutlined,
   StepBackwardOutlined,
   StepForwardOutlined,
-  DeleteOutlined,
-  ControlOutlined,
   UnorderedListOutlined,
-  SoundOutlined,
-  ShareAltOutlined,
-  LikeOutlined,
 } from '@ant-design/icons';
+import { Slider, Tooltip } from 'antd';
 import classNames from 'classnames';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, changeSong, setSong, nextFM, setCurrentTime, setShowDetail } from '@/store';
-import { classGenerator, formatMS, resizeImg, toHttps, transformMusic2Track } from '@/utils';
-import { useCurrentTime, useMusicList, usePause, usePlayMode, useLyric, useVolume } from './hooks';
-import { Tooltip, Slider } from 'antd';
+import { FC, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import { clearRequests } from '@/api/api';
 import { PlayMode } from '@/enum';
+import { Page } from '@/router';
+import { changeSong, nextFM, RootState, setCurrentTime, setShowDetail, setSong } from '@/store';
+import { classGenerator, formatMS, resizeImg, toHttps, transformMusic2Track } from '@/utils';
+
 import MusicDetail from '../music-detail';
 import MusicList from '../music-list';
-import { useHistory } from 'react-router-dom';
-import { Page } from '@/router';
-import { clearRequests } from '@/api/api';
+import styles from './footer.module.less';
+import { useCurrentTime, useLyric, useMusicList, usePause, usePlayMode, useVolume } from './hooks';
 
 const List: FC = () => {
   const getClass = classGenerator('footer', styles);

@@ -1,28 +1,31 @@
-import { useEffect, useMemo, useState, FC } from 'react';
 import '../list/list.less';
 import './radio-list.less';
-import Img from '@/components/img';
-import { classGenerator, resizeImg, toHttps } from '@/utils';
-import Button from '@/components/button';
+
 import {
+  AccountBookOutlined,
+  PlayCircleOutlined,
   ShareAltOutlined,
   SortAscendingOutlined,
   SortDescendingOutlined,
-  PlayCircleOutlined,
   StarOutlined,
-  AccountBookOutlined,
 } from '@ant-design/icons';
 import { Tabs } from 'antd';
-import { useParams } from 'react-router-dom';
-import { getDJDetail, getDJProgram } from '@/api';
-import { DJProgram } from '@/types';
-import Subscriber from './subscriber';
+import classNames from 'classnames';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
+import { getDJDetail, getDJProgram } from '@/api';
+import { clearRequests } from '@/api/api';
+import Button from '@/components/button';
+import Img from '@/components/img';
 import { insertSong, RootState } from '@/store';
 import { setDJDetail } from '@/store';
-import classNames from 'classnames';
+import { DJProgram } from '@/types';
+import { classGenerator, resizeImg, toHttps } from '@/utils';
+
 import Card from './card';
-import { clearRequests } from '@/api/api';
+import Subscriber from './subscriber';
 
 const RadioList: FC = () => {
   const getListClass = classGenerator('list');

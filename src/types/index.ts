@@ -1,4 +1,4 @@
-import type { ReactNode, CSSProperties, FormEventHandler } from 'react';
+import type { CSSProperties, FormEventHandler, ReactNode } from 'react';
 
 export type Data<T = unknown> = Record<string, T>;
 

@@ -1,8 +1,10 @@
-import { FC } from 'react';
-import styles from './card.module.less';
-import Img, { IconOptions } from '@/components/img';
 import classNames from 'classnames';
+import { FC } from 'react';
+
+import Img, { IconOptions } from '@/components/img';
 import { classGenerator, resizeImg } from '@/utils';
+
+import styles from './card.module.less';
 
 export type CardData = { id: number; name: string; imgUrl: string };
 

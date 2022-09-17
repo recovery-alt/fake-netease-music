@@ -1,11 +1,14 @@
-import { useState, useEffect, FC } from 'react';
 import './singer.less';
-import List, { ListData } from '@/components/list';
-import { getArtistSublist } from '@/api';
-import Header from '../../header';
-import { classGenerator } from '@/utils';
+
+import { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import { getArtistSublist } from '@/api';
+import List, { ListData } from '@/components/list';
 import { DynamicPage } from '@/router';
+import { classGenerator } from '@/utils';
+
+import Header from '../../header';
 
 const Singer: FC = () => {
   const getClass = classGenerator('collection-singer');

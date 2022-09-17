@@ -1,8 +1,10 @@
-import { FC, HtmlHTMLAttributes } from 'react';
 import { RightOutlined } from '@ant-design/icons';
-import styles from './title.module.less';
-import { classGenerator } from '@/utils';
 import classNames from 'classnames';
+import { FC, HtmlHTMLAttributes } from 'react';
+
+import { classGenerator } from '@/utils';
+
+import styles from './title.module.less';
 
 interface Props extends HtmlHTMLAttributes<HTMLElement> {
   name: string;

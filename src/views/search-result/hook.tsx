@@ -1,10 +1,12 @@
-import { useState, useEffect, useMemo, ReactElement } from 'react';
-import { SearchResult, SearchMultimatch } from '@/types';
-import { getSearch } from '@/api';
-import { SearchType } from '@/enum';
 import { Pagination } from 'antd';
-import { getClass } from '.';
+import { ReactElement, useEffect, useMemo, useState } from 'react';
+
+import { getSearch } from '@/api';
 import { clearRequests } from '@/api/api';
+import { SearchType } from '@/enum';
+import { SearchMultimatch, SearchResult } from '@/types';
+
+import { getClass } from '.';
 
 export type Props = {
   type: SearchType;

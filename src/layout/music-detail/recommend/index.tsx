@@ -1,10 +1,12 @@
-import { useEffect, useState, FC } from 'react';
-import styles from './recommend.module.less';
-import Img from '@/components/img';
+import { FC, useEffect, useState } from 'react';
+
 import { getSimiPlaylist, getSimiSong } from '@/api';
+import { clearRequests } from '@/api/api';
+import Img from '@/components/img';
 import { Music, UserPlaylist } from '@/types';
 import { classGenerator, resizeImg, wrapNumber } from '@/utils';
-import { clearRequests } from '@/api/api';
+
+import styles from './recommend.module.less';
 
 type Props = { id: number };
 

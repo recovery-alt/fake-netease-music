@@ -1,27 +1,29 @@
+import {
+  DeleteOutlined,
+  HeartOutlined,
+  MoreOutlined,
+  VerticalAlignMiddleOutlined,
+  VerticalLeftOutlined,
+} from '@ant-design/icons';
+import classNames from 'classnames';
 import { FC } from 'react';
 import { createPortal } from 'react-dom';
-import styles from './music-detail.module.less';
-import classNames from 'classnames';
-import Cover from './cover';
-import ButtonGroup from './button-group';
-import Lyric from './lyric';
-import CommentGroup from '@/components/comment-group';
-import { Music, Track } from '@/types';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/store';
-import Recommend from './recommend';
-import {
-  VerticalAlignMiddleOutlined,
-  HeartOutlined,
-  DeleteOutlined,
-  VerticalLeftOutlined,
-  MoreOutlined,
-} from '@ant-design/icons';
-import { setShowDetail } from '@/store';
-import WriteComment from './write-comment';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { getCommentDJ, getCommentMusic } from '@/api';
+import CommentGroup from '@/components/comment-group';
+import { RootState } from '@/store';
+import { setShowDetail } from '@/store';
+import { Music, Track } from '@/types';
 import { classGenerator } from '@/utils';
+
+import ButtonGroup from './button-group';
+import Cover from './cover';
+import Lyric from './lyric';
+import styles from './music-detail.module.less';
 import RadioDetail from './radio-detail';
+import Recommend from './recommend';
+import WriteComment from './write-comment';
 
 type Props = { visible: boolean };
 

@@ -1,14 +1,16 @@
-import { useEffect, useState, useMemo, FC } from 'react';
-import styles from './album-list.module.less';
-import { TopAlbumParams, TopAlbum } from '@/types';
-import Img from '@/components/img';
-import { classGenerator, resizeImg } from '@/utils';
-import { fetchAndSetCurrentTrack } from '@/store';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
 import { getTopAlbum } from '@/api';
-import { DynamicPage } from '@/router';
 import { clearRequests } from '@/api/api';
+import Img from '@/components/img';
+import { DynamicPage } from '@/router';
+import { fetchAndSetCurrentTrack } from '@/store';
+import { TopAlbum, TopAlbumParams } from '@/types';
+import { classGenerator, resizeImg } from '@/utils';
+
+import styles from './album-list.module.less';
 
 const AlbumList: FC<TopAlbumParams> = ({ type, area }) => {
   const getClass = classGenerator('album-list', styles);

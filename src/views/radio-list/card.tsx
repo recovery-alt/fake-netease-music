@@ -1,9 +1,10 @@
-import Img from '@/components/img';
-import { DJProgram } from '@/types';
-import { classGenerator, formatMS, resizeImg } from '@/utils';
 import { LikeOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { FC } from 'react';
+
+import Img from '@/components/img';
+import { DJProgram } from '@/types';
+import { classGenerator, formatMS, resizeImg } from '@/utils';
 
 type CardItem = Pick<
   DJProgram,

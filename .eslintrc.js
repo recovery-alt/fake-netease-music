@@ -9,6 +9,7 @@ module.exports = {
     'prettier',
     'plugin:prettier/recommended',
   ],
+  plugins: ['simple-import-sort'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 1 : 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 1 : 0,
@@ -16,5 +17,7 @@ module.exports = {
     'react/prop-types': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
+    'simple-import-sort/imports': 'warn',
+    'simple-import-sort/exports': 'warn',
   },
 };

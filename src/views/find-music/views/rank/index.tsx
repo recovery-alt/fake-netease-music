@@ -1,14 +1,17 @@
-import { useEffect, useState, FC } from 'react';
 import './rank.less';
-import Official from './official';
-import { getToplist, getPlaylistDetail } from '@/api';
-import { Toplist, UserPlaylist, Track } from '@/types';
-import Img from '@/components/img';
+
+import { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setCurrentTrack, fetchAndSetCurrentTrack } from '@/store';
 import { useHistory } from 'react-router-dom';
-import { classGenerator, resizeImg } from '@/utils';
+
+import { getPlaylistDetail, getToplist } from '@/api';
+import Img from '@/components/img';
 import { DynamicPage } from '@/router';
+import { fetchAndSetCurrentTrack, setCurrentTrack } from '@/store';
+import { Toplist, Track, UserPlaylist } from '@/types';
+import { classGenerator, resizeImg } from '@/utils';
+
+import Official from './official';
 
 const Rank: FC = () => {
   const getClass = classGenerator('rank');

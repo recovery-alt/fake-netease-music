@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
-import styles from './table.module.less';
-import { Data } from '@/types';
-import NoData from '../no-data';
-import get from 'lodash/get';
-import classNames from 'classnames';
 import { message } from 'antd';
+import classNames from 'classnames';
+import get from 'lodash/get';
+import { useEffect, useState } from 'react';
+import { FC, ReactNode } from 'react';
+
+import { Data } from '@/types';
 import { classGenerator } from '@/utils';
-import { ReactNode, FC } from 'react';
+
+import NoData from '../no-data';
+import styles from './table.module.less';
 
 export type Column<T = Data> = {
   width?: number;

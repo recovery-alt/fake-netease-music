@@ -1,8 +1,10 @@
-import { classGenerator } from '@/utils';
 import classNames from 'classnames';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import styles from './infinity-scroll.module.less';
 import { HTMLAttributes } from 'react';
+
+import { classGenerator } from '@/utils';
+
+import styles from './infinity-scroll.module.less';
 
 interface Props extends HTMLAttributes<HTMLElement> {
   cb: () => void;

@@ -1,9 +1,10 @@
-import { ReactEventHandler, useEffect, useState, FC } from 'react';
-import Title from '@/components/title';
-import Card, { CardData } from '@/components/card';
-import List, { ListData, ListParams } from './list';
-import Banner from '@/components/banner';
 import './find-music.less';
+
+import dayjs from 'dayjs';
+import { FC, ReactEventHandler, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 import {
   getAlbumNewest,
   getBanner,
@@ -13,15 +14,17 @@ import {
   getPPList,
   getRecommendSongs,
 } from '@/api';
-import { BannerType, Personalized, Track } from '@/types';
-import { useDispatch, useSelector } from 'react-redux';
-import { insertSong, fetchAndSetCurrentTrack, RootState, setCurrentTrack } from '@/store';
-import { useHistory } from 'react-router-dom';
-import Img, { IconOptions } from '@/components/img';
-import { classGenerator, resizeImg } from '@/utils';
 import recommend from '@/assets/img/recommend.jpg';
-import dayjs from 'dayjs';
+import Banner from '@/components/banner';
+import Card, { CardData } from '@/components/card';
+import Img, { IconOptions } from '@/components/img';
+import Title from '@/components/title';
 import { DynamicPage, Page } from '@/router';
+import { fetchAndSetCurrentTrack, insertSong, RootState, setCurrentTrack } from '@/store';
+import { BannerType, Personalized, Track } from '@/types';
+import { classGenerator, resizeImg } from '@/utils';
+
+import List, { ListData, ListParams } from './list';
 
 const FindMusic: FC = () => {
   const getClass = classGenerator('find-music');

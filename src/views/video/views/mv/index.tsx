@@ -1,16 +1,19 @@
-import { useState, useEffect, FC } from 'react';
 import './mv.less';
+
 import { RightOutlined } from '@ant-design/icons';
-import Nav from '../../nav';
-import { areaCategory } from '@/config';
-import List, { ListItem } from '../../list';
-import { getMVFirst, getMVAll, getMVExclusiveRcmd, getTopMV } from '@/api';
-import { MV as MVType } from '@/types';
-import Img from '@/components/img';
-import { classGenerator } from '@/utils';
+import { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { DynamicPage } from '@/router';
+
+import { getMVAll, getMVExclusiveRcmd, getMVFirst, getTopMV } from '@/api';
 import { clearRequests } from '@/api/api';
+import Img from '@/components/img';
+import { areaCategory } from '@/config';
+import { DynamicPage } from '@/router';
+import { MV as MVType } from '@/types';
+import { classGenerator } from '@/utils';
+
+import List, { ListItem } from '../../list';
+import Nav from '../../nav';
 
 const MV: FC = () => {
   const getClass = classGenerator('mv');

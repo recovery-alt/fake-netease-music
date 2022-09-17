@@ -1,12 +1,14 @@
-import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { PlaySquareOutlined } from '@ant-design/icons';
-import styles from './list.module.less';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { getTopSong } from '@/api';
+import Img from '@/components/img';
+import { insertSong } from '@/store';
 import { Song } from '@/types';
 import { classGenerator, formatMS, resizeImg } from '@/utils';
-import Img from '@/components/img';
-import { getTopSong } from '@/api';
-import { useDispatch } from 'react-redux';
-import { insertSong } from '@/store';
+
+import styles from './list.module.less';
 
 type Props = { type: number };
 

@@ -1,7 +1,9 @@
 import { FC } from 'react';
+
 import noMusic from '@/assets/img/no-music.svg';
-import styles from './no-data.module.less';
 import { classGenerator } from '@/utils';
+
+import styles from './no-data.module.less';
 
 type Props = { title?: string; subTitle?: string };
 

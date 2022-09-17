@@ -1,21 +1,24 @@
-import { useEffect, useMemo, useState, FC } from 'react';
 import './search-result.less';
+
 import { Tabs } from 'antd';
-import Song from './views/song';
-import Singer from './views/singer';
-import Album from './views/album';
-import Video from './views/video';
-import Playlist from './views/playlist';
-import Lyric from './views/lyric';
-import Radio from './views/radio';
-import UserProfile from './views/user';
-import { useLocation } from 'react-router-dom';
-import { SearchSuggest } from '@/types';
-import { SearchType } from '@/enum';
-import { getSearchMultimatch } from '@/api';
 import { parse } from 'qs';
-import { classGenerator } from '@/utils';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import { getSearchMultimatch } from '@/api';
 import { clearRequests } from '@/api/api';
+import { SearchType } from '@/enum';
+import { SearchSuggest } from '@/types';
+import { classGenerator } from '@/utils';
+
+import Album from './views/album';
+import Lyric from './views/lyric';
+import Playlist from './views/playlist';
+import Radio from './views/radio';
+import Singer from './views/singer';
+import Song from './views/song';
+import UserProfile from './views/user';
+import Video from './views/video';
 
 export const getClass = classGenerator('search-result');
 

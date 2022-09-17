@@ -1,20 +1,23 @@
-import { useEffect, FC } from 'react';
 import './fm.less';
-import Cover from './cover';
-import Lyric from '@/layout/music-detail/lyric';
-import ButtonGroup from '@/layout/music-detail/button-group';
-import CommentGroup from '@/components/comment-group';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState, setFM, nextFM } from '@/store';
+
 import {
-  HeartOutlined,
   DeleteOutlined,
-  VerticalLeftOutlined,
+  HeartOutlined,
   MoreOutlined,
+  VerticalLeftOutlined,
 } from '@ant-design/icons';
+import { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { getCommentMusic } from '@/api';
+import CommentGroup from '@/components/comment-group';
+import ButtonGroup from '@/layout/music-detail/button-group';
+import Lyric from '@/layout/music-detail/lyric';
 import WriteComment from '@/layout/music-detail/write-comment';
+import { AppDispatch, nextFM, RootState, setFM } from '@/store';
 import { classGenerator } from '@/utils';
+
+import Cover from './cover';
 
 const FM: FC = () => {
   const getClass = classGenerator('fm');

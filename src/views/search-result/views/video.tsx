@@ -1,13 +1,15 @@
-import { SearchVideo } from '@/types';
-import { FC } from 'react';
-import { usePagination, Props } from '../hook';
-import { SearchType } from '@/enum';
-import styles from './video.module.less';
-import Img from '@/components/img';
-import { classGenerator, resizeImg } from '@/utils';
 import classNames from 'classnames';
+import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import Img from '@/components/img';
+import { SearchType } from '@/enum';
 import { DynamicPage } from '@/router';
+import { SearchVideo } from '@/types';
+import { classGenerator, resizeImg } from '@/utils';
+
+import { Props, usePagination } from '../hook';
+import styles from './video.module.less';
 
 const getClass = classGenerator('video', styles);
 

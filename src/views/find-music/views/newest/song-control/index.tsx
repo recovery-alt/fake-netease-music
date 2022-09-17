@@ -1,7 +1,9 @@
+import { FileAddOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import { FC } from 'react';
-import { PlayCircleOutlined, FileAddOutlined } from '@ant-design/icons';
-import styles from './song-control.module.less';
+
 import { classGenerator } from '@/utils';
+
+import styles from './song-control.module.less';
 
 type Props = { onPlayAll: () => void; onCollectAll: () => void };
 

@@ -1,11 +1,12 @@
-import { useEffect, useRef, useReducer, FC } from 'react';
-import styles from '@/views/list/collector/collector.module.less';
-import { classGenerator, resizeImg } from '@/utils';
+import { FC, useEffect, useReducer, useRef } from 'react';
+
 import { getDJSubscriber } from '@/api';
-import type { Subscriber as SubscriberType } from '@/types';
+import { clearRequests } from '@/api/api';
 import Img from '@/components/img';
 import InfinityScroll, { SetMore } from '@/components/infinity-scroll';
-import { clearRequests } from '@/api/api';
+import type { Subscriber as SubscriberType } from '@/types';
+import { classGenerator, resizeImg } from '@/utils';
+import styles from '@/views/list/collector/collector.module.less';
 
 type Props = { id: number };
 

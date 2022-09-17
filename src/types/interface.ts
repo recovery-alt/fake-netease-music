@@ -1,5 +1,6 @@
-import { Data } from '.';
 import { SearchType } from '@/enum';
+
+import { Data } from '.';
 
 export type UserProfile = {
   nickname: string;

@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getSongUrl, getPersonalFM, getSongDetail, getPlaylistDetail, getAlbum } from '@/api';
-import { to } from '@/utils';
-import { PlayMode } from '@/enum';
 import { message } from 'antd';
-import { Music, Track, Song } from '@/types';
-import { RootState } from '..';
 import json from 'json5';
+
+import { getAlbum, getPersonalFM, getPlaylistDetail, getSongDetail, getSongUrl } from '@/api';
+import { PlayMode } from '@/enum';
+import { Music, Song, Track } from '@/types';
+import { to } from '@/utils';
+
+import { RootState } from '..';
 
 type CurrentTrack = {
   current: number;

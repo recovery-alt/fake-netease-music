@@ -1,29 +1,32 @@
 import './play-video.less';
-import { useEffect, useMemo, useState, FC } from 'react';
+
 import { LeftOutlined, PlusOutlined } from '@ant-design/icons';
-import Img from '@/components/img';
-import Button from '@/components/button';
+import { FolderAddOutlined, LikeOutlined, ShareAltOutlined } from '@ant-design/icons';
+import dayjs from 'dayjs';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
 import {
+  getCommentMV,
+  getCommentVideo,
+  getMVDetail,
+  getMVDetailInfo,
+  getMVUrl,
   getRelatedAllvideo,
   getVideoDetail,
   getVideoUrl,
-  getCommentVideo,
-  getMVUrl,
-  getMVDetail,
-  getMVDetailInfo,
-  getCommentMV,
 } from '@/api';
-import { useParams } from 'react-router-dom';
+import { clearRequests } from '@/api/api';
+import Button from '@/components/button';
+import CommentGroup from '@/components/comment-group';
+import Img from '@/components/img';
+import { DynamicPage } from '@/router';
 import { VideoDetail, VideoMultiCreator } from '@/types';
 import { classGenerator, resizeImg, wrapNumber } from '@/utils';
-import dayjs from 'dayjs';
-import { LikeOutlined, FolderAddOutlined, ShareAltOutlined } from '@ant-design/icons';
 import WriteComment from '@/views/list/comments-list/write-comment';
-import CommentGroup from '@/components/comment-group';
+
 import Video from './video';
-import { useHistory } from 'react-router-dom';
-import { DynamicPage } from '@/router';
-import { clearRequests } from '@/api/api';
 
 type Detail = Pick<
   VideoDetail,

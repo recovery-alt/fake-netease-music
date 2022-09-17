@@ -1,7 +1,9 @@
-import { useRef, useState, FC } from 'react';
-import styles from './video.module.less';
+import { FC, useRef, useState } from 'react';
+
 import Icon from '@/components/icon';
 import { classGenerator, toHttps } from '@/utils';
+
+import styles from './video.module.less';
 
 type Props = { src?: string };
 

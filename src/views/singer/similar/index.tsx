@@ -1,12 +1,14 @@
-import { useEffect, useState, FC } from 'react';
-import styles from './similar.module.less';
-import Img from '@/components/img';
-import { getSimiArtist } from '@/api';
-import { Artist } from '@/types';
+import { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { DynamicPage } from '@/router';
-import { classGenerator } from '@/utils';
+
+import { getSimiArtist } from '@/api';
 import { clearRequests } from '@/api/api';
+import Img from '@/components/img';
+import { DynamicPage } from '@/router';
+import { Artist } from '@/types';
+import { classGenerator } from '@/utils';
+
+import styles from './similar.module.less';
 
 type Props = { id: number };
 

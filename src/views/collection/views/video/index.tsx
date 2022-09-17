@@ -1,11 +1,14 @@
-import { useState, useEffect, FC } from 'react';
-import Header from '../../header';
 import './video.less';
-import List, { ListItem } from '@/views/video/list';
-import { getMVSublist } from '@/api';
-import { classGenerator } from '@/utils';
+
+import { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import { getMVSublist } from '@/api';
 import { DynamicPage } from '@/router';
+import { classGenerator } from '@/utils';
+import List, { ListItem } from '@/views/video/list';
+
+import Header from '../../header';
 
 const Video: FC = () => {
   const getClass = classGenerator('collection-video');

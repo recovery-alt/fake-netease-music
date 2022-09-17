@@ -1,12 +1,14 @@
-import { SearchLyric } from '@/types';
 import { FC } from 'react';
-import { usePagination, Props } from '../hook';
-import { SearchType } from '@/enum';
-import { SongWithLyric } from '@/types';
-import Table, { Column } from '@/components/table';
-import { formatMS } from '@/utils';
-import styles from './lyric.module.less';
+
 import Scrollbar from '@/components/scrollbar';
+import Table, { Column } from '@/components/table';
+import { SearchType } from '@/enum';
+import { SearchLyric } from '@/types';
+import { SongWithLyric } from '@/types';
+import { formatMS } from '@/utils';
+
+import { Props, usePagination } from '../hook';
+import styles from './lyric.module.less';
 
 const Lyric: FC<Props> = props => {
   const params = { ...props, currentType: SearchType.LYRIC };

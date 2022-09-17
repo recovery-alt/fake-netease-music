@@ -1,13 +1,15 @@
-import { useEffect, useState, FC } from 'react';
 import './daily-recommend.less';
+
+import { FolderAddOutlined } from '@ant-design/icons';
+import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getRecommendSongs } from '@/api';
 import calendar from '@/assets/img/calendar.png';
 import Button from '@/components/button';
-import { FolderAddOutlined } from '@ant-design/icons';
 import Table from '@/components/table';
 import { CommonColumns } from '@/config';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentTrack, RootState } from '@/store';
-import { getRecommendSongs } from '@/api';
+import { RootState, setCurrentTrack } from '@/store';
 import { Track } from '@/types';
 import { classGenerator } from '@/utils';
 

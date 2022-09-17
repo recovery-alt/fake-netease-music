@@ -1,9 +1,11 @@
-import { useEffect, useState, FC } from 'react';
-import styles from './detail.module.less';
+import { FC, useEffect, useState } from 'react';
+
 import { getArtistDesc } from '@/api';
+import { clearRequests } from '@/api/api';
 import { ArtistDesc } from '@/types';
 import { classGenerator } from '@/utils';
-import { clearRequests } from '@/api/api';
+
+import styles from './detail.module.less';
 
 type Props = { id: number };
 

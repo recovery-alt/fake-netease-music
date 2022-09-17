@@ -1,7 +1,9 @@
 import { FC } from 'react';
-import notFound from './not-found.svg';
-import styles from './not-found.module.less';
+
 import { classGenerator } from '@/utils';
+
+import styles from './not-found.module.less';
+import notFound from './not-found.svg';
 
 const NotFound: FC = () => {
   const getClass = classGenerator('not-found', styles);

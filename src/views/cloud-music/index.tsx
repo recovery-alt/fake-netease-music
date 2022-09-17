@@ -1,14 +1,16 @@
-import { useEffect, useMemo, useRef, useState, useReducer, FormEventHandler, FC } from 'react';
 import './cloud-music.less';
+
+import debounce from 'lodash/debounce';
+import { FC, FormEventHandler, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+
+import { getUserCloud } from '@/api';
 import Button from '@/components/button';
+import InfinityScroll from '@/components/infinity-scroll';
 import Input from '@/components/input';
 import Table from '@/components/table';
+import { CommonColumns } from '@/config';
 import { DataAction, Track } from '@/types';
 import { classGenerator } from '@/utils';
-import { getUserCloud } from '@/api';
-import { CommonColumns } from '@/config';
-import debounce from 'lodash/debounce';
-import InfinityScroll from '@/components/infinity-scroll';
 
 const CloudMusic: FC = () => {
   const getClass = classGenerator('cloud-music');

@@ -1,8 +1,10 @@
-import Layout from '@/layout';
-import { topMenuMap, MenuConfig } from './menu';
 import { lazy } from 'react';
-import { Page, DynamicPage } from './page';
 import { FC } from 'react';
+
+import Layout from '@/layout';
+
+import { MenuConfig, topMenuMap } from './menu';
+import { DynamicPage, Page } from './page';
 
 export type RouteConfig = {
   path: string;
@@ -72,6 +74,6 @@ const routes: Array<RouteConfig> = [
 
 export default routes;
 
-export { Page, DynamicPage, topMenuMap };
+export { DynamicPage, Page, topMenuMap };
 
 export type { MenuConfig };

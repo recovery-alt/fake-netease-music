@@ -1,8 +1,10 @@
-import { useEffect, useState, FC } from 'react';
 import './radio.less';
+
+import { FC, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { getDJSublist } from '@/api';
 import List, { ListData } from '@/components/list';
-import { useHistory } from 'react-router-dom';
 import { DynamicPage } from '@/router';
 import { classGenerator } from '@/utils';
 

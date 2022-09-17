@@ -1,17 +1,20 @@
-import { useState, useEffect, useMemo, useRef, FC } from 'react';
 import './newest.less';
+
 import classNames from 'classnames';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
+
 import { categoryList } from '@/config';
-import SongList from './song-list';
+import { DynamicPage } from '@/router';
+import { setCurrentTrack } from '@/store';
+import { AlbumCategory, Song } from '@/types';
+import { classGenerator, transformSong2Track } from '@/utils';
+
+import AlbumControl from './album-control';
 import AlbumList from './album-list';
 import SongControl from './song-control';
-import AlbumControl from './album-control';
-import { AlbumCategory, Song } from '@/types';
-import { useHistory, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setCurrentTrack } from '@/store';
-import { classGenerator, transformSong2Track } from '@/utils';
-import { DynamicPage } from '@/router';
+import SongList from './song-list';
 
 const Newest: FC = () => {
   const getClass = classGenerator('newest');

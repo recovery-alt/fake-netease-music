@@ -1,22 +1,23 @@
+import { PauseCircleFilled, PlayCircleFilled } from '@ant-design/icons';
 import {
-  useState,
-  useMemo,
-  useEffect,
-  RefObject,
-  MouseEventHandler,
-  useRef,
-  ReactEventHandler,
-} from 'react';
-import { PlayCircleFilled, PauseCircleFilled } from '@ant-design/icons';
-import {
-  RetweetOutlined,
   DoubleRightOutlined,
-  RollbackOutlined,
   EnterOutlined,
+  RetweetOutlined,
+  RollbackOutlined,
 } from '@ant-design/icons';
+import {
+  MouseEventHandler,
+  ReactEventHandler,
+  RefObject,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { AppDispatch, RootState, setCurrentTime, setPause, setPlayMode } from '@/store';
 import { Track } from '@/types';
-import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState, setPause, setCurrentTime, setPlayMode } from '@/store';
 
 export const usePause = (audio?: RefObject<HTMLAudioElement>, currentTrack?: Track) => {
   const pause = useSelector((state: RootState) => state.controller.pause);

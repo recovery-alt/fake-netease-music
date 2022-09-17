@@ -1,13 +1,15 @@
-import { FC } from 'react';
-import styles from './comments.module.less';
-import avatar from '@/assets/img/avatar.svg';
-import { LikeOutlined, ExportOutlined, CommentOutlined } from '@ant-design/icons';
-import { Comment } from '@/types';
+import { CommentOutlined, ExportOutlined, LikeOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
-import Img from '@/components/img';
-import { classGenerator, resizeImg } from '@/utils';
+import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import avatar from '@/assets/img/avatar.svg';
+import Img from '@/components/img';
 import { DynamicPage } from '@/router';
+import { Comment } from '@/types';
+import { classGenerator, resizeImg } from '@/utils';
+
+import styles from './comments.module.less';
 
 type Props = { comment: Comment };
 

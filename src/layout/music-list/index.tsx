@@ -1,14 +1,16 @@
-import { useRef, FC } from 'react';
-import styles from './music-list.module.less';
-import { createPortal } from 'react-dom';
-import classNames from 'classnames';
 import { FolderAddOutlined } from '@ant-design/icons';
+import classNames from 'classnames';
+import { FC, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useClickAway } from 'react-use';
+
 import Table, { Column } from '@/components/table';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, changeCurrent } from '@/store';
+import { changeCurrent, RootState } from '@/store';
 import { Track } from '@/types';
 import { classGenerator, formatMS } from '@/utils';
-import { useClickAway } from 'react-use';
+
+import styles from './music-list.module.less';
 
 type Props = {
   visible: boolean;

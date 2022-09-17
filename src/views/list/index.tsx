@@ -1,28 +1,31 @@
-import { useState, useEffect, useMemo, FC } from 'react';
 import './list.less';
-import Button from '@/components/button';
-import { FolderAddOutlined, ShareAltOutlined, DownloadOutlined } from '@ant-design/icons';
-import Table from '@/components/table';
-import { useHistory, useParams } from 'react-router-dom';
-import avatar from '@/assets/img/avatar.svg';
+
+import { DownloadOutlined, FolderAddOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { HeartFilled } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
-import dayjs from 'dayjs';
-import { wrapNumber, resizeImg, classGenerator, toHttps } from '@/utils';
-import { getAlbum, getPlaylistDetail, getAlbumDetailDynamic } from '@/api';
-import { UserPlaylist, Track } from '@/types';
-import { useDispatch } from 'react-redux';
-import { AppDispatch, setCurrentTrack } from '@/store';
 import { Tabs } from 'antd';
-import Collector from './collector';
-import CommentsList from './comments-list';
-import AlbumDetail from './album-detail';
-import Img from '@/components/img';
 import classNames from 'classnames';
+import dayjs from 'dayjs';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+
+import { getAlbum, getAlbumDetailDynamic, getPlaylistDetail } from '@/api';
+import { clearRequests } from '@/api/api';
+import avatar from '@/assets/img/avatar.svg';
+import Button from '@/components/button';
+import Img from '@/components/img';
+import Table from '@/components/table';
 import { CommonColumns } from '@/config';
 import { DynamicPage } from '@/router';
-import { clearRequests } from '@/api/api';
+import { RootState } from '@/store';
+import { AppDispatch, setCurrentTrack } from '@/store';
+import { Track, UserPlaylist } from '@/types';
+import { classGenerator, resizeImg, toHttps, wrapNumber } from '@/utils';
+
+import AlbumDetail from './album-detail';
+import Collector from './collector';
+import CommentsList from './comments-list';
 
 type CurrentInfo = Partial<UserPlaylist & { artistName: string }>;
 

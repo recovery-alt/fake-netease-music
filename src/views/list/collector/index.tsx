@@ -1,11 +1,13 @@
-import { useEffect, useState, FC } from 'react';
-import { getPlaylistSubscribers } from '@/api';
-import { Subscriber } from '@/types';
-import styles from './collector.module.less';
-import Img from '@/components/img';
-import { classGenerator, resizeImg } from '@/utils';
 import { Pagination } from 'antd';
+import { FC, useEffect, useState } from 'react';
+
+import { getPlaylistSubscribers } from '@/api';
 import { clearRequests } from '@/api/api';
+import Img from '@/components/img';
+import { Subscriber } from '@/types';
+import { classGenerator, resizeImg } from '@/utils';
+
+import styles from './collector.module.less';
 
 type Props = { id: number };
 

@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
-import { getTopPlaylist, getTopPlaylistHighquality, getAllMusicCategory } from '@/api';
-import { UserPlaylist, TopPlaylist, Subcategory } from '@/types';
-import { CardData } from '@/components/card';
 import { RightOutlined } from '@ant-design/icons';
+import { useEffect, useState } from 'react';
+
+import { getAllMusicCategory, getTopPlaylist, getTopPlaylistHighquality } from '@/api';
 import { clearRequests } from '@/api/api';
+import { CardData } from '@/components/card';
+import { Subcategory, TopPlaylist, UserPlaylist } from '@/types';
 
 export const useTopPlaylist = () => {
   const [topPlaylist, setTopPlaylist] = useState<CardData[]>([]);

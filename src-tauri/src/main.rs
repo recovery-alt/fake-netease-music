@@ -1,5 +1,3 @@
-use tauri::{Manager, RunEvent, WindowEvent};
-
 use crate::ui::app::register_shortcut;
 use crate::ui::menu::main_menu_builder;
 use crate::ui::tray::SystemTrayBuilder;
@@ -16,15 +14,5 @@ fn main() {
     .expect("error while running tauri application");
 
   register_shortcut(&app);
-  app.run(|app_handle, e| {
-    if let RunEvent::Ready = e {
-      let win = app_handle.get_window("main").unwrap().clone();
-
-      win.on_window_event(|e| {
-        if let WindowEvent::CloseRequested { api, .. } = e {
-          // api.prevent_close();
-        }
-      })
-    }
-  });
+  app.run(|_,_|{});
 }

@@ -1,8 +1,10 @@
-import { FC } from 'react';
 import classNames from 'classnames';
+import { FC } from 'react';
+
 import { AlbumCategory } from '@/types';
-import styles from './album-control.module.less';
 import { classGenerator } from '@/utils';
+
+import styles from './album-control.module.less';
 
 type Props = { albumType: AlbumCategory; setAlbumType: (albumType: AlbumCategory) => void };
 

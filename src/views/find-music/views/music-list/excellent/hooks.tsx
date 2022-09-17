@@ -1,9 +1,10 @@
-import { useHistory } from 'react-router-dom';
-import { PlaylistHighqualityTags } from '@/types';
-import { classGenerator } from '@/utils';
 import { FilterOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
+import { useHistory } from 'react-router-dom';
+
 import { DynamicPage } from '@/router';
+import { PlaylistHighqualityTags } from '@/types';
+import { classGenerator } from '@/utils';
 
 export function usePopover(tags: PlaylistHighqualityTags[], cat: string) {
   const getClass = classGenerator('excellent');

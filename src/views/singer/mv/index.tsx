@@ -1,12 +1,14 @@
-import { useEffect, useState, FC } from 'react';
-import styles from './mv.module.less';
-import Img from '@/components/img';
+import { FC, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { getArtistMV } from '@/api';
+import { clearRequests } from '@/api/api';
+import Img from '@/components/img';
+import { DynamicPage } from '@/router';
 import { MV as MVType } from '@/types';
 import { classGenerator, resizeImg } from '@/utils';
-import { DynamicPage } from '@/router';
-import { useHistory } from 'react-router-dom';
-import { clearRequests } from '@/api/api';
+
+import styles from './mv.module.less';
 
 type Props = { id: number };
 

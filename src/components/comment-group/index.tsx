@@ -1,10 +1,12 @@
-import { useState, useEffect, ReactNode, FC } from 'react';
-import Comments from './comments';
 import { Pagination } from 'antd';
-import styles from './comment-group.module.less';
+import { FC, ReactNode, useEffect, useState } from 'react';
+
+import { clearRequests } from '@/api/api';
 import { Comment, CommentData } from '@/types';
 import { classGenerator } from '@/utils';
-import { clearRequests } from '@/api/api';
+
+import styles from './comment-group.module.less';
+import Comments from './comments';
 
 type Data = CommentData & {
   code: number;

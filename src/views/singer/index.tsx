@@ -1,17 +1,19 @@
-import { useEffect, useMemo, useState, Suspense, lazy, FC } from 'react';
 import './singer.less';
-import Img from '@/components/img';
+
 import { FileAddOutlined, UserOutlined } from '@ant-design/icons';
 import { Tabs } from 'antd';
-import ButtonGroup from '@/views/user/button-group';
-import { useParams, useLocation, useHistory } from 'react-router-dom';
-import { getArtistDetail, getArtistAlbum } from '@/api';
-import { Album as AlbumType, Artist, UserProfile } from '@/types';
-import { PageMode } from '@/views/user/music-present';
-import { classGenerator, resizeImg } from '@/utils';
-import Button from '@/components/button';
-import { DynamicPage } from '@/router';
+import { FC, lazy, Suspense, useEffect, useMemo, useState } from 'react';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
+
+import { getArtistAlbum, getArtistDetail } from '@/api';
 import { clearRequests } from '@/api/api';
+import Button from '@/components/button';
+import Img from '@/components/img';
+import { DynamicPage } from '@/router';
+import { Album as AlbumType, Artist, UserProfile } from '@/types';
+import { classGenerator, resizeImg } from '@/utils';
+import ButtonGroup from '@/views/user/button-group';
+import { PageMode } from '@/views/user/music-present';
 
 const Album = lazy(() => import('@/views/user/music-present'));
 const MV = lazy(() => import('./mv'));

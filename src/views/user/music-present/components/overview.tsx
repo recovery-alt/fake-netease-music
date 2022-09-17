@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState, FC } from 'react';
-import styles from '../music-present.module.less';
+import { FC, useEffect, useRef, useState } from 'react';
+
 import { getAlbum, getArtistTopSong, getPlaylistDetail } from '@/api';
-import { Track } from '@/types';
-import OverviewItem from './overview-item';
-import { Props as PresentProps, DataType } from '../';
-import { classGenerator } from '@/utils';
 import { clearRequests } from '@/api/api';
+import { Track } from '@/types';
+import { classGenerator } from '@/utils';
+
+import { DataType, Props as PresentProps } from '../';
+import styles from '../music-present.module.less';
+import OverviewItem from './overview-item';
 
 type Props = Omit<PresentProps, 'type'>;
 

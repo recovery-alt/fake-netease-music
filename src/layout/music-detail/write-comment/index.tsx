@@ -1,7 +1,9 @@
-import { FC } from 'react';
-import styles from './write-comment.module.less';
 import { EditOutlined } from '@ant-design/icons';
+import { FC } from 'react';
+
 import { classGenerator } from '@/utils';
+
+import styles from './write-comment.module.less';
 
 const WriteComment: FC<{ count: number }> = ({ count }) => {
   const getClass = classGenerator('write-comment', styles);

@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import {
-  userReducer,
-  userPlaylistReducer,
-  currentTrackReducer,
   controllerReducer,
+  currentTrackReducer,
   djDetailReducer,
+  userPlaylistReducer,
+  userReducer,
 } from './reducer';
 
 const store = configureStore({

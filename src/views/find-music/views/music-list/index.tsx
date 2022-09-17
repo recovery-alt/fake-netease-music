@@ -1,18 +1,21 @@
-import { useEffect, useState, FC } from 'react';
 import './music-list.less';
+
 import { CrownOutlined, GlobalOutlined } from '@ant-design/icons';
-import { getMusicCategory } from '@/api';
-import { UserPlaylist } from '@/types';
-import { usePopover, useTopPlaylist } from './hooks';
 import { Pagination } from 'antd';
-import Img from '@/components/img';
-import { useHistory } from 'react-router-dom';
-import Popover from '@/views/video/popover';
 import classNames from 'classnames';
-import { classGenerator, resizeImg, toHttps } from '@/utils';
-import { fetchAndSetCurrentTrack } from '@/store';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import { getMusicCategory } from '@/api';
+import Img from '@/components/img';
 import { DynamicPage } from '@/router';
+import { fetchAndSetCurrentTrack } from '@/store';
+import { UserPlaylist } from '@/types';
+import { classGenerator, resizeImg, toHttps } from '@/utils';
+import Popover from '@/views/video/popover';
+
+import { usePopover, useTopPlaylist } from './hooks';
 import styles from './popover.module.less';
 
 const MusicList: FC = () => {

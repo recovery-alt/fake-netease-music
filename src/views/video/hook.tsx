@@ -1,8 +1,10 @@
+import { RightOutlined } from '@ant-design/icons';
+import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
+
 import { getVideoGroup, getVideoGroupList, getVideoTimelineAll } from '@/api';
 import { clearRequests } from '@/api/api';
 import { VideoCategogy } from '@/types';
-import { RightOutlined } from '@ant-design/icons';
-import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
+
 import { ListItem } from './list';
 
 export function usePopover(id?: string | number) {

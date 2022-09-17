@@ -1,26 +1,28 @@
-import { FC } from 'react';
-import styles from './song.module.less';
-import Img from '@/components/img';
 import { RightOutlined } from '@ant-design/icons';
+import dayjs from 'dayjs';
+import { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import Img from '@/components/img';
 import Table, { Column } from '@/components/table';
+import { SearchType } from '@/enum';
+import { DynamicPage } from '@/router';
+import { insertSong } from '@/store';
 import {
-  Song as SongType,
-  SearchSong,
-  SearchMultimatchOrderType,
-  SimpleAlbum,
   Artist,
-  UserPlaylist,
   Concert,
   Data,
+  SearchMultimatchOrderType,
+  SearchSong,
+  SimpleAlbum,
+  Song as SongType,
+  UserPlaylist,
 } from '@/types';
 import { classGenerator, formatMS, noop, resizeImg } from '@/utils';
-import { usePagination, Props } from '../hook';
-import { SearchType } from '@/enum';
-import dayjs from 'dayjs';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { insertSong } from '@/store';
-import { DynamicPage } from '@/router';
+
+import { Props, usePagination } from '../hook';
+import styles from './song.module.less';
 
 const Song: FC<Props> = props => {
   const getClass = classGenerator('song', styles);

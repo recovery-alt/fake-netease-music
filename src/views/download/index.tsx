@@ -1,7 +1,9 @@
-import { useState, FC } from 'react';
-import Header from './header';
+import { FC, useState } from 'react';
+
 import Table, { Column } from '@/components/table';
 import { Data } from '@/types';
+
+import Header from './header';
 
 const Download: FC = () => {
   const columns: Column[] = [

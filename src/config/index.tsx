@@ -1,5 +1,5 @@
-import { AlbumArea, Track } from '@/types';
 import { Column } from '@/components/table';
+import { AlbumArea, Track } from '@/types';
 import { formatMS } from '@/utils';
 
 export const categoryList: { name: string; area: number; type: number; albumArea?: AlbumArea }[] = [

@@ -1,21 +1,23 @@
-import { FC, useState } from 'react';
-import styles from './keyword-suggestion.module.less';
-import { getSearchSuggest } from '@/api';
 import {
   CustomerServiceOutlined,
-  UserOutlined,
-  UnorderedListOutlined,
   PlayCircleOutlined,
+  UnorderedListOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
-import { Artist, UserPlaylist, SearchSuggest, Song, SimpleAlbum, SuggestOrderType } from '@/types';
-import { useDispatch, useSelector } from 'react-redux';
-import { insertSong, RootState } from '@/store';
-import { useHistory } from 'react-router-dom';
 import { stringify } from 'qs';
-import { DynamicPage, Page } from '@/router';
-import { classGenerator } from '@/utils';
-import NoData from '@/components/no-data';
+import { FC, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useDebounce } from 'react-use';
+
+import { getSearchSuggest } from '@/api';
+import NoData from '@/components/no-data';
+import { DynamicPage, Page } from '@/router';
+import { insertSong, RootState } from '@/store';
+import { Artist, SearchSuggest, SimpleAlbum, Song, SuggestOrderType, UserPlaylist } from '@/types';
+import { classGenerator } from '@/utils';
+
+import styles from './keyword-suggestion.module.less';
 
 type Props = { setVisible: (visible: boolean) => void };
 

@@ -1,25 +1,28 @@
-import { useEffect, useMemo, useState, FC } from 'react';
 import './user.less';
-import Img from '@/components/img';
+
 import {
-  ManOutlined,
-  WomanOutlined,
   AudioOutlined,
-  MailOutlined,
-  PlusOutlined,
   EllipsisOutlined,
+  MailOutlined,
+  ManOutlined,
+  PlusOutlined,
+  WomanOutlined,
 } from '@ant-design/icons';
-import List, { ListItem } from '@/views/search-result/list';
-import ButtonGroup from './button-group';
-import MusicPresent, { PageMode, DataType } from './music-present';
-import { getUserDetail, getUserAudio, getUserPlaylist } from '@/api';
-import { useParams, useHistory, useLocation } from 'react-router-dom';
-import { UserPlaylist, UserDetail } from '@/types';
-import { classGenerator, resizeImg, toHttps } from '@/utils';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
+
+import { getUserAudio, getUserDetail, getUserPlaylist } from '@/api';
 import Button from '@/components/button';
+import Img from '@/components/img';
 import { DynamicPage } from '@/router';
+import { RootState } from '@/store';
+import { UserDetail, UserPlaylist } from '@/types';
+import { classGenerator, resizeImg, toHttps } from '@/utils';
+import List, { ListItem } from '@/views/search-result/list';
+
+import ButtonGroup from './button-group';
+import MusicPresent, { DataType, PageMode } from './music-present';
 
 const User: FC = () => {
   const getClass = classGenerator('user');

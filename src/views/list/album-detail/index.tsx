@@ -1,5 +1,7 @@
-import { classGenerator } from '@/utils';
 import { FC } from 'react';
+
+import { classGenerator } from '@/utils';
+
 import styles from './album-detail.module.less';
 
 type Props = { description: string };

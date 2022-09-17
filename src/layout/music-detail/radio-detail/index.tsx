@@ -1,10 +1,12 @@
+import { StarOutlined } from '@ant-design/icons';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
+
 import Button from '@/components/button';
 import { RootState } from '@/store';
 import { Music } from '@/types';
 import { classGenerator } from '@/utils';
-import { StarOutlined } from '@ant-design/icons';
-import { FC } from 'react';
-import { useSelector } from 'react-redux';
+
 import styles from './radio-detail.module.less';
 
 type Props = { music: Music };

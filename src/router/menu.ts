@@ -1,6 +1,8 @@
-import { Page } from './page';
+import { FC, lazy } from 'react';
+
 import { Data } from '@/types';
-import { lazy, FC } from 'react';
+
+import { Page } from './page';
 
 export type MenuConfig = { label: string; component: FC; path: string; exact?: boolean };
 

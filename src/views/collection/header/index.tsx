@@ -1,7 +1,9 @@
-import { FC, CSSProperties } from 'react';
+import { CSSProperties, FC } from 'react';
+
 import Input from '@/components/input';
-import styles from './header.module.less';
 import { classGenerator } from '@/utils';
+
+import styles from './header.module.less';
 
 type Props = { title: string; count: number; style?: CSSProperties };
 

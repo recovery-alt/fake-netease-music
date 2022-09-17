@@ -1,18 +1,21 @@
-import { Suspense, useEffect } from 'react';
-import type { RouteConfig } from '@/router';
-import { Switch, Route, useLocation } from 'react-router-dom';
 import './layout.less';
-import Sidebar from './sidebar';
+
+import { Spin } from 'antd';
+import json from 'json5';
+import { Suspense, useEffect } from 'react';
+import { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Switch, useLocation } from 'react-router-dom';
+
+import { clearRequests } from '@/api/api';
+import Scrollbar from '@/components/scrollbar';
+import type { RouteConfig } from '@/router';
+import store, { setPause, setShowDetail } from '@/store';
+import { classGenerator } from '@/utils';
+
 import Footer from './footer';
 import NotFound from './not-found';
-import Scrollbar from '@/components/scrollbar';
-import { Spin } from 'antd';
-import { clearRequests } from '@/api/api';
-import store, { setPause, setShowDetail } from '@/store';
-import { useDispatch } from 'react-redux';
-import json from 'json5';
-import { classGenerator } from '@/utils';
-import { FC } from 'react';
+import Sidebar from './sidebar';
 
 type Props = { routes?: Array<RouteConfig> };
 

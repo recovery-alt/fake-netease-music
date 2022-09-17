@@ -1,10 +1,12 @@
-import { useRef, useEffect, useState, ReactEventHandler, useMemo, FC } from 'react';
-import styles from './img.module.less';
-import classNames from 'classnames';
-import { AppProps } from '@/types';
 import { LoadingOutlined, PlayCircleOutlined } from '@ant-design/icons';
+import classNames from 'classnames';
+import { FC, ReactEventHandler, useEffect, useMemo, useRef, useState } from 'react';
+
 import Icon, { IconSize } from '@/components/icon';
+import { AppProps } from '@/types';
 import { classGenerator, toHttps } from '@/utils';
+
+import styles from './img.module.less';
 
 export type IconOptions = {
   size?: IconSize;

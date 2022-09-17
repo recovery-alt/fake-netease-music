@@ -1,7 +1,9 @@
 import { FC } from 'react';
-import styles from './show.module.less';
+
 import Img from '@/components/img';
 import { classGenerator } from '@/utils';
+
+import styles from './show.module.less';
 
 const Show: FC = () => {
   const getClass = classGenerator('show', styles);

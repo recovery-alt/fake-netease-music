@@ -1,6 +1,7 @@
-import json from 'json5';
-import { Data, Song } from '@/types';
 import dayjs from 'dayjs';
+import json from 'json5';
+
+import { Data, Song } from '@/types';
 import { Music } from '@/types';
 
 // 封装localStorage，可设置过期事件

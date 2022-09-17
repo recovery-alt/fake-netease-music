@@ -1,11 +1,12 @@
-import { FC, Suspense } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import routes, { Page } from '@/router';
-import { Provider } from 'react-redux';
-import store from '@/store';
 import { Spin } from 'antd';
-import Header from '@/layout/header';
+import { FC, Suspense } from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+
 import { getClass } from '@/layout';
+import Header from '@/layout/header';
+import routes, { Page } from '@/router';
+import store from '@/store';
 
 const App: FC = () => (
   <Provider store={store}>

@@ -1,8 +1,10 @@
-import { FC, ButtonHTMLAttributes } from 'react';
-import styles from './button.module.less';
 import { PlayCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
+import { ButtonHTMLAttributes, FC } from 'react';
+
 import { classGenerator } from '@/utils';
+
+import styles from './button.module.less';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   compose?: boolean;

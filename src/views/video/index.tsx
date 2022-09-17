@@ -1,14 +1,17 @@
-import { useEffect, useState, FC } from 'react';
 import './video.less';
-import { getVideoCategoryList } from '@/api';
-import Nav, { NavItem } from './nav';
-import List from './list';
-import { useHistory } from 'react-router-dom';
-import { DynamicPage } from '@/router';
-import Popover from './popover';
-import { useMore, usePopover } from './hook';
+
 import classNames from 'classnames';
+import { FC, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { getVideoCategoryList } from '@/api';
+import { DynamicPage } from '@/router';
 import { classGenerator } from '@/utils';
+
+import { useMore, usePopover } from './hook';
+import List from './list';
+import Nav, { NavItem } from './nav';
+import Popover from './popover';
 
 const Video: FC = () => {
   const getClass = classGenerator('video');

@@ -1,9 +1,11 @@
-import { useState, FC } from 'react';
 import './pedding.less';
-import { DownloadOutlined, PauseOutlined, DeleteOutlined } from '@ant-design/icons';
+
+import { DeleteOutlined, DownloadOutlined, PauseOutlined } from '@ant-design/icons';
+import { FC, useState } from 'react';
+
+import Button from '@/components/button';
 import Table, { Column } from '@/components/table';
 import { Data } from '@/types';
-import Button from '@/components/button';
 import { classGenerator } from '@/utils';
 
 const Pedding: FC = () => {

@@ -1,13 +1,15 @@
-import { useRef, FC } from 'react';
-import styles from './search-list.module.less';
-import { createPortal } from 'react-dom';
 import classNames from 'classnames';
-import EmptySuggestion from './empty-suggestion';
-import KeywordSuggestion from './keyword-suggestion';
-import { useClickAway } from 'react-use';
+import { FC, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
+import { useClickAway } from 'react-use';
+
 import { RootState } from '@/store';
 import { classGenerator } from '@/utils';
+
+import EmptySuggestion from './empty-suggestion';
+import KeywordSuggestion from './keyword-suggestion';
+import styles from './search-list.module.less';
 
 type Props = {
   visible: boolean;

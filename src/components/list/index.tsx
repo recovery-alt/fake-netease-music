@@ -1,7 +1,9 @@
 import { FC } from 'react';
-import styles from './list.module.less';
+
 import Img from '@/components/img';
 import { classGenerator, resizeImg } from '@/utils';
+
+import styles from './list.module.less';
 
 export type ListData = { id: number; imgUrl: string; col2: string; col3?: string; col4?: string };
 

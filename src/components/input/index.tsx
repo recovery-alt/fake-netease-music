@@ -1,9 +1,11 @@
-import { FormEventHandler, forwardRef, useMemo } from 'react';
-import styles from './input.module.less';
 import { CloseOutlined, SearchOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
-import { classGenerator } from '@/utils';
+import { FormEventHandler, forwardRef, useMemo } from 'react';
 import { InputHTMLAttributes } from 'react';
+
+import { classGenerator } from '@/utils';
+
+import styles from './input.module.less';
 
 interface Props
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type' | 'value'> {

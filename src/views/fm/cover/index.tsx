@@ -1,11 +1,13 @@
-import { FC } from 'react';
-import styles from './cover.module.less';
-import { Music } from '@/types';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch, setPause } from '@/store';
 import classNames from 'classnames';
-import { classGenerator, resizeImg, toHttps } from '@/utils';
+import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Icon from '@/components/icon';
+import { AppDispatch, RootState, setPause } from '@/store';
+import { Music } from '@/types';
+import { classGenerator, resizeImg, toHttps } from '@/utils';
+
+import styles from './cover.module.less';
 
 type Props = { current?: Music; next?: Music };
 

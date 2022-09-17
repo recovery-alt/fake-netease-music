@@ -1,16 +1,18 @@
-import { useEffect, useState, FC, MouseEventHandler } from 'react';
-import styles from './empty-suggestion.module.less';
-import { DeleteOutlined, CloseOutlined } from '@ant-design/icons';
-import { getSearchHotDetail } from '@/api';
-import { SearchHot } from '@/types';
+import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import json from 'json5';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setKeywords } from '@/store';
 import { stringify } from 'qs';
-import { Page } from '@/router';
-import { classGenerator } from '@/utils';
+import { FC, MouseEventHandler, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import { getSearchHotDetail } from '@/api';
 import { clearRequests } from '@/api/api';
+import { Page } from '@/router';
+import { setKeywords } from '@/store';
+import { SearchHot } from '@/types';
+import { classGenerator } from '@/utils';
+
+import styles from './empty-suggestion.module.less';
 
 type Props = { visible: boolean; setVisible: (visible: boolean) => void };
 

@@ -1,6 +1,8 @@
-import { classGenerator } from '@/utils';
 import classNames from 'classnames';
-import { HTMLAttributes, FC } from 'react';
+import { FC, HTMLAttributes } from 'react';
+
+import { classGenerator } from '@/utils';
+
 import styles from './icon.module.less';
 
 export type IconSize = 'small' | 'medium' | 'big' | 'large' | 'giant';

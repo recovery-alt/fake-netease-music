@@ -1,7 +1,9 @@
-import { useEffect, useState, FC } from 'react';
 import classNames from 'classnames';
-import styles from './nav.module.less';
+import { FC, useEffect, useState } from 'react';
+
 import { classGenerator } from '@/utils';
+
+import styles from './nav.module.less';
 
 export type NavItem = { id: number | string; name: string };
 

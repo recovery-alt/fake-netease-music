@@ -1,9 +1,11 @@
 import { FC } from 'react';
-import styles from './comments-list.module.less';
+
+import { getCommentAlbum, getCommentPlaylist } from '@/api';
 import CommentGroup from '@/components/comment-group';
-import { getCommentPlaylist, getCommentAlbum } from '@/api';
-import WriteComment from './write-comment';
 import { classGenerator } from '@/utils';
+
+import styles from './comments-list.module.less';
+import WriteComment from './write-comment';
 
 type Props = { id: number; isAlbum: boolean };
 

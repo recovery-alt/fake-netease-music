@@ -1,5 +1,7 @@
-import { classGenerator } from '@/utils';
 import { FC } from 'react';
+
+import { classGenerator } from '@/utils';
+
 import styles from './comments-list.module.less';
 
 const WriteComment: FC = () => {

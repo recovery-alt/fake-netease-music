@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { loginCellphone } from '@/api';
-import { UserInfo } from '@/types';
-import avatar from '@/assets/img/avatar.svg';
-import { to } from '@/utils';
 import { message } from 'antd';
+
+import { loginCellphone } from '@/api';
+import avatar from '@/assets/img/avatar.svg';
+import { UserInfo } from '@/types';
+import { to } from '@/utils';
 
 const prefix = (name?: string) => ('userInfo' + name ? `/${name}` : '');
 

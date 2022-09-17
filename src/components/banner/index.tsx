@@ -1,10 +1,12 @@
-import { FC, useEffect, useState } from 'react';
-import styles from './banner.module.less';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import type { BannerType } from '@/types';
 import classNames from 'classnames';
+import { FC, useEffect, useState } from 'react';
+
 import Img from '@/components/img';
+import type { BannerType } from '@/types';
 import { classGenerator } from '@/utils';
+
+import styles from './banner.module.less';
 
 type Props = {
   data: BannerType[];

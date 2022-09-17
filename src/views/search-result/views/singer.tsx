@@ -1,10 +1,12 @@
 import { FC } from 'react';
-import List from '../list';
-import { Artist, SearchSinger } from '@/types';
-import { usePagination, Props } from '../hook';
-import { SearchType } from '@/enum';
 import { useHistory } from 'react-router-dom';
+
+import { SearchType } from '@/enum';
 import { DynamicPage } from '@/router';
+import { Artist, SearchSinger } from '@/types';
+
+import { Props, usePagination } from '../hook';
+import List from '../list';
 
 const Singer: FC<Props> = props => {
   const params = { ...props, currentType: SearchType.SINGER };
