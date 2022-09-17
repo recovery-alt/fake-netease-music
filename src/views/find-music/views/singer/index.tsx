@@ -21,7 +21,7 @@ const Singer: FC = () => {
   const setMore = useRef<SetMore>(null);
   const { push } = useHistory();
   const limit = 20;
-  let offset = 0;
+  const offset = useRef(0);
 
   const searchData: Array<{ label: string; key: string; list: Array<Data<string | number>> }> = [
     {
@@ -62,15 +62,17 @@ const Singer: FC = () => {
     const newSelected = [...selected];
     newSelected[index] = value;
     setSelected(newSelected);
+    offset.current = 0;
+    loadArtistList();
   }
 
   async function loadArtistList() {
     const [area, type, initial] = selected;
-    const res = await getArtistList({ area, type, initial, limit, offset });
-    const actionType = offset === 0 ? 'reset' : 'add';
+    const res = await getArtistList({ area, type, initial, limit, offset: offset.current });
+    const actionType = offset.current === 0 ? 'reset' : 'add';
     setMore.current?.(res.more);
     dataDispatch({ type: actionType, payload: res.artists });
-    offset += limit;
+    offset.current += limit;
   }
 
   function handleSingerClick(item: Artist) {
