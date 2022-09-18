@@ -1,5 +1,5 @@
 [package]
-authors = ["you"]
+authors = ["Recovery"]
 "build" = "src/build.rs"
 default-run = "app"
 description = "A Tauri App"
@@ -13,12 +13,12 @@ version = "0.1.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = {version = "1.0.0-rc.4", features = [] }
+tauri-build = {version = "1.1.1", features = [] }
 
 [dependencies]
 serde = {version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-tauri = {version = "1.0.0-rc.4", features = ["api-all", "macos-private-api", "system-tray"] }
+tauri = {version = "1.1.1", features = ["api-all", "macos-private-api", "system-tray"] }
 
 [features]
 # by default Tauri runs in production mode
