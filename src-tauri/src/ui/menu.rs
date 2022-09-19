@@ -7,6 +7,5 @@ pub fn main_menu_builder() -> Menu {
     .add_native_item(MenuItem::ShowAll)
     .add_native_item(MenuItem::Separator)
     .add_native_item(MenuItem::Quit);
-  Menu::new()
-    .add_submenu(Submenu::new("Echo", echoo_menu))
+  Menu::new().add_submenu(Submenu::new("Echo", echoo_menu))
 }
